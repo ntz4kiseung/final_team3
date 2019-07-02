@@ -3,6 +3,7 @@
 �븘臾닿굅�굹
 
 test
+<<<<<<< HEAD
 
 
 
@@ -10,3 +11,9 @@ test
 
 set1/set2 �떆耳곗뼱
 origin/seungwon20190702
+=======
+>>>>>>> origin/SeungWon
+
+----------
+spiderman
+>>>>>>> origin/hanEol_2019_07_02
