@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.sagyo.join.IJoinDAO">  <!-- 인터페이스 지정  -->
-	<select id="list" resultType="com.sagyo.join.JoinDTO"> 
-		SELECT NVL(T.BADGEPOINTNAME,'뉴비') BADGEPOINTNAME, U.NICKNAME NICKNAME, U.USERID USERID, J.CONTENTS CONTENTS, J.JOINDATE JOINDATE 
+<mapper namespace="com.test.mybatis.IPostDAO">  <!-- 인터페이스 지정  -->
+	<select id="joinlist" resultType="com.test.mybatis.JoinDTO"> 
+		SELECT NVL(T.BADGEPOINTNAME,'뉴비') URL, U.NICKNAME NICKNAME, U.USERID USERID, J.CONTENTS CONTENTS, J.JOINDATE JOINDATE 
 		FROM POST P LEFT JOIN JOIN J 
 		ON P.POSTID = J.POSTID
 		LEFT JOIN USER_ESSENTIAL U
@@ -15,5 +15,8 @@
 		LEFT JOIN POINT T
 		ON L.BADGEPOINTID = T.BADGEPOINTID
 		WHERE P.POSTID = 'PT00002'
+	</select>
+	<select id="postlist" resultType="com.test.mybatis.PostDTO">
+		
 	</select>
 </mapper>
