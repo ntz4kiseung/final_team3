@@ -17,7 +17,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
- -->    
+	 -->    
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -49,13 +49,21 @@ $(document).ready(function()
 	     return false;
 	});
 	
+	/* 
 	$( ".badgePoint a" ).click(function() {
 		$('point img').attr('src', $(this).src($(this)));
 		
 		var img_src = $(this).attr
 	    
 	});
+	 */
+	 /* 문제점 발견! 같은 구절을 다른 파일로 넣었을때 가능한걸로 보아 금요일에 발생한 문제와 똑같은 문제인듯 하다..;; */
 	
+	 $( ".badgePoint" ).click(function() {
+		 
+		 alert("클릭");
+		 //$("#img").attr("src", "img/통수.png");
+	});
 	
 });	
 
@@ -63,6 +71,7 @@ function change()
 {
 	alert('클릭');
 	
+		
 }
 		   
 
@@ -196,25 +205,31 @@ function change()
         </div>
 
         <div class="body-box flex-item-grow flex-col-center-up">
-            <div class="body flex-item-grow flex-col-center-center">
+			<div class="body flex-item-grow flex-col-center-center">
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">
 
                     <div class="MyPage-header flex-row-left-center">
+                    
+                    	<c:forEach items="${userList }" var="list">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                                <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                            </div>
+                            	
+                            	
+                                <!-- <img src="img/badge150pixel_0001_뉴비.png" alt=""> -->
+                                <img alt="" src="${list.url }">
+                               	
+                    		</div>
                             <div class="MyPage-header-grade-star" style="color: #ffd700;">
                                 ★★★★★
                             </div>
                             <div class="MyPage-header-grade">
-                                3.5/5.0
+                               ${list.reviewGrade }/5.0
                             </div>
-                        </div>
+						</div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                Nickname
+                                ${list.nickname }
                             </div>
                             <div class="MyPage-header-detail">
                                 <div>#서울특별시 송파구  #서울특별시 관악구</div>
@@ -223,7 +238,8 @@ function change()
                                 <div>Email 인증 완료</div>
                             </div>
                         </div>
-                    </div>
+                        </c:forEach>
+					</div>
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
@@ -238,13 +254,12 @@ function change()
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
                             <div class="MyPage-body-header flex-row-left-center">
-                                <span>개설모임</span>&nbsp;&nbsp;&nbsp;<span>참여모임</span>
+                                <span><a href="joinpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;<span><a href="#">참여모임</a></span>
                             </div>
 
                             <div class="MyPage-body-body">
                                 <div class="PostList flex-col-left-center">
                                 
-
                                     <div class="PostList-post flex-row-left-center">
                                         <div class="PostList-post-left flex-col-center-center">
                                             <div class="PostList-post-badge">
@@ -274,123 +289,45 @@ function change()
                                             </div>
                                         </div>
                                     </div>
-
-
+                                    
+                                    
+                                    <c:forEach var="list" items="${reviewList }">
                                     <div class="PostList-post flex-row-left-center">
                                         <div class="PostList-post-left flex-col-center-center">
                                             <div class="PostList-post-badge">
                                                 <img src="img/badge150pixel_0025_맛잘알.png" alt="">
                                             </div>
                                             <div>
-                                                nickname
+                                                <!-- nickname -->
+                                                ${list.nickname }
                                             </div>
                                         </div>
                                         <div class="PostList-post-center flex-col-left-center">
                                             <div class="PostList-post-title">
-                                                이곳은 제목이 옵니다...
+                                                <!-- 이곳은 제목이 옵니다... -->
+                                                ${list.title }
                                             </div>
                                             <div class="PostList-post-contents">
-                                                이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                                <!-- 이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!! -->
+                                                ${list.contents }
                                             </div>
                                         </div>
                                         <div class="PostList-post-right flex-col-center-center">
+                                        
                                             <div>
-                                                <button class="btn btn-outline-secondary btn-120-35" disabled>모집중</button>
+                                                <button class="btn btn-outline-orange btn-120-35 mybtn" data-toggle="modal" data-target="#reviewModal">후기남기기</button>
                                             </div>
+                                            
                                             <div class="PostList-post-detail flex-col-left-center">
-                                                <div>서울특별시 용산구</div>
-                                                <div>2019/06/04 19:06</div>
+                                                <!-- <div>서울특별시 용산구</div> -->
+                                                <div>${list.addrSiName } ${list.addrGuName }</div>
+                                                <!-- <div>2019/06/04 19:06</div> -->
+                                                <div>${list.meetDate }</div>
                                             </div>
                                         </div>
                                     </div>
+									</c:forEach>
 
-
-                                    <div class="PostList-post flex-row-left-center">
-                                        <div class="PostList-post-left flex-col-center-center">
-                                            <div class="PostList-post-badge">
-                                                <img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                                            </div>
-                                            <div>
-                                                nickname
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-center flex-col-left-center">
-                                            <div class="PostList-post-title">
-                                                이곳은 제목이 옵니다...
-                                            </div>
-                                            <div class="PostList-post-contents">
-                                                이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-right flex-col-center-center">
-                                            <div>
-                                                <button class="btn btn-outline-orange btn-120-35">후기남기기</button>
-                                            </div>
-                                            <div class="PostList-post-detail flex-col-left-center">
-                                                <div>서울특별시 용산구</div>
-                                                <div>2019/06/04 19:06</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="PostList-post flex-row-left-center">
-                                        <div class="PostList-post-left flex-col-center-center">
-                                            <div class="PostList-post-badge">
-                                                <img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                                            </div>
-                                            <div>
-                                                nickname
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-center flex-col-left-center">
-                                            <div class="PostList-post-title">
-                                                이곳은 제목이 옵니다...
-                                            </div>
-                                            <div class="PostList-post-contents">
-                                                이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-right flex-col-center-center">
-                                            <div>
-                                                <button class="btn btn-outline-secondary btn-120-35" disabled>만남실패</button>
-                                            </div>
-                                            <div class="PostList-post-detail flex-col-left-center">
-                                                <div>서울특별시 용산구</div>
-                                                <div>2019/06/04 19:06</div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                    <div class="PostList-post flex-row-left-center">
-                                        <div class="PostList-post-left flex-col-center-center">
-                                            <div class="PostList-post-badge">
-                                                <img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                                            </div>
-                                            <div>
-                                                nickname
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-center flex-col-left-center">
-                                            <div class="PostList-post-title">
-                                                이곳은 제목이 옵니다...
-                                            </div>
-                                            <div class="PostList-post-contents">
-                                                이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-right flex-col-center-center">
-                                            <div>
-                                                <button class="btn btn-outline-orange btn-120-35">후기남기기</button>
-                                            </div>
-                                            <div class="PostList-post-detail flex-col-left-center">
-                                                <div>서울특별시 용산구</div>
-                                                <div>2019/06/04 19:06</div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     
                                 </div>
                             </div>
@@ -449,7 +386,7 @@ function change()
 							
                            		<div class="flex-review-third" style="text-align: center;" >
                            			<div class="PostList-post-badge">
-                           					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-trigger="focus">
+                           					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom">
                                               <img class="point" src="img/img4.PNG" alt="포인트선택" id="img">
                                             </a>
                                	 	</div>
@@ -562,7 +499,7 @@ function change()
 		
 
 		<div id="badgeList" class="hidden">
-		  	 	<div class="popover-body" class="badge-post flex-col-left-up badgePoint">
+		  	 	<div class="popover-body" class="badge-post flex-col-left-up">
 		  	 	
 		      		<div>
 		      			<div>
@@ -572,8 +509,9 @@ function change()
 			      			<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0011_핵인싸.png" alt="뱃지" onclick="change()">
+				      				<img class="badgePoint" src="img/badge150pixel_0011_핵인싸.png" alt="뱃지">
 				      				</a>
+				      				<button type="button" class="badgePoint">확인버튼</button>
 				      				핵인싸
 				      				
 				      			</div>
