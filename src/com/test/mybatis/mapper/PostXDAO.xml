@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IPostDAO">  <!-- 인터페이스 지정  -->
+	<select id="joinlist" resultType="com.test.mybatis.JoinDTO"> 
+		SELECT POSTID, JOINID, USERID, NVL(URL,'없음'), NICKNAME, JOINDATE, CONTENTS, NVL(DELJOIN,'없음')
+		FROM JOIN_VIEW
+		WHERE POSTID = 'PT00002'
+	</select>
+	<select id="postlist" resultType="com.test.mybatis.PostDTO">
+		SELECT USERID, URL, TITLE, NICKNAME, MEETDATE, ADDRSINAME, ADDRGUNAME, POSTDATE, ADDRDETAIL, INTERMAINNAME, INTERSUBNAME, INTERDETAIL, DRINK, MOODNAME, SAMEGENDER, CONTENTS, MINNUM, MAXNUM, LIMITGRADE
+		,NVL((SELECT C.CERTINAME FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
+		ON U.CERTIID = C.CERTIID WHERE U.USERID= POST_VIEW.USERID AND C.CERTIID = 'CT00001'), '없음') TELCERTIID
+		, NVL((SELECT C.CERTINAME FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
+		ON U.CERTIID = C.CERTIID WHERE U.USERID= POST_VIEW.USERID AND C.CERTIID = 'CT00002'), '없음') EMAILCERTIID
+		, NVL((SELECT ID FROM FOLLOW WHERE GIVEUSERID = 'anlant' AND TAKEUSERID = POST_VIEW.USERID), 0) FOLLOWID 
+		FROM POST_VIEW
+		WHERE POSTID = 'PT00002'
+	</select>
+	<select id="replylist" resultType="com.test.mybatis.JoinDTO">
+		SELECT JOINID, NVL(REPLYID, '없음'), USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, NVL(USERTYPEID,'없음')
+		FROM REPLY_VIEW
+	</select>
+	<select id="reportlist" resultType="com.test.mybatis.ReportDTO">
+		SELECT REPORTCATENAME
+		FROM REPORT_CATE
+	</select>
+	
+	<insert id="followinsert">
+		INSERT INTO FOLLOW(ID, GIVEUSERID, TAKEUSERID, FOLLOWDATE) VALUES(FOLLOW_SEQ.NEXTVAL, #{userId}, #{followId}, SYSDATE)
+	</insert>
+	
+	<delete id="followdelete">
+		DELETE
+		FROM FOLLOW
+		WHERE GIVEUSERID = #{userId} AND TAKEUSERID = #{followId}
+	</delete>
+</mapper>

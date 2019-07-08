@@ -25,8 +25,6 @@
   	<url-pattern>*.action</url-pattern> <!-- 메인컨트롤러 이기 때문에 그냥 어떤 요청이던 action 이면~ 다 수행 -->
   </servlet-mapping>
   
-  
-    <!-- check~!!! -->
   <!-- 인코딩 필터 등록 → CharacterEncodingFilter -->
   <!-- ○ 한글 인코딩 처리를 위한 필터 클래스 등록 ~  -->
  <filter>
@@ -47,16 +45,3 @@
  </filter-mapping>
   
 </web-app>
-
-
-
-
-
-
-
-
-
-
-
-
-

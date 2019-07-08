@@ -1,0 +1,13 @@
+package com.test.mybatis;
+
+import java.util.ArrayList;
+
+public interface IPostDAO
+{
+	public ArrayList<JoinDTO> joinlist();
+	public PostDTO postlist();
+	public ArrayList<JoinDTO> replylist();
+	public ArrayList<ReportDTO> reportlist();
+	public int followinsert(FollowDTO followDTO);
+	public int followdelete(FollowDTO followDTO);
+}

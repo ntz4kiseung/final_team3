@@ -2,7 +2,7 @@ package com.test.mybatis;
 
 public class PostDTO
 {
-	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId, interMainName, interSubId, interSubName, interDetail, minNum, maxNum, date, meetDate, samegender, drink, grade, mood, contents, urlBad, url, nickname, postStatus;
+	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId, interMainName, interSubId, interSubName, interDetail, minNum, maxNum, postDate, meetDate, samegender, drink, grade, moodName, contents, urlBad, url, nickname, postStatus, telCertiId, emailCertiId, followId, limitGrade;
 
 	public String getUserId()
 	{
@@ -144,14 +144,14 @@ public class PostDTO
 		this.maxNum = maxNum;
 	}
 
-	public String getDate()
+	public String getPostDate()
 	{
-		return date;
+		return postDate;
 	}
 
-	public void setDate(String date)
+	public void setPostDate(String postDate)
 	{
-		this.date = date;
+		this.postDate = postDate;
 	}
 
 	public String getMeetDate()
@@ -194,14 +194,14 @@ public class PostDTO
 		this.grade = grade;
 	}
 
-	public String getMood()
+	public String getMoodName()
 	{
-		return mood;
+		return moodName;
 	}
 
-	public void setMood(String mood)
+	public void setMoodName(String moodName)
 	{
-		this.mood = mood;
+		this.moodName = moodName;
 	}
 
 	public String getContents()
@@ -253,6 +253,45 @@ public class PostDTO
 	{
 		this.postStatus = postStatus;
 	}
-	
-	
+
+	public String getTelCertiId()
+	{
+		return telCertiId;
+	}
+
+	public void setTelCertiId(String telCertiId)
+	{
+		this.telCertiId = telCertiId;
+	}
+
+	public String getEmailCertiId()
+	{
+		return emailCertiId;
+	}
+
+	public void setEmailCertiId(String emailCertiId)
+	{
+		this.emailCertiId = emailCertiId;
+	}
+
+	public String getFollowId()
+	{
+		return followId;
+	}
+
+	public void setFollowId(String followId)
+	{
+		this.followId = followId;
+	}
+
+	public String getLimitGrade()
+	{
+		return limitGrade;
+	}
+
+	public void setLimitGrade(String limitGrade)
+	{
+		this.limitGrade = limitGrade;
+	}
+
 }

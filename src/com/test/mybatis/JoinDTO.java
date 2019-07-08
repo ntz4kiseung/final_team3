@@ -2,9 +2,8 @@ package com.test.mybatis;
 
 public class JoinDTO
 {
-	private String url,userId,nickname,userTypeId,date,contents,delJoin;
-					
-	
+	private String url,userId,nickname,userTypeId, joinDate, contents, delJoin, joinId;
+
 	public String getUrl()
 	{
 		return url;
@@ -45,14 +44,14 @@ public class JoinDTO
 		this.userTypeId = userTypeId;
 	}
 
-	public String getDate()
+	public String getJoinDate()
 	{
-		return date;
+		return joinDate;
 	}
 
-	public void setDate(String date)
+	public void setJoinDate(String joinDate)
 	{
-		this.date = date;
+		this.joinDate = joinDate;
 	}
 
 	public String getContents()
@@ -74,8 +73,14 @@ public class JoinDTO
 	{
 		this.delJoin = delJoin;
 	}
-	
-	
-	
-	
+
+	public String getJoinId()
+	{
+		return joinId;
+	}
+
+	public void setJoinId(String joinId)
+	{
+		this.joinId = joinId;
+	}
 }
