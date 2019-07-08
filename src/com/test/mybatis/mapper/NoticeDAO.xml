@@ -32,17 +32,54 @@
 		-->
 
 	<select id="list" resultType="com.test.mybatis.NoticeDTO">
-		SELECT ID, TITLE, CONTENTS, NOTICEDATE
+		<!-- SELECT ID, TITLE, CONTENTS, NOTICEDATE
 		FROM NOTICE
-		ORDER BY ID DESC
+		ORDER BY ID DESC -->
+
+		
+SELECT RNUM, ID, TITLE, CONTENTS, NOTICEDATE
+FROM
+(SELECT ROWNUM AS RNUM, ID, TITLE, CONTENTS, NOTICEDATE 
+FROM (SELECT ID, TITLE, CONTENTS, NOTICEDATE
+      FROM NOTICE
+      ORDER BY ID DESC
+     ) 				
+ORDER BY ROWNUM
+)
+WHERE RNUM BETWEEN #{reqpage}*10-10+1 AND #{reqpage}*10		
+		
 	</select>
 	
-   	<select id="searchlist" resultType="com.test.mybatis.NoticeDTO">
-		SELECT ID, TITLE, CONTENTS, NOTICEDATE
+   	<select id="searchlist" resultType="com.test.mybatis.NoticeDTO" parameterType="java.util.Map" >
+		<!-- SELECT ID, TITLE, CONTENTS, NOTICEDATE
 		FROM NOTICE
-		WHERE TITLE LIKE '%'||'#{keyword}'||'%'
-		ORDER BY ID DESC
+		WHERE TITLE LIKE '%'||#{keyword}||'%'
+		ORDER BY ID DESC -->
+		SELECT RNUM, ID, TITLE, CONTENTS, NOTICEDATE
+		FROM
+		(SELECT ROWNUM AS RNUM, ID, TITLE, CONTENTS, NOTICEDATE 
+		FROM (SELECT ID, TITLE, CONTENTS, NOTICEDATE
+		      FROM NOTICE
+		      WHERE TITLE LIKE '%'||#{keyword}||'%'
+		      ORDER BY ID DESC
+		     ) 				
+		ORDER BY ROWNUM
+		)
+		WHERE RNUM BETWEEN ${reqpage}*10-10+1 AND ${reqpage}*10			
+		
+		
+		
 	</select>
+	
+	<!-- 게시물 카운트  -->
+	<select id="count" resultType="int">
+		SELECT COUNT(*) AS COUNT
+		FROM NOTICE
+		WHERE TITLE LIKE '%'||#{keyword}||'%'
+	</select> 
+	
+	
+	
 
 	
 

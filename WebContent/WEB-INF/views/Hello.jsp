@@ -11,10 +11,8 @@
 <title>Hello.jsp</title>
 </head>
 <body>
-
-<div>
-	<h1>${message }</h1>
-</div>
+	<div><h1>${searchlist }</h1></div>
+	<!-- view 페이지임  -->
 
 </body>
 </html>

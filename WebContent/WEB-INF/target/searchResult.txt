@@ -1,0 +1,16 @@
+<c:forEach var="searchlist" items="${searchlist }">
+							    <div class="card"> 
+							      <div class="card-header"> 
+							        <a class="card-link" data-toggle="collapse" data-parent="#accordion"  href="#collapse${searchlist.id }"> 
+							          <span style="border:1px;">공지</span> ${searchlist.title }  <span>${searchlist.noticedate }</span>
+							        </a> 
+							      </div> 
+							      <div id="collapse${searchlist.id }" class="collapse"> 
+							        <div class="card-body"> 
+							          ${searchlist.contents} 
+							        </div> 
+							      </div> 
+							    </div> 
+							 </c:forEach> 
+
+<div>하하하</div>

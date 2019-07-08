@@ -3,19 +3,15 @@ package com.test.mybatis;
 public class NoticeDTO
 {
 	// 주요 속성 구성
-	private String id,title,contents,noticedate, keyword;
+	private String id,title,contents,noticedate;//, keyword;
 	
 	//getter/ setter 구성
 
-	public String getKeyword()
-	{
-		return keyword;
-	}
-
-	public void setKeyword(String keyword)
-	{
-		this.keyword = keyword;
-	}
+	/*
+	 * public String getKeyword() { return keyword; }
+	 * 
+	 * public void setKeyword(String keyword) { this.keyword = keyword; }
+	 */
 
 	public String getId()
 	{
