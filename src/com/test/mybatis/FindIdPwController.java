@@ -28,7 +28,7 @@ public class FindIdPwController
 		return result;
 	}
 	@RequestMapping(value="/findidtelcheck.action")
-	public void findidCheck(String[] findidtel, HttpServletResponse response) throws IOException
+	public void findIdTelCheck(String[] findidtel, HttpServletResponse response) throws IOException
 	{
 		int result = 0;
 
@@ -41,7 +41,7 @@ public class FindIdPwController
 	
 	
 	@RequestMapping(value="/findidemailcheck.action")
-	public void findemailCheck(String[] findidemail, HttpServletResponse response) throws IOException
+	public void findIdEmailCheck(String[] findidemail, HttpServletResponse response) throws IOException
 	{
 		int result = 0;
 		
@@ -50,6 +50,18 @@ public class FindIdPwController
 		result = dao.findIdEmailCheck(findidemail[0], findidemail[1]);
 		
 		response.getWriter().print(result);
+		
+	}
+	
+	@RequestMapping(value="/findidcertiinsert.action")
+	public void findIdInsert(UserDTO user)
+	{
+		int result = 0;
+		
+		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		
+		
+		System.out.println("왔습니다");
 		
 	}
 }

@@ -36,7 +36,7 @@
     <script type="text/javascript">
 
         $(document).ready( function() {
-        	
+        		
 
     		var key = 'tel';
             $("#find-id-email").hide();
@@ -48,11 +48,18 @@
                 {
                     $("#find-id-tel").hide();
                     $("#find-id-email").show();
+                    $("#name").attr('id','name1');
+                    $("#name2").attr('id','name');
+                    
                 }
                 if(radioCheck=="tel")
                 {
                     $("#find-id-tel").show();
                     $("#find-id-email").hide();
+                    $("#name").attr('id','name2');
+                	$("#name1").attr('id','name');
+                	
+                	
                 }
             })
             
@@ -133,12 +140,12 @@
 			
 			
 			
-			$("#tel-check").click(function()
+			$("#telCheck").click(function()
 			{
 
 
-				var inputname = $("#find-id-tel-name").val();
-				var inputtel = $("#find-id-tel-tel").val();
+				var inputname = $("#name").val();
+				var inputtel = $("#tel").val();
 			
 				var findidtel = [inputname, inputtel];
 				
@@ -185,12 +192,12 @@
 			})
 			
 			
-			$("#email-check").click(function()
+			$("#emailCheck").click(function()
 			{
 
 
-				var inputname = $("#find-id-email-name").val();
-				var inputemail = $("#find-id-email-email").val();
+				var inputname = $("#name").val();
+				var inputemail = $("#email").val();
 				
 				
 				var findidemail = [inputname, inputemail];
@@ -308,9 +315,9 @@
 
 
 
-						<form action="" id="find-id-form" name="find-id-form" method="post"></form>
+						<form action="findidcertiinsert.action" id="find-id-form" name="find-id-form" method="post">
 
-                            <div class="radio-box flex-row-left-center">
+                            <div class="radio-box flex-row-left-center" id="find-id-content">
                                 <input type="radio" name="tel-email" value="tel" checked ="checked">
                                 <span>&nbsp;&nbsp;등록된 휴대전화로 찾기</span>
                             </div>
@@ -321,24 +328,19 @@
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline" id="find-id-tel-name">
+                                    <input type="text" class="input-underline" id="name">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         전화번호
                                     </div>
-                                    <input type="text" class="input-underline" id="find-id-tel-tel">
-                                    <button type="button" class="btn" id="tel-check" name="tel-check">인증하기</button>
+                                    <input type="text" class="input-underline" id="tel" value="">
+                                    <button type="button" class="btn" id="telCheck" name="telCheck">인증하기</button>
                                 </div>
                                 <div class="div-check">
                                 	<span class="span-check" id="find-id-tel-span"></span>
                                 </div>
                             </div>
-                            
-                            
-                            
-                            
-                            
                             
                             
 
@@ -353,28 +355,22 @@
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline" id="find-id-email-name">
+                                    <input type="text" class="input-underline" id="name2">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         이메일
                                     </div>
-                                    <input type="text" class="input-underline" id="find-id-email-email">
-                                    <button type="button" class="btn" id="email-check" name="email-check">인증하기</button>
+                                    <input type="text" class="input-underline" id="email">
+                                    <button type="button" class="btn" id="emailCheck" name="emailCheck">인증하기</button>
                                 </div>
                                 <div class="div-check">
                                 	<span class="span-check" id="find-id-email-span"></span>
                                 </div>
                             </div>
                             
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+                          </form>  
+                          
                             
                         </div>
 						
