@@ -1,0 +1,401 @@
+@charset "UTF-8";
+
+	
+
+
+	.div_head{
+	width: 100%;
+	height: 50px;
+	background: #FFBF00;
+	margin: 0 auto;
+	
+	}
+
+	.div_all{
+	width: 1000px;
+	height: 1200;
+	background: #ddd;
+	margin: 0 auto;
+	}
+	
+	.div_logo{
+	position: relative;
+	width: 100%;
+	height: 100px;
+	background : #F7D358;
+	left: 50%;
+	margin: 0 0 0 -400px;
+	}
+	
+	/* 회원가입 폼 전체 */
+	.div_signUp{
+	position: relative;
+	background: #FAFAFA;
+	width: 800px;
+	height: 100%;
+	left: 50%;
+	margin: 0 0 0 -400px;
+	padding: 10px 0 0 0;
+	
+	}
+	
+	
+	
+	.div_input{
+	position: relative;
+	width: 650px;
+	height: 30px;
+	
+	margin-bottom: 10px;
+	margin-left: 165px;
+	
+	}
+	
+	/* 인풋 */
+	
+	.div_input_text{
+	position: relative;
+	width: 650px;
+	height: 45px;
+	margin-top: 5px;
+	margin-bottom: 10px;
+	margin-left: 165px;
+	
+	}
+	
+	.sign_head{
+	position: relative;
+	width: 110px;
+	height: 20px;
+	top: 2px;
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	}
+	
+	.sign_input{
+	position: relative;
+	width: 200px;
+	height: 30px;
+	font-size: 16px;
+	float: left;
+	
+	}
+	
+	.sign_text{
+	position: relative;
+	width: 300px;
+	height: 20px;
+	float: left;
+	}
+	
+	.sign_text_bottom{
+	
+	position:absolute;
+	width: 500px;
+	left: 100px;
+	margin-top: 24px;
+	} 
+	
+	.text_bottom{
+	right: 10px;
+	font-size: 11px;
+	color: #848484;
+	}
+	
+	input {
+	width:190px;
+	height:25px;
+	font-size:20px;
+	}
+	
+	.text_right{
+	
+	}
+	
+	
+	/* 버튼 */
+	
+	
+	.big_place{
+	z-index: 2;
+	height: 30px;
+	width: 100px;
+	margin-right: 4px;
+	}
+	
+	.small_place{
+	z-index: 2;
+	height: 30px;
+	width: 85px;
+	
+	}
+
+
+/*sample*/
+        /* flex에 대한 설명 잘됨 → https://d2.naver.com/helloworld/8540176#ch7 */
+        
+        
+	/*달력*/
+	
+	.yy_input{
+	height: 25px;
+	width: 50px;
+	
+	}
+	.dd_input{
+	left: 5px;
+	}
+	select{
+	height: 25px;
+	width: 60px;	
+	}
+	.sign_yy{
+	position: relative;
+	width: 60px;
+	height: 30px;
+	float: left;
+	}
+	.sign_mmdd{
+	position: relative;
+	width: 130px;
+	height: 30px;
+	float: left;
+	}
+	
+	.input_telA{
+	width: 48px;
+	height: 25px;
+	
+	}
+	.input_telB{
+	width: 57px;
+	height: 25px;
+	
+	}
+	.input_telC{
+	width: 57px;
+	height: 25px;
+	
+	}
+	
+	/*중복 체크 or 인증*/
+	
+	.check{
+	background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent;
+    border: none;
+
+	font-size: 13px;
+	text-align: left;
+	height: 25px;
+	width: 70px;
+	
+	}
+
+	
+	
+	.id_span{
+	color: #DF0101;
+	font-size: 12px;
+	display: none;
+	}
+     
+    .pw_span{
+	color: #DF0101;
+	font-size: 12px;
+	display: none;
+	}
+	
+	.nick_span{
+	color: #DF0101;
+	font-size: 12px;
+	display: none;
+	}
+	
+	/* 인증 */
+	.certi_rc{
+	width: 200px;
+	height: 50px;
+	padding-left: 6px;	
+	margin-left: 150px;
+	}
+	
+	.certi_text{
+	width: 250px;
+	height: 50px;
+	margin-left: 140px;
+	
+	}
+	
+	.certi_input{
+	width: 250px;
+	height: 40px;
+	margin-top: 20px;
+	margin-left: 140px;
+	}
+	
+	.certi{
+	background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent;
+    border: none;
+	
+	
+	font-size: 13px;
+	text-align: left;
+	height: 25px;
+	width: 50px;
+	}
+	
+	.certi_close{
+	background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent;
+	border: none;
+	
+	font-size: 15px;
+	height: 30px;
+	width: 80px;
+	
+	}
+	/* 인증 */
+	
+	
+	/* 자기소개 */
+	.sign_int{
+	width: 240px;
+	height: 100px;
+	
+	}
+	
+	.div_input_int{
+	position: relative;
+	width: 650px;
+	height: 130px;
+	
+	margin-bottom: 10px;
+	margin-left: 165px;
+	
+	}
+	
+	
+	/*아이디 비밀번호 찾기 css*/
+	
+	
+	.idpw_Search{
+	width: 650px;
+	padding: 30px 50px 0px 50px;
+	margin-left: 75px;
+	margin-top: 120px;
+	
+	
+	}
+	
+	
+	
+	.search_input{
+	position: relative;
+	width: 650px;
+	height: 30px;
+	
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 40px;
+	
+	}
+	
+	
+	
+	.idpw_radio{
+	margin-left: 30px;
+	width: 580px;
+	
+	
+	
+	}
+	
+	
+	
+	.search_submtBtn{
+	width: 100px;
+	height: 40px;
+	margin-left: 275px;
+	
+	}
+	
+	
+	.div_search_submit{
+	position: relative;
+	width: 650px;
+	height: 60px;
+	right: 50px;
+	}
+	
+	.certi_suc{
+	display: none;
+	color: "#31B404";
+	font-size: 12px;
+	}
+	
+	/*결과창*/
+	
+	.result_close{
+	background-color: transparent !important;
+    background-image: none !important;
+    border-color: transparent;
+	border: none;
+	
+	font-size: 15px;
+	height: 30px;
+	width: 80px;
+	}
+	
+	.result_main{
+	width: 650px;
+	height: 250px;
+	padding: 30px 50px 0px 50px;
+	margin-left: 75px;
+	margin-top: 120px;
+	
+	}
+	
+	.result_button{
+	width: 200px;
+	height: 50px;
+	padding-left: 6px;	
+	margin-left: 180px;
+	
+	}
+	
+	.result_logo{
+	}
+	
+	.result_text{
+	height: 120px;
+	text-align: center;
+	padding-top: 40px;
+	
+	}
+	
+	.place_pop1{
+	z-index: 3;
+	position: relative;
+ 	background-color: white; 
+	width: 300px;
+	height: 150px;
+	border: 1px solid black;
+	padding: 10px 10px 10px 10px;
+ 	display: none;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
