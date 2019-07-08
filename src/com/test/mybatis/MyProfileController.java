@@ -18,7 +18,14 @@ public class MyProfileController
 	@RequestMapping(value="/myProfile.action", method = RequestMethod.GET)
 	public String myProfile(Model model)
 	{
-				 
+		IProfileDAO dao = sqlSession.getMapper(IProfileDAO.class);
+		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		
+		model.addAttribute("UserList",dao.UserList()); 
+		model.addAttribute("myPageList", dao2.myPageList());
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
+		model.addAttribute("myPageInterList", dao2.myPageInterList());
+		
 		return "WEB-INF/views/MyProfile.jsp";
 	}
 	

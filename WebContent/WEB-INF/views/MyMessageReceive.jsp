@@ -306,7 +306,7 @@
                                         </button>
           
                                         &nbsp;&nbsp;
-                                        <button class="btn btn-orange btn-85-25"  data-toggle="modal" data-target="#exampleModal">
+                                        <button class="btn btn-orange btn-85-25"  data-toggle="modal" data-target="#messageModal">
                                          		   쪽지 쓰기
                                         </button>
                                     </div>
@@ -376,7 +376,7 @@
                                                             <div class="MyMessage-date">보낸날짜:  ${message.sendDate }</div>&nbsp;&nbsp;
                                                             <div class="MyMessage-date">확인날짜: ${message.checkDate }</div>
                                                             <div class="flex-item-grow flex-row-right-center">
-                                                                <button class="btn btn-orange btn-85-25">답장하기</button>
+                                                                <button class="btn btn-orange btn-85-25" data-toggle="modal" data-target="#messageModal2">답장하기</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -410,8 +410,8 @@
         </div>
     </div>
     
-    <!-- 모달 -->
-   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- 모달 1 - 쪽지 쓰기-->
+  <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -425,6 +425,45 @@
        	<div class="control-group flex-row-center-center">
             <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
             <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" ></div>
+          </div>
+          <br />
+          <!-- TextArea Message -->
+          <div class="control-group">
+            <label for="destinataire" >내용</label>
+            <textarea id="contents" name="contents" class="form-control" rows="5"></textarea>
+          </div>
+          <br />
+        </div>
+        
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-orange submit">전송하기</button>
+      </div>
+     </form>
+    </div>
+  </div>
+</div>
+
+
+    <!-- 모달2 -- 답장하기 -->
+  <div class="modal fade" id="messageModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">쪽지쓰기</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      
+      <form role="form" action="MessageSend.action" method="post">
+      
+      <div class="modal-body">
+	
+       	<div class="control-group flex-row-center-center">
+            <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
+            <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" value="${message.userid }"></div>
+
           </div>
           <br />
           <!-- TextArea Message -->

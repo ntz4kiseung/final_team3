@@ -6,13 +6,13 @@
 <mapper namespace="com.test.mybatis.IMessageDAO">  <!-- 인터페이스 지정  -->
   
 	<select id="messageRecevieList" resultType="com.test.mybatis.MessageDTO"> 
-		SELECT CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
+		SELECT MESSAGEID,CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
 		FROM MESSAGE
 		WHERE TAKEUSERID='caroin'
 	</select>  	
 
 	<select id="messageSendList" resultType="com.test.mybatis.MessageDTO"> 
-		SELECT CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
+		SELECT  MESSAGEID,CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
 		FROM MESSAGE
 		WHERE GIVEUSERID='admin001'
 	</select>  	

@@ -117,7 +117,6 @@
                             <div class="MyPage-body-header flex-row-left-center">
                               <a class="navnonclick" href="myFollowing.action">팔로잉</a>&nbsp;&nbsp;&nbsp;
                                 <a class="navclick" href="myFollower.action">팔로워</a>
-                                
                                  
                             </div>
 

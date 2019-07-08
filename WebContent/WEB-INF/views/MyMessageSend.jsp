@@ -292,7 +292,7 @@
                                                         <input type="checkbox" class=""  name="checkOne" >
                                                     </div>
                                                     <div class="flex-item-grow">
-                                                        <button class="btn btn-link MyMessage-title" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        <button class="btn btn-link MyMessage-title" type="button" data-toggle="collapse" data-target="#collapse${message.messageId }" aria-expanded="true" aria-controls="collapseOne">
                                                         	${message.contents }
                                                         </button>
                                                     </div>
@@ -308,7 +308,7 @@
                                                 
                                                 <!-- card body -->
                                         
-                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#NoticeAccordion">
+                                                <div id="collapse${message.messageId }" class="collapse" aria-labelledby="headingOne" data-parent="#NoticeAccordion">
                                                     <div class="card-body flex-col-left-up">
                                                         <div>
                                                         	${message.contents }

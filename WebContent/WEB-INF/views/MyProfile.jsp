@@ -91,7 +91,11 @@
             <div class="body flex-item-grow flex-col-center-center">
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">
+					
+					
+					
 
+					<c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
@@ -106,16 +110,21 @@
                         </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                Nickname
+                                ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                <div>#영상편집 #필라테스</div>
-                                <div>휴대전화 인증 완료</div>
-                                <div>Email 인증 완료</div>
+                                <div># ${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 } # ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 }</div> 
+                                <div># ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
+                                <div># ${myPageInterList[status.index].interSubName1 } # ${myPageInterList[status.index].interSubName2 }</div> 
+                                <div># ${myPageInterList[status.index].interSubName3 }</div> 
+                                		
+                                <div style="color: orange;">${List.telCheck }</div>
+                                
+                                <div style="color: orange;">${List.emailCheck }</div>
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
                     
                     <div class="flex-item-grow flex-row-left-up">
 
@@ -134,32 +143,32 @@
                             </div>
 
                             <div class="MyPage-body-body">
-                                
+                                <c:forEach var="user" items="${UserList }">
                                     <form class="MyProfile-body flex-col-left-up">
-
+									
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     아이디*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${user.name }" readonly>
                                             </div>
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     닉네임*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${user.nickname }" readonly>
                                             </div>                        
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     이름*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${user.userId }" readonly>
                                             </div>
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     생년월일
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${user.birth }" readonly>
                                             </div>
                 
                                             <div class="MyProfile-input-group">
@@ -261,7 +270,7 @@
                                                 <textarea class="form-control" name="" id="" cols="30" rows="10"  readonly></textarea>
                                             </div>
                                         </form>
-                                        
+                                        </c:forEach>
                                           <div class="MyProfileModify-footer flex-row-center-center">
                                             <button class="btn btn-orange btn-160-45 modify" >수정하기</button>
                                         </div>

@@ -108,11 +108,12 @@
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
+                        
                             <div class="MyPage-body-header flex-row-left-center">
-"C:/Users/KIMSUNA/Desktop/sagyo/sagyo/WebContent/WEB-INF/views/MyFollower.jsp"
-                                <a class="navclick" href="myFollowing.action">팔로잉</a>&nbsp;&nbsp;&nbsp;
+                              <a class="navclick" href="myFollowing.action">팔로잉</a>&nbsp;&nbsp;&nbsp;
                                 <a class="navnonclick" href="myFollower.action">팔로워</a>
                             </div>
+                            
 
                            <div class="MyPage-body-body">
                                 <div class="MyFollow flex-row-left-up">
