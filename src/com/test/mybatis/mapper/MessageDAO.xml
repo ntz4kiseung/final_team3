@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.test.mybatis.IMessageDAO">  <!-- 인터페이스 지정  -->
+  
+	<select id="messageRecevieList" resultType="com.test.mybatis.MessageDTO"> 
+		SELECT CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
+		FROM MESSAGE
+		WHERE TAKEUSERID='caroin'
+	</select>  	
+
+	<select id="messageSendList" resultType="com.test.mybatis.MessageDTO"> 
+		SELECT CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
+		FROM MESSAGE
+		WHERE GIVEUSERID='admin001'
+	</select>  	
+	
+	<insert id="messageAdd">
+		INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE)
+		VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', #{takeUserId},#{contents },SYSDATE)
+	</insert>
+	
+	<delete id="messageDelete">
+		DELETE
+		FROM MESSAGE
+		WHERE MESSAGEID=#{messageId }
+	</delete>
+	
+
+	
+  
+</mapper>
