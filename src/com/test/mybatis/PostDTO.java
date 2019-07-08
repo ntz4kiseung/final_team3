@@ -2,7 +2,9 @@ package com.test.mybatis;
 
 public class PostDTO
 {
-	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId, interMainName, interSubId, interSubName, interDetail, minNum, maxNum, postDate, meetDate, samegender, drink, grade, mood, contents, urlBad, url, nickname, postStatus, telCertiId, emailCertiId;
+	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId
+	, interMainName, interSubId, interSubName, interDetail, minNum, maxNum, postDate, meetDate
+	, samegender, drink, grade, mood, contents, urlBad, url, nickname, postStatus, telCertiId, emailCertiId;
 
 	public String getUserId()
 	{

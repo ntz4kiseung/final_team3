@@ -13,16 +13,42 @@ public class MypageController
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping(value="/joinpostlist.action", method=RequestMethod.GET)
-	public String mypageList(Model model)
+	@RequestMapping(value="/createpostlist.action", method=RequestMethod.GET)
+	public String myReviewList(Model model)
 	{
-		IUserDAO dao = sqlSession.getMapper(IUserDAO.class);
+		IAddrDAO dao1 = sqlSession.getMapper(IAddrDAO.class);
+		IInterDAO dao2 = sqlSession.getMapper(IInterDAO.class);
+		IUserDAO dao3 = sqlSession.getMapper(IUserDAO.class);
+		IPostDAO dao4 = sqlSession.getMapper(IPostDAO.class);
 		
-		model.addAttribute("userList", dao.userList());
+		model.addAttribute("addr", dao1.addr());
+		model.addAttribute("inter", dao2.inter());
+		model.addAttribute("profile",dao3.profile());
+		model.addAttribute("CertiCheck",dao3.CertiCheck());
+		model.addAttribute("myReviewList", dao4.myReviewList());
 		
-		model.addAttribute("reviewList", dao.reviewList());
+		return "/WEB-INF/views/CreatePostList.jsp";
+	}
+	
+	
+	@RequestMapping(value="/joinpostlist.action", method=RequestMethod.GET)
+	public String reviewList(Model model)
+	{
+		IAddrDAO dao1 = sqlSession.getMapper(IAddrDAO.class);
+		IInterDAO dao2 = sqlSession.getMapper(IInterDAO.class);
+		IUserDAO dao3 = sqlSession.getMapper(IUserDAO.class);
+		IPostDAO dao4 = sqlSession.getMapper(IPostDAO.class);
+		
+		model.addAttribute("addr", dao1.addr());
+		model.addAttribute("inter", dao2.inter());
+		model.addAttribute("profile",dao3.profile());
+		model.addAttribute("CertiCheck",dao3.CertiCheck());
+		model.addAttribute("reviewList", dao4.reviewList());
 		
 		return "/WEB-INF/views/JoinPostList.jsp";
 	}
+	
+
+
 	
 }

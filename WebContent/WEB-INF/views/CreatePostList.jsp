@@ -210,17 +210,20 @@ function change()
                 <div class="MyPage flex-item-grow flex-col-center-up">
 
                     <div class="MyPage-header flex-row-left-center">
-                    	
+                    
                     	<c:forEach items="${profile }" var="list">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
                             	
                             	
                                 <!-- <img src="img/badge150pixel_0001_뉴비.png" alt=""> -->
-								<img alt="" src="${list.url }" onerror="this.src='img/badge150pixel_0001_뉴비.png'">                               	
+                                <img alt="" src="${list.url }" onerror="this.src='img/badge150pixel_0001_뉴비.png'">
+                               	
                     		</div>
-                            <div class="MyPage-header-grade-star" style="color: #ffd700;">
-                                ★★★★★
+                            <div class="MyPage-header-grade-star">
+                                <c:forEach var="i" begin="0" end="4" >
+                                	<span>★</span>
+                                </c:forEach>
                             </div>
                             <div class="MyPage-header-grade">
                               ${list.reviewGrade } / 5.0
@@ -256,8 +259,10 @@ function change()
                                 		${CertiCheck.emailCheck }
                                 	</div>
                                 </c:forEach>
+                                	
                             </div>
                         </div>
+                        
 					</div>
                     
                     <div class="flex-item-grow flex-row-left-up">
@@ -266,20 +271,21 @@ function change()
                             <div><a href="#">쪽지함</a></div>
                             <div><a href="#">뱃지</a></div>
                             <div><a href="#">팔로우</a></div>
-                            <div><a href="#">내모임</a></div>
+                            <div><a href="createpostlist.action">내모임</a></div>
                         </div>
                         
                         
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
                             <div class="MyPage-body-header flex-row-left-center">
-                                <span><a href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;<span><a href="joinpostlist.action">참여모임</a></span>
+                                <span><a href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;
+                                <span><a href="joinpostlist.action">참여모임</a></span>
                             </div>
 
                             <div class="MyPage-body-body">
                                 <div class="PostList flex-col-left-center">
                                     
-                                    <c:forEach var="list" items="${reviewList }">
+                                    <c:forEach var="list" items="${myReviewList }">
                                     <div class="PostList-post flex-row-left-center">
                                         <div class="PostList-post-left flex-col-center-center">
                                             <div class="PostList-post-badge">

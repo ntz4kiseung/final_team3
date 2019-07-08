@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 public interface IUserDAO
 {
-	public ArrayList<UserDTO> userList();
-	
-	public ArrayList<UserDTO> reviewList();
-	
-	public UserDTO search(String sid);
+	public ArrayList<UserDTO> profile();
+	public ArrayList<UserDTO> CertiCheck();
 }
