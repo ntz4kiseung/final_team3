@@ -1,0 +1,929 @@
+/* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+/* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+body{
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+}
+img{
+    width: 100%;
+    height: 100%;
+}
+textarea{
+    width: 100%;
+    height: 100%;
+}
+input:read-only { 
+    background-color: yellow;
+  }
+.flex-row-left-up{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.flex-row-left-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flex-row-left-down{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.flex-row-center-up{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+.flex-row-center-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.flex-row-center-down{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.flex-row-right-up{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+.flex-row-right-center{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+.flex-row-right-down{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.flex-col-left-up{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+.flex-col-left-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+.flex-col-left-down{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.flex-col-center-up{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.flex-col-center-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flex-col-center-down{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flex-col-right-up{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+.flex-col-right-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+.flex-col-right-down{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.flex-item-grow{
+    flex-grow: 1;
+}
+
+
+/* 크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼   */
+/* 크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼   */
+.input-245-40{
+    width: 245px;
+    height: 40px;
+    font-size: 16px;    
+}
+.input-120-40{
+    width: 120px;
+    height: 40px;
+    font-size: 16px;    
+}
+.input-150-40{
+    width: 150px;
+    height: 40px;
+    font-size: 16px;    
+}
+.input-90-40{
+    width: 90px;
+    height: 40px;
+    font-size: 16px;    
+}
+
+.btn-120-35{
+    width: 120px;
+    height: 35px;
+    font-size: 14px;
+    padding: 6px 3px 6px 3px;
+}
+.btn-160-45{
+    width: 160px;
+    height: 45px;
+    font-size: 18px;
+}
+
+.box-245-40{
+    width: 245px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+.box-725-400{
+    width: 725px;
+    height: 400px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.05);
+    padding: 0px 25px 0px 25px;
+}
+.box-725-400-header{
+    width: 100%;
+    height: 70px;
+    padding: 0px 20px 0px 20px;
+}
+.box-725-400-body{
+    width: 100%;
+    flex-grow: 1;
+    border-bottom: 2px solid rgb(240, 240, 240);
+    border-top: 2px solid rgb(240,240,240);
+    padding: 0px 20px 0px 20px;
+    font-size: 16px;
+}
+.box-725-400-footer{
+    width: 100%;
+    height: 70px;
+}
+.box-725-400-body .radio-box{
+    height: 60px;
+}
+
+.box-420-250{
+    width: 420px;
+    height: 250px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.05);
+    padding: 0px 25px 0px 25px;
+}
+
+
+
+.box-555-345{
+    width: 555px;
+    height: 345px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.05);
+    padding: 0px 25px 0px 25px;
+}
+
+/* Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font  */
+/* Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font Font  */
+.font-20{
+    font-size: 20px;
+}
+
+/* BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON   */
+/* BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON  BUTTON   */
+.input-underline{
+    border: none;
+    height: 40px;
+    border-bottom : 1px solid rgb(220,220,220);
+    background-color: rgb(252,252,252);
+}
+.btn-border-left{
+    position: relative;    
+}
+.btn-border-left:after{
+    content: '';
+    height: 50%;
+    width: 1px;
+    
+    position: absolute;
+    right: 100%;
+    top: 25%;
+    
+    background-color: rgb(140,140,140);
+}
+
+.btn-border-right{
+    position: relative;    
+}
+.btn-border-right:after{
+    content: '';
+    height: 50%;
+    width: 1px;
+    
+    position: absolute;
+    right: 0%;
+    top: 25%;
+    
+    background-color: rgb(140,140,140);
+}
+
+.btn-border-side{
+    position: relative;    
+}
+.btn-border-side:after{
+    content: '';
+    height: 50%;
+    width: 1px;
+    
+    position: absolute;
+    right: 0%;
+    top: 25%;
+    
+    background-color: rgb(140,140,140);
+}
+.btn-border-side:before{
+    content: '';
+    height: 50%;
+    width: 1px;
+    
+    position: absolute;
+    right: 100%;
+    top: 25%;
+    
+    background-color: rgb(140,140,140);
+}
+
+.btn-orange {
+    color: #fff;
+    background-color: rgb(241,123,0);
+    border-color: rgb(241,123,0);
+}
+.btn-orange:hover {
+    color: #fff;
+    background-color: rgb(241,123,0);
+    border-color: rgb(241,123,0);
+}
+.btn-orange:focus, .btn-orange.focus {
+    box-shadow: 0 0 0 0.2rem rgba(241,123,0,0.5);
+}
+.btn-orange.disabled, .btn-orange:disabled {
+    color: #fff;
+    background-color: rgb(241,123,0);
+    border-color: rgb(241,123,0);
+}
+.btn-orange:not(:disabled):not(.disabled):active, .btn-orange:not(:disabled):not(.disabled).active,
+.show > .btn-orange.dropdown-toggle {
+    color: #fff;
+    background-color: rgb(241,123,0);
+    border-color: rgb(241,123,0);
+}
+.btn-orange:not(:disabled):not(.disabled):active:focus, .btn-orange:not(:disabled):not(.disabled).active:focus,
+.show > .btn-orange.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(241,123,0,0.5);
+}
+
+
+.btn-outline-orange {
+    color: rgb(241,123,0);
+    border-color: rgb(241,123,0);
+}
+.btn-outline-orange:hover {
+    color: #fff;
+    background-color: rgb(241,123,0);
+    border-color: rgb(241,123,0);
+}
+.btn-outline-orange:focus, .btn-outline-orange.focus {
+    box-shadow: 0 0 0 0.2rem rgba(241, 123, 0, 0.5);    
+}
+.btn-outline-orange.disabled, .btn-outline-orange:disabled {
+    color: rgb(241,123,0);
+    background-color: transparent;
+}
+.btn-outline-orange:not(:disabled):not(.disabled):active, .btn-outline-orange:not(:disabled):not(.disabled).active,
+.show > .btn-outline-orange.dropdown-toggle {
+    color: #fff;
+    background-color: rgb(241,123,0);
+    border-color: rgb(241,123,0);
+}
+.btn-outline-orange:not(:disabled):not(.disabled):active:focus, .btn-outline-orange:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-orange.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(241, 123, 0, 0.5);
+}
+
+
+.btn-outline-secondary{
+    /* disabled와 함께 씁니다. */
+}
+
+/* Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp  */
+/* Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp Navbar.jsp  */
+.browser{
+    width: 100vw;
+    min-height: 100vh;
+}
+.navbar-box{
+    flex-basis: 70px;
+    width: 100%;
+    background: linear-gradient(to right, rgb(255,159,16), rgb(255,175,13));
+    color: #fff;
+}
+.navbar-box button{
+    color: #fff;
+}
+.body-box{
+    width: 100%;
+    background-color: rgb(250,250,250);
+}
+.navbar-left{
+    flex-basis: 440px; 
+    padding-left:7.5px; 
+}
+.navbar-right{
+    flex-basis: 440px;
+    padding-right:20px; 
+}
+.logo-img{
+    width: 50px;
+    height: 50px;
+}
+.logo-text{
+    font-family: 'Handlee', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    color: #fff;
+    padding-left: 10px; 
+}
+.navbar-center > form{
+    width: 60%;
+}
+#navbar-search-btn{
+    width: 100px;   
+}
+.body{
+    width: 1200px;
+    background-color: rgb(252,252,252);
+    box-shadow: 0px 5px 5px 2px rgba(0,0,0,0.07);
+}
+
+/* FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId FindId */
+/* FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw FindPw */
+.FindId{
+    width: 100%;
+    height: 100%;
+}
+.FindId-input-box{
+    justify-content: space-around;
+    padding-left: 20px; 
+}
+.FindId-input-box>div>div{
+    width: 80px;
+}
+/* FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete FindIdComplete  */
+/* FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete FindPwComplete  */
+.FindIdComplete{
+    width: 100%;
+    height: 100%;
+}
+.FindIdComplete-logo{
+    flex-basis: 200px;
+}
+.FindIdComplete-logo-img{
+    width: 90px;
+    height: 90px;
+}
+.FindIdComplete-logo-text{
+    font-family: 'Handlee', cursive;
+    font-size: 60px;
+    font-weight: bold;
+    color: rgb(241,123,0);
+    padding-left: 30px; 
+}
+.FindIdComplete-message{
+    font-size: 22px;
+}
+.FindIdComplete-btn{
+    flex-basis: 140px;
+}
+
+/* SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp  */
+/* SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp SignUp  */
+.SignUp{
+    width: 100%;
+    height: 100%;
+}
+.SignUp .logo-box{
+    flex-basis: 160px;
+}
+.SignUp .logo-img{
+    width: 65px;
+    height: 65px;
+}
+.SignUp .logo-text{
+    font-family: 'Handlee', cursive;
+    font-size: 50px;
+    font-weight: bold;
+    color: rgb(241,123,0);
+    padding-left: 30px; 
+}
+.SignUp-header{
+    border-bottom: 2px solid rgb(240, 240, 240);
+}
+.SignUp-footer{
+    flex-basis: 120px;
+}
+.SignUp-box{
+    min-width: 525px;
+}
+.SignUp-box>div{
+    width: 100%;
+}
+.SignUp-body{
+	position: relative;
+    padding-top: 10px;
+    padding-left: 45px;
+    
+}
+.SignUp-input-group{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px 10px 0px;
+
+   
+}
+.SignUp-input-group-label{
+    width: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.input-tel{
+    width: 70px;
+    text-align: center;
+}
+.input-tel-010{
+    width: 55px;
+    text-align: center;
+}
+
+/* PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin  */
+/* PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin PostReadJoin  */
+.Post{
+    width: 100%;
+    padding: 0px 80px 0px 80px;
+}
+.Post>div{
+    width: 100%;
+    padding: 0px 30px 0px 30px;
+}
+.Post-title{
+    flex-basis: 75px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgb(240, 240, 240);
+}
+.Post-title div:first-child{
+    font-size: 20px;
+}
+.Post-title div:last-child{
+    font-size: 13px;
+}
+
+.Post-host{
+    flex-basis:130px;
+    border-bottom: 2px solid rgb(240, 240, 240);
+}
+.Post-host>div:first-child{
+    width: 100px;
+    height: 100px;
+}
+.Post-host>div:nth-child(2)
+{
+    flex-grow: 1;
+    padding-left: 20px;
+}
+.Post-host>div:last-child{
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.Post-contents{
+    flex-basis:auto;
+
+}
+.Post-join{
+    flex-basis:140px;
+    background-color: rgb(245,245,245);
+    border-top: 2px solid rgb(240, 240, 240);
+    border-bottom: 2px solid rgb(240, 240, 240);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.Post-joinList{
+    flex-basis:auto;
+}
+.Post-contents>div{
+    padding: 30px 50px 10px 50px;
+}
+.Post-report>button{
+    text-align: right;
+    font-size: 13px;
+    color: rgb(170,170,170);
+}
+.Post-join>div:first-child{
+    padding: 10px 0px 0px 0px;
+}
+.Post-join>div:last-child{
+    height: 100px;
+    padding: 10px 0px 20px 0px;
+
+}
+.Post-join>div:last-child>div{
+    height: 100%;
+}
+.Post-join>div:last-child>div:first-child{
+    width: 860px;
+    margin-right: 10px;
+}
+.Post-join>div:last-child button{
+    width: 120px;
+    height: 70px;
+}
+
+.comments{
+    width: 1040px;
+    height: 90px;
+    border-bottom: 2px solid rgb(240, 240, 240);
+}
+.comments-reply{
+    width: 25px;
+    height: 100%;
+}
+.comments-user{
+    width: 60px;
+    margin: 0px 30px 0px 10px;
+}
+.comments-else{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 10px 0px 20px 0px;
+}
+.comments-buttons{
+    font-size: 12px;
+    color: rgb(170, 170, 170);
+}
+.comments-buttons button{
+    font-size: 12px;
+    color: rgb(170, 170, 170);
+}
+.Post-footer{
+    height: 90px;
+}
+
+.Post-Status{
+    flex-basis:65px;
+    background-color: rgb(245,245,245);
+    border-top: 2px solid rgb(240, 240, 240);
+    border-bottom: 2px solid rgb(240, 240, 240);
+    display: flex;
+    justify-content: space-between;
+}
+.Post-Status>div{
+    padding: 5px 0px 5px 0px;
+}
+.Post-Status button{
+    margin-left:10px; 
+}
+
+/* MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate  */
+/* MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate MyPageTemplate  */
+.MyPage{
+    width: 100%;
+    height: 100%;
+    padding: 0px 25px 0px 25px;
+}
+.MyPage-header{
+    width: 100%;
+    flex-basis: 260px;
+    border-bottom: 2px solid rgb(220,220,220);
+}
+.MyPage>div:last-child{
+    width: 100%;
+}
+.MyPage-nav{
+    min-height: 600px;
+    flex-basis: 260px;
+
+}
+.MyPage-nav>div{
+    font-size: 20px;
+    margin-top: 50px;
+
+}
+.MyPage-body{
+    height: 100%;
+    border-left: 2px solid rgb(220,220,220);
+}
+
+.MyPage-header-left{
+    height: 260px;
+    flex-basis: 260px;
+}
+.MyPage-header-badge{
+    width: 140px;
+    height: 140px;
+}
+
+.MyPage-header-right{
+    padding-left: 30px; 
+}
+.MyPage-header-nickname{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+.MyPage-header-detail{
+    font-size: 16px;
+}
+.MyPage-body-header{
+    width: 100%;
+    flex-basis: 100px;
+    font-size: 28px;
+    padding-left: 45px;
+}
+.MyPage-body-body{
+    width: 100%;
+    flex-grow: 1;
+    font-size: 16px;
+    padding-left: 45px;
+}
+
+
+
+/* MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp  */
+/* MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp MyProfile.jsp  */
+.MyProfile{
+    width: 100%;
+    height: 100%;
+}
+.MyProfile-box{
+    min-width: 525px;
+}
+.MyProfile-box>div{
+    width: 100%;
+}
+.MyProfile-input-group{
+    display: flex;
+    flex-direction: row;
+    padding: 10px 0px 10px 0px;
+}
+.MyProfile-input-group-label{
+    width: 120px;
+    display: flex;
+    align-items: center;
+}
+
+.MyProfileModify-footer{
+    height: 120px;
+}
+
+/* MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp  */
+/* MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp  */
+.MyFollow{
+    width: 800px;
+    flex-wrap: wrap;
+}
+.MyFollow-user{
+    width: 400px;
+    height: 100px;
+    margin-bottom: 30px;
+}
+.MyFollow-user-badge{
+    width: 100px;
+    height: 100px;
+}
+.MyFollow-user-detail{
+    padding-left: 15px; 
+    font-size: 14px;
+}
+.MyFollow-user-detail>div:first-child{
+    font-size: 20px;
+}
+
+/* MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp  */
+/* MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp MyBadge.jsp  */
+.MyBadge-box{
+    width: 840px;
+    height: 230px;
+    border-bottom: 2px solid rgb(220,220,220);
+}
+.MyBadge-box-label{
+    flex-basis: 80px;
+    font-size: 24px;
+}
+.MyBadge-box-badge{
+    width: 120px;
+    height: 120px;
+    margin-right: 40px;
+}
+
+/* CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp CreatePostList.jsp  */
+/* JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp JoinPostList.jsp  */
+.PostList-post{
+    width: 900px;
+    height: 145px;
+    border-top: 2px solid rgb(220,220,220);
+}
+.PostList-post-left{
+    width: 120px;
+    height: 100%;
+}
+.PostList-post-center{
+    width: 630px;
+    height: 100%;
+}
+.PostList-post-right{
+    width: 150px;
+    height: 100%;
+}
+.PostList-post-right button{
+    margin-bottom: 5px;
+}
+.PostList-post-badge{
+    width: 75px;
+    height: 75px;
+}
+.PostList-post-title{
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+.PostList-post-contents{
+    font-size: 14px;
+    width: 500px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;            
+}
+.PostList-post-detail{
+    font-size: 14px;
+}
+
+
+
+/* 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터  */
+/* 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터 고객센터  */
+.CustomerService{
+    width: 100%;
+    background-color: aquamarine;
+}
+.CustomerService-header{
+    width: 100%;
+    flex-basis: 100px;
+    font-size: 30px;
+    padding-left: 30px;
+    background-color: rgb(252, 252, 252);
+}
+
+.CustomerService-body{
+    width: 100%;
+    background-color: rgb(252, 252, 252);
+}
+.CustomerService-category{
+    width: 100%;
+    flex-basis: 65px;
+    font-size: 24px;
+    padding-left: 30px;
+    background-color: rgb(248,248,248);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.05);
+}
+
+.Withdrawal-header{
+    flex-basis: 130px;
+}
+.Withdrawal-header .logo-text{
+    color: rgb(241,123,0);
+}
+
+.Withdrawal-footer{
+    flex-basis: 130px;
+}
+.Withdrawal-desc{
+    width: 740px;
+    height: 450px;
+    padding: 10px 0px 10px 0px;
+}
+.Withdrawal-body>div:first-child{
+    font-size: 20px;
+}
+.Withdrawal-body>div:last-child{
+    font-size: 20px;
+}
+
+.Withdrawal-input-group{
+    display: flex;
+    font-size: 16px;
+    padding: 5px 0px 5px 0px;
+}
+
+.Withdrawal-input-group-label{
+    width: 90px;
+    font-weight: bold;
+}
+.Withdrawal-input-box{
+    width: 230px;
+    margin: 20px 0px 20px 0px;
+}
+.Withdrawal-input-group .input-underline{
+    width: 140px;
+    height: 30px;
+    border-color: rgb(100,100,100);
+}
+
+.DirectQuestion{
+    width: 100%;
+    padding: 0px 135px 0px 135px;
+}
+.DirectQuestion-desc{
+    width: 100%;
+    height: 165px;
+    padding-left: 15px;
+}
+.DirectQuestion-title{
+    width: 100%;
+    height: 70px;
+}
+.DirectQuestion-contents{
+    width: 100%;
+    height: 490px;
+}
+.DirectQuestion-footer{
+    width: 100%;
+    height: 130px;
+}
+.DirectQuestion-title {
+    border-top: 2px solid rgb(220,220,220);
+    border-bottom: 2px solid rgb(220,220,220); 
+}
+.DirectQuestion-title>div:first-child{
+    width: 75px;
+    text-align: center;
+}
+.DirectQuestion-contents textarea{
+    margin-top: 15px; 
+    height: 100%;
+}
+
+
+/* 추가 */
+
+.input-75-40{
+    width: 75px;
+    height: 40px;
+    font-size: 16px;    
+}
+
+
+
