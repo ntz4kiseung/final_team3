@@ -156,7 +156,6 @@ input:read-only {
     height: 40px;
     font-size: 16px;    
 }
-
 .btn-120-35{
     width: 120px;
     height: 35px;
@@ -476,14 +475,11 @@ input:read-only {
 	position: relative;
     padding-top: 10px;
     padding-left: 45px;
-    
 }
 .SignUp-input-group{
     display: flex;
     flex-direction: row;
     padding: 10px 0px 10px 0px;
-
-   
 }
 .SignUp-input-group-label{
     width: 120px;
@@ -924,6 +920,3 @@ input:read-only {
     height: 40px;
     font-size: 16px;    
 }
-
-
-
