@@ -3,7 +3,7 @@ package com.test.mybatis;
 public class FollowDTO
 {
 	private String nickname, userId, addrSiName1, addrGuName1, addrSiName2, addrGuName2,addrSiName3, addrGuName3, interMainName1, interSubName1, interMainName2, interSubName2, interMainName3, interSubName3, urlBad, url, followId;
-	private int reviewGrade, count;
+	private int reviewGrade;
 	public String getNickname()
 	{
 		return nickname;
@@ -147,16 +147,6 @@ public class FollowDTO
 	public void setReviewGrade(int reviewGrade)
 	{
 		this.reviewGrade = reviewGrade;
-	}
-	public int getCount()
-	{
-		return count;
-	}
-	public void setCount(int count)
-	{
-		this.count = count;
-	}
-	
-	
+	}	
 	
 }

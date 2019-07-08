@@ -294,7 +294,4 @@ public class PostDTO
 		this.limitGrade = limitGrade;
 	}
 
-	
-	
-	
 }

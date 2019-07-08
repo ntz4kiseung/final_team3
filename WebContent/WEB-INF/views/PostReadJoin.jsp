@@ -20,13 +20,51 @@
 <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- sagyo.css -->
 <link href="css/sagyo.css" rel="stylesheet">
+<!-- ajax -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function ()
 	{
 		$('#myModal').on('shown.bs.modal', function () {
 			$('#myInput').trigger('focus')
 		});
+		$('#followBtn-u').click(function()
+		{
+			followUpdate();
+		});
+		$('#followBtn-d').click(function()
+		{
+			followDelete();
+		});
+		
 	});
+	function followUpdate()
+	{
+		$("#followBtn-u").val()
+		$.post("followinsert.action",{followId : $("#followBtn-u").val()}, function(data){
+					    
+			alert("test");
+			postlist = data;
+			alert(postlist+"test");
+			$("#followBtn-u").val(postlist);
+			$("#followBtn-u").html("❤");
+			$("#followBtn-u").attr('id', 'followBtn-d');
+	        alert($("#followBtn-d").attr('id'));
+		});
+	}
+	function followDelete()
+	{
+		alert($("#followBtn-d").val());
+		$.post("followdelete.action",{followId : $("#followBtn-d").val()}, function(data){		    
+	       alert("test");
+	       postlist = data;
+	       alert(postlist+"test");
+	       $("#followBtn-d").val(postlist);
+	       $("#followBtn-d").html("♡");
+	       $("#followBtn-d").attr('id', 'followBtn-u');
+	       alert($("#followBtn-u").attr('id'));
+		});
+	}
 </script>
 
 </head>
@@ -69,7 +107,6 @@
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-up">
                 <div class="Post flex-item-grow flex-col-center-up">
-                	<c:forEach var="postlist" items="${postlist }">
                     <div class="Post-title">
                         <div>${postlist.title}</div>
                         <div>${postlist.postDate }</div>
@@ -81,12 +118,10 @@
                         </div>
                         <div>
                             <div>${postlist.nickname }
-                            <c:forEach var="follow" items="${follow }">
                            	<c:choose>
-                           	<c:when test="${follow.count != 0}">❤</c:when>
-                           	<c:otherwise>♡</c:otherwise>
+                           	<c:when test="${postlist.followId != 0}"><button class="btn" id="followBtn-d" value="${postlist.userId }">❤</button></c:when>
+                           	<c:when test="${postlist.followId eq 0 }"><button class="btn" id="followBtn-u" value="${postlist.userId }">♡</button></c:when>
                            	</c:choose>
-                           	</c:forEach>
                            	</div> 
                             <div>☆☆☆☆☆</div>
                             <c:if test="${postlist.telCertiId != '없음'}">
@@ -119,17 +154,15 @@
                             <div><button class="btn btn-outline-secondary">참가신청</button></div>
                         </div>
                     </div>
-					</c:forEach>
 <!-- 댓글 부분 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->					
                     <div class="Post-joinList">
  						<c:forEach var="join" items="${list}">
  							<div class="comments flex-row-left-center">
-	
 	                            <div class="comments-user"> <!-- 코멘트 유저 뱃지 + 닉네임 -->
 	                                <div> <!-- 뱃지 -->
 	                                    <img src="img/badge150pixel_0001_뉴비.png" alt="">
 	                                </div>
-	                                <div  id="${join.joinId }" name="${join.joinId }"> <!-- 닉네임 -->
+	                                <div > <!-- 닉네임 -->
 	                                    ${join.nickname}
 	                                </div>
 	                            </div>
@@ -137,7 +170,7 @@
 	                                <div class="comments-buttons flex-row-left-center">
 	                                    <div>${join.joinDate}</div>
 	                                    <div>
-	                                        <button class="btn">신고하기</button>
+	                                        <button class="btn" id="${join.joinId }" name="${join.joinId }">신고하기</button>
 	                                    </div>
 	                                    <div>
 	                                        <button class="btn btn-border-right">댓글달기</button>
@@ -159,7 +192,7 @@
 			                                <div>
 			                                    <img src="img/badge150pixel_0005_우수참석러.png" alt="">
 			                                </div>
-			                                <div id="${join.joinId }" name="${join.joinId }">
+			                                <div>
 			                                    ${replylist.nickname }
 			                                </div>
 			                            </div>
@@ -167,7 +200,7 @@
 			                                <div class="comments-buttons flex-row-left-center">
 			                                    <div>${replylist.joinDate }</div>
 			                                    <div>
-			                                        <button class="btn">신고하기</button>
+			                                        <button class="btn" id="${join.joinId }" name="${join.joinId }">신고하기</button>
 			                                    </div>
 			                                    <div>
 			                                        <button class="btn btn-border-right">댓글달기</button>
