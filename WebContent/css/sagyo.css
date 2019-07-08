@@ -1,5 +1,9 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}/* 예전 부트스트랩엔 있었는데 최신건 없어서 가져옴 */
 body{
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
@@ -910,8 +914,6 @@ input:read-only {
     margin-top: 15px; 
     height: 100%;
 }
-
-
 /* 추가 */
 
 .input-75-40{

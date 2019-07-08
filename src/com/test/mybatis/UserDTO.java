@@ -3,8 +3,9 @@ package com.test.mybatis;
 public class UserDTO
 {
 	private String userId, pwd, nickname, name, birth, genderId;
-	private String tel, email, sns, introduce, urlBad, url, telCheck, emailCheck,reviewDate, followCheck;
-	private int reviewGrade, postStatus;
+	private String tel, email, sns, introduce, urlBad, url, telCheck, emailCheck, reviewDate, followCheck;
+	private int postStatus;
+	private double reviewGrade;
 	
 	public String getUserId()
 	{
@@ -134,14 +135,6 @@ public class UserDTO
 	{
 		this.followCheck = followCheck;
 	}
-	public int getReviewGrade()
-	{
-		return reviewGrade;
-	}
-	public void setReviewGrade(int reviewGrade)
-	{
-		this.reviewGrade = reviewGrade;
-	}
 	public int getPostStatus()
 	{
 		return postStatus;
@@ -150,8 +143,14 @@ public class UserDTO
 	{
 		this.postStatus = postStatus;
 	}
-	
-	
+	public double getReviewGrade()
+	{
+		return reviewGrade;
+	}
+	public void setReviewGrade(double reviewGrade)
+	{
+		this.reviewGrade = reviewGrade;
+	}
 }
 
 

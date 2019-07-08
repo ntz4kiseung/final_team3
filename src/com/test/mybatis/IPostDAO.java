@@ -10,4 +10,6 @@ public interface IPostDAO
 	public ArrayList<ReportDTO> reportlist();
 	public int followinsert(FollowDTO followDTO);
 	public int followdelete(FollowDTO followDTO);
+	public ArrayList<PostDTO> myReviewList();
+	public ArrayList<PostDTO> reviewList();
 }

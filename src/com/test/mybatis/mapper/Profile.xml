@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.mybatis.IUserDAO">
+
+	<select id="profile" resultType="com.test.mybatis.UserDTO">
+		SELECT DISTINCT E.NICKNAME AS NICKNAME, E.BADGELOGID AS BADGELOGID, ROUND(AVG(R.GRADE)OVER(),1) AS REVIEWGRADE
+		FROM USER_ESSENTIAL E
+		JOIN REVIEW R
+		ON E.USERID = R.TAKEUSERID
+		WHERE E.USERID = 'B001'
+	</select>
+	
+	<select id="CertiCheck" resultType="com.test.mybatis.UserDTO">
+		SELECT USERID,NICKNAME,NVL2((SELECT C.CERTINAME 
+                    FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
+                    ON U.CERTIID = C.CERTIID 
+                    WHERE U.USERID=  E.USERID AND C.CERTIID = 'CT00001'),'휴대폰 인증 완료 ✔','') AS TELCHECK
+                 , NVL2((SELECT C.CERTINAME FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
+                  ON U.CERTIID = C.CERTIID
+                  WHERE U.USERID= E.USERID AND C.CERTIID = 'CT00002'),'이메일 인증 완료 ✔' ,'') AS EMAILCHECK
+		FROM USER_ESSENTIAL E
+		WHERE USERID='B001'
+	</select>
+	
+</mapper>

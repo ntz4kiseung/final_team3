@@ -55,7 +55,6 @@ public class MessageDTO
 		this.checkDate = checkDate;
 	}
 
-
 	public String getMessageId()
 	{
 		return messageId;
