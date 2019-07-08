@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.test.mybatis.IFollowDAO">  <!-- 인터페이스 지정  -->
+  
+	<select id="followList" resultType="com.test.mybatis.FollowDTO"> 
+		SELECT '테스트용' AS NICKNAME , 'BABASUNA' AS USERID , '서울특별시' AS ADDRSINAME1,'성동구' AS ADDRGUNAME1, '서울특별시' AS ADDRSINAME2,'강남구' AS ADDRGUNAME2, '서울특별시' AS ADDRSINAME3,'용산구' AS ADDRGUNAME3,
+        '필라테스' AS INTERSUBNAME1  ,'영상편집' AS INTERSUBNAME2 , 'img/badge150pixel_0004_우수참석러-복사.png' AS URL , '3' AS REVIEWGRADE
+		FROM DUAL
+	</select>  	
+	
+	<select id="myProfile" resultType="com.test.mybatis.UserDTO"> 
+		SELECT '테스트용' AS NICKNAME , 'BABASUNA' AS USERID 
+     , 'img/badge150pixel_0003_일반참석러.png' AS URL , '3' AS REVIEWGRADE
+		FROM DUAL
+	</select>  
+
+
+	
+  
+</mapper>

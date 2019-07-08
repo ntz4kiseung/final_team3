@@ -3,6 +3,7 @@ package com.test.mybatis;
 public class MessageDTO
 {
 	private String contents, giveUserId, takeUserId, sendDate, checkDate;
+	private String messageId;
 
 	public String getContents()
 	{
@@ -54,4 +55,14 @@ public class MessageDTO
 		this.checkDate = checkDate;
 	}
 
+
+	public String getMessageId()
+	{
+		return messageId;
+	}
+
+	public void setMessageId(String messageId)
+	{
+		this.messageId = messageId;
+	}
 }

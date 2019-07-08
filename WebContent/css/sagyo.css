@@ -648,7 +648,6 @@ input:read-only {
 .MyPage-nav{
     min-height: 600px;
     flex-basis: 260px;
-
 }
 .MyPage-nav>div{
     font-size: 20px;

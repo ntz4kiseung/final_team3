@@ -33,9 +33,7 @@
 	
 	<!-- ⑤ sqlSessioin 등록 과정에서 생겨나는 추가 코드 -->
 	<!-- ※ mybatis를 사용하기 위한 환경 설정 추가 2 -->
-
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg> <!-- SqlSessionTemplate 클래스 안에 생성자 많을때 몇번째 생성자 쓸 건지 설정 -->
 	</bean>
-
 </beans>
