@@ -65,7 +65,7 @@ WHERE RNUM BETWEEN #{reqpage}*10-10+1 AND #{reqpage}*10
 		     ) 				
 		ORDER BY ROWNUM
 		)
-		WHERE RNUM BETWEEN ${reqpage}*10-10+1 AND ${reqpage}*10			
+		WHERE RNUM BETWEEN #{reqpage}*10-10+1 AND #{reqpage}*10			
 		
 		
 		

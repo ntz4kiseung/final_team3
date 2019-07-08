@@ -26,26 +26,25 @@
 								      </div> 
 								    </div> 
 								 </c:forEach>  
-								 <!-- 페이징 처리 ~ 시작  -->
+								<!-- 페이징 처리 ~ 시작  -->
 			                           <div class="flex-row-center-center;">
 			                            <form action="noticelist.action" method="get">
 			                            <div class="flex-row-center-center;">
 			                              <script type="text/javascript">
 			                              
-											var max = ${pages };
-											var print = "";
-											for (var i = 1; i <= max; i++)
-											{
-												
-												print = i;
-												document.write("<button type='submit' id='pagesu' name='pagesu' value="+ print +">"+print+"</button>");
-											}
-											//document.write("<button type='submit' id='pagesu' name='pagesu' value="+ print +">"+print+"</button>");
+			                              var max = ${pages }
+			                             for (var i = 1; i <= max; i++)
+										{
+											document.write("<h1>"+i+"</h1>");
+										}
 											
-										</script>
+											
+										  </script>
 										 </div>
 			                           </form>
 			                           </div>
+			                           <h1>${pages }</h1>
+                               <!-- 페이징 처리 ~ 끝~  -->
                                <!-- 페이징 처리 ~ 끝~  -->
 							 
 			                    

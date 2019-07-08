@@ -76,6 +76,7 @@ public class NoticeController
 		//System.out.println("/searchnotice.action호출 확인"+request.getParameter("keyword"));
 		 
 		String keyword = request.getParameter("keyword");
+		String reqpage = request.getParameter("pagesu");
 		
 		System.out.println(keyword+"searchlist keyword이당 ");
 		
@@ -89,23 +90,24 @@ public class NoticeController
 		
 		//model.addAttribute("searchlist",keyword);  // 여기 key 값이 넘어가는 구조인듯. 
 		
-		String reqpage = request.getParameter("pagesu");//페이지수 
+		
 		//dao.searchlist(keyword);// dao에있는 search라는 select문에 값을 보냄~ 
-		System.out.println(reqpage+"reqpage확인");
+		
 		if (keyword==null)
 		{
 			keyword="";
 		};
+		if (reqpage==null)
+		{
+			reqpage = "1";
+		}
+		
+	
 		
 		
-		 Map<String, String> map = new HashMap<String, String>(); 
-		 map.put("keyword",keyword); 
-		 //map.put("reqpage", dao.count("reqpage"));
-		
-		 System.out.println(map.get("keyword"));
 		 int pages = (int)Math.ceil(dao.count(keyword)/10.0); // 
 			System.out.println(pages+"페이지수 확인 searchlist");
-			//model.addAttribute("pages",pages);
+			model.addAttribute("pages",pages);
 		
 		 
 		System.out.println("매퍼 전~ ");
@@ -113,7 +115,7 @@ public class NoticeController
 		try
 		{
 			
-			model.addAttribute("list",dao.searchlist(map));//<<-- 요 끝에 꺼는 DAO~ 
+			model.addAttribute("list",dao.searchlist(keyword,reqpage));//<<-- 요 끝에 꺼는 DAO~ 
 								// 요고 뷰 페이지에서 접근할때 경로임 ㅇㅇ 
 			// 페이징 처리 시작? 
 			System.out.println("매퍼 후~ ");
@@ -121,11 +123,6 @@ public class NoticeController
 		{
 			System.out.println(e.toString());
 		}
-		
-		 
-		
-		
-		
 		
 		// 페이징 처리 끝 
 		result = "/WEB-INF/views/SearchList.jsp";
