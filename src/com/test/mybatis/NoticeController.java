@@ -20,7 +20,7 @@ public class NoticeController
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping(value="/noticelist.action",method=RequestMethod.GET)
+	@RequestMapping(value="/noticelist.action",method= {RequestMethod.POST, RequestMethod.GET})
 	public String noticeList(Model model, HttpServletRequest request)
 	{	
 		String result= null;

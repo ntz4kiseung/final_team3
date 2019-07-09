@@ -138,6 +138,10 @@
 		
 	}) */
 	/* list에서 요소 지우기  끝  */
+	
+	
+	
+	
 </script>
     
     
@@ -216,7 +220,7 @@
                         	<!-- <form action="searchnotice.action" method="post"> -->
                         		<input type="text" class="form-control form-control-sm" name="keyword" id="keyword"> <!-- 입력 창 -->
                         		
-                        		<input type="button"  onclick="loadXMLDocs()" class="btn btn-success btn-default" value="검색"/>
+                        		<input type="button"  onclick="loadXMLDocs()" class="btn btn-success btn-default" value="검색" id="search"/>
                         		
                         	<!-- </form> -->
                         	</div>
@@ -254,10 +258,12 @@
 								      </div> 
 								    </div> 
 								 </c:forEach>  
-								 <!-- 페이징 처리 ~ 시작  -->
+								 
+							 </div>
+							 <!-- 페이징 처리 ~ 시작  -->
 			                           <div class="flex-row-center-center;">
-			                            <form action="noticelist.action" method="get">
-			                            <div class="flex-row-center-center;">
+			                            <form action="noticelist.action" method="post" id="formId">
+			                            <div class="flex-row-center-center;" id="numbering">
 			                              <script type="text/javascript">
 			                              
 											var max = ${pages };
@@ -275,7 +281,6 @@
 			                           </form>
 			                           </div>
                                <!-- 페이징 처리 ~ 끝~  -->
-							 </div>
 							 <!-- 본래의 게시물 리스트 (끝 ) -->
 							 
 							 <!-- 검색이 되었을때의 게시물 리스트 (시작) -->
