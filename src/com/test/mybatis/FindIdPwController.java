@@ -80,31 +80,26 @@ public class FindIdPwController
 	}
 	
 	@RequestMapping(value="/findidtelinsert.action", method=RequestMethod.POST)
-	public String findIdTelInsert(UserDTO user,Model model)
+	public String findIdTelInsert(UserDTO user, Model model)
 	{
-		/* RedirectAttributes rttr = null; */
 		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
-		dao.findIdTelInsert(user);
-		/* rttr.addFlashAttribute("findid", user.getUserId()); */
 		
-		model.addAttribute("userId", user.getUserId());
+		dao.findIdTelInsert(user);
+		
+		model.addAttribute("resultid", user.getUserId());
 		
 		return "redirect:findidresult.action";
-
 	}
 	
 	@RequestMapping(value="/findidemailinsert.action", method=RequestMethod.POST)
-	public String findIdEmailInsert(UserDTO user,Model model)
+	public String findIdEmailInsert(UserDTO user, Model model)
 	{
-		/* RedirectAttributes rttr = null; */
-		System.out.println("야");
 		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
-		dao.findIdEmailInsert(user);
-		System.out.println("왜");
-		/* rttr.addFlashAttribute("findid", user.getUserId()); */
-		model.addAttribute("userId", user.getUserId());
-		System.out.println("안데");
-		return "redirect:findidresult.action";
 		
+		dao.findIdEmailInsert(user);
+		
+		model.addAttribute("resultid", user.getUserId());
+		
+		return "redirect:findidresult.action";
 	}
 }

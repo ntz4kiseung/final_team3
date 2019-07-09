@@ -95,7 +95,7 @@
                                     Sagyo
                                 </div>
                             </div>
-                            <input type="hidden" id="resultid" name="resultid" value="${param.findid}"/>
+                            <input type="hidden" id="resultid" name="resultid" value="${param.resultid}"/>
                             
                             <div class="FindIdComplete-message flex-item-grow flex-row-center-center" id="result">
                                 

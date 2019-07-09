@@ -458,66 +458,7 @@
 			    </div>
 			  </div>
 			</div>
-			    
-    
-
-
-<!-- 
-      
-            <div id="tel_modal" class="modal fade" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                         header
-                        <div class="modal-header">
-                            <h6 class="modal-title">휴대폰 인증</h6>
-                        </div>
-                        body
-                        <div class="certi_text"><br>
-                            <span>인증코드가 발송되었습니다.</span><br>
-                            <span>전송된 코드를 입력해주세요.</span>
-                        </div>
-                        <div class="certi_input">
-                        <br>
-                            <input type="text" class="input_certi" id="tel_certi_input">
-                        </div>
-                        <br>
-                        <div class="certi_rc">
-                            <button type="button" class="certi_close">다시전송</button>&nbsp;<span>|</span>
-                            <button type="button" class="certi_close" id="tel_submit">확인</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
-                <div id="email_modal" class="modal fade" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    header
-                        <div class="modal-header">
-                            <h6 class="modal-title">E-mail 인증</h6>
-                        </div>
-                    body
-                            <div class="certi_text"><br>
-                                <span>인증코드가 발송되었습니다.</span><br>
-                                <span>전송된 코드를 입력해주세요.</span>
-                            <br>
-                            </div>
-                        <div class="certi_input">
-                        <br>
-                                <input type="text" class="input_certi" id="email_certi_input">
-                        </div>
-                        <br>
-                            <div class="certi_rc">
-                            
-                                <button type="button" class="certi_close">다시전송</button>&nbsp;<span>|</span>
-                                <button type="button" class="certi_close" id="email_submit">확인</button>
-                            </div>
-                    </div>
-                    </div>
-                </div> -->
-      
         </div>
-        
     </div>
 </body>
 </html>
