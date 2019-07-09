@@ -19,8 +19,9 @@
 		WHERE POSTID = 'PT00002'
 	</select>
 	<select id="replylist" resultType="com.test.mybatis.JoinDTO">
-		SELECT JOINID, NVL(REPLYID, '없음'), USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, NVL(USERTYPEID,'없음')
+		SELECT JOINID, REPLYID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, USERTYPEID
 		FROM REPLY_VIEW
+		WHERE POSTID = 'PT00002'
 	</select>
 	<select id="reportlist" resultType="com.test.mybatis.ReportDTO">
 		SELECT REPORTCATENAME
@@ -36,4 +37,7 @@
 		FROM FOLLOW
 		WHERE GIVEUSERID = #{userId} AND TAKEUSERID = #{followId}
 	</delete>
+	<insert id="joininsert">
+		INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE) VALUES(ADD_ID('JOIN','JOINID','JN'),'PT00002',#{userId}, 'ST00001',#{contents},SYSDATE)
+	</insert>
 </mapper>

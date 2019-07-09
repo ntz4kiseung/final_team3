@@ -23,48 +23,41 @@
 <!-- ajax -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function ()
+	$(window).on('load', function ()
 	{
 		$('#myModal').on('shown.bs.modal', function () {
 			$('#myInput').trigger('focus')
 		});
-		$('#followBtn-u').click(function()
+		
+		$('#followBtn').click(function()
 		{
-			followUpdate();
-		});
-		$('#followBtn-d').click(function()
-		{
-			followDelete();
+			$.post("followinsert.action",{followId : $("#followBtn").val()}, function(data){
+				
+				followId = data;
+				alert(followId);
+				if(parseInt(followId) == 0)
+				{
+					$("#followBtn").html("♡");	
+				}
+				else if(parseInt(followId) != 0)
+				{
+					$("#followBtn").html("❤");	
+				}
+			});
 		});
 		
+		$('#post-join-btn').click(function()
+		{
+			location.href="joininsert.action?contents="+$('#contents').val();
+		});
+		
+		$('#reportBtn').click(function()
+		{
+			alert($('#reportArea').val());
+			alert($('#reportType').val());
+			location.href="joininsert.action?contents="+$('#contents').val();
+		});
 	});
-	function followUpdate()
-	{
-		$("#followBtn-u").val()
-		$.post("followinsert.action",{followId : $("#followBtn-u").val()}, function(data){
-					    
-			alert("test");
-			postlist = data;
-			alert(postlist+"test");
-			$("#followBtn-u").val(postlist);
-			$("#followBtn-u").html("❤");
-			$("#followBtn-u").attr('id', 'followBtn-d');
-	        alert($("#followBtn-d").attr('id'));
-		});
-	}
-	function followDelete()
-	{
-		alert($("#followBtn-d").val());
-		$.post("followdelete.action",{followId : $("#followBtn-d").val()}, function(data){		    
-	       alert("test");
-	       postlist = data;
-	       alert(postlist+"test");
-	       $("#followBtn-d").val(postlist);
-	       $("#followBtn-d").html("♡");
-	       $("#followBtn-d").attr('id', 'followBtn-u');
-	       alert($("#followBtn-u").attr('id'));
-		});
-	}
 </script>
 
 </head>
@@ -119,8 +112,12 @@
                         <div>
                             <div>${postlist.nickname }
                            	<c:choose>
-                           	<c:when test="${postlist.followId != 0}"><button class="btn" id="followBtn-d" value="${postlist.userId }">❤</button></c:when>
-                           	<c:when test="${postlist.followId eq 0 }"><button class="btn" id="followBtn-u" value="${postlist.userId }">♡</button></c:when>
+                           	<c:when test="${postlist.followId != 0}">
+                           		<button class="btn" id="followBtn" value="${postlist.userId }">❤</button>
+                           	</c:when>
+                           	<c:when test="${postlist.followId eq 0 }">
+                           		<button class="btn" id="followBtn" value="${postlist.userId }">♡</button>
+                           	</c:when>
                            	</c:choose>
                            	</div> 
                             <div>☆☆☆☆☆</div>
@@ -146,12 +143,12 @@
                     <div class="Post-report flex-row-right-center">
                         <button class="btn" data-toggle="modal"  data-target="#report-post">신고하기</button>
                     </div>
-
+                    <form action="joininsert.action" method="get"></form>
                     <div class="Post-join">
                         <div>현재 참가 신청인원 (3/${postlist.minNum }~${postlist.maxNum })</div>
                         <div class="flex-row-left-center">
-                            <div><textarea name="" id=""></textarea></div>
-                            <div><button class="btn btn-outline-secondary">참가신청</button></div>
+                            <div><textarea name="contents" id="contents"></textarea></div>
+                            <div><button id="post-join-btn"class="btn btn-outline-secondary">참가신청</button></div>
                         </div>
                     </div>
 <!-- 댓글 부분 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->					
@@ -184,34 +181,36 @@
 	                        </div>
 	                        <c:forEach var="replylist" items="${replylist }">
 	                        	<c:if test="${join.joinId eq replylist.joinId }">
-	                        		<div class="comments flex-row-left-center">
-			                            <div class="comments-reply">
-			                                <img src="img/img6.png" alt="">
-			                            </div>
-			                            <div class="comments-user">
-			                                <div>
-			                                    <img src="img/badge150pixel_0005_우수참석러.png" alt="">
-			                                </div>
-			                                <div>
-			                                    ${replylist.nickname }
-			                                </div>
-			                            </div>
-			                            <div class="comments-else flex-item-grow">
-			                                <div class="comments-buttons flex-row-left-center">
-			                                    <div>${replylist.joinDate }</div>
-			                                    <div>
-			                                        <button class="btn" id="${join.joinId }" name="${join.joinId }">신고하기</button>
-			                                    </div>
-			                                    <div>
-			                                        <button class="btn btn-border-right">댓글달기</button>
-			                                        <button class="btn">신청취소</button>
-			                                    </div>
-			                                </div>
-			                                <div>
-			                                    	${replylist.contents }
-			                                </div>
-			                            </div>
-			                        </div>
+	                        		<c:if test="${not empty replylist.userTypeId}">
+		                        		<div class="comments flex-row-left-center">
+				                            <div class="comments-reply">
+				                                <img src="img/img6.png" alt="">
+				                            </div>
+				                            <div class="comments-user">
+				                                <div>
+				                                    <img src="img/badge150pixel_0005_우수참석러.png" alt="">
+				                                </div>
+				                                <div>
+				                                    ${replylist.nickname }
+				                                </div>
+				                            </div>
+				                            <div class="comments-else flex-item-grow">
+				                                <div class="comments-buttons flex-row-left-center">
+				                                    <div>${replylist.joinDate }</div>
+				                                    <div>
+				                                        <button class="btn" id="${join.joinId }" name="${join.joinId }">신고하기</button>
+				                                    </div>
+				                                    <div>
+				                                        <button class="btn btn-border-right">댓글달기</button>
+				                                        <button class="btn">신청취소</button>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    	${replylist.contents }
+				                                </div>
+				                            </div>
+				                        </div>
+			                        </c:if>
 	                        	</c:if>
 	                        </c:forEach>
  						</c:forEach>
@@ -237,19 +236,19 @@
 			      	<div class="flex-row-center-center">
 			      		<div>유형</div>
 			      		<div>
-			      			<select>
+			      			<select id="reportType">
 			      				<c:forEach var="reportlist" items="${reportlist }">
-			      				<option>${reportlist.reportCateName }</option>
+			      				<option value="${reportlist.reportCateName }">${reportlist.reportCateName }</option>
 			      				</c:forEach>
 			      			</select>
 			      		</div>
 			      	</div>
 			      	<div class="flex-col-center-center">
-			      		<textarea rows="5" cols="50" placeholder="입력해주세요"></textarea>  
+			      		<textarea id="reportArea" rows="5" cols="50" placeholder="입력해주세요"></textarea>  
 				    </div>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">신고하기</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="reportBtn">신고하기</button>
 			      </div>
 			    </div>
 			  </div>
