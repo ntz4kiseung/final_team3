@@ -142,44 +142,74 @@
 
 
                         <div class="box-725-400-body flex-col-left-center">
-
-                            <div class="radio-box flex-row-left-center">
-                                <input type="radio">
+						<form action="findpwtelinsert.action" id="find-pw-form" name="find-pw-form" method="POST">
+                            <div class="radio-box flex-row-left-center" id="find-pw-content">
+                                <input type="radio" name="tel-email" value="tel" checked="checked">
                                 <span>&nbsp;&nbsp;등록된 휴대전화로 찾기</span>
                             </div>
-                            <div class="flex-item-grow flex-col-left-center FindId-input-box">
+                            <div class="flex-item-grow flex-col-left-center FindId-input-box" id="find-pw-tel">
                                 <div class="flex-row-left-center">
                                     <div>
                                         아이디
                                     </div>
-                                    <input type="text" class="input-underline">
+                                    <input type="text" class="input-underline" id="userId" name="userId">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline">
+                                    <input type="text" class="input-underline" id="name" name="name">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         전화번호
                                     </div>
-                                    <input type="text" class="input-underline">
-                                    <button class="btn" id="tel_check">인증하기</button>
+                                    <input type="text" class="input-underline" id="tel" name="tel">
+                                    <button type="button" class="btn" id="tel-Check-btn" name="tel-Check-btn" value="0">인증하기</button>
+                               		<input type="hidden" id="telCheck" name="telCheck" value="" />
+                                </div>
+                                <div class="div-check">
+                                	<span class="span-check" id="find-pw-tel-span"></span>
                                 </div>
                             </div>
 
+
+
+
+
+
+
+
+
+
                             <div class="radio-box flex-row-left-center">
-                                <input type="radio">
+                                <input type="radio" name="tel-email" value="email">
                                 <span>&nbsp;&nbsp;등록된 이메일로 찾기</span>
                             </div>
-                            <div>
-                                <!-- 여기에 위에 있는거(휴대폰 찾기에서 FindId-input-box) 그대로 쓰면 됨.. -->
+                            <div class="flex-item-grow flex-col-left-center FindId-input-box" id="find-id-email">
+                                <div class="flex-row-left-center">
+                                    <div>
+                                        이름
+                                    </div>
+                                    <input type="text" class="input-underline" id="name2" name="name">
+                                </div>
+                                <div class="flex-row-left-center">
+                                    <div>
+                                        이메일
+                                    </div>
+                                    <input type="text" class="input-underline" id="email" name="email" value="">
+                                    <button type="button" class="btn" id="email-Check-btn" name="email-Check-btn" value="0">인증하기</button>
+                                    <input type="hidden" id="emailCheck" name="emailCheck" value="">
+                                </div>
+                                <div class="div-check">
+                                	<span class="span-check" id="find-id-email-span"></span>
+                                </div>
                             </div>
-
+                            <input type="hidden" id="pwd" name="pwd" value="">
+						</form>
+						
                         </div>
-
-
+						
                         <div class="box-725-400-footer flex-row-center-center">
                             <button class="btn btn-orange btn-160-45">다음</button>
                         </div>

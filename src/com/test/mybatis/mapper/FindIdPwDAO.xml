@@ -19,7 +19,7 @@
  	<select id = "findIdTel" resultType="java.lang.String">
  		SELECT USERID
  		FROM USER_ESSENTIAL
- 		WHERE NAME = #{name} AND EMAIL = #{tel}
+ 		WHERE NAME = #{name} AND TEL = #{tel}
  	</select>
  	
  	<select id = "findIdEmail" resultType="java.lang.String">
@@ -28,16 +28,13 @@
  		WHERE NAME = #{name} AND EMAIL = #{email}
  	</select>
  	
- 	
- 	<!-- public int findIdTelInsert(UserDTO user);
-	
-	public int findIdEmailInsert(UserDTO user);
-	 -->
-	 
-	 <insert id="findIdTelInsert">
+ 	<insert id="findIdTelInsert">
 	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
 		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00003')
 	 </insert>
 	 
-	 
+	 <insert id="findIdEmailInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00004')
+	 </insert>
  </mapper>

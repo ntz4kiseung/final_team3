@@ -48,18 +48,22 @@
                 {
                     $("#find-id-tel").hide();
                     $("#find-id-email").show();
+                    $("#name").val("");
+                    $("#tel").val("");
                     $("#name").attr('id','name1');
                     $("#name2").attr('id','name');
+                    $("#find-id-form").attr('action','findidemailinsert.action');
                     
                 }
                 if(radioCheck=="tel")
                 {
                     $("#find-id-tel").show();
                     $("#find-id-email").hide();
+                    $("#name").val("");
+                    $("#email").val("");
                     $("#name").attr('id','name2');
                 	$("#name1").attr('id','name');
-                	
-                	
+                	$("#find-id-form").attr('action','findidtelinsert.action');
                 }
             })
             
@@ -72,83 +76,15 @@
 			        text += possible.charAt(Math.floor(Math.random() * possible.length));
 			    return text;
 			}
-			
-			
-			$("#tel-re").click(function() {
-				
-				var certi = makeid();
-				$("#tel-certi-test").text(certi);
-			    $('#tel-su').val(certi);
-			})
-			
-			$("#tel-su").click(function() {
-				var telC=$("#tel-su").val();
-				
-				var telInput = $("#tel_certi_input").val();
-				
-				if (telC == telInput) 
-				{
-					$("#telCheck").val(telC);
-					$("#telmodal").modal('hide');
-					
-					document.getElementById("find-id-tel-span").style.display = 'block';
-					document.getElementById("find-id-tel-span").style.color = '#31B404';
-					$("#find-id-tel-span").text("인증이 성공하였습니다. 다음버튼을 눌러주세요.");
-					
-				}
-				else
-				{
-					$("#tel-context1").text("인증번호가 틀렸습니다. 다시 전송합니다.");
-					var certi = makeid();
-					$("#tel-certi-test").text(certi);
-				    $('#tel-su').val(certi);
-				}
-			})
-			
-			
-			$("#email-re").click(function() {
-				
-				var certi = makeid();
-				$("#email-certi-test").text(certi);
-			    $('#email-su').val(certi);
-			})
-			
-			$("#email-su").click(function() {
-				var telC=$("#email-su").val();
-				
-				var telInput = $("#email_certi_input").val();
-				
-				if (telC == telInput) 
-				{
-					$("#emailCheck").val(telC);
-					$("#emailmodal").modal('hide');
-					
-					document.getElementById("find-id-email-span").style.display = 'block';
-					document.getElementById("find-id-email-span").style.color = '#31B404';
-					$("#find-id-email-span").text("인증이 성공하였습니다. 다음버튼을 눌러주세요.");
-					
-				}
-				else
-				{
-					$("#email-context1").text("인증번호가 틀렸습니다. 다시 전송합니다.");
-					var certi = makeid();
-					$("#email-certi-test").text(certi);
-				    $('#email-su').val(certi);
-				}
-			})
-			
-			
-			
-			
-			$("#telCheck").click(function()
+            
+
+			$("#tel-Check-btn").click(function()
 			{
-
-
+				console.log("1 = " + $("#telCheck").val());
 				var inputname = $("#name").val();
 				var inputtel = $("#tel").val();
-			
-				var findidtel = [inputname, inputtel];
 				
+				var findidtel = [inputname, inputtel];
 				
 				if (inputname == "") {
 					document.getElementById("find-id-tel-span").style.display = 'block';
@@ -169,33 +105,69 @@
 					url : "<%=cp %>/findidtelcheck.action",
 					type : "post",
 					data : {'findidtel': findidtel},
-					success : function(count)
+					success : function(userid)
 					{
-						if (count == 0) {
+						if (userid == "null") {
 							document.getElementById("find-id-tel-span").style.display = 'block';
 							document.getElementById("find-id-tel-span").style.color = '#DF0101';
 							/* $("#btn-check-id").val("1"); */
 							$("#find-id-tel-span").text("이름과 전화번호를 확인해주세요");
+
 						}
 						else
 						{
 							var certi = makeid();
 							$("#tel-certi-test").text(certi);
-						    $('#tel-su').val(certi);
 							
+							var id = userid;
 							
 							document.getElementById("find-id-tel-span").style.display = 'none';
 							$('#telmodal').modal();
+							$('#telCheck').val(certi);
+							console.log(userid);
+							$("#userId").val(id);
+							console.log($("#userId").val());
 						}
 					}
 				})
 			})
 			
+			$("#tel-re").click(function() {
+				
+				var certi = makeid();
+				$("#tel-certi-test").text(certi);
+			    $('#telCheck').val(certi);
+			})
 			
-			$("#emailCheck").click(function()
+			$("#tel-su").click(function() {
+				
+				var telInput = $("#tel_certi_input").val();
+				var telC = $("#telCheck").val();
+				
+				if (telC == telInput) 
+				{
+					$("#telmodal").modal('hide');
+					
+					document.getElementById("find-id-tel-span").style.display = 'block';
+					document.getElementById("find-id-tel-span").style.color = '#31B404';
+					$("#tel-Check-btn").val(1);
+					$("#find-id-tel-span").text("인증이 성공하였습니다. 다음버튼을 눌러주세요.");
+				}
+				else
+				{
+					$("#tel-context1").text("인증번호가 틀렸습니다. 다시 전송합니다.");
+					var certi = makeid();
+					$('#telCheck').val(certi);
+					$("#tel-certi-test").text(certi);
+				}
+			})
+			
+			
+			
+			
+			/* 이메일 인증  --------------------------------------------------------------------------------------*/
+			$("#email-Check-btn").click(function()
 			{
-
-
 				var inputname = $("#name").val();
 				var inputemail = $("#email").val();
 				
@@ -220,9 +192,9 @@
 					url : "<%=cp %>/findidemailcheck.action",
 					type : "post",
 					data : {'findidemail': findidemail},
-					success : function(count)
+					success : function(userid)
 					{
-						if (count == 0) {
+						if (userid == "null") {
 							document.getElementById("find-id-email-span").style.display = 'block';
 							document.getElementById("find-id-email-span").style.color = '#DF0101';
 							/* $("#btn-check-id").val("1"); */
@@ -232,9 +204,9 @@
 						{
 							var certi = makeid();
 							$("#email-certi-test").text(certi);
-						    $('#email-su').val(certi);
-							
-							
+						    $('#emailCheck').val(certi);
+						    $("#userId").val(userid);
+						    console.log($("#userId").val());
 							document.getElementById("find-id-email-span").style.display = 'none';
 							$('#emailmodal').modal();
 						}
@@ -243,17 +215,53 @@
 			})
 			
 			
+			$("#email-re").click(function() {
+				
+				var certi = makeid();
+				$("#email-certi-test").text(certi);
+			    $('#emailCheck').val(certi);
+			})
 			
+			$("#email-su").click(function() {
+				var telC=$("#emailCheck").val();
+				
+				var telInput = $("#email_certi_input").val();
+				
+				if (telC == telInput) 
+				{
+					$("#emailCheck").val(telC);
+					$("#emailmodal").modal('hide');
+					
+					document.getElementById("find-id-email-span").style.display = 'block';
+					document.getElementById("find-id-email-span").style.color = '#31B404';
+					$("#email-Check-btn").val(1);
+					$("#find-id-email-span").text("인증이 성공하였습니다. 다음버튼을 눌러주세요.");
+				}
+				else
+				{
+					$("#email-context1").text("인증번호가 틀렸습니다. 다시 전송합니다.");
+					var certi = makeid();
+					$("#email-certi-test").text(certi);
+				    $('#emailCheck').val(certi);
+				}
+			})
+			
+			/*--------------------------------------------------------------------------------- 이메일 인증*/
+			
+			/* 제출  --------------------------------------------------------------------------------------*/
 			
 			$("#find-id-btn").click(function(){
-				console.log("1");
-   				document.getElementById("find-id-form").submit();
+				
+				if($("#email-Check-btn").val() == 1 || $("#tel-Check-btn").val() == 1)
+				{
+					document.getElementById("find-id-form").submit();
+				}
+				else
+				{
+					alert("인증을 완료해주세요.");
+				}
+   				
    			})
-			
-			
-          
-            
-            
         });
     </script>
 </head>
@@ -315,7 +323,7 @@
 
 
 
-						<form action="findidcertiinsert.action" id="find-id-form" name="find-id-form" method="post">
+						<form action="findidtelinsert.action" id="find-id-form" name="find-id-form" method="POST">
 
                             <div class="radio-box flex-row-left-center" id="find-id-content">
                                 <input type="radio" name="tel-email" value="tel" checked ="checked">
@@ -323,19 +331,19 @@
                             </div>
                             
                             <div class="flex-item-grow flex-col-left-center FindId-input-box" id="find-id-tel">
-                            
                                 <div class="flex-row-left-center">
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline" id="name">
+                                    <input type="text" class="input-underline" id="name" name="name">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         전화번호
                                     </div>
-                                    <input type="text" class="input-underline" id="tel" value="">
-                                    <button type="button" class="btn" id="telCheck" name="telCheck">인증하기</button>
+                                    <input type="text" class="input-underline" id="tel" name="tel" value="">
+                                    <button type="button" class="btn" id="tel-Check-btn" name="tel-Check-btn" value="0">인증하기</button>
+                                    <input type="hidden" id="telCheck" name="telCheck" value="">
                                 </div>
                                 <div class="div-check">
                                 	<span class="span-check" id="find-id-tel-span"></span>
@@ -355,20 +363,21 @@
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline" id="name2">
+                                    <input type="text" class="input-underline" id="name2" name="name">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         이메일
                                     </div>
-                                    <input type="text" class="input-underline" id="email">
-                                    <button type="button" class="btn" id="emailCheck" name="emailCheck">인증하기</button>
+                                    <input type="text" class="input-underline" id="email" name="email" value="">
+                                    <button type="button" class="btn" id="email-Check-btn" name="email-Check-btn" value="0">인증하기</button>
+                                    <input type="hidden" id="emailCheck" name="emailCheck" value="">
                                 </div>
                                 <div class="div-check">
                                 	<span class="span-check" id="find-id-email-span"></span>
                                 </div>
                             </div>
-                            
+                            <input type="hidden" id="userId" name="userId" value="">
                           </form>  
                           
                             
@@ -378,6 +387,7 @@
 
                         <div class="box-725-400-footer flex-row-center-center">
                             <button type="button" id="find-id-btn" name="find-id-btn" class="btn btn-orange btn-160-45">다음</button>
+                            
                         </div>
                          
                     </div>

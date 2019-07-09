@@ -7,9 +7,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class FindIdPwController
@@ -17,9 +19,8 @@ public class FindIdPwController
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
 	@RequestMapping(value="/findid.action", method=RequestMethod.GET)
-	public String findidForm(ModelMap model)
+	public String findidTelForm(ModelMap model)
 	{
 		String result = null;
 		result = "/WEB-INF/views/FindId.jsp";
@@ -27,14 +28,39 @@ public class FindIdPwController
 		
 		return result;
 	}
+	
+	@RequestMapping(value="/findpw.action", method=RequestMethod.GET)
+	public String findidEmailForm(ModelMap model)
+	{
+		String result = null;
+		result = "/WEB-INF/views/FindPw.jsp";
+		
+		
+		return result;
+	}
+	
+	
+	
+	
+	@RequestMapping(value="/findidresult.action", method=RequestMethod.GET)
+	public String finidResult()
+	{
+		String result = null;
+		result = "/WEB-INF/views/FindIdComplete.jsp";
+		
+		return result;
+	}
+	
+	
+	
 	@RequestMapping(value="/findidtelcheck.action")
 	public void findIdTelCheck(String[] findidtel, HttpServletResponse response) throws IOException
 	{
-		int result = 0;
+		String result = "";
 
 		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
 
-		result = dao.findIdTelCheck(findidtel[0], findidtel[1]);
+		result = dao.findIdTel(findidtel[0], findidtel[1]);
 		
 		response.getWriter().print(result);
 	}
@@ -43,25 +69,42 @@ public class FindIdPwController
 	@RequestMapping(value="/findidemailcheck.action")
 	public void findIdEmailCheck(String[] findidemail, HttpServletResponse response) throws IOException
 	{
-		int result = 0;
+		String result = "";
 		
 		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
 		
-		result = dao.findIdEmailCheck(findidemail[0], findidemail[1]);
+		result = dao.findIdEmail(findidemail[0], findidemail[1]);
 		
 		response.getWriter().print(result);
 		
 	}
 	
-	@RequestMapping(value="/findidcertiinsert.action")
-	public void findIdInsert(UserDTO user)
+	@RequestMapping(value="/findidtelinsert.action", method=RequestMethod.POST)
+	public String findIdTelInsert(UserDTO user,Model model)
 	{
-		int result = 0;
-		
+		/* RedirectAttributes rttr = null; */
 		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		dao.findIdTelInsert(user);
+		/* rttr.addFlashAttribute("findid", user.getUserId()); */
 		
+		model.addAttribute("userId", user.getUserId());
 		
-		System.out.println("왔습니다");
+		return "redirect:findidresult.action";
+
+	}
+	
+	@RequestMapping(value="/findidemailinsert.action", method=RequestMethod.POST)
+	public String findIdEmailInsert(UserDTO user,Model model)
+	{
+		/* RedirectAttributes rttr = null; */
+		System.out.println("야");
+		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		dao.findIdEmailInsert(user);
+		System.out.println("왜");
+		/* rttr.addFlashAttribute("findid", user.getUserId()); */
+		model.addAttribute("userId", user.getUserId());
+		System.out.println("안데");
+		return "redirect:findidresult.action";
 		
 	}
 }

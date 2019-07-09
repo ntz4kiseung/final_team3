@@ -23,6 +23,26 @@
     <link href="css/sagyo.css" rel="stylesheet">
 
 </head>
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		var resultid = $("#resultid").val();
+		
+		var printid = resultid.substr(0,3);
+		
+		for (var i = printid.length; i < resultid.length; i++)
+		{
+			printid = printid.concat('*');
+		}
+		
+		console.log(resultid + " 길이 : "+ resultid.length);
+		console.log(printid);
+		
+		$("#result").text("회원님의 아이디는 " + printid + "입니다.");
+	})
+
+
+</script>
 <body>
     <div class="browser flex-col-center-center">
         <div class="navbar-box flex-row-center-center">
@@ -75,8 +95,10 @@
                                     Sagyo
                                 </div>
                             </div>
-                            <div class="FindIdComplete-message flex-item-grow flex-row-center-center">
-                                회원님의 아이디는 pizza****입니다.
+                            <input type="hidden" id="resultid" name="resultid" value="${param.findid}"/>
+                            
+                            <div class="FindIdComplete-message flex-item-grow flex-row-center-center" id="result">
+                                
                             </div>
                             <div class="FindIdComplete-btn flex-row-center-center">
                                 <button class="btn btn-border-right">메인으로</button>
