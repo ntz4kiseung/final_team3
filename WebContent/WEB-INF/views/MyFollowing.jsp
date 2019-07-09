@@ -73,175 +73,94 @@
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">
 
+                <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                                <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                             </div>
-                            <div class="MyPage-header-grade-star">
-                                ★★★★★
+                              <div class="MyPage-header-grade-star">
+                                <c:forEach var="i" begin="1" end="${List.reviewGrade }">
+                                   <label style="color: #ffd700;">★</label>
+                                </c:forEach>
+                                <c:forEach var="i" begin="${List.reviewGrade }" end="4">
+                                   <label style="color: #e9e9e9;">★</label>
+                                </c:forEach>
                             </div>
                             <div class="MyPage-header-grade">
-                                3.5/5.0
+                              ${List.reviewGrade } / 5.0
+                              <input type="hidden" id="hidden" value="${List.reviewGrade }" />
                             </div>
                         </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                Nickname
+                                ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                <div>#영상편집 #필라테스</div>
-                                <div>휴대전화 인증 완료</div>
-                                <div>Email 인증 완료</div>
+                                <div>${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 }  ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 } 
+                                ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
+                                <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
+                                <div>${myPageInterList[status.index].interSubName3 }</div> 
+                                		
+                                <div style="color: orange;">${List.telCheck }</div>
+                                
+                                <div style="color: orange;">${List.emailCheck }</div>
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
-                            <div><a class="navnonclick" href="myProfile.action">프로필</a></div>
-                            <div><a class="navnonclick" href="myMessageRecevie.action">쪽지함</a></div>
-                            <div><a class="navnonclick" href="myBadge.action">뱃지</a></div>
-                            <div><a class="navclick" href="myFollowing.action">팔로우</a></div>
+                             <div><a class="navnonclick" href="myprofile.action">프로필</a></div>
+                            <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
+                            <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
+                            <div><a class="navclick" href="myfollowing.action">팔로우</a></div>
                             <div><a class="navnonclick" href="#">내모임</a></div>
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
                         
                             <div class="MyPage-body-header flex-row-left-center">
-                              <a class="navclick" href="myFollowing.action">팔로잉</a>&nbsp;&nbsp;&nbsp;
-                                <a class="navnonclick" href="myFollower.action">팔로워</a>
+                              <a class="navclick" href="myfollowing.action">팔로잉</a>&nbsp;&nbsp;&nbsp;
+                                <a class="navnonclick" href="myfollower.action">팔로워</a>
                             </div>
                             
 
                            <div class="MyPage-body-body">
                                 <div class="MyFollow flex-row-left-up">
 
+
+									<c:forEach var="fList" items="${ followingList }" varStatus="status">
                                     <div class="MyFollow-user flex-row-left-center">
                                         <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                                            <img src="<%=cp %>/${fList.url } " alt="">
                                         </div>
                                         <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
+                                        
+                                        
+                                        	<div>${fList.nickname }</div>
+                                           <div >
+				                                <c:forEach var="i" begin="1" end="${fList.reviewGrade }">
+				                                   <label style="color: #ffd700;">★</label>
+				                                </c:forEach>
+				                                <c:forEach var="i" begin="${fList.reviewGrade }" end="4">
+				                                   <label style="color: #e9e9e9;">★</label>
+				                                </c:forEach>
+				                                
+					                              ${fList.reviewGrade } / 5.0
+                            					  <input type="hidden" id="hidden" value="${fList.reviewGrade }" />
+				                            
+			                           	 	</div>
+                                            <div>${followingAddrList[status.index].addrSiName1 }  ${followingAddrList[status.index].addrGuName1 } 
+                                             ${followingAddrList[status.index].addrSiName2 }  ${followingAddrList[status.index].addrGuName2 } 
+                                             ${followingAddrList[status.index].addrSiName3 }   ${followingAddrList[status.index].addrGuName3 } </div>
+                                            <div>${followingInterList[status.index].interSubName1 }
+                                           	 	${followingInterList[status.index].interSubName2 }
+                                            	${followingInterList[status.index].interSubName3 }</div>
                                         </div>
                                     </div>
-
-
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-
-                                    <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                        </div>
-                                        <div class="MyFollow-user-detail">
-                                            <div>nickname ♥</div>
-                                            <div>★★★★★   4.3 / 5.0</div>
-                                            <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                            <div>#영상편집 #필라테스</div>
-                                        </div>
-                                    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+									</c:forEach>
 
 
                                 </div>

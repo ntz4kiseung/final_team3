@@ -17,22 +17,34 @@ public class MessageController
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping(value="/myMessageRecevie.action", method = RequestMethod.GET)
+	@RequestMapping(value="/mymessagerecevie.action", method = RequestMethod.GET)
 	public String myMessageRecevie( Model model)
 	{
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
+		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		
+		
+		model.addAttribute("myPageList", dao2.myPageList());
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
+		model.addAttribute("myPageInterList", dao2.myPageInterList());	
 		
 		model.addAttribute("messageRecevieList",dao.messageRecevieList());
 		 
 		return "WEB-INF/views/MyMessageReceive.jsp";
 	}
 	
-	@RequestMapping(value="/myMessageSend.action", method = RequestMethod.GET)
+	@RequestMapping(value="/mymessagesend.action", method = RequestMethod.GET)
 	public String myMessageSend(Model model)
 	{
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
+		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		
+		
+		model.addAttribute("myPageList", dao2.myPageList());
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
+		model.addAttribute("myPageInterList", dao2.myPageInterList());	
 		
 		model.addAttribute("messageSendList",dao.messageSendList());
 		 
@@ -40,36 +52,36 @@ public class MessageController
 	}
 
 
-	@RequestMapping(value="/MessageSend.action", method=RequestMethod.POST)	
+	@RequestMapping(value="/messagesend.action", method=RequestMethod.POST)	
 	public String MessageSend(MessageDTO m)
 	{
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		
 		dao.messageAdd(m); 
 		
-		return "redirect:myMessageRecevie.action";
+		return "redirect:mymessagerecevie.action";
 		
 	}
 	
-	@RequestMapping(value="/MessageSend2.action", method=RequestMethod.POST)	
+	@RequestMapping(value="/messagesend2.action", method=RequestMethod.POST)	
 	public String MessageSend2(MessageDTO m)
 	{
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		
 		dao.messageAdd(m); 
 		
-		return "redirect:myMessageSend.action";
+		return "redirect:mymessagesend.action";
 		
 	}
 	
-	@RequestMapping(value="/messageDelete.action", method=RequestMethod.POST)	
+	@RequestMapping(value="/messagedelete.action", method=RequestMethod.POST)	
 	public String messageDelete(Model model,MessageDTO m)
 	{
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		
 		model.addAttribute("messageDelete",dao.messageDelete(m));
 		
-		return "redirect:myMessageRecevie.action";
+		return "redirect:mymessagerecevie.action";
 		
 	}
 	

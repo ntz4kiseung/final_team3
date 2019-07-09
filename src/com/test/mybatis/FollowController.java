@@ -15,30 +15,37 @@ public class FollowController
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping(value="/follow.action", method = RequestMethod.GET)
-	public String studentList( Model model)
+	@RequestMapping(value="/myfollowing.action", method = RequestMethod.GET)
+	public String myFollowing(Model model)
 	{
+		IFollowingDAO dao = sqlSession.getMapper(IFollowingDAO.class);
+		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
 		
-		IFollowDAO dao = sqlSession.getMapper(IFollowDAO.class);
+		model.addAttribute("followingList",dao.followingList());
+		model.addAttribute("followingAddrList",dao.followingAddrList());
+		model.addAttribute("followingInterList",dao.followingInterList());
 		
-		model.addAttribute("followList",dao.followList());
-		model.addAttribute("myProfile",dao.myProfile());
-		 
+		model.addAttribute("myPageList", dao2.myPageList());
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
+		model.addAttribute("myPageInterList", dao2.myPageInterList());	
+		
+		return "WEB-INF/views/MyFollowing.jsp";
+	}
+	
+	@RequestMapping(value="/myfollower.action", method = RequestMethod.GET)
+	public String myFollower(Model model)
+	{
+		IFollowerDAO dao = sqlSession.getMapper(IFollowerDAO.class);
+		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		
+		model.addAttribute("followerList",dao.followerList());
+		model.addAttribute("followerAddrList",dao.followerAddrList());
+		model.addAttribute("followerInterList",dao.followerInterList());
+		
+		model.addAttribute("myPageList", dao2.myPageList());
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
+		model.addAttribute("myPageInterList", dao2.myPageInterList());	
+		
 		return "WEB-INF/views/MyFollower.jsp";
 	}
-	
-
-	@RequestMapping(value = "/follower.action", method = RequestMethod.GET)
-	public String studentInsertForm(IFollowDAO f)
-	{
-		
-		return "WEB-INF/views/StudentInsertForm.jsp";
-	}
-	
-
-	
-	
-	
-	
-
 }

@@ -173,7 +173,7 @@
 		            	
 		            	for(int i=0;i<chk.length;i++){
 
-		            		$(location).attr("href","messageDelete.action?messageId=" + $(this).val());
+		            		$(location).attr("href","messagedelete.action?messageId=" + $(this).val());
 
 		            		            
 
@@ -252,45 +252,57 @@
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">
 
+                    <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                                <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                             </div>
-                            <div class="MyPage-header-grade-star">
-                           		     ★★★★★
+                              <div class="MyPage-header-grade-star">
+                                <c:forEach var="i" begin="1" end="${List.reviewGrade }">
+                                   <label style="color: #ffd700;">★</label>
+                                </c:forEach>
+                                <c:forEach var="i" begin="${List.reviewGrade }" end="4">
+                                   <label style="color: #e9e9e9;">★</label>
+                                </c:forEach>
                             </div>
                             <div class="MyPage-header-grade">
-                                3.5/5.0
+                              ${List.reviewGrade } / 5.0
+                              <input type="hidden" id="hidden" value="${List.reviewGrade }" />
                             </div>
                         </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                Nickname
+                                ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <div>#서울특별시 송파구  #서울특별시 관악구</div>
-                                <div>#영상편집 #필라테스</div>
-                                <div>휴대전화 인증 완료</div>
-                                <div>Email 인증 완료</div>
+                                <div>${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 }  ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 } 
+                                ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
+                                <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
+                                <div>${myPageInterList[status.index].interSubName3 }</div> 
+                                		
+                                <div style="color: orange;">${List.telCheck }</div>
+                                
+                                <div style="color: orange;">${List.emailCheck }</div>
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
-                            <div><a class="navnonclick" href="myProfile.action">프로필</a></div>
-                            <div><a class="navclick" href="myMessageRecevie.action">쪽지함</a></div>
-                            <div><a class="navnonclick" href="myBadge.action">뱃지</a></div>
-                            <div><a class="navnonclick" href="myFollowing.action">팔로우</a></div>
+                             <div><a class="navnonclick" href="myprofile.action">프로필</a></div>
+                            <div><a class="navclick" href="mymessagerecevie.action">쪽지함</a></div>
+                            <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
+                            <div><a class="navnonclick" href="myfollowing.action">팔로우</a></div>
                             <div><a class="navnonclick" href="#">내모임</a></div>
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
                             <div class="MyPage-body-header flex-row-left-center">
                                 
-                                <a class="navclick" href="myMessageRecevie.action">받은 쪽지</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class="navnonclick" href="myMessageSend.action">보낸 쪽지</a>
+                                <a class="navclick" href="mymessagerecevie.action">받은 쪽지</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a class="navnonclick" href="mymessagesend.action">보낸 쪽지</a>
                             </div>
 
                             
@@ -420,7 +432,7 @@
           <span aria-hidden="true">×</span>
         </button>
       </div>
-       <form role="form" action="MessageSend.action" method="post">
+       <form role="form" action="messagesend.action" method="post">
       <div class="modal-body">
        	<div class="control-group flex-row-center-center">
             <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
@@ -445,7 +457,7 @@
 </div>
 
 
-    <!-- 모달2 -- 답장하기 -->
+   <!-- 모달2 -- 답장하기 -->
   <div class="modal fade" id="messageModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -456,13 +468,13 @@
         </button>
       </div>
       
-      <form role="form" action="MessageSend.action" method="post">
+      <form role="form" action="messagesend.action" method="post">
       
       <div class="modal-body">
 	
        	<div class="control-group flex-row-center-center">
-            <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
-            <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" value="${message.userid }"></div>
+            <div for="destinataire" style="padding-right: 15px;" >받는 사람</div>
+            <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" value=""></div>
 
           </div>
           <br />
