@@ -135,6 +135,7 @@ public class UserDTO
 	{
 		this.followCheck = followCheck;
 	}
+	
 	public int getPostStatus()
 	{
 		return postStatus;
@@ -151,6 +152,8 @@ public class UserDTO
 	{
 		this.reviewGrade = reviewGrade;
 	}
+	
+	
 }
 
 

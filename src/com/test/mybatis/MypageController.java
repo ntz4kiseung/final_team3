@@ -16,16 +16,13 @@ public class MypageController
 	@RequestMapping(value="/createpostlist.action", method=RequestMethod.GET)
 	public String myReviewList(Model model)
 	{
-		IAddrDAO dao1 = sqlSession.getMapper(IAddrDAO.class);
-		IInterDAO dao2 = sqlSession.getMapper(IInterDAO.class);
-		IUserDAO dao3 = sqlSession.getMapper(IUserDAO.class);
-		IPostDAO dao4 = sqlSession.getMapper(IPostDAO.class);
+		IMyPageDAO dao1 = sqlSession.getMapper(IMyPageDAO.class);
+		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		
-		model.addAttribute("addr", dao1.addr());
-		model.addAttribute("inter", dao2.inter());
-		model.addAttribute("profile",dao3.profile());
-		model.addAttribute("CertiCheck",dao3.CertiCheck());
-		model.addAttribute("myReviewList", dao4.myReviewList());
+		model.addAttribute("myPageList",dao1.myPageList());
+		model.addAttribute("myPageAddrList", dao1.myPageAddrList());
+		model.addAttribute("myPageInterList", dao1.myPageInterList());
+		model.addAttribute("myReviewList", dao2.myReviewList());
 		
 		return "/WEB-INF/views/CreatePostList.jsp";
 	}
@@ -34,16 +31,13 @@ public class MypageController
 	@RequestMapping(value="/joinpostlist.action", method=RequestMethod.GET)
 	public String reviewList(Model model)
 	{
-		IAddrDAO dao1 = sqlSession.getMapper(IAddrDAO.class);
-		IInterDAO dao2 = sqlSession.getMapper(IInterDAO.class);
-		IUserDAO dao3 = sqlSession.getMapper(IUserDAO.class);
-		IPostDAO dao4 = sqlSession.getMapper(IPostDAO.class);
+		IMyPageDAO dao1 = sqlSession.getMapper(IMyPageDAO.class);
+		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		
-		model.addAttribute("addr", dao1.addr());
-		model.addAttribute("inter", dao2.inter());
-		model.addAttribute("profile",dao3.profile());
-		model.addAttribute("CertiCheck",dao3.CertiCheck());
-		model.addAttribute("reviewList", dao4.reviewList());
+		model.addAttribute("myPageList",dao1.myPageList());
+		model.addAttribute("myPageAddrList", dao1.myPageAddrList());
+		model.addAttribute("myPageInterList", dao1.myPageInterList());
+		model.addAttribute("reviewList", dao2.reviewList());
 		
 		return "/WEB-INF/views/JoinPostList.jsp";
 	}

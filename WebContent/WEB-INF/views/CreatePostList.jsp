@@ -58,14 +58,30 @@ $(document).ready(function()
 	});
 	 */
 	 /* 문제점 발견! 같은 구절을 다른 파일로 넣었을때 가능한걸로 보아 금요일에 발생한 문제와 똑같은 문제인듯 하다..;; */
-	
+	/* 
 	 $( ".badgePoint" ).click(function() {
 		 
 		 alert("클릭");
 		 //$("#img").attr("src", "img/통수.png");
 	});
-
+	*/
+	
+	$(window).scroll(function()
+			{
+				if ($(window).scrollTop() == $(
+						document).height()
+						- $(window).height())
+				{
+					$(".search-result-posts")
+							.append(
+									'<div class="post-item"><div class="post-item-left"><div class="post-item-left-image"><img src="image/프로참석러.png" alt="파일 없으면 이 텍스트뜸"></div><div class="post-item-left-nickname">rhkr5209</div></div><div class="post-item-center"><div class="post-item-center-title">닌텐도 이야기 하실분 (4명)</div><div class="post-item-center-mainText">닌텐도 이야기 하실분 구합니다.</div></div><div class="post-item-right"><div><input type="button" value="후기 남기기" class="btn btn-warning"></div><div class="post-item-right-meetPlace">서울특별시 관악구</div><div class="post-item-right-meetDay">2019/07/02 13:20</div></div></div>')
+				}
+			});
 });	
+<%
+	
+%>
+
 
 function change()
 {
@@ -189,7 +205,6 @@ function change()
                     <button class="btn" id="navbar-search-btn">검색</button>
                 </form>
             </div>
-            
             <div class="navbar-right flex-row-right-center">
                 <div>알람</div>
                 <div>
@@ -211,39 +226,41 @@ function change()
 
                     <div class="MyPage-header flex-row-left-center">
                     
-                    	<c:forEach items="${profile }" var="list">
+                    	<c:forEach items="${myPageList }" var="profile">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
                             	
                             	
                                 <!-- <img src="img/badge150pixel_0001_뉴비.png" alt=""> -->
-                                <img alt="" src="${list.url }" onerror="this.src='img/badge150pixel_0001_뉴비.png'">
+                                <img src="${profile.url }" onerror="this.src='img/뉴비.png'">
                                	
                     		</div>
                             <div class="MyPage-header-grade-star">
-                                <c:forEach var="i" begin="0" end="4" >
-                                	<span>★</span>
+                                <c:forEach var="i" begin="1" end="${profile.reviewGrade }">
+                                	<label style="color: #ffd700;">★</label>
+                                </c:forEach>
+                                <c:forEach var="i" begin="${profile.reviewGrade }" end="4">
+                                	<label style="color: #e9e9e9;">★</label>
                                 </c:forEach>
                             </div>
                             <div class="MyPage-header-grade">
-                              ${list.reviewGrade } / 5.0
+                              ${profile.reviewGrade } / 5.0
                             </div>
 						</div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                ${list.nickname }
+                                ${profile.nickname }
                             </div>
-                        </c:forEach>
                             <div class="MyPage-header-detail">
                             
                                 <!-- <div>#서울특별시 송파구  #서울특별시 관악구</div> -->
-                                <c:forEach items="${addr }" var="addr">
+                                <c:forEach items="${myPageAddrList }" var="addr">
                                 	<div>
                                 		${addr.addrSiName1} ${addr.addrGuName1 } ${addr.addrSiName2} ${addr.addrGuName2 } ${addr.addrSiName3} ${addr.addrGuName3 }
                                 	</div>
                                 </c:forEach>
                                 <!-- <div>#영상편집 #필라테스</div> -->
-                                <c:forEach items="${inter }" var="inter">
+                                <c:forEach items="${myPageInterList }" var="inter">
                                 	<div>
                                 		${inter.interMainName1 } ${inter.interSubName1 } ${inter.interMainName2 } ${inter.interSubName2 } ${inter.interMainName3 } ${inter.interSubName3 }
                                 	</div>
@@ -251,14 +268,13 @@ function change()
                                 <!-- <div>휴대전화 인증 완료</div> -->
                                 <!-- <div>Email 인증 완료</div> -->
                                 
-                                <c:forEach items="${CertiCheck }" var="CertiCheck">
                                 	<div style="color: orange;">
-                                		${CertiCheck.telCheck }
+                                		${profile.telCheck }
                                 	</div>
                                 	<div style="color: orange;">
-                                		${CertiCheck.emailCheck }
+                                		${profile.emailCheck }
                                 	</div>
-                                </c:forEach>
+                       </c:forEach>
                                 	
                             </div>
                         </div>
@@ -290,7 +306,7 @@ function change()
                                         <div class="PostList-post-left flex-col-center-center">
                                             <div class="PostList-post-badge">
                                                 <!-- <img src="img/badge150pixel_0025_맛잘알.png" alt=""> -->
-                                            	<img src="${list.url }" onerror="this.src='img/badge150pixel_0001_뉴비.png'">
+                                            	<img src="${list.url }" onerror="this.src='img/뉴비.png'">
                                             	
 
                                             	
