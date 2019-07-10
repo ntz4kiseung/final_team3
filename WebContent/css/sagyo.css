@@ -1,5 +1,13 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+.user-badge-box{
+	position: relative;
+}
+.user-bad-badge{
+	width: 50%;
+	height: 50%;
+	position: absolute;
+}
 .hidden {
   display: none !important;
   visibility: hidden !important;
@@ -790,12 +798,6 @@ input:read-only {
 .PostList-post-badge{
     width: 75px;
     height: 75px;
-    position: relative;
-}
-.PostList-post-badge>img:first-child{
-	width: 50%;
-	height: 50%;
-	position: absolute;
 }
 .PostList-post-title{
     font-weight: bold;
