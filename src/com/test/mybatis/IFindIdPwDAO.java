@@ -15,5 +15,13 @@ public interface IFindIdPwDAO
 	public String findIdTel(@Param("name")String name, @Param("tel")String tel);
 	
 	public String findIdEmail(@Param("name")String name, @Param("email")String email);
+
+	public int findPwTelCheck(@Param("userId")String userId, @Param("name")String name, @Param("tel")String tel);
+	
+	public int findPwEmailCheck(@Param("userId")String userId, @Param("name")String name, @Param("email")String email);
+	
+	public int findPwTemp(UserDTO user);
+	
+	public String findPwdString(String userId);
 	
 }
