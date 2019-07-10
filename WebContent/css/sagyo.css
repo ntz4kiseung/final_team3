@@ -790,6 +790,12 @@ input:read-only {
 .PostList-post-badge{
     width: 75px;
     height: 75px;
+    position: relative;
+}
+.PostList-post-badge>img:first-child{
+	width: 50%;
+	height: 50%;
+	position: absolute;
 }
 .PostList-post-title{
     font-weight: bold;
