@@ -211,36 +211,40 @@ function change()
 
                     <div class="MyPage-header flex-row-left-center">
                     	
-                    	<c:forEach items="${profile }" var="list">
+                    	<c:forEach items="${myPageList }" var="profile">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
                             	
                             	
                                 <!-- <img src="img/badge150pixel_0001_뉴비.png" alt=""> -->
-								<img alt="" src="${list.url }" onerror="this.src='img/badge150pixel_0001_뉴비.png'">                               	
+								<img alt="" src="${profile.url }" onerror="this.src='img/badge150pixel_0001_뉴비.png'">                               	
                     		</div>
                             <div class="MyPage-header-grade-star" style="color: #ffd700;">
-                                ★★★★★
+                                <c:forEach var="i" begin="1" end="${profile.reviewGrade }">
+                                	<label style="color: #ffd700;">★</label>
+                                </c:forEach>
+                                <c:forEach var="i" begin="${profile.reviewGrade }" end="4">
+                                	<label style="color: #e9e9e9;">★</label>
+                                </c:forEach>
                             </div>
                             <div class="MyPage-header-grade">
-                              ${list.reviewGrade } / 5.0
+                              ${profile.reviewGrade } / 5.0
                             </div>
 						</div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                ${list.nickname }
+                                ${profile.nickname }
                             </div>
-                        </c:forEach>
                             <div class="MyPage-header-detail">
                             
                                 <!-- <div>#서울특별시 송파구  #서울특별시 관악구</div> -->
-                                <c:forEach items="${addr }" var="addr">
+                                <c:forEach items="${myPageAddrList }" var="addr">
                                 	<div>
                                 		${addr.addrSiName1} ${addr.addrGuName1 } ${addr.addrSiName2} ${addr.addrGuName2 } ${addr.addrSiName3} ${addr.addrGuName3 }
                                 	</div>
                                 </c:forEach>
                                 <!-- <div>#영상편집 #필라테스</div> -->
-                                <c:forEach items="${inter }" var="inter">
+                                <c:forEach items="${myPageInterList }" var="inter">
                                 	<div>
                                 		${inter.interMainName1 } ${inter.interSubName1 } ${inter.interMainName2 } ${inter.interSubName2 } ${inter.interMainName3 } ${inter.interSubName3 }
                                 	</div>
@@ -248,12 +252,11 @@ function change()
                                 <!-- <div>휴대전화 인증 완료</div> -->
                                 <!-- <div>Email 인증 완료</div> -->
                                 
-                                <c:forEach items="${CertiCheck }" var="CertiCheck">
                                 	<div style="color: orange;">
-                                		${CertiCheck.telCheck }
+                                		${profile.telCheck }
                                 	</div>
                                 	<div style="color: orange;">
-                                		${CertiCheck.emailCheck }
+                                		${profile.emailCheck }
                                 	</div>
                                 </c:forEach>
                             </div>

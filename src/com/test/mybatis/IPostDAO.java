@@ -13,4 +13,6 @@ public interface IPostDAO
 	public ArrayList<PostDTO> myReviewList();
 	public ArrayList<PostDTO> reviewList();
 	public ArrayList<PostDTO> searchList(SearchDTO s);
+	public ArrayList<PostDTO> hostReview();
+	public ArrayList<PostDTO> guestReview();
 }
