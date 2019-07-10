@@ -4,6 +4,20 @@ public class BadgeDTO
 {
 	
 	private String badgeCateId, badgeCateName, badgePointId, badgePointName, url, badgePointDesc1, badgePointDesc2;
+	
+	//선아 DTO 추가 
+	private int badgeCk;
+	
+	
+	public int getBadgeCk()
+	{
+		return badgeCk;
+	}
+
+	public void setBadgeCk(int badgeCk)
+	{
+		this.badgeCk = badgeCk;
+	}
 
 	public String getBadgeCateId()
 	{
