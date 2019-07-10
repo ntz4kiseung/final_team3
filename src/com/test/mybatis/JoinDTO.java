@@ -2,7 +2,7 @@ package com.test.mybatis;
 
 public class JoinDTO
 {
-	private String url,userId,nickname,userTypeId, joinDate, contents, delJoin, joinId;
+	private String url,userId,nickname,userTypeId, joinDate, contents, delJoin, joinId, replyId;
 
 	public String getUrl()
 	{
@@ -83,4 +83,16 @@ public class JoinDTO
 	{
 		this.joinId = joinId;
 	}
+
+	public String getReplyId()
+	{
+		return replyId;
+	}
+
+	public void setReplyId(String replyId)
+	{
+		this.replyId = replyId;
+	}
+
+	
 }
