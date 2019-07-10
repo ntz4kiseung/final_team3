@@ -12,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 @Controller
 public class PostReadJoinController
 {
@@ -26,18 +27,22 @@ public class PostReadJoinController
 	// @RequestMapping(value = "요청주소", method = 전송방식)
 	// 이 때, 전송 방식은 submit 액션인 경우만 POST
 	// 나머지 모든 전송 방식은 GET 으로 처리한다.
-
 	@RequestMapping(value = "/postreadjoin.action", method = RequestMethod.GET)
 	public String readList(Model model)
 	{
 		String result = null;
-		
 		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
-		model.addAttribute("postlist",dao.postlist());
+		String followIds = "anlant";
+		model.addAttribute("postlist",dao.postlist(followIds));
+		PostDTO postDTO = dao.postlist(followIds);
 		model.addAttribute("list",dao.joinlist()); 
 		model.addAttribute("replylist",dao.replylist());
 		model.addAttribute("reportlist", dao.reportlist());
-		 
+		ArrayList<JoinDTO> joindto =  dao.replylist();
+		for (JoinDTO joinDTO2 : joindto)
+		{
+			System.out.println(joinDTO2.getUserTypeId()+"test");
+		}
 		result = "WEB-INF/views/PostReadJoin.jsp";
 
 		return result;
@@ -49,7 +54,8 @@ public class PostReadJoinController
 		String result = null;
 		
 		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
-		model.addAttribute("postlist",dao.postlist()); 
+		String followId = "anlant";
+		model.addAttribute("postlist",dao.postlist(followId)); 
 		model.addAttribute("list",dao.joinlist()); 
 		model.addAttribute("replylist",dao.replylist());
 		model.addAttribute("reportlist", dao.reportlist());
@@ -60,33 +66,89 @@ public class PostReadJoinController
 	}
 	
 	@RequestMapping(value = "/followinsert.action", method = RequestMethod.POST)
-	public String followInsert(ModelMap model, FollowDTO followDTO)
+	public String follow(ModelMap model, FollowDTO followDTO)
 	{
+		
 		String result = null;
-		System.out.println(followDTO.getUserId());
 		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
-		followDTO.setUserId("anlant");
-		String userId = followDTO.getFollowId();
-		dao.followinsert(followDTO);
-		System.out.println("userId");
-		model.addAttribute("postlist",userId); 
+		String followIdin = "anlant";
+		followDTO.setUserId(followIdin);
+		
+		PostDTO postDTO = dao.postlist(followIdin);
+		int followId = Integer.parseInt(postDTO.getFollowId());
+		if(followId != 0)
+		{
+			dao.followdelete(followDTO);
+		}
+		else
+		{
+			dao.followinsert(followDTO);
+		}
+		postDTO = dao.postlist(followIdin);
+		followId = Integer.parseInt(postDTO.getFollowId());
+		model.addAttribute("followId",followId);
 		result = "WEB-INF/views/FollowUpdateAjax.jsp";
 
 		return result;
 	}
-	@RequestMapping(value = "/followdelete.action", method = RequestMethod.POST)
-	public String followDelete(ModelMap model, FollowDTO followDTO)
+	
+	@RequestMapping(value = "/joininsert.action", method = RequestMethod.GET)
+	public String JoinInsert(Model model, JoinDTO joinDTO)
 	{
 		String result = null;
-		System.out.println(followDTO.getUserId());
 		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
-		followDTO.setUserId("anlant");
-		String userId = followDTO.getFollowId();
-		dao.followdelete(followDTO); 
-		System.out.println("userId");
-		model.addAttribute("postlist",userId);
-		result = "WEB-INF/views/FollowDeleteAjax.jsp";
-
+		System.out.println(joinDTO.getContents());
+		joinDTO.setUserId("anlant");
+		dao.joininsert(joinDTO);
+		
+		result = "redirect:postreadjoin.action";
+		return result;
+	}
+	
+	@RequestMapping(value = "/reportinsert.action", method = RequestMethod.GET)
+	public String reportPost(Model model, ReportDTO reportDTO)
+	{
+		String result = null;
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		reportDTO.setUserId("anlant");
+		dao.reportpostinsert(reportDTO);
+		
+		result = "redirect:postreadjoin.action";
+		return result;
+	}
+	
+	@RequestMapping(value = "/reportjoininsert.action", method = RequestMethod.GET)
+	public String reportJoin(Model model, ReportDTO reportDTO)
+	{
+		String result = null;
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		reportDTO.setUserId("anlant");
+		dao.reportjoininsert(reportDTO);
+		
+		result = "redirect:postreadjoin.action";
+		return result;
+	}
+	
+	@RequestMapping(value = "/reportreplyinsert.action", method = RequestMethod.GET)
+	public String reportreply(Model model, ReportDTO reportDTO)
+	{
+		String result = null;
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		reportDTO.setUserId("anlant");
+		dao.reportreplyinsert(reportDTO);
+		
+		result = "redirect:postreadjoin.action";
+		return result;
+	}
+	
+	@RequestMapping(value = "/replyinsert.action", method = RequestMethod.GET)
+	public String replyInsert(Model model, JoinDTO joinDTO)
+	{
+		String result = null;
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		joinDTO.setUserId("anlant");
+		dao.replyinsert(joinDTO);
+		result = "redirect:postreadjoin.action";
 		return result;
 	}
 }

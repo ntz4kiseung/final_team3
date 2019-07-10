@@ -23,48 +23,94 @@
 <!-- ajax -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function ()
+	$(window).on('load', function ()
 	{
+		
 		$('#myModal').on('shown.bs.modal', function () {
 			$('#myInput').trigger('focus')
 		});
-		$('#followBtn-u').click(function()
+		
+		$('#followBtn').click(function()
 		{
-			followUpdate();
-		});
-		$('#followBtn-d').click(function()
-		{
-			followDelete();
+			$.post("followinsert.action",{followId : $("#followBtn").val()}, function(data){
+				
+				followId = data;
+				if(parseInt(followId) == 0)
+				{
+					$("#followBtn").html("♡");	
+				}
+				else if(parseInt(followId) != 0)
+				{
+					$("#followBtn").html("❤");	
+				}
+			});
 		});
 		
+		$('#post-join-btn').click(function()
+		{
+			location.href="joininsert.action?contents="+$('#contents').val();
+		});
+		
+// 신고 구간 ------------------------------------------------------------------------------------------------------		
+		$('.report-post').click(function()
+		{
+			$('#reportBtn').click(function()
+			{
+				location.href="reportinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val();
+			});
+		});
+		
+		$('.joinreport').click(function()
+		{
+			var joinId = $(this).attr('name');
+			$('#reportBtn').click(function()
+			{
+				location.href="reportjoininsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId;
+			});
+			
+		});
+		
+		$('.replyreport').click(function()
+		{
+			var joinId = $(this).attr('name');
+			$('#reportBtn').click(function()
+			{
+				location.href="reportreplyinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId;
+			});
+		});
+// ------------------------------------------------------------------------------------------------------ 신고 구간
+
+// 댓글 추가 구간 -------------------------------------------------------------------------------------------------
+		$('.reply-insert').click(function()
+		{
+			var reply = $(this).attr('name');
+			$('#reply-insert-Btn').click(function()
+			{
+				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val();
+			});	
+		});
+		
+		$('.reply-r-insert').click(function()
+		{
+			var reply = $(this).attr('name');
+			$('#reply-insert-Btn').click(function()
+			{
+				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val();
+			});	
+		});
+		// ------------------------------------------------------------------------------------------------- 댓글 추가 구간
+		
+		$(".request-join").click(function()
+		{
+			var join = $(this).attr('name');
+			$('#join-reset-Btn').click(function()
+			{
+				alert(join);
+				//location.href="";
+			});
+		});
 	});
-	function followUpdate()
-	{
-		$("#followBtn-u").val()
-		$.post("followinsert.action",{followId : $("#followBtn-u").val()}, function(data){
-					    
-			alert("test");
-			postlist = data;
-			alert(postlist+"test");
-			$("#followBtn-u").val(postlist);
-			$("#followBtn-u").html("❤");
-			$("#followBtn-u").attr('id', 'followBtn-d');
-	        alert($("#followBtn-d").attr('id'));
-		});
-	}
-	function followDelete()
-	{
-		alert($("#followBtn-d").val());
-		$.post("followdelete.action",{followId : $("#followBtn-d").val()}, function(data){		    
-	       alert("test");
-	       postlist = data;
-	       alert(postlist+"test");
-	       $("#followBtn-d").val(postlist);
-	       $("#followBtn-d").html("♡");
-	       $("#followBtn-d").attr('id', 'followBtn-u');
-	       alert($("#followBtn-u").attr('id'));
-		});
-	}
+
 </script>
 
 </head>
@@ -114,28 +160,35 @@
 
                     <div class="Post-host flex-row-left-center">
                         <div>
-                            <img src="img/badge150pixel_0023_슈퍼방장.png" alt="이미지 없음">
+                            <img src="${postlist.url }" alt="이미지 없음">
                         </div>
                         <div>
                             <div>${postlist.nickname }
                            	<c:choose>
-                           	<c:when test="${postlist.followId != 0}"><button class="btn" id="followBtn-d" value="${postlist.userId }">❤</button></c:when>
-                           	<c:when test="${postlist.followId eq 0 }"><button class="btn" id="followBtn-u" value="${postlist.userId }">♡</button></c:when>
+                           	<c:when test="${postlist.followId != 0}">
+                           		<button class="btn" id="followBtn" value="${postlist.userId }">❤</button>
+                           	</c:when>
+                           	<c:when test="${postlist.followId == 0}">
+                           		<button class="btn" id="followBtn" value="${postlist.userId }">♡</button>
+                           	</c:when>
                            	</c:choose>
                            	</div> 
                             <div>☆☆☆☆☆</div>
-                            <c:if test="${postlist.telCertiId != '없음'}">
-                            	<div>${postlist.telCertiId }</div>
+                            <c:if test="${not empty postlist.telCertiId}">
+                            	<div>휴대폰인증 완료</div>
                             </c:if>
-                            <c:if test="${postlist.emailCertiId != '없음'}">
-                            <div>${postlist.emailCertiId }</div>
+                            <c:if test="${not empty postlist.emailCertiId != '없음'}">
+                            <div>이메일 인증완료</div>
                             </c:if>
                         </div>
                         <div>
                             <div>만 남 일: <span>${postlist.meetDate }</span></div>
                             <div>만남장소: <span>${postlist.addrSiName }> ${postlist.addrGuName } > ${postlist.addrDetail }</span></div>
                             <div>관 심 사: <span>${postlist.interMainName } > ${postlist.interSubName } > ${postlist.interDetail }</span></div>
-                            <div>참가제한: <span>${postlist.drink }, ${postlist.moodName }, ${postlist.samegender },${postlist.limitGrade }점 이상</span></div>
+                            <div>참가제한: <span><c:choose><c:when test="${postlist.drink eq 'DR00001'}">음주가능</c:when><c:when test="${postlist.drink eq 'DR00002'}">음주 불가능</c:when></c:choose>
+                            ,<c:choose><c:when test="${postlist.moodName eq 'MI00001'}">무관</c:when><c:when test="${postlist.moodName eq 'MI00002'}">진지한</c:when><c:when test="${postlist.moodName eq 'MI00003'}">가벼운</c:when></c:choose>
+                            , <c:choose><c:when test="${postlist.samegender eq 'SG00001'}">동성만</c:when><c:when test="${postlist.samegender eq 'SG00002'}">무관</c:when></c:choose>
+                            ,${postlist.limitGrade }점 이상</span></div>
                         </div>
                     </div>
 
@@ -144,14 +197,14 @@
                     </div>
 
                     <div class="Post-report flex-row-right-center">
-                        <button class="btn" data-toggle="modal"  data-target="#report-post">신고하기</button>
+                        <button class="btn report-post" data-toggle="modal"  data-target="#report-post">신고하기</button>
                     </div>
-
+                    <form action="joininsert.action" method="get"></form>
                     <div class="Post-join">
                         <div>현재 참가 신청인원 (3/${postlist.minNum }~${postlist.maxNum })</div>
                         <div class="flex-row-left-center">
-                            <div><textarea name="" id=""></textarea></div>
-                            <div><button class="btn btn-outline-secondary">참가신청</button></div>
+                            <div><textarea name="contents" id="contents"></textarea></div>
+                            <div><button id="post-join-btn"class="btn btn-outline-secondary">참가신청</button></div>
                         </div>
                     </div>
 <!-- 댓글 부분 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->					
@@ -160,7 +213,7 @@
  							<div class="comments flex-row-left-center">
 	                            <div class="comments-user"> <!-- 코멘트 유저 뱃지 + 닉네임 -->
 	                                <div> <!-- 뱃지 -->
-	                                    <img src="img/badge150pixel_0001_뉴비.png" alt="">
+	                                    <img src="${join.url }" alt="">
 	                                </div>
 	                                <div > <!-- 닉네임 -->
 	                                    ${join.nickname}
@@ -170,11 +223,11 @@
 	                                <div class="comments-buttons flex-row-left-center">
 	                                    <div>${join.joinDate}</div>
 	                                    <div>
-	                                        <button class="btn" id="${join.joinId }" name="${join.joinId }">신고하기</button>
+	                                        <button class="btn joinreport" data-toggle="modal" data-target="#report-post" name="${join.joinId }">신고하기</button>
 	                                    </div>
 	                                    <div>
-	                                        <button class="btn btn-border-right">댓글달기</button>
-	                                        <button class="btn">신청취소</button>
+	                                        <button class="btn btn-border-right reply-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId }">댓글달기</button>
+	                                        <button class="btn request-join" data-toggle="modal" data-target="#join-reset-modal" name="${join.joinId }">신청취소</button>
 	                                    </div>
 	                                </div>
 	                                <div>
@@ -184,34 +237,35 @@
 	                        </div>
 	                        <c:forEach var="replylist" items="${replylist }">
 	                        	<c:if test="${join.joinId eq replylist.joinId }">
-	                        		<div class="comments flex-row-left-center">
-			                            <div class="comments-reply">
-			                                <img src="img/img6.png" alt="">
-			                            </div>
-			                            <div class="comments-user">
-			                                <div>
-			                                    <img src="img/badge150pixel_0005_우수참석러.png" alt="">
-			                                </div>
-			                                <div>
-			                                    ${replylist.nickname }
-			                                </div>
-			                            </div>
-			                            <div class="comments-else flex-item-grow">
-			                                <div class="comments-buttons flex-row-left-center">
-			                                    <div>${replylist.joinDate }</div>
-			                                    <div>
-			                                        <button class="btn" id="${join.joinId }" name="${join.joinId }">신고하기</button>
-			                                    </div>
-			                                    <div>
-			                                        <button class="btn btn-border-right">댓글달기</button>
-			                                        <button class="btn">신청취소</button>
-			                                    </div>
-			                                </div>
-			                                <div>
-			                                    	${replylist.contents }
-			                                </div>
-			                            </div>
-			                        </div>
+	                        		<c:if test="${not empty replylist.userTypeId}">
+		                        		<div class="comments flex-row-left-center">
+				                            <div class="comments-reply">
+				                                <img src="img/대댓글.png" alt="">
+				                            </div>
+				                            <div class="comments-user">
+				                                <div>
+				                                    <img src="${replylist.url }" alt="">
+				                                </div>
+				                                <div>
+				                                    ${replylist.nickname }
+				                                </div>
+				                            </div>
+				                            <div class="comments-else flex-item-grow">
+				                                <div class="comments-buttons flex-row-left-center">
+				                                    <div>${replylist.joinDate }</div>
+				                                    <div>
+				                                        <button class="btn replyreport" data-toggle="modal" data-target="#report-post" name="${replylist.replyId }">신고하기</button>
+				                                    </div>
+				                                    <div>
+				                                        <button class="btn btn-border-right reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
+				                                    </div>
+				                                </div>
+				                                <div>
+				                                    ${replylist.contents }
+				                                </div>
+				                            </div>
+				                        </div>
+			                        </c:if>
 	                        	</c:if>
 	                        </c:forEach>
  						</c:forEach>
@@ -237,23 +291,67 @@
 			      	<div class="flex-row-center-center">
 			      		<div>유형</div>
 			      		<div>
-			      			<select>
+			      			<select id="reportType">
 			      				<c:forEach var="reportlist" items="${reportlist }">
-			      				<option>${reportlist.reportCateName }</option>
+			      				<option value="${reportlist.reportId }">${reportlist.reportCateName }</option>
 			      				</c:forEach>
 			      			</select>
 			      		</div>
 			      	</div>
 			      	<div class="flex-col-center-center">
-			      		<textarea rows="5" cols="50" placeholder="입력해주세요"></textarea>  
+			      		<textarea id="reportArea" rows="5" cols="50" placeholder="입력해주세요"></textarea>  
 				    </div>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">신고하기</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="reportBtn">신고하기</button>
 			      </div>
 			    </div>
 			  </div>
 			</div>
+<!-- 모달창 대댓글 달기 -------------------------------------------------------------------------------------------------- -->
+			 <!-- Modal -->
+			<div class="modal fade" id="reply-insert-modal" tabindex="-1" role="dialog" aria-labelledby="reply-insert" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="reply-insert">댓글 달기</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      	<div class="flex-col-center-center">
+			      		<textarea id="replyArea" rows="5" cols="50" placeholder="입력해주세요"></textarea>  
+				    </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="reply-insert-Btn">댓글 달기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+<!-- 모달 신청 취소 ---------------------------------------------------------------------------------------------------- -->
+			<div class="modal fade" id="join-reset-modal" tabindex="-1" role="dialog" aria-labelledby="join-reset" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="join-reset">댓글 달기</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      	<div class="flex-col-center-center">
+			      		<div>정말 취소하시겠습니까?</div> 
+			      		<div>취소하시면 참가신청한 글은 삭제됩니다.</div>  
+				    </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="join-reset-Btn">댓글 달기</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>					
         </div>
     </div>
 </body>
