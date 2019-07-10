@@ -13,12 +13,19 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    
     <!-- 폰트 (Noto Snas KR + Handlee) -->
     <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
 
     <style>
+      .modal-backdrop {
+		z-index: 1020;
+   	 	display : none;
+		}
+    
         .MyMessage>div{
             width: 100%;
         }
@@ -153,7 +160,43 @@
 	 			});
 	 		});
 	 	});
-	 	    
+	 	
+		$("#btn-check-id").click(function()
+				{
+					var inputid = $("#takeUserId").val();
+					
+					console.log(inputid);
+					if (inputid == "") {
+						document.getElementById("span-check-id").style.display = 'block';
+						document.getElementById("span-check-id").style.color = '#DF0101';
+						$("#span-check-id").text("아이디를 입력해주세요.");
+						return false;
+					}
+					
+					$.ajax({
+						url : "<%=cp %>/messageidcheck.action",
+						type : "post",
+						data : {'id': inputid},
+						success : function(count)
+						{
+							console.log(count);
+							
+							if (count == 0) {
+								document.getElementById("span-check-id").style.display = 'block';
+								document.getElementById("span-check-id").style.color = '#DF0101';
+								$("#btn-check-id").val("1");
+								$("#span-check-id").text("아이디가 존재하지 않습니다.");
+							}
+							else {
+								document.getElementById("span-check-id").style.display = 'block';
+								document.getElementById("span-check-id").style.color = '#31B404';
+								$("#span-check-id").text("존재하는 아이디 입니다.");
+							}
+						}
+					})
+				});
+	 	
+	 	
 	});
  	
     </script>
@@ -372,6 +415,14 @@
        	<div class="control-group flex-row-center-center">
             <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
             <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" ></div>
+            <button type="button" class="btn" id="btn-check-id" value="0">아이디 중복확인</button>
+			
+          </div>
+           <br>   
+         <div class="control-group">
+             <div class="div-check">
+                <span class="span-check" id="span-check-id" style="text-align: center;"></span>
+             </div>
           </div>
           <br />
           <!-- TextArea Message -->

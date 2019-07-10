@@ -141,16 +141,14 @@
                                         
                                         	<div>${fList.nickname }</div>
                                            <div >
-				                                <c:forEach var="i" begin="1" end="${fList.reviewGrade }">
+				                               <c:forEach var="i" begin="1" end="${fList.reviewGrade }">
 				                                   <label style="color: #ffd700;">★</label>
 				                                </c:forEach>
 				                                <c:forEach var="i" begin="${fList.reviewGrade }" end="4">
 				                                   <label style="color: #e9e9e9;">★</label>
 				                                </c:forEach>
-				                                
-					                              ${fList.reviewGrade } / 5.0
-                            					  <input type="hidden" id="hidden" value="${fList.reviewGrade }" />
-				                            
+				                              ${fList.reviewGrade } / 5.0
+				                              <input type="hidden" id="hidden" value="${fList.reviewGrade }" />
 			                           	 	</div>
                                             <div>${followingAddrList[status.index].addrSiName1 }  ${followingAddrList[status.index].addrGuName1 } 
                                              ${followingAddrList[status.index].addrSiName2 }  ${followingAddrList[status.index].addrGuName2 } 

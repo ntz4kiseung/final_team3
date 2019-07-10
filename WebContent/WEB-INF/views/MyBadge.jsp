@@ -50,6 +50,7 @@
 {
    width: 120px;
    height: 120px;
+   -webkit-filter: grayscale(100%);
 }
 
 .MyBadge-header-nickname{
@@ -76,22 +77,26 @@
 
 </style>
 <script type="text/javascript">
-$(function(){
-    $("[data-toggle=popover]").popover({
-        html : true,
-        content: function() {
-          var content = $(this).attr("data-popover-content");
-          return $(content).children(".popover-body").html();
-        },
-        title: function() {
-          var title = $(this).attr("data-popover-content");
-          return $(title).children(".popover-heading").html();
-        }
-    });
-  
-    
-});
-
+	$(function(){
+		
+	    $("[data-toggle=popover]").popover( {
+	        html : true,
+	        content: function() {
+	          var content = $(this).attr("data-popover-content");
+	          return $(content).children(".popover-body").html();
+	        },
+	        title: function() {
+	          var title = $(this).attr("data-popover-content");
+	          return $(title).children(".popover-heading").html();
+	          
+	        }
+	        
+	    });
+	   
+	    
+	  
+	    
+	});
 
 </script>
 </head>
@@ -197,32 +202,14 @@ $(function(){
                                             활동 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                        <c:forEach var="List" items="${BadgeList1 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                          <!--      <button type="button"
-                                                         class="btn"
-                                                         data-toggle="popover" 
-                                                          data-popover-content="#badge1" 
-                                                          data-placement="bottom">
-                                                    <img class="img2" src="img/badge150pixel_0001_뉴비.png" >
-                                                    </button>
-                                              -->
-                                            <a href="#" data-toggle="popover" 
-                                                  data-popover-content="#badge1" 
-                                                 data-placement="bottom" disabled;>
-                                               <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                               </a> 
+                                               <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge2" data-placement="bottom">
+                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                </button>
+ 
                                             </div>
-                                            
-
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0003_일반참석러.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0004_우수참석러-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0006_프로참석러-복사.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
@@ -233,20 +220,14 @@ $(function(){
                                             칭찬 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                        <c:forEach var="List" items="${BadgeList2 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                                <a href="#" data-toggle="popover" 
-                                                  data-popover-content="#badge2" 
-                                                 data-placement="bottom" disabled;>
-                                                <img src="img/badge150pixel_0009_매너왕.png" alt="">
-                                               </a> 
-                                            
+                                               <button type="button" class="btn"  data-trigger="focus"  data-toggle="popover" data-popover-content="#badge1" data-placement="bottom">
+                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                </button>
+ 
                                             </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0010_핵인싸-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0012_지식왕-복사.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
@@ -255,18 +236,14 @@ $(function(){
                                             꾸중 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                         <c:forEach var="List" items="${BadgeList3 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0014_불참러-복사.png" alt="">
+                                               <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge1" data-placement="bottom">
+                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                </button>
+ 
                                             </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0016_비매너-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0020_여기왜왔니-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0019_지각러.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
@@ -277,15 +254,13 @@ $(function(){
                                             개설자 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                            <c:forEach var="List" items="${BadgeList4 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0022_슈퍼방장-복사.png" alt="">
+                                               <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge1" data-placement="bottom">
+                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                </button> 
                                             </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0026_뒤통수-복사.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
@@ -305,11 +280,12 @@ $(function(){
    <div class="popover-body" >
       <div id="inbody"  >
       
+                                      
           <div class="MyFollow-user flex-row-left-center">   
-          
               <div class="flex-col-center-center">
+              
                     <div class="MyFollow-user-badge" >
-                        <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                        <img src="" alt="">
                     </div>
                    
                     <div>
@@ -318,12 +294,13 @@ $(function(){
                </div>
       
                <div class="flex-col-left-center" style="padding-left: 20px;">
-                   <div class="MyBadge-header-nickname">뉴비뱃지</div>
+                   <div class="MyBadge-header-nickname">뱃지이름</div>
                     <div class="MyBadge-header-detail">뱃지 포인트 </div>
                     <div class="MyBadge-header-detail">sagyo 이용 15회 달성!</div>
                    <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div></div>
                </div>
           </div>
+
    
       </div>
    </div>                     
@@ -335,13 +312,15 @@ $(function(){
 <div id="badge2" class="hidden" >
    <div class="popover-body">
       <div id="inbody"  >
-          <div class="MyFollow-user flex-row-left-center">
+          
+
+             <div class="MyFollow-user flex-row-left-center">
               <div class="flex-col-left-center">
                     <div class="MyFollow-user-badge" >
-                        <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                        <img src="" alt="">
                     </div>
-                    <div>
-                  <button type="button" class="btn btn-orange">대표뱃지 설정</button>
+                    <div>   
+                   <button type="button" class="btn btn-orange">대표뱃지 설정</button>
                     </div>
                </div>
                <div class="flex-col-left-center">
@@ -351,7 +330,11 @@ $(function(){
                    <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
                </div>
             </div>
-          </div>
+
+          
+
+            
+          
       </div>
    </div>                     
 </div>   
