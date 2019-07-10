@@ -106,8 +106,7 @@
 		// 『xmlHttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 		// xmlHttp.send(input1=value1&input2=value2);』
 		// 와 같이 헤더를 추가해 주어야 한다. 
-		
-		xmlHttp.open("POST","searchnotice.action"+"?keyword="+document.getElementById("keyword").value,true);
+		xmlHttp.open("POST","notice.action"+"?keyword="+ document.getElementById("keyword").value ,true);
 		xmlHttp.send(""); //xmlHttp.send(); 매개변수 아무것도 안넘기는것도 됨
 		
 		
@@ -138,6 +137,10 @@
 		
 	}) */
 	/* list에서 요소 지우기  끝  */
+	
+	
+	
+	
 </script>
     
     
@@ -214,10 +217,11 @@
                         <div class="Withdrawal-body flex-col-center-start container"> <!--  게시판 영역 시작  -->
                         	<div>
                         	<!-- <form action="searchnotice.action" method="post"> -->
+                        	<form action="notice.action" method="post">
                         		<input type="text" class="form-control form-control-sm" name="keyword" id="keyword"> <!-- 입력 창 -->
                         		
-                        		<input type="button"  onclick="loadXMLDocs()" class="btn btn-success btn-default" value="검색"/>
-                        		
+                        		<input type="submit"   class="btn btn-success btn-default" value="검색" id="search"/>
+                        	</form>	
                         	<!-- </form> -->
                         	</div>
                         	
@@ -254,10 +258,11 @@
 								      </div> 
 								    </div> 
 								 </c:forEach>  
-								 <!-- 페이징 처리 ~ 시작  -->
+								 
+								  <!-- 페이징 처리 ~ 시작  -->
 			                           <div class="flex-row-center-center;">
-			                            <form action="noticelist.action" method="get">
-			                            <div class="flex-row-center-center;">
+			                            <form action="notice.action" method="post" id="formId">
+			                            <div class="flex-row-center-center;" id="numbering">
 			                              <script type="text/javascript">
 			                              
 											var max = ${pages };
@@ -268,14 +273,17 @@
 												print = i;
 												document.write("<button type='submit' id='pagesu' name='pagesu' value="+ print +">"+print+"</button>");
 											}
+											//alert(document.getElementById("keyword").value);
 											//document.write("<button type='submit' id='pagesu' name='pagesu' value="+ print +">"+print+"</button>");
 											
-										</script>
+										  </script>
+										    <input type=hidden id="keyword" name = "keyword" value="${keyword }">
 										 </div>
 			                           </form>
 			                           </div>
                                <!-- 페이징 처리 ~ 끝~  -->
 							 </div>
+							
 							 <!-- 본래의 게시물 리스트 (끝 ) -->
 							 
 							 <!-- 검색이 되었을때의 게시물 리스트 (시작) -->
