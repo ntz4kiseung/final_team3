@@ -124,9 +124,7 @@
 							document.getElementById("find-id-tel-span").style.display = 'none';
 							$('#telmodal').modal();
 							$('#telCheck').val(certi);
-							console.log(userid);
 							$("#userId").val(id);
-							console.log($("#userId").val());
 						}
 					}
 				})
@@ -143,6 +141,7 @@
 				
 				var telInput = $("#tel_certi_input").val();
 				var telC = $("#telCheck").val();
+				
 				
 				if (telC == telInput) 
 				{

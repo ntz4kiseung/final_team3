@@ -28,42 +28,31 @@
 		WHERE ADDRSIID = #{siid }
  	</select>
  	
-
- 	
  	<insert id = "userLoginInsert">
  	
  	INSERT INTO LOGIN(USERID, PWD, ROLEID)
-	VALUES(#{userId }, CRYPTPACK.ENCRYPT(#{pwd }, #{pwd }), 'RL00002')
- 	
+	VALUES(#{userId }, CRYPTPACK.ENCRYPT(#{pwd }, 'JAVA006$'), 'RL00002')
  	</insert>
  	
  	<insert id = "userEssentialInsert">
- 	
  	INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
 	VALUES(#{userId }, #{nickname }, #{name } , TO_DATE(#{birth },'YYMMDD'), #{genderId }, #{tel }, #{email }, SYSDATE)
- 	
  	</insert>
- 	
- 	
  	
  	<insert id = "userSubInsert">
  	INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
 	VALUES(USER_SUB_SEQ.NEXTVAL, #{userId }, #{sns }, #{introduce })
- 	
  	</insert>
- 	
  	
  	<insert id = "userAddrInsert">
  	INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
 	VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, 'GU00001')
- 	
  	</insert>
  	
  	
  	<insert id = "userInterInsert">
  	INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
 	VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, 'IS00001')
- 	
  	</insert>
  	
  	<insert id = "userTelInsert">
