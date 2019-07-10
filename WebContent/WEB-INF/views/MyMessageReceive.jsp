@@ -165,53 +165,28 @@
 	 		});
 	 	});
 	 	
-
-	 /* 	$(".delete").click(function()
-		{
-	 		 var nmeCardSeq ="";
-		        var checkArray = new Array(); 
-		         
-		        $("input[name=checkOne]:checked").each(function(i){   //jQuery로 for문 돌면서 check 된값 배열에 담는다
-		            checkArray.push($(this).val());
-		              });
-		         
-		     
-		        if(checkArray.length == 0){
-		            alert("삭제할 쪽지를 선택하세요.")
-		        }
-		        else{
-		            if (confirm("삭제하시겠습니까?") == true){    //확인
-		            	
-		            	for(int i=0;i<chk.length;i++){
-
-		            		$(location).attr("href","messagedelete.action?messageId=" + $(this).val());
-
-		            		            
-
-		            		}
-		            	
-		            	
-		            	/* $.ajaxSettings.traditional = true;
-		            
-		                $.ajax({
-		                type : 'POST',   
-		                url : 'messageDelete.action?messageId= '+$(this).val(),
-		               data : {  
-		                     
-		                    checkArray : checkArray},
-		                    success: function pageReload(){
-		                        location.href="/messageRecevieList.action"
-		                    }
-		                });
-		                checkArray= new Array();
-		                nmeCardSeq="";  
-		             
-		            }
-		            else{   //취소    
-		                location.reload(true);
-		            }
-		        }
-		}); */
+	
+		$(".delete").click(function(){
+			  var confirm_val = confirm("정말 삭제하시겠습니까?");
+			  
+			  if(confirm_val) {
+			   var checkArr = new Array();
+			   
+			   $("input[class='checkOne']:checked").each(function(){
+			    checkArr.push($(this).attr("data-cartNum"));
+			   });
+			    
+			   $.ajax({
+			    url : "<%=cp %>/messagedelete.action",
+			    type : "post",
+			    data : { checkOne : checkArr },
+			    success : function(){
+			     location.href = "<%=cp %>/mymessagerecevie.action";
+			    }
+			   });
+			  } 
+			 });
+		
 	 	
 	 	
 		$("#btn-check-id").click(function()

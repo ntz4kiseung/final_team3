@@ -28,12 +28,7 @@
 		WHERE MESSAGEID=#{messageId }
 	</delete>
 	
-	<!-- <select id="messagecheckId" resultType="java.lang.Integer">
- 		SELECT COUNT(USERID) AS COUNT
-		FROM LOGIN
-		WHERE UPPER(USERID) = UPPER(#{takeUserId })
- 	</select> -->
- 	
+
  	<select id="checkId" resultType="java.lang.Integer">
  		SELECT COUNT(USERID) AS COUNT
 		FROM LOGIN

@@ -53,6 +53,12 @@
    -webkit-filter: grayscale(100%);
 }
 
+.img
+{
+	width: 120px;
+   height: 120px;
+}
+
 .MyBadge-header-nickname{
     font-size: 20px;
     font-weight: bold;
@@ -199,13 +205,14 @@
                                 
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            활동 뱃지
+                                          	  활동 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
                                         <c:forEach var="List" items="${BadgeList1 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
                                                <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge2" data-placement="bottom">
-                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                    <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
                                                 </button>
  
                                             </div>
@@ -217,13 +224,14 @@
                                    
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            칭찬 뱃지
+                                          	  칭찬 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
                                         <c:forEach var="List" items="${BadgeList2 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
                                                <button type="button" class="btn"  data-trigger="focus"  data-toggle="popover" data-popover-content="#badge1" data-placement="bottom">
-                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                    <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
                                                 </button>
  
                                             </div>
@@ -233,13 +241,14 @@
 
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            꾸중 뱃지
+                                         	   꾸중 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
                                          <c:forEach var="List" items="${BadgeList3 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
                                                <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge1" data-placement="bottom">
-                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                    <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
                                                 </button>
  
                                             </div>
@@ -251,13 +260,14 @@
 
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            개설자 뱃지
+                                        	    개설자 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
                                             <c:forEach var="List" items="${BadgeList4 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
                                                <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge1" data-placement="bottom">
-                                                    <img class="img2" src="<%=cp %>/${List.url }" >
+                                                     <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
                                                 </button> 
                                             </div>
                                           </c:forEach>
