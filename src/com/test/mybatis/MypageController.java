@@ -1,5 +1,7 @@
 package com.test.mybatis;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +21,14 @@ public class MypageController
 		IMyPageDAO dao1 = sqlSession.getMapper(IMyPageDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		
+		
 		model.addAttribute("myPageList",dao1.myPageList());
 		model.addAttribute("myPageAddrList", dao1.myPageAddrList());
 		model.addAttribute("myPageInterList", dao1.myPageInterList());
 		model.addAttribute("myReviewList", dao2.myReviewList());
+		
+		model.addAttribute("hostReview", dao2.hostReview());
+		
 		
 		return "/WEB-INF/views/CreatePostList.jsp";
 	}

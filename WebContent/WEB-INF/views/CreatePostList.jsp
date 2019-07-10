@@ -49,46 +49,28 @@ $(document).ready(function()
 	     return false;
 	});
 	
-	/* 
-	$( ".badgePoint a" ).click(function() {
-		$('point img').attr('src', $(this).src($(this)));
-		
-		var img_src = $(this).attr
-	    
-	});
-	 */
+
 	 /* 문제점 발견! 같은 구절을 다른 파일로 넣었을때 가능한걸로 보아 금요일에 발생한 문제와 똑같은 문제인듯 하다..;; */
-	/* 
-	 $( ".badgePoint" ).click(function() {
-		 
-		 alert("클릭");
-		 //$("#img").attr("src", "img/통수.png");
-	});
-	*/
+	 
 	
+	/* 
 	$(window).scroll(function()
 			{
 				if ($(window).scrollTop() == $(
 						document).height()
 						- $(window).height())
 				{
-					$(".search-result-posts")
-							.append(
-									'<div class="post-item"><div class="post-item-left"><div class="post-item-left-image"><img src="image/프로참석러.png" alt="파일 없으면 이 텍스트뜸"></div><div class="post-item-left-nickname">rhkr5209</div></div><div class="post-item-center"><div class="post-item-center-title">닌텐도 이야기 하실분 (4명)</div><div class="post-item-center-mainText">닌텐도 이야기 하실분 구합니다.</div></div><div class="post-item-right"><div><input type="button" value="후기 남기기" class="btn btn-warning"></div><div class="post-item-right-meetPlace">서울특별시 관악구</div><div class="post-item-right-meetDay">2019/07/02 13:20</div></div></div>')
+					$(".PostList").append
+					(
+						'<c:forEach var="list" items="${myReviewList }"><div class="PostList-post flex-row-left-center"><div class="PostList-post-left flex-col-center-center"><div class="PostList-post-badge"><img src="${list.url }"></div><div>${list.nickname }</div></div><div class="PostList-post-center flex-col-left-center"><div class="PostList-post-title">${list.title }</div><div class="PostList-post-contents">${list.contents }</div></div><div class="PostList-post-right flex-col-center-center"><div><button class="btn btn-outline-orange btn-120-35 mybtn" data-toggle="modal" data-target="#reviewModal">후기남기기</button></div><div class="PostList-post-detail flex-col-left-center"><div>${list.addrSiName } ${list.addrGuName }</div><div>${list.meetDate }</div></div></div></div></c:forEach>'			
+					)
 				}
 			});
+	 */
+	
+	
 });	
-<%
-	
-%>
 
-
-function change()
-{
-	alert('클릭');
-	
-		
-}
 		   
 
 </script>
@@ -329,9 +311,8 @@ function change()
                                         <div class="PostList-post-right flex-col-center-center">
                                         
                                             <div>
-                                                <button class="btn btn-outline-orange btn-120-35 mybtn" data-toggle="modal" data-target="#reviewModal">후기남기기</button>
+                                                <button class="btn btn-outline-orange btn-120-35 mybtn review" data-toggle="modal" data-target="#reviewModal">후기남기기</button>
                                             </div>
-                                            
                                             <div class="PostList-post-detail flex-col-left-center">
                                                 <!-- <div>서울특별시 용산구</div> -->
                                                 <div>${list.addrSiName } ${list.addrGuName }</div>
@@ -339,7 +320,7 @@ function change()
                                                 <div>${list.meetDate }</div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div>	
 									</c:forEach>
 
                                     
@@ -377,11 +358,11 @@ function change()
 					</div>
 				</div>
 						<div style="overflow:auto; height: 50vh;">
-							<div class="review-post flex-review">
+							<!-- <div class="review-post flex-review">
 								
 								<div class="flex-review-first" style="text-align: center;">
 									<div class="PostList-post-badge">
-                                    	<img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                    	<img src="맛잘알.png" alt="">
                                	 	</div>
 									nickname
 								</div>
@@ -401,7 +382,43 @@ function change()
                            		<div class="flex-review-third" style="text-align: center;" >
                            			<div class="PostList-post-badge">
                            					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom">
-                                              <img class="point" src="img/img4.PNG" alt="포인트선택" id="img">
+                                              <img class="point" src="img/Logo_NoBorder.png" alt="포인트선택" id="img">
+                                            </a>
+                               	 	</div>
+                               	 	포인트 선택
+                           		</div>
+									
+                           		<div class="flex-review-fourth">
+                           			<textarea class="form-control"></textarea>
+                           		</div>
+							</div> -->
+							<c:forEach items="${hostReview }" var="review">
+							<div class="review-post flex-review">
+								
+								<div class="flex-review-first" style="text-align: center;">
+									<div class="PostList-post-badge">
+                                    	<!-- <img src="맛잘알.png" alt=""> -->
+                                    	<img src="${review.url }" alt="">
+                               	 	</div>
+									<!-- nickname -->
+									${review.nickname }
+								</div>
+								<div class="flex-review-second" style="text-align: center;">
+									<div>
+	                               		<p class="star_rating">
+										    <a href="#" class="on">★</a>
+										    <a href="#" class="on">★</a>
+										    <a href="#" class="on">★</a>
+										    <a href="#">★</a>
+										    <a href="#">★</a>
+										</p>
+	                           		</div>
+                           		</div>
+							
+                           		<div class="flex-review-third" style="text-align: center;" >
+                           			<div class="PostList-post-badge">
+                           					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom">
+                                              <img class="point" src="img/Logo_NoBorder.png" alt="포인트선택" onclick="pointSelect()">
                                             </a>
                                	 	</div>
                                	 	포인트 선택
@@ -411,96 +428,9 @@ function change()
                            			<textarea class="form-control"></textarea>
                            		</div>
 							</div>
-							<div class="review-post flex-review">
-								
-								<div class="flex-review-first" style="text-align: center;">
-									<div class="PostList-post-badge">
-                                    	<img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                               	 	</div>
-									nickname
-								</div>
-								<div class="flex-review-second" style="text-align: center;">
-									<div style="color: #e9e9e9;">
-	                               		<p class="star_rating">
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#">★</a>
-										    <a href="#">★</a>
-										</p>
-	                           		</div>
-	                           		5점
-                           		</div>
-                           		<div class="flex-review-third" style="text-align: center;">
-                           			<div class="PostList-post-badge">
-                                                <img src="img/badge150pixel_0009_매너왕.png" alt="뱃지">
-                               	 	</div>
-                               	 	포인트 선택
-                           		</div>
-                           		<div class="flex-review-fourth">
-                           			<textarea  class="form-control"></textarea>
-                           		</div>
-							</div>
-							<div class="review-post flex-review">
-								
-								<div class="flex-review-first" style="text-align: center;">
-									<div class="PostList-post-badge">
-                                    	<img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                               	 	</div>
-									nickname
-								</div>
-								<div class="flex-review-second" style="text-align: center;">
-									<div style="color: #e9e9e9;">
-	                               		<p class="star_rating">
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#">★</a>
-										    <a href="#">★</a>
-										</p>
-	                           		</div>
-	                           		5점
-                           		</div>
-                           		<div class="flex-review-third" style="text-align: center;">
-                           			<div class="PostList-post-badge">
-                                                <img src="img/badge150pixel_0009_매너왕.png" alt="뱃지">
-                               	 	</div>
-                               	 	포인트 선택
-                           		</div>
-                           		<div class="flex-review-fourth">
-                           			<textarea  class="form-control"></textarea>
-                           		</div>
-							</div>
-							<div class="review-post flex-review">
-								
-								<div class="flex-review-first" style="text-align: center;">
-									<div class="PostList-post-badge">
-                                    	<img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                               	 	</div>
-									nickname
-								</div>
-								<div class="flex-review-second" style="text-align: center;">
-									<div style="color: #e9e9e9;">
-	                               		<p class="star_rating">
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#">★</a>
-										    <a href="#">★</a>
-										</p>
-	                           		</div>
-	                           		5점
-                           		</div>
-                           		<div class="flex-review-third" style="text-align: center;">
-                           			<div class="PostList-post-badge">
-                                                <img src="img/badge150pixel_0009_매너왕.png" alt="뱃지">
-                               	 	</div>
-                               	 	포인트 선택
-                           		</div>
-                           		<div class="flex-review-fourth">
-                           			<textarea  class="form-control"></textarea>
-                           		</div>
-							</div>
+							</c:forEach>
+							
+							
 							
 						</div>
 		      </div>
@@ -523,7 +453,7 @@ function change()
 			      			<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img class="badgePoint" src="img/badge150pixel_0011_핵인싸.png" alt="뱃지">
+				      				<img class="badgePoint" src="img/핵인싸.png" alt="뱃지">
 				      				</a>
 				      				<button type="button" class="badgePoint">확인버튼</button>
 				      				핵인싸
@@ -534,7 +464,7 @@ function change()
 				      		<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0009_매너왕.png" alt="뱃지">
+				      				<img src="img/매너왕.png" alt="뱃지">
 				      				</a>
 				      				매너왕
 			      					
@@ -544,7 +474,7 @@ function change()
 		      				<div>
 			      				<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0013_지식왕.png" alt="뱃지">
+				      				<img src="img/지식왕.png" alt="뱃지">
 				      				</a>
 				      				지식왕
 			      					
@@ -567,7 +497,7 @@ function change()
 			      			<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0015_불참러.png" alt="뱃지">
+				      				<img src="img/불참러.png" alt="뱃지">
 				      				</a>
 				      				불참러
 				      				
@@ -577,7 +507,7 @@ function change()
 				      		<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0017_비매너.png" alt="뱃지">
+				      				<img src="img/비매너.png" alt="뱃지">
 				      				</a>
 				      				비매너
 			      					
@@ -587,7 +517,7 @@ function change()
 		      				<div>
 			      				<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0019_지각러.png" alt="뱃지">
+				      				<img src="img/지각러.png" alt="뱃지">
 				      				</a>
 				      				지각러
 			      					
@@ -597,7 +527,7 @@ function change()
 		      				<div>
 			      				<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0021_여기왜왔니.png" alt="뱃지">
+				      				<img src="img/여기왜왔니.png" alt="뱃지">
 				      				</a>
 				      				여기왜왔니
 			      					
@@ -618,7 +548,7 @@ function change()
 			      			<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0023_슈퍼방장.png" alt="뱃지">
+				      				<img src="img/슈퍼방장.png" alt="뱃지">
 				      				</a>
 				      				슈퍼방장
 				      				
@@ -628,7 +558,7 @@ function change()
 				      		<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0025_맛잘알.png" alt="뱃지">
+				      				<img src="img/맛잘알.png" alt="뱃지">
 				      				</a>
 				      				맛잘알
 			      					
@@ -638,7 +568,7 @@ function change()
 		      				<div>
 			      				<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/badge150pixel_0027_뒤통수.png" alt="뱃지">
+				      				<img src="img/뒤통수.png" alt="뱃지">
 				      				</a>
 				      				뒷통수
 			      					

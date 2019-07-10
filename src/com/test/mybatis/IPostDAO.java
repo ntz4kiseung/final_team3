@@ -12,4 +12,7 @@ public interface IPostDAO
 	public int followdelete(FollowDTO followDTO);
 	public ArrayList<PostDTO> myReviewList();
 	public ArrayList<PostDTO> reviewList();
+	public ArrayList<PostDTO> hostReview();
+	public ArrayList<PostDTO> guestReview();
+	
 }
