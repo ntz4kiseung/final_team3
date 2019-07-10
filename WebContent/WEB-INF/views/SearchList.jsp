@@ -27,6 +27,28 @@
 			    </div> 
 			 </c:forEach>  
 								
-							 
+			<form action="noticelist.action" method="post" id="formId">
+			<c:forEach var="num" begin="1" end="${pages }" step="1"> 
+				<button type='submit' id='pagesu' name='pagesu' value=${num }>${num }</button>
+				
+			</c:forEach>
+			</form>			 
 			                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
