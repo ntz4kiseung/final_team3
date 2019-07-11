@@ -2,6 +2,7 @@ package com.test.mybatis;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
@@ -26,8 +27,25 @@ public class SearchController
 		
 		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);
 		
+		SearchDTO searchDto = new SearchDTO();
+		searchDto.setKeyword("|키워드|");
+		
 		model.addAttribute("list", postDao.searchList(s));
 		
 		return result;
+	}
+	
+	@RequestMapping(value="/searchajax.action", method=RequestMethod.GET)
+	public String test(ModelMap model, SearchDTO s, String pageNum)
+	{
+		
+		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);
+		
+		SearchDTO searchDto = new SearchDTO();
+		searchDto.setKeyword("|키워드|");
+		
+		model.addAttribute("list", postDao.searchList(s));
+		
+		return "/WEB-INF/views/SearchAjax.jsp";
 	}
 }

@@ -19,6 +19,7 @@
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <style>
        .Main{
            width: 100%;
@@ -232,16 +233,58 @@
    </style>
 
    <script>
+   	   var pageNum = 1;
+   	   
        $(document).ready(function(){
+    	   
+    	    // 모달 함수 가능하게 해줌
             $('#Search-filter-modal').on('shown.bs.modal', function () {
             });
-
-            $('.addrPlus').click(function(){
+			
+    	    
+			$('#filterBtn').click(function(){
+				$('.filter-plus').removeClass('hidden');
+				$('.additional-filter').addClass("hidden");
+			});
+			
+			
+    	    // 주소 추가 함수
+            $('.filter-plus').click(function(){
                 console.log(this);
-                $(this).css('display', 'none');
+				$(this).addClass("hidden");
+				$(this).parent().next().removeClass("hidden");
+				return false;
+            });
+            
+    	    
+            // 페이지 요청시 게시글 불러옴
+            callList(pageNum);
+            
+            
+            // 무한 스크롤
+           	$(".Search-result-body").scroll(function(){
+           		div = $(".Search-result-body")[0];
+				
+           		if(div.scrollHeight==(div.scrollTop+div.clientHeight)){
+           			pageNum++;
+					callList(pageNum);
+           		}
+           	})
+           	
+           	
+           	// 페이지 최초 요청시 게시글 불러오고, 스크롤 내리면 또 불러오는 함수
+           	function callList(pageNum){
 
-                $(this).parent().parent().append('<div class="flex-row-left-center"><input type="text" class="form-control" value="서울특별시" readonly>&nbsp;&nbsp;<input type="text" class="form-control"value="동작구" readonly><button class="addrPlus">+</button></div>');
-            });  
+           		$.ajax({
+           			url: 'searchajax.action',
+           			data: {pageNum : pageNum},
+           			type: 'GET',
+           			dataType: 'html'        			
+           		}).done(function(result){
+           			$('.Search-result-body').append(result);
+           		}); 
+           	};
+         
        })
 
        
@@ -318,7 +361,7 @@
                                 <!-- 카테고리용으로 비워둠 -->
                             </div>
                             <div>
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Search-filter-modal">필터</button>
+                                <button id="filterBtn" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Search-filter-modal">필터</button>
                             </div>
                         </div>
 
@@ -339,21 +382,38 @@
                                                 <div>만남장소</div>
                                                  <div class="flex-col-left-center">
                                                     <div class="flex-row-left-center">
-                                                        <input type="text" class="form-control" value="서울특별시" readonly>&nbsp;&nbsp;
-                                                        <input type="text" class="form-control" value="동작구" readonly>
-                                                        <button class="addrPlus">+</button>
-                                                    </div>
+                                                        <button type="text" class="btn btn-120-35" name="addrSiId1" id="addrSiId1" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
+                                                        <button type="text" class="btn btn-120-35" name="addrGuId1" id="addrGuId1" value="SI00003" >동작구</button>
+                                                        <button class="filter-plus">+</button>                              
+                                                    </div>                                                                  
+                                                    <div class="flex-row-left-center hidden additional-filter">                               
+                                                        <button type="text" class="btn btn-120-35" name="addrSiId2" id="addrSiId2" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
+                                                        <button type="text" class="btn btn-120-35" name="addrGuId2" id="addrGuId2" value="SI00003" >동작구</button>
+                                                        <button class="filter-plus">+</button>                               
+                                                    </div>                                                                   
+                                                    <div class="flex-row-left-center hidden additional-filter">                                
+                                                        <button type="text" class="btn btn-120-35" name="addrSiId3" id="addrSiId3" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
+                                                        <button type="text" class="btn btn-120-35" name="addrGuId3" id="addrGuId3" value="SI00003" >동작구</button>
+                                                    </div>                                                                           
                                                  </div>
                                             </div>
                                             <div class="filter-attribute">
-                                                <div>관심사</div>
+                                                <div>관심사a</div>
                                                 <div class="flex-col-left-center">
                                                     <div class="flex-row-left-center">
-                                                        <input type="text" class="form-control" value="스포츠" readonly>&nbsp;&nbsp;
-                                                        <input type="text" class="form-control" value="전체" readonly>
-                                                        <button>+</button>
-                                                    </div>
-                                                    
+                                                        <button type="text" class="btn btn-120-35" name="interMainId1" id="interMainId1"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
+                                                        <button type="text" class="btn btn-120-35" name="interSubId1"  id="interSubId1"  value="IS00003" readonly>축구</button>
+                                                        <button class="filter-plus">+</button>                                     
+                                                    </div>                                                                         
+                                                    <div class="flex-row-left-center hidden additional-filter">                                      
+                                                        <button type="text" class="btn btn-120-35" name="interMainId2" id="interMainId2"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
+                                                        <button type="text" class="btn btn-120-35" name="interSubId2"  id="interSubId2"  value="IS00003" readonly>축구</button>
+                                                        <button class="filter-plus">+</button>                                
+                                                    </div>                                                                    
+                                                    <div class="flex-row-left-center hidden additional-filter">                                 
+                                                        <button type="text" class="btn btn-120-35" name="interMainId3" id="interMainId3"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
+                                                        <button type="text" class="btn btn-120-35" name="interSubId3"  id="interSubId3"  value="IS00003" readonly>축구</button>
+                                                    </div>                                                                                                        
                                                 </div>
                                             </div>
                                             <div class="filter-attribute">
@@ -378,7 +438,7 @@
                                         </div>
 
                                         <div class="Search-filter-modal-footer flex-col-center-center">
-                                            <button class="btn btn-orange btn-160-45">필터적용</button>
+                                            <button class="btn btn-orange btn-160-45" >필터적용</button>
                                         </div>
                                     </form>
                                 </div>
