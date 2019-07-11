@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.test.mybatis.IProfileDAO">  <!-- 인터페이스 지정  -->
+<mapper namespace="com.test.mybatis.IProfileDAO"> 
   
 	<select id="UserList" resultType="com.test.mybatis.UserDTO"> 
 		SELECT USERID, NICKNAME, NAME, BIRTH, GENDERID,TEL,EMAIL

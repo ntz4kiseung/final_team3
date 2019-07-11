@@ -96,7 +96,10 @@
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                               <div class="user-badge-box">
+                                         <img class="user-bad-badge" src=" ${MyPageBad[status.index].urlBad }" alt="">
+                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                 </div>
                             </div>
                               <div class="MyPage-header-grade-star">
                                 <c:forEach var="i" begin="1" end="${List.reviewGrade }">
@@ -146,26 +149,26 @@
                             </div>
 
                             <div class="MyPage-body-body">
-                                <c:forEach var="user" items="${UserList }">
+                                <c:forEach var="List" items="${ myPageList }" varStatus="status">
                                     <form class="MyProfile-body flex-col-left-up">
 									
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     아이디*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${user.name }" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${List.userId }" readonly>
                                             </div>
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     닉네임*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${user.nickname }" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${List.nickname }" readonly>
                                             </div>                        
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     이름*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${user.userId }" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${List.name }" readonly>
                                             </div>
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
@@ -178,15 +181,15 @@
                                                 <div class="MyProfile-input-group-label">
                                                     성별
                                                 </div>
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
+                                                <input type="text" class="form-control input-245-40" value="ss" readonly>
                                             </div>
                 
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     휴대전화
                                                 </div>
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
-                                                <span>휴대폰 인증 완료</span>
+                                                <input type="text" class="form-control input-245-40" value="${List.tel }" readonly>
+                                                <span style="color: orange; padding-left: 10px; padding-top: 10px;">${List.telCheck }</span>
                                             </div>
                 
                 
@@ -194,15 +197,15 @@
                                                 <div class="MyProfile-input-group-label">
                                                     Email
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
-                                                <span>이메일 인증 완료</span>
+                                                <input type="text" class="form-control input-245-40" value="${List.email }" readonly>
+                                                      <span style="color: orange; padding-left: 10px; padding-top: 10px;">${List.emailCheck }</span>
                                             </div>
                 
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     대표SNS
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="아이디를 입력해주세요" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${List.sns }" readonly>
                                             </div>
                 
                                             <div class="MyProfile-input-group">
@@ -210,8 +213,8 @@
                                                     만남장소1
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="서울특별시" readonly>
-                                                    <input type="text" class="form-control input-90-40" value="---" readonly>
+                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName1 } " readonly>
+                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName1 }" readonly>
                                                 </div>
                                             </div>
                 
@@ -220,8 +223,8 @@
                                                     만남장소2
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="서울특별시" readonly>
-                                                    <input type="text" class="form-control input-90-40" value="---" readonly>
+                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName2 }" readonly>
+                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName2 }" readonly>
                                                 </div>
                                             </div>
                 
@@ -230,8 +233,8 @@
                                                     만남장소3
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="서울특별시" readonly>
-                                                    <input type="text" class="form-control input-90-40" value="---" readonly>
+                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName3 }" readonly>
+                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName3 }" readonly>
                                                 </div>
                                             </div>
                 
@@ -241,8 +244,8 @@
                                                     관심사1
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-120-40" value="관심사 대" readonly>
-                                                    <input type="text" class="form-control input-120-40" value="관심사 소" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interMainName1 } " readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interSubName1 } " readonly>
                                                 </div>
                                             </div>
                 
@@ -251,8 +254,8 @@
                                                     관심사2
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-120-40" value="관심사 대" readonly>
-                                                    <input type="text" class="form-control input-120-40" value="관심사 소" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interMainName2 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interSubName2 }" readonly>
                                                 </div>
                                             </div>
                 
@@ -261,8 +264,8 @@
                                                     관심사3
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-120-40" value="관심사 대" readonly>
-                                                    <input type="text" class="form-control input-120-40" value="관심사 소" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interMainName3 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interSubName3 }" readonly>
                                                 </div>
                                             </div>
                 
@@ -270,7 +273,7 @@
                                                 <div class="MyProfile-input-group-label">
                                                     자기소개
                                                 </div>  
-                                                <textarea class="form-control" name="" id="" cols="30" rows="10"  readonly></textarea>
+                                                <textarea class="form-control" name="" id="" cols="30" rows="10"  readonly>${List.introduce }</textarea>
                                             </div>
                                         </form>
                                         </c:forEach>

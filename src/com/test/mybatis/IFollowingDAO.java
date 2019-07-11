@@ -6,6 +6,8 @@ public interface IFollowingDAO
 {
 	public ArrayList<FollowDTO> followingList();
 	
+	public ArrayList<FollowDTO> followingBad();
+	
 	public ArrayList<FollowDTO> followingAddrList();
 	
 	public ArrayList<FollowDTO> followingInterList();

@@ -6,7 +6,7 @@
 <mapper namespace="com.test.mybatis.IBadgeDAO">  <!-- 인터페이스 지정  -->
   	
   	<select id="BadgeList1" resultType="com.test.mybatis.BadgeDTO"> 
-		SELECT  badgePointId,badgePointNAME,(SELECT COUNT(*)
+		SELECT  BADGEPOINTID,BADGEPOINTNAME,(SELECT COUNT(*)
         FROM USERBADGELOG_VIEW
         WHERE BADGEPOINTID = P.BADGEPOINTID AND USERID='BJOREEN') AS BADGECK, P.URL
 		FROM POINT P 
@@ -15,7 +15,7 @@
 	</select> 
 	 	
 	<select id="BadgeList2" resultType="com.test.mybatis.BadgeDTO"> 
-		SELECT  badgePointId,badgePointNAME,(SELECT COUNT(*)
+		SELECT  BADGEPOINTID,BADGEPOINTNAME,(SELECT COUNT(*)
          FROM USERBADGELOG_VIEW
          WHERE BADGEPOINTID = P.BADGEPOINTID AND USERID='BJOREEN') AS BADGECK , P.URL
 		FROM POINT P 
@@ -24,7 +24,7 @@
 	</select> 
 	
 	<select id="BadgeList3" resultType="com.test.mybatis.BadgeDTO"> 
-		SELECT  badgePointId,badgePointNAME,(SELECT COUNT(*)
+		SELECT  BADGEPOINTID,BADGEPOINTNAME,(SELECT COUNT(*)
          FROM USERBADGELOG_VIEW
          WHERE BADGEPOINTID = P.BADGEPOINTID AND USERID='BJOREEN') AS BADGECK , P.URL
 		FROM POINT P 
@@ -33,7 +33,7 @@
 	</select> 
 	
 	<select id="BadgeList4" resultType="com.test.mybatis.BadgeDTO"> 
-		SELECT  badgePointId,badgePointNAME,(SELECT COUNT(*)
+		SELECT  BADGEPOINTID,BADGEPOINTNAME,(SELECT COUNT(*)
          FROM USERBADGELOG_VIEW
          WHERE BADGEPOINTID = P.BADGEPOINTID AND USERID='BJOREEN') AS BADGECK , P.URL
 		FROM POINT P 

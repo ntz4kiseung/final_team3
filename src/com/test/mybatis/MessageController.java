@@ -27,7 +27,7 @@ public class MessageController
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
 		
-		
+		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
 		model.addAttribute("myPageInterList", dao2.myPageInterList());	
@@ -44,7 +44,7 @@ public class MessageController
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
 		
-		
+		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
 		model.addAttribute("myPageInterList", dao2.myPageInterList());	

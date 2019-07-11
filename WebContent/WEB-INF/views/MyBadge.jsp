@@ -98,6 +98,15 @@
 	        }
 	        
 	    });
+	    
+	    $(".badge1").click(function()
+		{
+			      
+	       $("#modal1badge").attr('src',$(this).children('#imgbadge1').attr('src'));
+	       
+
+	    
+		});
 	   
 	    
 	  
@@ -151,8 +160,11 @@
                    <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
-                            <div class="MyPage-header-badge">
-                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                        <div class="MyPage-header-badge">
+                               <div class="user-badge-box">
+                                         <img class="user-bad-badge" src=" ${MyPageBad[status.index].urlBad }" alt="">
+                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                 </div>
                             </div>
                               <div class="MyPage-header-grade-star">
                                 <c:forEach var="i" begin="1" end="${List.reviewGrade }">
@@ -210,12 +222,11 @@
                                         <div class="MyBadge-box-badges flex-row-left-center">
                                         <c:forEach var="List" items="${BadgeList1 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                               <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge2" data-placement="bottom">
-                                                    <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                               <button type="button" class="btn badge1" data-toggle="popover" data-trigger="focus" data-popover-content="#badge2" data-placement="bottom">
+                                                    <img id="imgbadge1"  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
                                                     src="<%=cp %>/${List.url }" >
-                                                </button>
- 
-                                            </div>
+                                                 </button >
+ 												</div>
                                           </c:forEach>
                                         </div>
                                     </div>  
@@ -250,7 +261,7 @@
                                                     <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
                                                     src="<%=cp %>/${List.url }" >
                                                 </button>
- 
+ 													
                                             </div>
                                           </c:forEach>
                                         </div>
@@ -311,40 +322,33 @@
                </div>
           </div>
 
-   
       </div>
    </div>                     
 </div>   
      
      
-<!--  -->
+<!-- 활동뱃지 모달 -->
 
 <div id="badge2" class="hidden" >
    <div class="popover-body">
       <div id="inbody"  >
-          
-
              <div class="MyFollow-user flex-row-left-center">
               <div class="flex-col-left-center">
                     <div class="MyFollow-user-badge" >
-                        <img src="" alt="">
+                        <img id="modal1badge" src="" alt="">
                     </div>
                     <div>   
                    <button type="button" class="btn btn-orange">대표뱃지 설정</button>
                     </div>
                </div>
                <div class="flex-col-left-center">
-                   <div class="MyBadge-header-nickname">뉴비뱃지</div>
+                   <div class="MyBadge-header-nickname" ></div>
                     <div class="MyBadge-header-detail">뱃지 포인트 </div>
                     <div class="MyBadge-header-detail">sagyo 이용 15회 달성!</div>
                    <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
                </div>
             </div>
-
-          
-
-            
-          
+   		    </div>     
       </div>
    </div>                     
 </div>   

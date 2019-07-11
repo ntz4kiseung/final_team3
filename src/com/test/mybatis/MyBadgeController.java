@@ -26,6 +26,8 @@ public class MyBadgeController
 		model.addAttribute("BadgeList2",dao.BadgeList2());
 		model.addAttribute("BadgeList3",dao.BadgeList3());
 		model.addAttribute("BadgeList4",dao.BadgeList4());
+		
+		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
 		model.addAttribute("myPageInterList", dao2.myPageInterList());

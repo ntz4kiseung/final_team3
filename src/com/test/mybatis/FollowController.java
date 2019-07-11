@@ -21,10 +21,12 @@ public class FollowController
 		IFollowingDAO dao = sqlSession.getMapper(IFollowingDAO.class);
 		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
 		
+		model.addAttribute("followingBad",dao.followingBad());
 		model.addAttribute("followingList",dao.followingList());
 		model.addAttribute("followingAddrList",dao.followingAddrList());
 		model.addAttribute("followingInterList",dao.followingInterList());
 		
+		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
 		model.addAttribute("myPageInterList", dao2.myPageInterList());	
@@ -38,10 +40,12 @@ public class FollowController
 		IFollowerDAO dao = sqlSession.getMapper(IFollowerDAO.class);
 		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
 		
+		model.addAttribute("followerBad",dao.followerBad());
 		model.addAttribute("followerList",dao.followerList());
 		model.addAttribute("followerAddrList",dao.followerAddrList());
 		model.addAttribute("followerInterList",dao.followerInterList());
 		
+		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
 		model.addAttribute("myPageInterList", dao2.myPageInterList());	

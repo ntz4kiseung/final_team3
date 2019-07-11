@@ -81,8 +81,11 @@
                    <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
-                            <div class="MyPage-header-badge">
-                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                             <div class="MyPage-header-badge">
+                               <div class="user-badge-box">
+                                         <img class="user-bad-badge" src=" ${MyPageBad[status.index].urlBad }" alt="">
+                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                 </div>
                             </div>
                               <div class="MyPage-header-grade-star">
                                 <c:forEach var="i" begin="1" end="${List.reviewGrade }">
@@ -137,8 +140,9 @@
 
                                    	<c:forEach var="fList" items="${followerList }" varStatus="status">
                                     <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="<%=cp %>/${fList.url } "alt="">
+                                       <div class="user-badge-box">
+                                                <img class="user-bad-badge" src="<%=cp %>/${followerBad[status.index].urlBad }" alt="">
+                                                <img src="<%=cp %>/${fList.url } " alt="">
                                         </div>
                                           <div class="MyFollow-user-detail">
                                         
