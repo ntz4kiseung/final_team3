@@ -1,5 +1,13 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+.user-badge-box{
+	position: relative;
+}
+.user-bad-badge{
+	width: 50%;
+	height: 50%;
+	position: absolute;
+}
 .hidden {
   display: none !important;
   visibility: hidden !important;

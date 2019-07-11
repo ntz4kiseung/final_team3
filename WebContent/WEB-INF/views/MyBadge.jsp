@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>      \                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   itle>
+<title>Insert title here</title>
    <!-- 부트스트랩 -->
 
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -50,6 +50,13 @@
 {
    width: 120px;
    height: 120px;
+   -webkit-filter: grayscale(100%);
+}
+
+.img
+{
+	width: 120px;
+   height: 120px;
 }
 
 .MyBadge-header-nickname{
@@ -76,22 +83,26 @@
 
 </style>
 <script type="text/javascript">
-$(function(){
-    $("[data-toggle=popover]").popover({
-        html : true,
-        content: function() {
-          var content = $(this).attr("data-popover-content");
-          return $(content).children(".popover-body").html();
-        },
-        title: function() {
-          var title = $(this).attr("data-popover-content");
-          return $(title).children(".popover-heading").html();
-        }
-    });
-  
-    
-});
-
+	$(function(){
+		
+	    $("[data-toggle=popover]").popover( {
+	        html : true,
+	        content: function() {
+	          var content = $(this).attr("data-popover-content");
+	          return $(content).children(".popover-body").html();
+	        },
+	        title: function() {
+	          var title = $(this).attr("data-popover-content");
+	          return $(title).children(".popover-heading").html();
+	          
+	        }
+	        
+	    });
+	   
+	    
+	  
+	    
+	});
 
 </script>
 </head>
@@ -136,38 +147,50 @@ $(function(){
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">
 
+                          
+                   <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                                <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                             </div>
-                            <div class="MyPage-header-grade-star">
-                                ★★★★★
+                              <div class="MyPage-header-grade-star">
+                                <c:forEach var="i" begin="1" end="${List.reviewGrade }">
+                                   <label style="color: #ffd700;">★</label>
+                                </c:forEach>
+                                <c:forEach var="i" begin="${List.reviewGrade }" end="4">
+                                   <label style="color: #e9e9e9;">★</label>
+                                </c:forEach>
                             </div>
                             <div class="MyPage-header-grade">
-                                3.5/5.0
+                              ${List.reviewGrade } / 5.0
+                              <input type="hidden" id="hidden" value="${List.reviewGrade }" />
                             </div>
                         </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                Nickname
+                                ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <div>#서울특별시 송파구  
-                                #서울특별시 관악구</div>
-                                <div>#영상편집 #필라테스</div>
-                                <div>휴대전화 인증 완료</div>
-                                <div>Email 인증 완료</div>
+                                <div>${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 }  ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 } 
+                                ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
+                                <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
+                                <div>${myPageInterList[status.index].interSubName3 }</div> 
+                                		
+                                <div style="color: orange;">${List.telCheck }</div>
+                                
+                                <div style="color: orange;">${List.emailCheck }</div>
                             </div>
                         </div>
                     </div>
+                    </c:forEach>
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
-                            <div><a class="navnonclick" href="myProfile.action">프로필</a></div>
-                            <div><a class="navnonclick" href="myMessageRecevie.action">쪽지함</a></div>
-                            <div><a class="navclick" href="myBadge.action">뱃지</a></div>
-                            <div><a class="navnonclick" href="myFollowing.action">팔로우</a></div>
+                            <div><a class="navnonclick" href="myprofile.action">프로필</a></div>
+                            <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
+                            <div><a class="navclick" href="mybadge.action">뱃지</a></div>
+                            <div><a class="navnonclick" href="myfollowing.action">팔로우</a></div>
                             <div><a class="navnonclick" href="#">내모임</a></div>
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
@@ -182,35 +205,18 @@ $(function(){
                                 
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            활동 뱃지
+                                          	  활동 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                        <c:forEach var="List" items="${BadgeList1 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                          <!--      <button type="button"
-                                                         class="btn"
-                                                         data-toggle="popover" 
-                                                          data-popover-content="#badge1" 
-                                                          data-placement="bottom">
-                                                    <img class="img2" src="img/badge150pixel_0001_뉴비.png" >
-                                                    </button>
-                                              -->
-                                            <a href="#" data-toggle="popover" 
-                                                  data-popover-content="#badge1" 
-                                                 data-placement="bottom" disabled;>
-                                               <img src="img/badge150pixel_0001_뉴비.png" alt="">
-                                               </a> 
+                                               <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge2" data-placement="bottom">
+                                                    <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
+                                                </button>
+ 
                                             </div>
-                                            
-
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0003_일반참석러.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0004_우수참석러-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0006_프로참석러-복사.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
@@ -218,43 +224,35 @@ $(function(){
                                    
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            칭찬 뱃지
+                                          	  칭찬 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                        <c:forEach var="List" items="${BadgeList2 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                                <a href="#" data-toggle="popover" 
-                                                  data-popover-content="#badge2" 
-                                                 data-placement="bottom" disabled;>
-                                                <img src="img/badge150pixel_0009_매너왕.png" alt="">
-                                               </a> 
-                                            
+                                               <button type="button" class="btn"  data-trigger="focus"  data-toggle="popover" data-popover-content="#badge1" data-placement="bottom">
+                                                    <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
+                                                </button>
+ 
                                             </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0010_핵인싸-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0012_지식왕-복사.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            꾸중 뱃지
+                                         	   꾸중 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                         <c:forEach var="List" items="${BadgeList3 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0014_불참러-복사.png" alt="">
+                                               <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge1" data-placement="bottom">
+                                                    <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
+                                                </button>
+ 
                                             </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0016_비매너-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0020_여기왜왔니-복사.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0019_지각러.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
@@ -262,18 +260,17 @@ $(function(){
 
                                     <div class="MyBadge-box flex-col-left-up">
                                         <div class="MyBadge-box-label flex-col-left-center">
-                                            개설자 뱃지
+                                        	    개설자 뱃지
                                         </div>
                                         <div class="MyBadge-box-badges flex-row-left-center">
+                                            <c:forEach var="List" items="${BadgeList4 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0022_슈퍼방장-복사.png" alt="">
+                                               <button type="button" class="btn" data-toggle="popover" data-trigger="focus" data-popover-content="#badge1" data-placement="bottom">
+                                                     <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
+                                                    src="<%=cp %>/${List.url }" >
+                                                </button> 
                                             </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0025_맛잘알.png" alt="">
-                                            </div>
-                                            <div class="MyBadge-box-badge">
-                                                <img src="img/badge150pixel_0026_뒤통수-복사.png" alt="">
-                                            </div>
+                                          </c:forEach>
                                         </div>
                                     </div>  
 
@@ -293,11 +290,12 @@ $(function(){
    <div class="popover-body" >
       <div id="inbody"  >
       
+                                      
           <div class="MyFollow-user flex-row-left-center">   
-          
               <div class="flex-col-center-center">
+              
                     <div class="MyFollow-user-badge" >
-                        <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                        <img src="" alt="">
                     </div>
                    
                     <div>
@@ -306,12 +304,13 @@ $(function(){
                </div>
       
                <div class="flex-col-left-center" style="padding-left: 20px;">
-                   <div class="MyBadge-header-nickname">뉴비뱃지</div>
+                   <div class="MyBadge-header-nickname">뱃지이름</div>
                     <div class="MyBadge-header-detail">뱃지 포인트 </div>
                     <div class="MyBadge-header-detail">sagyo 이용 15회 달성!</div>
                    <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div></div>
                </div>
           </div>
+
    
       </div>
    </div>                     
@@ -323,13 +322,15 @@ $(function(){
 <div id="badge2" class="hidden" >
    <div class="popover-body">
       <div id="inbody"  >
-          <div class="MyFollow-user flex-row-left-center">
+          
+
+             <div class="MyFollow-user flex-row-left-center">
               <div class="flex-col-left-center">
                     <div class="MyFollow-user-badge" >
-                        <img src="img/badge150pixel_0001_뉴비.png" alt="">
+                        <img src="" alt="">
                     </div>
-                    <div>
-                  <button type="button" class="btn btn-orange">대표뱃지 설정</button>
+                    <div>   
+                   <button type="button" class="btn btn-orange">대표뱃지 설정</button>
                     </div>
                </div>
                <div class="flex-col-left-center">
@@ -339,7 +340,11 @@ $(function(){
                    <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
                </div>
             </div>
-          </div>
+
+          
+
+            
+          
       </div>
    </div>                     
 </div>   

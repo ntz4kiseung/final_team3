@@ -15,7 +15,7 @@ public class MyProfileController
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@RequestMapping(value="/myProfile.action", method = RequestMethod.GET)
+	@RequestMapping(value="/myprofile.action", method = RequestMethod.GET)
 	public String myProfile(Model model)
 	{
 		IProfileDAO dao = sqlSession.getMapper(IProfileDAO.class);
@@ -29,32 +29,18 @@ public class MyProfileController
 		return "WEB-INF/views/MyProfile.jsp";
 	}
 	
-	@RequestMapping(value="/myProfileModify.action", method = RequestMethod.GET)
+	@RequestMapping(value="/myprofilemodify.action", method = RequestMethod.GET)
 	public String myProfileModify(Model model)
 	{
-				 
+		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		
+		model.addAttribute("myPageList", dao2.myPageList());
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
+		model.addAttribute("myPageInterList", dao2.myPageInterList());
+		
 		return "WEB-INF/views/MyProfileModify.jsp";
 	}
 	
 
-	@RequestMapping(value="/myBadge.action", method = RequestMethod.GET)
-	public String myBadge(Model model)
-	{
-				 
-		return "WEB-INF/views/MyBadge.jsp";
-	}
-	
-	@RequestMapping(value="/myFollowing.action", method = RequestMethod.GET)
-	public String myFollowing(Model model)
-	{
-				 
-		return "WEB-INF/views/MyFollowing.jsp";
-	}
-	
-	@RequestMapping(value="/myFollower.action", method = RequestMethod.GET)
-	public String myFollower(Model model)
-	{
-				 
-		return "WEB-INF/views/MyFollower.jsp";
-	}
+
 }

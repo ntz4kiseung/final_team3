@@ -95,14 +95,11 @@ public class SingupController
 	@RequestMapping(value="/idcheck.action")
 	public void singUpcheckId(String id, HttpServletResponse response) throws IOException
 	{
-		
 		int result = 0;
 		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
 		result = dao.checkId(id);
-
 		
 		response.getWriter().print(result);
-		
 	}
 	
 	@RequestMapping(value="/nickcheck.action")

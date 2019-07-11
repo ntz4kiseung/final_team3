@@ -29,6 +29,14 @@
 	</delete>
 	
 
+ 	<select id="checkId" resultType="java.lang.Integer">
+ 		SELECT COUNT(USERID) AS COUNT
+		FROM LOGIN
+		WHERE UPPER(USERID) = UPPER(#{takeUserId })
+ 	</select> 
+ 	
+	
+
 	
   
 </mapper>

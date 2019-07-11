@@ -4,8 +4,8 @@ public class AddrDTO
 {
 	private String userId,addrSiId1,addrSiName1,addrSiId2
 	,addrSiName2,addrSiId3,addrSiName3,addrGuId1,addrGuName1,addrGuId2
-	,addrGuName2,addrGuSiId3,addrGuName3;
-
+	,addrGuName2,addrGuId3,addrGuName3;
+	
 	public String getUserId()
 	{
 		return userId;
@@ -116,14 +116,14 @@ public class AddrDTO
 		this.addrGuName2 = addrGuName2;
 	}
 
-	public String getAddrGuSiId3()
+	public String getAddrGuId3()
 	{
-		return addrGuSiId3;
+		return addrGuId3;
 	}
 
-	public void setAddrGuSiId3(String addrGuSiId3)
+	public void setAddrGuId3(String addrGuId3)
 	{
-		this.addrGuSiId3 = addrGuSiId3;
+		this.addrGuId3 = addrGuId3;
 	}
 
 	public String getAddrGuName3()
@@ -135,5 +135,6 @@ public class AddrDTO
 	{
 		this.addrGuName3 = addrGuName3;
 	}
+
 
 }

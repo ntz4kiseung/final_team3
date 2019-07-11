@@ -9,7 +9,7 @@ public interface INoticeDAO
 {
 	
 	//게시물  리스트  출력 
-		public ArrayList<NoticeDTO> list(String reqpage);
+		public ArrayList<NoticeDTO> list(@Param("keyword")String keyword,@Param("reqpage")String reqpage);
 	//게시물  검색후 리스트 출력 
 		public ArrayList<NoticeDTO> searchlist(@Param("keyword")String keyword,@Param("reqpage")String reqpage);
 		

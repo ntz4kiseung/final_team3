@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IPostDAO">  <!-- 인터페이스 지정  -->
+	<select id="joinlist" resultType="com.test.mybatis.JoinDTO"> 
+		SELECT POSTID, JOINID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, NVL(DELJOIN,'없음')
+		FROM JOIN_VIEW
+		WHERE POSTID = 'PT00002'
+	</select>
+	<select id="postlist" resultType="com.test.mybatis.PostDTO" parameterType="String">
+		SELECT POSTID, USERID, NICKNAME, TITLE, CONTENTS, GRADE, TELCERTIID, EMAILCERTIID, URL, BADURL, ADDRSIID, ADDRSINAME, ADDRSINAME, ADDRGUID, ADDRGUNAME, ADDRDETAIL, INTERMAINID, INTERMAINNAME, INTERSUBID, INTERSUBNAME, INTERDETAIL, MINNUM, MAXNUM, POSTDATE, MEETDATE, SAMEGENDER, DRINK, LIMITGRADE, MOOD MOODNAME
+     	, NVL((SELECT ID FROM FOLLOW WHERE GIVEUSERID= #{followIds} AND TAKEUSERID=PV.USERID), 0) AS FOLLOWID
+		FROM POST_VIEW2 PV
+		WHERE POSTID = 'PT00002'
+	</select>
+	<select id="replylist" resultType="com.test.mybatis.JoinDTO">
+		SELECT JOINID, REPLYID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, USERTYPEID
+		FROM REPLY_VIEW
+		WHERE POSTID = 'PT00002'
+	</select>
+	<select id="reportlist" resultType="com.test.mybatis.ReportDTO">
+		SELECT REPORTCATEID REPORTID, REPORTCATENAME
+		FROM REPORT_CATE
+	</select>
+	<insert id="followinsert">
+		INSERT INTO FOLLOW(ID, GIVEUSERID, TAKEUSERID, FOLLOWDATE) VALUES(FOLLOW_SEQ.NEXTVAL, #{userId}, #{followId}, SYSDATE)
+	</insert>
+	
+	<delete id="followdelete">
+		DELETE
+		FROM FOLLOW
+		WHERE GIVEUSERID = #{userId} AND TAKEUSERID = #{followId}
+	</delete>
+	
+	<select id="searchList" resultType="com.test.mybatis.PostDTO">
+	<![CDATA[
+		SELECT POSTID, USERID, NICKNAME, URL, URLBAD, TITLE, MINNUM, MAXNUM, CONTENTS, ADDRSINAME, ADDRGUNAME, TO_CHAR(MEETDATE, 'YYYY/MM/DD HH24:MI') AS MEETDATE
+		FROM POST_VIEW
+		WHERE MEETDATE >= SYSDATE
+		  AND (ADDRGUID LIKE '%' OR ADDRGUID IN ('' ,''))
+		  AND (INTERSUBID LIKE '%' OR INTERSUBID IN ('' ,''))
+		  AND (2<=MINNUM AND MAXNUM<=20)
+		  AND (SYSDATE+2<=MEETDATE AND MEETDATE<=SYSDATE+10)
+		  AND MOOD LIKE '%%'
+		  AND LIMITGRADE>=1
+		  AND DRINK LIKE '%%'
+		  AND SAMEGENDER LIKE '%%'
+	]]>
+	</select>
+	
+	<insert id="joininsert">
+		INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE) VALUES(ADD_ID('JOIN','JOINID','JN'),'PT00002',#{userId}, 'ST00001',#{contents},SYSDATE)
+	</insert>
+	<insert id="reportpostinsert">
+		INSERT INTO REPORT_POST(ID, POSTID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_POST_SEQ.NEXTVAL, 'PT00002', #{userId}, #{reportCateName}, #{reportDetail}, SYSDATE)
+	</insert>
+	<insert id="reportjoininsert">
+		INSERT INTO REPORT_JOIN(ID, JOINID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_JOIN_SEQ.NEXTVAL, #{reportId}, #{userId}, #{reportCateName}, #{reportDetail},  SYSDATE)
+	</insert>
+	<insert id="replyinsert">
+		INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), #{joinId}, #{contents}, SYSDATE, 'RU00002')
+	</insert>
+	<insert id="reportreplyinsert">
+		INSERT INTO REPORT_REPLY(ID, REPLYID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_REPLY_SEQ.NEXTVAL, #{reportId}, #{userId}, #{reportCateName}, #{reportDetail}, SYSDATE)
+	</insert>
+<<<<<<< HEAD:src/com/test/mybatis/mapper/PostXDAO.xml
+	<insert id="joindelcheckinsert">
+		INSERT INTO DEL_JOIN(ID, JOINID, DELETEDATE) VALUES(DEL_JOIN_SEQ.NEXTVAL, #{reportId}, SYSDATE)
+	</insert>
+=======
+
+>>>>>>> ed1d3f09d25144e6b4c19ca01e8178beead1c3be:src/com/test/mybatis/mapper/PostDAO.xml
+</mapper>

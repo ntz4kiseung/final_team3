@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
@@ -20,72 +20,289 @@
     <!-- 폰트 (Noto Snas KR + Handlee) -->
     <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
     <!-- sagyo.css -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    
+	<style type="text/css">
+	.modal-backdrop {
+	z-index: 1020;
+    display : none;
+	}
+	</style>
     <link href="css/sagyo.css" rel="stylesheet">
 
    
     <script type="text/javascript">
-        var sampleId = 'wing4465';
-        var sampleNick = 'sist';
-        var sampleCerti = '123';
-        $(document).ready( function() {
-            $("#email_search").hide();
-            $("input:radio[name=idpw_search]").click(function() 
-            { 
-                var radioCheck = $("input:radio[name=idpw_search]:checked").val();
-                if(radioCheck==0)
-                {
-                    $("#tel_search").show();
-                    $("#email_search").hide();
-                }
-                else if(radioCheck==1)
-                {
-                    $("#tel_search").hide();
-                    $("#email_search").show();
-                }
-            }) 
+    
+    $(document).ready( function() {
+    	$("#find-pw-email").hide();
+
+		var key = 'tel';
+        
+        $("input:radio[name=tel-email]").click(function()
+        { 
+        	
+            var radioCheck = $("input:radio[name=tel-email]:checked").val();
             
-            $("#tel_check").click(function() {
-                $('#tel_modal').modal();
-            })
             
-            $("#email_check").click(function() {
-                $('#email_modal').modal();
-            })
-            
-            $("#tel_submit").click(function() {
-                var a = $("#tel_certi_input").val();
+            if(radioCheck=="email")
+            {
+                $("#find-pw-tel").hide();
+                $("#find-pw-email").show();
+                $("#name").val("");
+                $("#tel").val("");
+                $("#name").attr('id','name1');
+                $("#name2").attr('id','name');
+                $("#userId").attr('id','userId1');
+                $("#userId2").attr('id','userId');
+                $("#find-pw-form").attr('action','findpwemailinsert.action');
                 
-                if (a==sampleCerti) 
-                {
-                    $('#tel_modal').modal('hide');
-                    
-                    $("#tel_check").remove();
-                    document.getElementById("certi_suc1").style.display = 'inline-block';
-                    document.getElementById("certi_suc1").style.color = '#31B404';
-                    $("#certi_suc1").text("인증에 성공하셧습니다.");	
-                }
-                else
-                {
-                    alert("인증번호를 다시 입력하세요.");
-                }
-            })
-            
-            $("#email_submit").click(function() {
-                var a= $("#email_certi_input").val();
-                if (a==sampleCerti) 
-                {
-                    $('#email_modal').modal('hide');
-                    $("#email_check").remove();
-                    document.getElementById("certi_suc2").style.display = 'inline-block';
-                    document.getElementById("certi_suc2").style.color = '#31B404';
-                    $("#certi_suc2").text("인증에 성공하셧습니다.");	
-                }
-                else
-                {
-                    alert("인증번호를 다시 입력하세요.");
-                }
-            })
-        });
+            }
+            if(radioCheck=="tel")
+            {
+                $("#find-pw-tel").show();
+                $("#find-pw-email").hide();
+                $("#name").val("");
+                $("#email").val("");
+                $("#name").attr('id','name2');
+                $("#name1").attr('id','name');
+                $("#userId").attr('id','userId2');
+            	$("#userId1").attr('id','userId');
+            	$("#find-pw-form").attr('action','findpwtelinsert.action');
+            }
+        })
+        
+        function makeid()
+		{
+		    var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		    for( var i=0; i < 5; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+		    return text;
+		}
+        
+        /* 임시비밀번호 제작 */
+        function makepw()
+		{
+		    var text = "";
+		    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+		    for( var i=0; i < 4; i++ )
+		        text += possible.charAt(Math.floor(Math.random() * possible.length));
+		    return text;
+		}
+        
+        
+
+		$("#tel-Check-btn").click(function()
+		{
+			var inputid = $("#userId").val();
+			var inputname = $("#name").val();
+			var inputtel = $("#tel").val();
+			
+			var findpwtel = [inputid ,inputname, inputtel];
+			
+			
+			jQuery.ajaxSettings.traditional = true;
+			
+			if (inputid == "")
+			{
+				document.getElementById("find-pw-tel-span").style.display = 'block';
+				document.getElementById("find-pw-tel-span").style.color = '#DF0101';
+				$("#find-pw-tel-span").text("아이디를 입력해주세요.");
+				return false;
+				
+			}
+			else if (inputname == "") {
+				document.getElementById("find-pw-tel-span").style.display = 'block';
+				document.getElementById("find-pw-tel-span").style.color = '#DF0101';
+				$("#find-pw-tel-span").text("이름을 입력해주세요.");
+				return false;
+			}
+			else if (inputtel == ""){
+				document.getElementById("find-pw-tel-span").style.display = 'block';
+				document.getElementById("find-pw-tel-span").style.color = '#DF0101';
+				$("#find-pw-tel-span").text("전화번호를 입력해주세요.");
+				return false;
+			}
+			
+			 
+			$.ajax({
+				
+				url : "<%=cp %>/findpwtelcheck.action",
+				type : "post",
+				data : {'findpwtel': findpwtel},
+				
+				success : function(count)
+				{
+
+					console.log(count);
+					if (count == 0) {
+						document.getElementById("find-pw-tel-span").style.display = 'block';
+						document.getElementById("find-pw-tel-span").style.color = '#DF0101';
+						/* $("#btn-check-id").val("1"); */
+						$("#find-pw-tel-span").text("아이디와 이름, 전화번호를 확인해주세요");
+
+					}
+					else
+					{
+						console.log("성공");
+						var certi = makeid();
+						$("#tel-certi-test").text(certi);
+						
+						document.getElementById("find-pw-tel-span").style.display = 'none';
+						$('#telmodal').modal();
+						$('#telCheck').val(certi);
+
+					}
+				}
+			})
+		})
+		
+		$("#tel-re").click(function() {
+			
+			var certi = makeid();
+			$("#tel-certi-test").text(certi);
+		    $('#telCheck').val(certi);
+		})
+		
+		$("#tel-su").click(function() {
+			
+			var telInput = $("#tel_certi_input").val();
+			var telC = $("#telCheck").val();
+			if (telC == telInput) 
+			{
+				
+				$("#telmodal").modal('hide');
+				$("telCheck").val(telC);
+				
+				document.getElementById("find-pw-tel-span").style.display = 'block';
+				document.getElementById("find-pw-tel-span").style.color = '#31B404';
+				$("#tel-Check-btn").val(1);
+				$("#find-pw-tel-span").text("인증이 성공하였습니다. 다음버튼을 눌러주세요.");
+			}
+			else
+			{
+				var certi = makeid();
+				$("#tel-context1").text("인증번호가 틀렸습니다. 다시 전송합니다.");
+				
+				$('#telCheck').val(certi);
+				
+				$("#tel-certi-test").text(certi);
+			}
+		})
+		
+		
+		/* 이메일 인증  --------------------------------------------------------------------------------------*/
+		$("#email-Check-btn").click(function()
+		{
+			var inputid = $("#userId").val();
+			var inputname = $("#name").val();
+			var inputemail = $("#email").val();
+				
+				console.log(inputid + inputname + inputemail);
+			
+			var findpwemail = [inputid ,inputname, inputemail];
+			if (inputid == "")
+			{
+				document.getElementById("find-pw-tel-span").style.display = 'block';
+				document.getElementById("find-pw-tel-span").style.color = '#DF0101';
+				$("#find-pw-tel-span").text("아이디를 입력해주세요.");
+				return false;
+			}
+			else if (inputname == "") {
+				document.getElementById("find-pw-email-span").style.display = 'block';
+				document.getElementById("find-pw-email-span").style.color = '#DF0101';
+				$("#find-pw-tel-span").text("이름을 입력해주세요.");
+				return false;
+			}
+			else if (inputemail == ""){
+				document.getElementById("find-pw-email-span").style.display = 'block';
+				document.getElementById("find-pw-email-span").style.color = '#DF0101';
+				$("#find-pw-tel-span").text("이메일을 입력해주세요.");
+				return false;
+			}
+			
+			jQuery.ajaxSettings.traditional = true;
+			
+			$.ajax({
+				url : "<%=cp %>/findpwemailcheck.action",
+				type : "post",
+				data : {'findpwemail': findpwemail},
+				success : function(count)
+				{
+					if (count == 0) {
+						document.getElementById("find-pw-email-span").style.display = 'block';
+						document.getElementById("find-pw-email-span").style.color = '#DF0101';
+						$("#find-pw-email-span").text("이름과 이메일를 확인해주세요");
+					}
+					else
+					{
+						var certi = makeid();
+						$("#email-certi-test").text(certi);
+					    
+						document.getElementById("find-pw-email-span").style.display = 'none';
+						$('#emailmodal').modal();
+						$('#emailCheck').val(certi);
+					}
+				}
+			})
+		})
+		
+		
+		$("#email-re").click(function() {
+			
+			var certi = makeid();
+			$("#email-certi-test").text(certi);
+		    $('#emailCheck').val(certi);
+		})
+		
+		$("#email-su").click(function() {
+			var emailInput = $("#email_certi_input").val();
+			var emailC=$("#emailCheck").val();
+			console.log(emailInput+emailC);
+			
+			if (emailC == emailInput) 
+			{
+				$("#emailCheck").val(emailC);
+				$("#emailmodal").modal('hide');
+				
+				document.getElementById("find-pw-email-span").style.display = 'block';
+				document.getElementById("find-pw-email-span").style.color = '#31B404';
+				$("#email-Check-btn").val(1);
+				$("#find-pw-email-span").text("인증이 성공하였습니다. 다음버튼을 눌러주세요.");
+			}
+			else
+			{
+				$("#email-context1").text("인증번호가 틀렸습니다. 다시 전송합니다.");
+				var certi = makeid();
+				$("#email-certi-test").text(certi);
+			    $('#emailCheck').val(certi);
+			}
+		})
+		
+		/*--------------------------------------------------------------------------------- 이메일 인증*/
+		/* 제출  --------------------------------------------------------------------------------------*/
+		
+		$("#find-pw-btn").click(function(){
+			
+			if($("#email-Check-btn").val() != 1 && $("#tel-Check-btn").val() != 1)
+			{
+				alert("인증을 완료해주세요.");
+				return false;
+			}
+			
+			var temp = makepw();
+			$("#pwd").val(temp);
+			
+			alert($("#pwd").val() + ", " + $("#userId").val());
+			
+			document.getElementById("find-pw-form").submit();
+				
+		})
+    });
     </script>
 </head>
 <body>
@@ -139,109 +356,165 @@
                                 &nbsp;&nbsp;휴대전화 혹은 이메일을 인증하시면 다음으로 진행할 수 있습니다.
                             </div>
                         </div>
-
-
                         <div class="box-725-400-body flex-col-left-center">
-
-                            <div class="radio-box flex-row-left-center">
-                                <input type="radio">
+                        
+                        
+                        
+                        
+                        
+                        
+						<form action="findpwtelinsert.action" id="find-pw-form" name="find-pw-form" method="POST">
+                            <div class="radio-box flex-row-left-center" id="find-pw-content">
+                                <input type="radio" name="tel-email" value="tel" checked="checked">
                                 <span>&nbsp;&nbsp;등록된 휴대전화로 찾기</span>
                             </div>
-                            <div class="flex-item-grow flex-col-left-center FindId-input-box">
+                            <div class="flex-item-grow flex-col-left-center FindId-input-box" id="find-pw-tel">
                                 <div class="flex-row-left-center">
                                     <div>
                                         아이디
                                     </div>
-                                    <input type="text" class="input-underline">
+                                    <input type="text" class="input-underline" id="userId" name="userId">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline">
+                                    <input type="text" class="input-underline" id="name" name="name">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         전화번호
                                     </div>
-                                    <input type="text" class="input-underline">
-                                    <button class="btn" id="tel_check">인증하기</button>
+                                    <input type="text" class="input-underline" id="tel" name="tel">
+                                    <button type="button" class="btn" id="tel-Check-btn" name="tel-Check-btn" value="0">인증하기</button>
+                               		<input type="hidden" id="telCheck" name="telCheck" value="" />
+                                </div>
+                                <div class="div-check">
+                                	<span class="span-check" id="find-pw-tel-span"></span>
                                 </div>
                             </div>
 
+
+
+
+
+
+
+
+
+
                             <div class="radio-box flex-row-left-center">
-                                <input type="radio">
+                                <input type="radio" name="tel-email" value="email">
                                 <span>&nbsp;&nbsp;등록된 이메일로 찾기</span>
                             </div>
-                            <div>
-                                <!-- 여기에 위에 있는거(휴대폰 찾기에서 FindId-input-box) 그대로 쓰면 됨.. -->
+                            <div class="flex-item-grow flex-col-left-center FindId-input-box" id="find-pw-email">
+                            	<div class="flex-row-left-center">
+                                    <div>
+                                        아이디
+                                    </div>
+                                    <input type="text" class="input-underline" id="userId2" name="userId">
+                                </div>
+                                <div class="flex-row-left-center">
+                                    <div>
+                                        이름
+                                    </div>
+                                    <input type="text" class="input-underline" id="name2" name="name">
+                                </div>
+                                <div class="flex-row-left-center">
+                                    <div>
+                                        이메일
+                                    </div>
+                                    <input type="text" class="input-underline" id="email" name="email" value="">
+                                    <button type="button" class="btn" id="email-Check-btn" name="email-Check-btn" value="0">인증하기</button>
+                                    <input type="hidden" id="emailCheck" name="emailCheck" value="">
+                                </div>
+                                <div class="div-check">
+                                	<span class="span-check" id="find-pw-email-span"></span>
+                                </div>
                             </div>
-
+                            <input type="hidden" id="pwd" name="pwd" value="">
+						</form>
+						
+						
+						
+						
+						
+						
+						
+						
                         </div>
-
-
                         <div class="box-725-400-footer flex-row-center-center">
-                            <button class="btn btn-orange btn-160-45">다음</button>
+                            <button type="button" id="find-pw-btn" name="find-pw-btn" class="btn btn-orange btn-160-45">다음</button>
                         </div>
                     </div>
                 </div>
             </div>
 
 
-            
-            <div id="tel_modal" class="modal fade" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                         <!-- header -->
-                        <div class="modal-header">
-                            <h6 class="modal-title">휴대폰 인증</h6>
-                        </div>
-                        <!-- body -->
-                        <div class="certi_text"><br>
-                            <span>인증코드가 발송되었습니다.</span><br>
-                            <span>전송된 코드를 입력해주세요.</span>
-                        </div>
-                        <div class="certi_input">
-                        <br>
-                            <input type="text" class="input_certi" id="tel_certi_input">
-                        </div>
-                        <br>
-                        <div class="certi_rc">
-                            <button type="button" class="certi_close">다시전송</button>&nbsp;<span>|</span>
-                            <button type="button" class="certi_close" id="tel_submit">확인</button>
-                        </div>
-                        
-                    </div>
-                    </div>
-                </div>
-                
-                <div id="email_modal" class="modal fade" >
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                    <!-- header -->
-                        <div class="modal-header">
-                            <h6 class="modal-title">E-mail 인증</h6>
-                        </div>
-                    <!-- body -->
-                            <div class="certi_text"><br>
-                                <span>인증코드가 발송되었습니다.</span><br>
-                                <span>전송된 코드를 입력해주세요.</span>
-                            <br>
-                            </div>
-                        <div class="certi_input">
-                        <br>
-                                <input type="text" class="input_certi" id="email_certi_input">
-                        </div>
-                        <br>
-                            <div class="certi_rc">
-                            
-                                <button type="button" class="certi_close">다시전송</button>&nbsp;<span>|</span>
-                                <button type="button" class="certi_close" id="email_submit">확인</button>
-                            </div>
-                    </div>
-                    </div>
-                </div>
       
+
+
+
+			<div class="modal fade" id="telmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">휴대폰 인증</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      			  <span id="tel-certi-test"></span>
+			      			  <br>
+						      <span id ="tel-context1">인증코드가 발송되었습니다.</span>
+						      <br>
+						      <span id ="tel-context2">전송된 코드를 입력해주세요.</span>
+							<div>
+								<input type="text" class="form-control input-245-40" id="tel_certi_input">
+							</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id ="tel-re" class="btn btn-secondary">다시전송</button>
+			        <button type="button" id ="tel-su" class="btn btn-primary" value="">확인</button>
+			       
+			      </div>
+			      
+			    </div>
+			  </div>
+			</div>
+			
+			
+			
+			
+			<div class="modal fade" id="emailmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title">E-mail 인증</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+			      			  <span id="email-certi-test"></span>
+			      			  <br>
+						      <span id ="email-context1">인증코드가 발송되었습니다.</span>
+						      <br>
+						      <span id ="email-context2">전송된 코드를 입력해주세요.</span>
+							<div>
+								<input type="text" class="form-control input-245-40" id="email_certi_input">
+							</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" id ="email-re" class="btn btn-secondary">다시전송</button>
+			        <button type="button" id ="email-su" class="btn btn-primary" value="">확인</button>
+			       
+			      </div>
+			      
+			    </div>
+			  </div>
+			</div>
         </div>
     </div>
 </body>
