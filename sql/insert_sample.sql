@@ -1,0 +1,2150 @@
+------------------------------------------------------ 노랑 ------------------------------------------------------
+
+--○ ROLE 테이블 INSERT 쿼리문
+INSERT INTO ROLE(ROLEID, ROLENAME)
+VALUES('RL00001','관리자');
+INSERT INTO ROLE(ROLEID, ROLENAME)
+VALUES('RL00002','회원');
+
+--○ FAQ 테이블 INSERT 쿼리문
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'신청한 내역은 어디서 확인하나요?','로그인 후 마이페이지에서 신청내역을 확인할수 있습니다.:)',TO_DATE('2019-07-03','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'계정을 잊어버렸는데 어떻게 하나요?','아이디/비밀번호 찾기 메뉴를 통해 계정을 찾으실수 있습니다. 기타 문의사항은 고객센터로 문의 주시면 빠른 처리 도와드리겠습니다.:)',TO_DATE('2019-07-01','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'후기 수정은 어떻게 하나요? ','후기수정은 sagyo 정책상 불가능 합니다 ^^ 후기를 남기실때는 신중히 남겨주시기 바랍니다 :)',TO_DATE('2019-06-24','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'이런 SAGYO가 되었으면 좋겠어요!','저희 SAGYO에 대해 아이디어나 부족한점이 생각나신다면 저희 사교 고객센터로 연락주시기 바랍니다 :)',TO_DATE('2019-05-23','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'인원 증원은 안되나요?','정해진 인원으로 진행되는 SAGYO는  인원 증원이 어렵습니다. 참가신청(대기신청) 하시면 취소자 발생시 참여가 가능하니 참고 부탁드립니다 :)',TO_DATE('2019-05-22','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'관심있는 유저를 팔로우하면 뭐가 달라지나요?','관심있는 유저를 팔로우하면 해당 유저가 모임 개최시 관련 정보를 보다 수월하게 보실 수 있습니다 :)',TO_DATE('2019-05-02','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'모임을 개최하고 싶은데.. 저도 호스트가 될 수 있을까요?','사교에 가입한 회원이라면 누구나 모임개최 및 참여가 가능합니다 :)',TO_DATE('2019-05-01','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'한 사람이 여러 명 것을 신청할 수 있나요?','사교는 1인당 1계정 원칙을 준수하고 있습니다. 한 사람이 여러명의 참여신청을 하는것은 불가능 합니다.',TO_DATE('2019-04-15','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'관심사는 무엇인가요?','회원님이 선택하신 관심사에 따라 회원님들에게 알맞은 정보가 먼저 보이게 됩니다. 관심사를 입력할때는 신중하게 입력해 주세요 ^^ ',TO_DATE('2019-04-01','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'회원탈퇴는 어떻게 하나요?','고객센터>회원탈퇴 탭을 클릭하시면 회원탈퇴를 진행하실수 있습니다. ',TO_DATE('2019-03-22','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'회원정보는 어떻게 변경하나요?','[마이페이지]에서 회원정보 수정 탭을 클릭하시면 회원정보를 바꾸실수 있습니다. 아이디는 변경 불가하오니 이점 참고 부탁드립니다 :)',TO_DATE('2019-02-01','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'개최한 모임을 양도하고싶은데 가능한가요?','개최한 모임은 양도가 불가능합니다. ',TO_DATE('2019-01-22','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'비회원도 사교를 이용할 수 있나요?','사교에 게시된 모든 모임은 회원가입 없이도 일부분만 볼수 있습니다. 참여를 위해서는 사교에 가입해주세요 ^^',TO_DATE('2019-01-01','YYYY-MM-DD'));
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'개최자(호스트)에게 질문도 할 수 있나요?','참여 신청시 코멘트 입력란을 통해 질문을 하실 수 있습니다',TO_DATE('2018-12-24','YYYY-MM-DD'));
+
+
+INSERT INTO FAQ(ID,TITLE, CONTENTS, FAQDATE)
+VALUES(FAQ_SEQ.NEXTVAL,'사교(SAGYO)란? ','사교(SAGYO)는 소셜 다이닝 플랫폼 입니다.
+관심사가 비슷한 사람들을 모아 소통하며 더 행복한 일상이 만들어지도록 도와주는 서비스 플랫폼 입니다. 사교를 통해 지친 일상속에서 활력을 찾길 바랍니다:) ',TO_DATE('2018-02-01','YYYY-MM-DD'));
+
+
+
+-- FAQ 테이블 INSERT 쿼리문 끝 
+
+--○ NOTICE 테이블 INSERT 쿼리문
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'개인정보 처리방침 변경 안내','개인정보 처리방침 변경에 관하여 알려드리고자 합니다.
+
+회원님들께서는 변경된 개인정보 처리방침 내용을 확인하시고 서비스 이용에 불편을 겪지 않도록 참고하여 주시기 바랍니다.
+
+
+본 변경된 개인정보 처리방침은 2019년 5월 24일자로 적용됩니다.
+
+
+
+본 개인정보 처리방침 변경에 동의하시지 않는 경우, 
+
+
+변경 개인정보 처리방침 적용일자 전일까지 사교 호스트 지원센터를 통하여 회사에 거부의사를 
+
+표시하고 서비스 이용계약을 해지를 할 수 있으며, 시행일까지 별도의 거부 의사를 표시하지 않으시는 
+
+경우 변경된 개인정보 처리방침에 동의한 것으로 간주됩니다.',TO_DATE('2018-02-01','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'제목','내용',TO_DATE('날짜','YYYY-MM-DD'));
+
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'설 연휴 고객센터 운영 시간 안내','2018년 2월 15일(목)
+
+- 카카오톡 @SAGYO 단축 운영 (10:00 ~ 15:00)
+
+- 전화 문의는 운영되지 않습니다
+
+
+
+2018년 2월 16일(금)
+
+- 설 당일 고객센터 전화 및 카카오톡이 모두 운영되지 않습니다.
+
+
+
+2018년 2월 17일(토) ~ 2월 18일(일)
+
+- 카카오톡 @SAGYO 정상 운영 (10:00 ~ 19:00)
+
+- 전화 문의는 운영되지 않습니다
+
+
+
+※ 설 연휴 동안, 일부 상담처리가 불가할 수 있습니다.
+
+※ 문의 및 업무 처리는 2/19(월)부터 순차적으로 처리될 예정입니다.',TO_DATE('2018-02-14','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'5월 연휴기간 고객센터 운영시간 안내','안녕하세요. 회원님 :)
+사교 고객센터입니다.
+
+
+어느덧 가정의 달인 5월이 다가왔습니다.
+근로자의 날 및 어린이날 대체 휴무로 인하여 연휴가 많은 날이기도 합니다.
+
+따라서, 연휴 기간 사교 서비스 이용에 차질이 생기지 않도록 사교 고객센터 일정에 대해 안내해 드립니다.
+
+
+
+[5월 연휴 해당일]
+
+1) 5/1 화요일 : 근로자의 날
+
+2) 5/7 월요일 : 어린이날 대체공휴일
+
+3) 5/22 화요일 : 석가탄신일
+
+
+[고객센터 운영시간 안내]
+
+1. 사교 고객센터 카카오톡 @SAGYO 단축운영
+> 10:00 am ~ 14:00 pm
+
+2. 고객센터(02-512-3662) 전화 상담 운영 X
+
+※ 주말에도 사교 고객센터 카카오톡은 정상 운영됩니다.
+※ 연휴(주말 포함)에 전화 상담은 운영되지 않습니다.
+
+
+2018년 5월 사교와 함께
+즐거운 연휴 되시기 바랍니다 :)
+
+
+감사합니다.
+사교 고객센터 드림',TO_DATE('2018-04-30','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'6월 공휴일 고객센터 운영일정 안내','안녕하세요. 회원님 :)
+사교 고객센터입니다.
+
+
+벌써 날씨가 더워지기 시작하는 6월이 다가왔습니다.
+현충일 및 지방선거로 인하여 해당일에는 고객센터 운영시간이 변경 됩니다.
+
+따라서, 공휴일 고객 상담에 차질이 생기지 않도록 고객센터 운영 일정에 대해 안내해 드립니다.
+
+ㅡ
+
+[6월 공휴일 일정]
+
+1) 6월 6일 수요일 : 현충일
+
+2) 6월 13일 수요일 : 지방선거
+
+
+[고객센터 운영시간 안내]
+
+1. 사교 고객센터 카카오톡 @sagyo(사교) 단축운영
+> 10:00 am ~ 14:00 pm
+
+2. 고객센터 전화 상담 운영 X
+
+※ 주말에도 사교 고객센터 카카오톡은 정상 운영(10:00 ~ 19:00)됩니다.
+※ 공휴일(주말 포함)에 전화 상담은 운영되지 않습니다.
+
+ㅡ
+
+
+2018년 6월도 사교과 함께
+즐거운 휴일을 보내시길 바랍니다 :)
+
+
+
+감사합니다.
+사교 고객센터 드림',TO_DATE('2018-06-01','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'7월 26일 사교 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+사교 내부 행사로 인하여 카카오톡 플러스친구 및 전화 상담이 다음과 같이 단축 운영될 예정입니다.
+
+7월 26일(목) 10:00~16:00
+16시 이후 문의 및 업무 처리는 7월 27일(금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+연일 극심한 폭염에 건강 조심하시길 바랍니다.
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2018-07-05','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'[사과문] 일시적인 서비스 이용 불가로 인해 사과 말씀드립니다','안녕하세요 회원님
+
+사교 고객센터 입니다.
+
+
+
+
+
+8월 9일 목요일 오전 10시 30분부터 오후 1시 30분까지 사교Web에서 사교 모임 전체 혹은 일부가 검색 및 보이지 않는 현상이 발생하였습니다.
+
+
+
+
+
+현재 해당 문제는 해결되었으며, 사교 서비스 이용 중 불편을 드려 죄송합니다.
+
+
+
+
+
+추가로 같은 현상이 발생하지 않도록, 서버 및 시스템 패치까지 완료하여 원활한 서비스 이용이 가능하게 되었습니다.
+
+
+
+
+
+다시 한번 불편을 드려 죄송하다는 사과의 말씀 드리며, 앞으로 더 나은 서비스를 제공하기 위해 최선을 다하겠습니다.
+
+
+
+
+
+추가 불편사항 및 피드백이 있으시다면 cs@sagyo.com으로 보내주시면 빠른 답변드리도록 하겠습니다.
+
+
+
+
+
+감사합니다
+
+
+
+- 사교 고객센터 드림-',TO_DATE('2018-08-09','YYYY-MM-DD'));
+
+
+
+
+
+
+
+
+-------------------- 여기서  부터 한꺼번에 컨트롤 엔터 할꺼들 
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'광복절(8.15) 고객센터 단축운영 안내','안녕하세요. 회원님 :)
+사교 고객센터입니다.
+
+
+
+
+
+이번 8월 15일(수요일)에는 광복절 휴무로 인하여 고객센터 운영 시간이 단축됩니다.
+
+상담에 차질이 생기지 않도록 고객센터 운영 일정에 대하여 공지 드립니다.
+
+※ 사교 App/Web 서비스는 정상적으로 이용하실 수 있습니다.
+
+
+ㅡ
+
+[고객센터 단축 운영 안내]
+
+1. 사교 고객센터 카카오톡 @sagyo(사교) 단축운영
+> 오전 10:00 ~ 오후 1:00 까지
+
+2. 고객센터 전화 상담 운영 X
+
+단축운영 이후, 문의사항은 카카오 플러스친구 @sagyo(사교) 혹은 cs@frientrip.com으로 남겨주시면 순차적으로 처리해드리도록 하겠습니다.
+
+ㅡ
+
+
+감사합니다.
+사교 고객센터 드림',TO_DATE('2018-08-14 ','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'8월 30일(목) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+
+
+사교 내부 행사로 인하여 카카오톡 플러스친구 및 전화 상담이 다음과 같이 단축 운영될 예정입니다.
+
+
+
+
+
+- 8월 30일(목) 10:00~16:00
+
+
+
+
+
+16시 이후 문의는
+
+8월 31일(금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2018-08-29','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'12월 25일(화요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+12월 25일(화)은 크리스마스 휴무로 인하여 고객센터가 다음과 같이 단축 운영될 예정입니다.
+
+
+
+상담에 차질이 생기지 않도록 참고 부탁드립니다.
+
+
+
+ㅡ
+
+
+
+[사교 고객센터 운영 시간]
+
+- 카카오톡 : 오전 11:00 ~ 오후 2:00 까지
+
+- 전화 상담 : 운영 안함
+
+
+
+단축 운영 이후, 문의사항은 카카오 플러스친구 @sagyo(사교) 혹은 cs@frientrip.com으로 남겨주시면 순차적으로 처리해드리도록 하겠습니다.
+
+
+
+ㅡ
+
+
+
+즐거운 휴일 보내시길 바랍니다 :)
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2018-12-19 ','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'2019년 1월 1일(화요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+2019년 1월 1일(화요일)은 휴무로 인하여 고객센터가 다음과 같이 단축 운영될 예정입니다.
+
+
+
+상담에 차질이 생기지 않도록 참고 부탁드립니다.
+
+
+
+ㅡ
+
+
+
+[사교 고객센터 운영 시간]
+
+- 카카오톡 : 오전 11:00 ~ 오후 2:00 까지
+
+- 전화상담 : 운영 안함
+
+
+
+단축 운영 이후, 문의사항은 카카오 플러스친구 @sagyo(사교) 혹은 cs@frientrip.com으로 남겨주시면 순차적으로 처리해드리도록 하겠습니다.
+
+
+
+ㅡ
+
+
+
+즐거운 휴일 보내시길 바랍니다 :)
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2018-12-26','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'2019년 기해년! 새해 복 많이 받으세요 :)','사교 회원님!
+
+
+
+2018년 사교과 함께
+
+
+
+멋진 여가 문화를 만들어주셔서 감사합니다
+
+
+
+-
+
+
+
+2019년 기해년에도 회원님들의 
+
+
+
+더 멋진 여가생활을 만들기 위해
+
+
+
+최선을 다하는 사교이 되겠습니다.
+
+
+
+-
+
+
+
+새해 복 많이 받으세요 :)
+
+
+
+사교 전 직원 일동',TO_DATE('2018-12-31','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'1월 3일(목요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+사교 내부 행사로 인하여 카카오톡 플러스친구 및 전화 상담이 다음과 같이 단축 운영될 예정입니다.
+
+
+
+<단축 운영 일정>
+
+- 2019년 1월 3일(목) 11:00~16:00
+
+
+
+16시 이후 문의 및 업무 처리는 1월 4일(금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+새해 복 많이 받으세요 :)
+
+
+
+감사합니다.
+사교 고객센터 드림',TO_DATE('2019-01-02','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'설 연휴기간 (2/4 ~ 2/6) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+2/4 (월) ~ 2/6 (수) 설 연휴 기간 동안 사교 고객센터가 단축 운영될 예정입니다.
+
+
+
+카카오톡 플러스친구 통해 문의 내용을 남기실 수 있으나, 일정 변경 및 사교 관련 문의 등 문의에 대해 처리 및 답변이 제한되니 양해부탁드립니다.
+
+
+
+
+
+[사교 고객센터 단축 운영 안내]
+
+- 2월 4일 (월) ~ 2월 6일 (수)
+
+- 카카오톡 : 오전 11:00 ~ 오후 2:00 까지
+
+- 전화 및 메일 상담 불가
+
+
+
+
+
+문의사항은 카카오 플러스친구 @sagyo(사교) 으로 남겨주시면 2/7 목요일부터 순차적으로 처리해드리겠습니다.
+
+
+
+즐거운 설 연휴 보내시길 바랍니다 :)
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-01-30','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'2월 14일 (목요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+사교 내부 행사로 인하여 카카오톡 플러스친구 및 전화 상담이 다음과 같이 단축 운영될 예정입니다.
+
+
+
+<단축 운영 일정>
+
+- 2019년 2월 14일(목) 11:00~16:00
+
+
+
+16시 이후 문의 및 업무 처리는 2월 15일(금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-02-13','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'3월 1일 (금요일) 고객센터 단축 운영 안내','안녕하세요, 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+3월 1일(금요일)은 삼일절 휴일로 인하여 사교 고객센터가 단축 운영될 예정입니다.
+
+
+
+카카오 플러스친구를 통해 문의 내용을 남기실 수 있으나, 일정 변경 및 사교 관련 문의 등에 대해 처리 및 답변이 제한되니 양해부탁드립니다.
+
+
+
+ㅡ
+
+
+
+[사교 고객센터 단축 운영 안내]
+
+- 카카오톡 : 오전 11:00 ~ 오후 2:00 까지
+
+- 전화 및 메일 상담 불가
+
+
+
+문의사항은 카카오 플러스친구 @sagyo(사교)으로 남겨주시면 3/4 월요일에 순차적으로 처리해드리도록 하겠습니다.
+
+
+
+ㅡ
+
+
+
+즐거운 휴일 보내시길 바랍니다
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-02-27','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'3월 7일 (목요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+사교 고객센터입니다.
+
+
+
+사교 내부 행사로 인하여 카카오톡 플러스친구 및 전화 상담이 다음과 같이 단축 운영될 예정입니다.
+
+
+
+<단축 운영 일정>
+
+- 2019년 3월 7일(목) 11:00~16:00
+
+
+
+16시 이후 문의 및 업무 처리는 3월 8일(금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-03-06','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'위치기반 서비스 이용약관 신설 및 이용약관, 개인정보 처리방침 변경 안내','안녕하세요.
+
+사교 고객센터 입니다.
+
+
+
+항상 사교을 이용해 주셔서 감사드리며, 사교 위치기반서비스 이용약관 신설 및 이용약관, 개인정보 처리방침 변경에 관하여 알려드리고자 합니다.
+
+
+
+회원님들께서는 신설된 프렌트립 위치기반서비스 이용약관 및 이용약관, 개인정보 처리방침 변경 내용을 확인하시고 서비스 이용에 불편을 겪지 않도록 참고하여 주시기 바랍니다.
+
+
+
+본 신설 위치기반서비스 이용약관 및 변경된 이용약관, 개인정보 처리방침은 2019년 3월 15일자로 적용됩니다.
+
+
+
+본 위치기반서비스 이용약관 신설 및 이용약관, 개인정보 처리방침 변경에 동의하시지 않는 경우, 본 신설 위치기반서비스 이용약관 및 변경 이용약관, 개인정보 처리방침 적용일자 전일까지 사교 호스트 지원센터를 통하여 회사에 거부의사를 표시하고 서비스 이용계약을 해지를 할 수 있으며, 시행일까지 별도의 거부 의사를 표시하지 않으시는 경우 신설된 위치기반서비스 이용약관 및 변경 이용약관, 개인정보 처리방침에 동의한 것으로 간주됩니다.',TO_DATE('2019-03-08','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'3월 20일 (수) 사교 웹사이트 업데이트 안내','안녕하세요 회원님,
+
+사교 고객센터입니다.
+
+
+
+항상 사교을 이용해 주셔서 감사드리며, 금일(3/20 수) 사교 웹사이트가 업데이트 될 예정입니다!',TO_DATE('2019-03-20','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'4월 4일 (목요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터 입니다.
+
+
+
+4월 4일 (목) 16시부터 사교 전 직원이 액티비티 데이(사교)를 즐기러 갑니다 :)
+
+
+
+* 사교 액티비티 데이란?
+
+사교 전 직원이 조를 나눠 1달에 1번! 사교 액티비티를 정해, 직접 체험해보는 기업 문화입니다.
+
+
+
+다양한 사교을 경험해보고 더 좋은 사교을 회원님들께 소개해 드릴 수 있도록 열심히 즐기고 오겠습니다!
+
+
+
+이로 인해, 카카오톡 플러스친구 및 전화 상담이 다음과 같이 단축 운영되오니 양해 부탁드립니다
+
+
+
+<단축 운영 일정>
+
+- 2019년 4월 4일(목) 11:00~16:00
+
+
+
+16시 이후 문의 및 업무 처리는 4월 5일(금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-04-03','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'5월 1일 (수요일) 고객센터 단축 운영 안내','안녕하세요, 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+5월 1일(수요일)은 근로자의 날로 사교 고객센터가 단축 운영될 예정입니다.
+
+카카오 플러스친구를 통해 문의 내용을 남기실 수 있으나, 일정 변경 및 사교 관련 문의 등에 대해 처리 및 답변이 제한되니 양해부탁드립니다.
+
+
+
+ㅡ
+
+
+
+[사교 고객센터 단축 운영 안내]
+
+- 카카오톡 : 오전 11:00 ~ 오후 2:00 까지
+
+- 전화 및 메일 상담 불가
+
+
+
+문의사항은 카카오 플러스친구 @sagyo(사교)으로 남겨주시면 5/2 목요일에 순차적으로 처리해드리도록 하겠습니다.
+
+
+
+ㅡ
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-04-29','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'5월 2일 (목요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터 입니다.
+
+
+
+5월 2일 (목) 16시부터 사교 전 직원이 액티비티 데이(사교)를 즐기러 갑니다 :)
+
+
+
+* 사교 액티비티 데이란?
+
+사교 전 직원이 조를 나눠 1달에 1번! 사교 액티비티를 정해, 직접 체험해보는 기업 문화입니다.
+
+
+
+다양한 사교을 경험해보고 더 좋은 사교을 회원님들께 소개해 드릴 수 있도록 열심히 즐기고 오겠습니다!
+
+이로 인해, 카카오톡 플러스친구 및 전화 상담이 다음과 같이 단축 운영되오니 양해 부탁드립니다
+
+
+
+<단축 운영 일정>
+
+- 2019년 5월 2일(목) 11:00~16:00
+
+
+
+16시 이후 문의 및 업무 처리는 5월 3일(금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-04-30','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'5월 6일 (월요일) 고객센터 단축 운영 안내','안녕하세요, 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+5월 6일 (월요일)은 어린이날 대체 휴무일로 사교 고객센터가 단축 운영될 예정입니다.
+
+카카오 플러스친구를 통해 문의 내용을 남기실 수 있으나, 일정 변경 및 사교 관련 문의 등에 대해 처리 및 답변이 제한되니 양해부탁드립니다.
+
+
+
+ㅡ
+
+
+
+[사교 고객센터 단축 운영 안내]
+
+- 카카오톡 : 오전 11:00 ~ 오후 2:00 까지
+
+- 전화 및 메일 상담 불가
+
+
+
+문의사항은 카카오 플러스친구 @sagyo(사교)으로 남겨주시면 5/7 화요일에 순차적으로 처리해드리도록 하겠습니다.
+
+
+
+ㅡ
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-05-03','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'개인정보 처리방침 변경 안내','안녕하세요.
+
+사교 고객센터입니다.
+
+
+
+항상 사교을 이용해 주셔서 감사드리며, 사교 개인정보 처리방침 변경에 관하여 알려드리고자 합니다.
+
+
+
+회원님들께서는 변경된 개인정보 처리방침 내용을 확인하시고 서비스 이용에 불편을 겪지 않도록 참고하여 주시기 바랍니다.
+
+
+
+본 변경된 개인정보 처리방침은 2019년 5월 24일자로 적용됩니다.
+
+
+
+본 개인정보 처리방침 변경에 동의하시지 않는 경우, 변경 개인정보 처리방침 적용일자 전일까지 사교 호스트 지원센터를 통하여 회사에 거부의사를 표시하고 서비스 이용계약을 해지를 할 수 있으며, 시행일까지 별도의 거부 의사를 표시하지 않으시는 경우 변경된 개인정보 처리방침에 동의한 것으로 간주됩니다.',TO_DATE('2019-05-17','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'6월 6일 (목요일) 고객센터 단축 운영 안내','안녕하세요, 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+6월 6일 (목요일)은 현충일 휴일로 사교 고객센터가 단축 운영될 예정입니다.
+
+카카오 플러스친구를 통해 문의 내용을 남기실 수 있으나, 일정 변경 및 사교 관련 문의 등에 대해 처리 및 답변이 제한되니 양해부탁드립니다.
+
+
+
+ㅡ
+
+
+
+[사교 고객센터 단축 운영 안내]
+
+- 카카오톡 : 오전 11:00 ~ 오후 2:00 까지
+
+- 전화 및 메일 상담 불가
+
+
+
+문의사항은 카카오 플러스친구 @sagyo(사교)으로 남겨주시면 6/7 금요일에 순차적으로 처리해드리도록 하겠습니다.
+
+
+
+ㅡ
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-06-04','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'개인정보 처리방침 및 위치기반 서비스 이용약관 변경 안내','안녕하세요, 회원님.
+
+사교 고객센터입니다.
+
+
+
+항상 사교을 이용해 주셔서 감사드리며, 사교 개인정보 처리방침 및 위치기반 서비스 이용약관 변경에 관하여 알려드리고자 합니다.
+
+회원님들께서는 변경된 개인정보 처리방침 및 위치기반 서비스 이용약관 내용을 확인하시고 서비스 이용에 불편을 겪지 않도록 참고하여 주시기 바랍니다.
+
+
+
+본 변경된 개인정보 처리방침 및 위치기반 서비스 이용약관은 2019년 6월 12일자로 적용됩니다.
+
+
+
+본 개인정보 처리방침 및 위치기반 서비스 이용약관 변경에 동의하시지 않는 경우, 개인정보 처리방침 및 위치기반 서비스 이용약관 적용일자 전일까지 사교 고객센터를 통하여 회사에 거부의사를 표시하고 서비스 이용계약을 해지를 할 수 있으며, 시행일까지 별도의 거부 의사를 표시하지 않으시는 경우 변경된 개인정보 처리방침 및 위치기반 서비스 이용약관에 동의한 것으로 간주됩니다.
+
+
+
+[고객센터 문의 채널]
+
+- 카카오 플러스친구 @sagyo
+
+- 이메일 cs@frientrip.com',TO_DATE('2019-06-11','YYYY-MM-DD'));
+
+INSERT INTO NOTICE(ID,TITLE, CONTENTS, NOTICEDATE)
+VALUES(NOTICE_SEQ.NEXTVAL,'6월 13일 (목요일) 고객센터 단축 운영 안내','안녕하세요. 회원님 :)
+
+사교 고객센터입니다.
+
+
+
+6월 13일 (목) 16시부터 사교 전 직원이 액티비티 데이(사교)를 즐기러 갑니다 :)
+
+
+
+* 사교 액티비티 데이란?
+
+사교 전 직원이 조를 나눠 1달에 1번! 사교 액티비티를 정해, 직접 체험해보는 기업 문화입니다.
+
+
+
+다양한 사교을 경험해보고 더 좋은 사교을 회원님들께 소개해 드릴 수 있도록 열심히 즐기고 오겠습니다!
+
+이로 인해, 카카오 플러스친구 및 전화 상담이 다음과 같이 단축 운영되니 양해 부탁드려요.
+
+
+
+<단축 운영 일정>
+
+- 2019년 6월 13일 (목) 11:00~16:00
+
+
+
+16시 이후 문의 및 업무 처리는 6월 14일 (금)부터 순차적으로 처리될 예정이니 참고 부탁드립니다.
+
+
+
+감사합니다.
+
+사교 고객센터 드림',TO_DATE('2019-06-11','YYYY-MM-DD'));
+
+-- NOTICE 끝 
+
+--○ GENDER 테이블 INSERT 쿼리문
+INSERT INTO GENDER(GENDERID, GENDER) VALUES('GD00001','남자');
+INSERT INTO GENDER(GENDERID, GENDER) VALUES('GD00002','여자');
+
+--○ ADDR_SI 테이블 INSERT 쿼리문
+INSERT INTO ADDR_SI(ADDRSIID, ADDRSINAME) VALUES(ADD_ID('ADDR_SI','ADDRSIID','SI'),'서울');
+INSERT INTO ADDR_SI(ADDRSIID, ADDRSINAME) VALUES(ADD_ID('ADDR_SI','ADDRSIID','SI'),'대전');
+INSERT INTO ADDR_SI(ADDRSIID, ADDRSINAME) VALUES(ADD_ID('ADDR_SI','ADDRSIID','SI'),'부산');
+INSERT INTO ADDR_SI(ADDRSIID, ADDRSINAME) VALUES(ADD_ID('ADDR_SI','ADDRSIID','SI'),'인천');
+INSERT INTO ADDR_SI(ADDRSIID, ADDRSINAME) VALUES(ADD_ID('ADDR_SI','ADDRSIID','SI'),'광주');
+
+--○ INTEREST_MAIN 테이블 INSERT 쿼리문
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'스포츠');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'음악'||'&'||'예술');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'공예'||'&'||'DIY');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'사진'||'&'||'영상');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'요리'||'&'||'음료');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'학습');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'취업'||'&'||'재테크');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'뷰티'||'&'||'패션');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'미디어');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'IT'||'&'||'테크');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'건강'||'&'||'애견');
+INSERT INTO INTEREST_MAIN(INTERMAINID, INTERMAINNAME) VALUES(ADD_ID('INTEREST_MAIN','INTERMAINID','IM'),'여행');
+
+--○ CERTIFICATION_CATE 테이블 INSERT 쿼리문
+INSERT INTO CERTIFICATION_CATE(CERTIID, CERTINAME) VALUES(ADD_ID('CERTIFICATION_CATE', 'CERTIID', 'CT'),'회원가입 휴대폰 인증' );
+INSERT INTO CERTIFICATION_CATE(CERTIID, CERTINAME) VALUES(ADD_ID('CERTIFICATION_CATE', 'CERTIID', 'CT'),'회원가입 이메일 인증' );
+INSERT INTO CERTIFICATION_CATE(CERTIID, CERTINAME) VALUES(ADD_ID('CERTIFICATION_CATE', 'CERTIID', 'CT'),'아이디 찾기 휴대폰 인증' );
+INSERT INTO CERTIFICATION_CATE(CERTIID, CERTINAME) VALUES(ADD_ID('CERTIFICATION_CATE', 'CERTIID', 'CT'),'아이디 찾기 이메일 인증' );
+INSERT INTO CERTIFICATION_CATE(CERTIID, CERTINAME) VALUES(ADD_ID('CERTIFICATION_CATE', 'CERTIID', 'CT'),'비밀번호 찾기 휴대폰 인증' );
+INSERT INTO CERTIFICATION_CATE(CERTIID, CERTINAME) VALUES(ADD_ID('CERTIFICATION_CATE', 'CERTIID', 'CT'),'비밀번호 찾기 이메일 인증' );
+
+--○ MOOD 테이블 INSERT 쿼리문
+INSERT INTO MOOD(MOODID, MOODNAME) VALUES(ADD_ID('MOOD','MOODID','MI'),'무관');
+INSERT INTO MOOD(MOODID, MOODNAME) VALUES(ADD_ID('MOOD','MOODID','MI'),'진지한');
+INSERT INTO MOOD(MOODID, MOODNAME) VALUES(ADD_ID('MOOD','MOODID','MI'),'가벼운');
+
+--○ DRINK 테이블 INSERT 쿼리문
+INSERT INTO DRINK(DRINKID,DRINK)
+VALUES ('DR00001','음주가능');
+INSERT INTO DRINK(DRINKID,DRINK)
+VALUES ('DR00002','음주불가능');
+
+--○ STATUS 테이블 INSERT 쿼리문
+INSERT INTO STATUS(STATUSID, STATUSNAME)
+VALUES(ADD_ID('STATUS', 'STATUSID', 'ST'), '대기');
+INSERT INTO STATUS(STATUSID, STATUSNAME)
+VALUES(ADD_ID('STATUS', 'STATUSID', 'ST'), '수락대기');
+INSERT INTO STATUS(STATUSID, STATUSNAME) 
+VALUES(ADD_ID('STATUS', 'STATUSID', 'ST'), '만남확정');
+INSERT INTO STATUS(STATUSID, STATUSNAME) 
+VALUES(ADD_ID('STATUS', 'STATUSID', 'ST'), '만남실패');
+
+--○ SAME_GENDER 테이블 INSERT 쿼리문
+INSERT INTO SAME_GENDER(SAMEGENDERID,SAMEGENDER)
+VALUES ('SG00001' ,'동성만');
+INSERT INTO SAME_GENDER(SAMEGENDERID,SAMEGENDER)
+VALUES ('SG00002' ,'무관');
+
+--○ REPORT_CATE 테이블 INSERT 쿼리문
+INSERT INTO REPORT_CATE(REPORTCATEID, REPORTCATENAME) VALUES(ADD_ID('REPORT_CATE', 'REPORTCATEID', 'RC'),'욕설' );
+INSERT INTO REPORT_CATE(REPORTCATEID, REPORTCATENAME) VALUES(ADD_ID('REPORT_CATE', 'REPORTCATEID', 'RC'),'음란물' );
+INSERT INTO REPORT_CATE(REPORTCATEID, REPORTCATENAME) VALUES(ADD_ID('REPORT_CATE', 'REPORTCATEID', 'RC'),'불법자료' );
+INSERT INTO REPORT_CATE(REPORTCATEID, REPORTCATENAME) VALUES(ADD_ID('REPORT_CATE', 'REPORTCATEID', 'RC'),'스팸·광고' );
+INSERT INTO REPORT_CATE(REPORTCATEID, REPORTCATENAME) VALUES(ADD_ID('REPORT_CATE', 'REPORTCATEID', 'RC'),'권리 침해' );
+INSERT INTO REPORT_CATE(REPORTCATEID, REPORTCATENAME) VALUES(ADD_ID('REPORT_CATE', 'REPORTCATEID', 'RC'),'기타' );
+
+--○ REPLY_USER_TYPE 테이블 INSERT 쿼리문
+INSERT INTO REPLY_USER_TYPE(USERTYPEID, USERTYPENAME) 
+VALUES(ADD_ID('REPLY_USER_TYPE', 'USERTYPEID', 'RU'), '개설자');
+INSERT INTO REPLY_USER_TYPE(USERTYPEID, USERTYPENAME) 
+VALUES(ADD_ID('REPLY_USER_TYPE', 'USERTYPEID', 'RU'), '신청자');
+
+--○ POINT_CATE 테이블 INSERT 쿼리문
+INSERT INTO POINT_CATE(BADGEPOINTCATEID, BADGEPOINTCATENAME) VALUES(ADD_ID('POINT_CATE', 'BADGEPOINTCATEID', 'BC'), '칭찬');
+INSERT INTO POINT_CATE(BADGEPOINTCATEID, BADGEPOINTCATENAME) VALUES(ADD_ID('POINT_CATE', 'BADGEPOINTCATEID', 'BC'), '꾸중');
+INSERT INTO POINT_CATE(BADGEPOINTCATEID, BADGEPOINTCATENAME) VALUES(ADD_ID('POINT_CATE', 'BADGEPOINTCATEID', 'BC'), '개설자');
+INSERT INTO POINT_CATE(BADGEPOINTCATEID, BADGEPOINTCATENAME) VALUES(ADD_ID('POINT_CATE', 'BADGEPOINTCATEID', 'BC'), '활동');
+
+
+
+
+------------------------------------------------------ 초록 ------------------------------------------------------
+
+--○ LOGIN 테이블 INSERT 쿼리문
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('admin001', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00001');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('B001',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BLUMBALD',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BRADOCUS',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BROGAN',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BAHEELA',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BERMEDA',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BERSON',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BJOREEN',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BLISSET',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('BRATHAID',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('EADWYNDA',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('EDAINE',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('EDROSINK',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('EITLIAS',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('ELLELL',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('ELRONE',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('EREDUI',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('ERVETAN',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('EVERETTE',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('EVROGAN',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('aberine', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('aladanne', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('anlant', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('armelorc', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('adalleif', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('alberic', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('annetia', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('arthisef', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('adiard', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('advice', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('divien', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('dymira', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('degink', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('dweald', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('duwaino', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('dogwen', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('derbonie', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('dunarea', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('dodulla', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('Dagona',CRYPTPACK.ENCRYPT('JAVA006$','JAVA006$'),'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('caroin', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('coimhin', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('channa', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('collerva', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('ciriel', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('cirdan', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('crowen', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('chrigh', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('chiania', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+INSERT INTO LOGIN(USERID, PWD, ROLEID) VALUES('cointer', CRYPTPACK.ENCRYPT('JAVA006$', 'JAVA006$'), 'RL00002');
+
+--○ ADDR_GU 테이블 INSERT 쿼리문
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '강남구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '강동구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '강서구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '강북구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '관악구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '광진구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '구로구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '금천구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '노원구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '동대문구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '도봉구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '동작구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '마포구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '서대문구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '성동구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '성북구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '서초구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '송파구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '영등포구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '용산구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '양천구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '은평구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '종로구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '중구', 'SI00001');
+INSERT INTO ADDR_GU(ADDRGUID, ADDRGUNAME, ADDRSIID) VALUES(ADD_ID('ADDR_GU', 'ADDRGUID', 'GU'), '중랑구', 'SI00001');
+
+--○ INTEREST_SUB 테이블 INSERT 쿼리문
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'클라이밍','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'패러글라이딩','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'구기스포츠','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'무도'||'&'||'댄스','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'수영','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'요가'||'&'||'발레','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'필라테스','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'레저스포츠','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'골프','IM00001');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'피아노','IM00002');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'기타(악기)','IM00002');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'보컬','IM00002');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'뮤지컬'||'&'||'연극','IM00002');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'동양화','IM00002');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'서양화','IM00002');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'캘리그라피'||'&'||'드로잉','IM00002');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'도예','IM00003');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'가죽공예','IM00003');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'향수','IM00003');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'목공','IM00003');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'원예','IM00003');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'인테리어','IM00003');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'사진','IM00004');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'사진편집','IM00004');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'영상','IM00004');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'영상편집','IM00004');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'한식','IM00005');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'일식','IM00005');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'아시아음식','IM00005');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'양식','IM00005');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'떡'||'&'||'한과','IM00005');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'베이킹'||'&'||'디저트','IM00005');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'커피'||'&'||'주류','IM00005');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'영어','IM00006');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'일본어','IM00006');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'중국어','IM00006');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'철학','IM00006');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'사회'||'&'||'과학','IM00006');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'자소서','IM00007');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'면접','IM00007');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'금융상품','IM00007');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'부동산','IM00007');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'주식','IM00007');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'패션','IM00008');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'헤어'||'&'||'메이크업','IM00008');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'네일'||'&'||'왁싱','IM00008');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'예능','IM00009');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'영화','IM00009');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'드라마','IM00009');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'웹툰','IM00009');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'만화'||'&'||'소설','IM00009');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'모바일','IM00010');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'웹','IM00010');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'컴퓨터','IM00010');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'노트북','IM00010');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'심리'||'&'||'상담','IM00011');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'스파'||'&'||'마사지','IM00011');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'애견','IM00011');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'국내','IM00012');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'동북아시아','IM00012');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'동남아시아'||'&'||'서남아시아','IM00012');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'미주(북·남미)','IM00012');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'유럽','IM00012');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'대양주'||'&'||'괌','IM00012');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'중동'||'&'||'아프리카','IM00012');
+INSERT INTO INTEREST_SUB(INTERSUBID,INTERSUBNAME,INTERMAINID)
+VALUES (ADD_ID('INTEREST_SUB' ,'INTERSUBID','IS'),'러시아'||'&'||'몽골'||'&'||'중앙아시아','IM00012');
+
+
+--○ POINT 테이블 INSERT 쿼리문
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '매너왕', 'BC00001', '매너있는 사람에게', '매너있는 사람에게2', 'img/매너왕.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '지식왕', 'BC00001', '지식있는 사람에게', '지식있는 사람에게2', 'img/지식왕.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '핵인싸', 'BC00001', '인기있는 사람에게', '인기있는 사람에게2', 'img/핵인싸.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '불참러', 'BC00002', '모임에 불참하는 사람에게', '모임에 불참하는 사람에게2', 'img/불참러.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '지각러', 'BC00002', '모임에 늦는 사람에게', '모임에 늦는 사람에게2', 'img/지각러.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '비매너', 'BC00002', '비매너인 사람에게', '비매너인 사람에게2', 'img/비매너.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '여기왜왔니', 'BC00002', '주제에 맞지않은 사람에게', '주제에 맞지않은 사람에게2', 'img/여기왜왔니.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '맛잘알', 'BC00003', '방장이 맛집을 잘아는 사람에게', '방장이 맛집을 잘아는 사람에게2', 'img/맛잘알.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '슈퍼방장', 'BC00003', '슈퍼 방장에게', '슈퍼 방장에게2', 'img/슈퍼방장.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '뒷통수 조심', 'BC00003', '방장이 뒷통수치는 사람에게', '방장이 뒷통수치는 사람에게2', 'img/뒤통수조심.png', '3');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '뉴비', 'BC00004', '뉴비에게', '뉴비에게2', 'img/뉴비.png', '5');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '일반 참석러', 'BC00004', '일반 참석러', '일반 참석러', 'img/일반참석러.png', '15');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '우수 참석러', 'BC00004', '우수 참석러', '우수 참석러', 'img/우수참석러.png', '30');
+INSERT INTO POINT(BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID, BADGEPOINTDESC1, BADGEPOINTDESC2, URL, CONDITION)
+VALUES(ADD_ID('POINT', 'BADGEPOINTID', 'BP'), '프로 참석러', 'BC00004', '프로 참석러', '프로 참석러', 'img/프로참석러.png', '50');
+
+
+------------------------------------------------------ 파랑 ------------------------------------------------------
+--○ ADMIN 테이블 INSERT 쿼리문
+INSERT INTO ADMIN(USERID) VALUES('admin001');
+
+--○ USER_ESSENTIAL 테이블 INSERT 쿼리문
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('Dagona', '말티즈', '김우주', TO_DATE('19950617','YYYY-MM-DD'), 'GD00001', '010-3311-3345','Dagona@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('divien', '악어', '이사랑', TO_DATE('19920820','YYYY-MM-DD'), 'GD00002', '010-3122-3665','divien@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('dymira', '치와와', '김수호', TO_DATE('19910707','YYYY-MM-DD'), 'GD00001', '010-3201-3998','dymira@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('degink', '고양이', '한기린', TO_DATE('19960111','YYYY-MM-DD'), 'GD00001', '010-3457-3652','degink@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('dweald', '호랑이', '이소희', TO_DATE('19930401','YYYY-MM-DD'), 'GD00002', '010-3222-3244','dweald@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('duwaino', '사자', '정다솔', TO_DATE('19901212','YYYY-MM-DD'), 'GD00002', '010-3211-3111','duwaino@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('dogwen', '팬더', '김수현', TO_DATE('19890304','YYYY-MM-DD'), 'GD00001', '010-3454-3874','dogwen@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('derbonie', '기린', '홍세리', TO_DATE('19941118','YYYY-MM-DD'), 'GD00002', '010-3987-3965','derbonie@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('dunarea', '사슴', '김소희', TO_DATE('19970105','YYYY-MM-DD'), 'GD00002', '010-3145-3654','dunarea@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('dodulla', '코끼리', '한석호', TO_DATE('19960308','YYYY-MM-DD'), 'GD00001', '010-3157-3984','dodulla@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('EADWYNDA', '참새', '김숙현', TO_DATE('19880705','YYYY-MM-DD'), 'GD00002', '010-3788-3112','EADWYNDA@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('EDAINE', '비둘기', '오세희', TO_DATE('19900505','YYYY-MM-DD'), 'GD00002', '010-3554-3665','EDAINE@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('EDROSINK', '다람쥐', '민희찬', TO_DATE('19960602','YYYY-MM-DD'), 'GD00001', '010-3221-3114','EDROSINK@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('EITLIAS', '돼지', '이호찬', TO_DATE('19980712','YYYY-MM-DD'), 'GD00001', '010-3158-3336','EITLIAS@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('ELLELL', '웰시코기', '최보라', TO_DATE('19930404','YYYY-MM-DD'), 'GD00002', '010-3334-3336','ELLELL@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('B001', '치킨', '홍길동', TO_DATE('20100101','YYYY-MM-DD'), 'GD00001', '010-2001-2001','B001@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BLUMBALD', '피자', '정동호', TO_DATE('20100102','YYYY-MM-DD'), 'GD00001', '010-2002-2002','BLUMBALD@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BRADOCUS', '국수', '안표섭', TO_DATE('20100103','YYYY-MM-DD'), 'GD00001', '010-2003-2003','BRADOCUS@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BROGAN', '돈가스', '전석진', TO_DATE('20100104','YYYY-MM-DD'), 'GD00001', '010-2004-2004','BROGAN@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BAHEELA', '김밥', '손상흠', TO_DATE('20100105','YYYY-MM-DD'), 'GD00001', '010-2005-2005','BAHEELA@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BERMEDA', '순대', '배자혁', TO_DATE('20100101','YYYY-MM-DD'), 'GD00001', '010-2006-2006','BERMEDA@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BERSON', '햄버거', '전봉광', TO_DATE('20100102','YYYY-MM-DD'), 'GD00001', '010-2007-2007','BERSON@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BJOREEN', '스테이크', '안표섭', TO_DATE('20100103','YYYY-MM-DD'), 'GD00001', '010-2008-2008','BJOREEN@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BLISSET', '규카츠', '조석인', TO_DATE('20100104','YYYY-MM-DD'), 'GD00001', '010-2009-2009','BLISSET@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('BRATHAID', '돼지국밥', '전추환', TO_DATE('20100105','YYYY-MM-DD'), 'GD00001', '010-2010-2010','BRATHAID@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('anlant', '마로니에', '은현우', TO_DATE('19870429','YYYY-MM-DD'), 'GD00001', '010-1658-1973','anlant@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('aberine', '베아트리스', '유가인', TO_DATE('19930917','YYYY-MM-DD'), 'GD00001', '010-1143-1579','aberine@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('aladanne', '히야신스', '강마루', TO_DATE('19890422','YYYY-MM-DD'), 'GD00001', '010-1286-1953','aladanne@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('armelorc', '플록스', '이다슬', TO_DATE('19910217','YYYY-MM-DD'), 'GD00002', '010-1455-1768','armelorc@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('adalleif', '프리지아', '민서윤', TO_DATE('19950417','YYYY-MM-DD'), 'GD00002', '010-1357-1975','adalleif@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('alberic', '플라타너스', '한지우', TO_DATE('19901111','YYYY-MM-DD'), 'GD00001', '010-1224-1678','alberic@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('annetia', '카모밀레', '김수아', TO_DATE('19931225','YYYY-MM-DD'), 'GD00002', '010-1687-1887','annetia@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('arthisef', '제라늄', '유서현', TO_DATE('19960101','YYYY-MM-DD'), 'GD00001', '010-1957-1562','arthisef@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('adiard', '사프란', '박지아', TO_DATE('19940930','YYYY-MM-DD'), 'GD00002', '010-1786-1353','adiard@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('advice', '리아트리스', '정다윤', TO_DATE('19901017','YYYY-MM-DD'), 'GD00002', '010-1657-1768','advice@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('ELRONE', '멜리사', '한승헌', TO_DATE('19910515','YYYY-MM-DD'), 'GD00001', '010-1657-1697','ELRONE@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('EREDUI', '메리골드', '이주안', TO_DATE('19940722','YYYY-MM-DD'), 'GD00001', '010-1476-1347','EREDUI@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('ERVETAN', '라벤더', '박찬형', TO_DATE('20030927','YYYY-MM-DD'), 'GD00001', '010-1579-1798','ERVETAN@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('EVERETTE', '라일락', '한서인', TO_DATE('19850311','YYYY-MM-DD'), 'GD00002', '010-1325-1258','EVERETTE@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('EVROGAN', '데이지', '강수현', TO_DATE('19940228','YYYY-MM-DD'), 'GD00002', '010-1582-1588','EVROGAN@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('caroin', '리그오브레전드', '김이영', TO_DATE('19930914','YYYY-MM-DD'), 'GD00001', '010-4111-4111','caroin@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('coimhin', '전략적팀게임', '방준혁', TO_DATE('19930915','YYYY-MM-DD'), 'GD00001', '010-4222-4222','caroin@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('channa', '마인크래프트', '김수현', TO_DATE('19940815','YYYY-MM-DD'), 'GD00002', '010-4333-4333','channa@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('collerva', '하스스톤', '노가연', TO_DATE('19970215','YYYY-MM-DD'), 'GD00002', '010-4421-4421','collerva@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('ciriel', '와우', '이예지', TO_DATE('19970415','YYYY-MM-DD'), 'GD00002', '010-4522-4521','ciriel@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('cirdan', '패스오브엑자일', '윤현섭', TO_DATE('19900525','YYYY-MM-DD'), 'GD00001', '010-4626-4561','cirdan@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('crowen', '오토체스', '김동건', TO_DATE('19941225','YYYY-MM-DD'), 'GD00001', '010-4739-4769','crowen@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('chrigh', '오버워치', '최인성', TO_DATE('19931105','YYYY-MM-DD'), 'GD00001', '010-4838-4881','chrigh@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('chiania', '메이플스토리', '방태혁', TO_DATE('19930105','YYYY-MM-DD'), 'GD00001', '010-4942-4588','chiania@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('cointer', '던전앤파이터', '양성룡', TO_DATE('19930105','YYYY-MM-DD'), 'GD00001', '010-4014-4089','cointer@naver.com',SYSDATE);
+INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+VALUES('admin001', '관리자001', '장우봉', TO_DATE('19800814','YYYY-MM-DD'), 'GD00001', '010-4111-4111','admin001@naver.com',SYSDATE);
+
+--○ DIRECT_QUESTION 테이블 INSERT 쿼리문
+INSERT INTO DIRECT_QUESTION(ID, TITLE, USERID, CONTENTS, DIRECTQUESTIONDATE) 
+VALUES(DIRECT_QUESTION_SEQ.NEXTVAL, '저사람이 욕했어요', 'B001', '풍부하게 하는 것이다 청춘을 !', SYSDATE);
+INSERT INTO DIRECT_QUESTION(ID, TITLE, USERID, CONTENTS, DIRECTQUESTIONDATE) 
+VALUES(DIRECT_QUESTION_SEQ.NEXTVAL, '저사람이에요', 'BLUMBALD', '그들의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 생생하며', SYSDATE);
+INSERT INTO DIRECT_QUESTION(ID, TITLE, USERID, CONTENTS, DIRECTQUESTIONDATE) 
+VALUES(DIRECT_QUESTION_SEQ.NEXTVAL, '저사람입니다.', 'BRADOCUS', ' 아름답고 소담스러운 열매를 맺어 우리 인생', SYSDATE);
+INSERT INTO DIRECT_QUESTION(ID, TITLE, USERID, CONTENTS, DIRECTQUESTIONDATE) 
+VALUES(DIRECT_QUESTION_SEQ.NEXTVAL, '이사람아 아니야', 'BROGAN', ' 아름답고 소담스러운 열매', SYSDATE);
+INSERT INTO DIRECT_QUESTION(ID, TITLE, USERID, CONTENTS, DIRECTQUESTIONDATE) 
+VALUES(DIRECT_QUESTION_SEQ.NEXTVAL, '이사람아 맞습니다.', 'BAHEELA', '그들은 이상의 보배를 능히 품으며', SYSDATE);
+
+--○ USER_ADDR 테이블 INSERT 쿼리문
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'B001', 'GU00001');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'Dagona', 'GU00002');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'Dagona', 'GU00018');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BLUMBALD', 'GU00016');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BLUMBALD', 'GU00010');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BLUMBALD', 'GU00023');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BRADOCUS', 'GU00001');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BRADOCUS', 'GU00002');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'anlant', 'GU00017');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BROGAN', 'GU00005');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BROGAN', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BROGAN', 'GU00008');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BAHEELA', 'GU00006');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BAHEELA', 'GU00012');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BERMEDA', 'GU00021');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BERSON', 'GU00022');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BERSON', 'GU00024');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BERSON', 'GU00025');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BJOREEN', 'GU00002');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BJOREEN', 'GU00003');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BJOREEN', 'GU00007');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BLISSET', 'GU00010');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BLISSET', 'GU00015');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'BRATHAID', 'GU00014');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'aberine', 'GU00020');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'aberine', 'GU00019');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EADWYNDA', 'GU00017');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EADWYNDA', 'GU00013');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EADWYNDA', 'GU00012');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EDAINE', 'GU00008');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EDAINE', 'GU00007');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EDROSINK', 'GU00009');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EITLIAS', 'GU00022');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EITLIAS', 'GU00023');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ELLELL', 'GU00012');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ELRONE', 'GU00024');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ELRONE', 'GU00001');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ELRONE', 'GU00003');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EREDUI', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ERVETAN', 'GU00006');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ERVETAN', 'GU00008');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EVERETTE', 'GU00010');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EVROGAN', 'GU00014');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EVROGAN', 'GU00006');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'EVROGAN', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'aladanne', 'GU00005');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'armelorc', 'GU00011');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'armelorc', 'GU00013');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'armelorc', 'GU00015');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'adalleif', 'GU00021');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'adalleif', 'GU00019');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'alberic', 'GU00020');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'annetia', 'GU00015');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'annetia', 'GU00010');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'arthisef', 'GU00005');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'adiard', 'GU00001');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'adiard', 'GU00003');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'adiard', 'GU00002');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'advice', 'GU00002');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'advice', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'advice', 'GU00003');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'divien', 'GU00006');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'divien', 'GU00008');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'divien', 'GU00007');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dymira', 'GU00011');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dymira', 'GU00013');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'degink', 'GU00018');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dweald', 'GU00017');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dweald', 'GU00001');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'duwaino', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dogwen', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dogwen', 'GU00005');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dogwen', 'GU00022');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'derbonie', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dunarea', 'GU00023');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dunarea', 'GU00005');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'dodulla', 'GU00009');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'caroin', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'caroin', 'GU00021');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'caroin', 'GU00019');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'coimhin', 'GU00004');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'channa', 'GU00006');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'channa', 'GU00008');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'channa', 'GU00011');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'collerva', 'GU00013');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ciriel', 'GU00015');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'ciriel', 'GU00021');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'cirdan', 'GU00022');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'crowen', 'GU00020');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'crowen', 'GU00012');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'crowen', 'GU00017');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'chrigh', 'GU00005');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'chiania', 'GU00024');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'chiania', 'GU00018');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'cointer', 'GU00019');
+INSERT INTO USER_ADDR(ID, USERID, ADDRGUID) VALUES(USER_ADDR_SEQ.NEXTVAL, 'cointer', 'GU00005');
+
+--○ USER_SUB 테이블 INSERT 쿼리문
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'aberine', 'https://www.facebook.com/aberine', '나는 페이스북을 하는 베아트리스입니다.');
+INSERT INTO USER_SUB(ID, USERID, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'Dagona', '나는 블로그를 하는 말티즈입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'B001', 'https://www.instagram.com/B001', '나는 인스타를 하는 치킨입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'caroin', 'https://www.facebook.com/caroin', '나는 페이스북을 하는 리그오브레전드입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'coimhin', 'https://blog.naver.com/coimhin', '나는 블로그를 하는 전략적팀게임입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'channa', 'https://www.instagram.com/channa', '나는 인스타를 하는 마인크래프트입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'collerva', 'https://www.facebook.com/collerva');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BLUMBALD', 'https://blog.naver.com/BLUMBALD', '나는 블로그를 하는 피자입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BRADOCUS', 'https://www.instagram.com/BRADOCUS', '나는 인스타를 하는 국수입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BROGAN', 'https://www.facebook.com/BROGAN', '나는 페이스북을 하는 돈가스입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BAHEELA', 'https://blog.naver.com/BAHEELA', '나는 블로그를 하는 김밥입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'ciriel', 'https://www.instagram.com/ciriel', '나는 인스타를 하는 와우입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'cirdan', 'https://www.facebook.com/cirdan', '나는 페이스북을 하는 패스오브엑자일입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'crowen', 'https://blog.naver.com/crowen');
+INSERT INTO USER_SUB(ID, USERID,  INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'chrigh',  '나는 아무것도 없는 오버워치입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'divien', 'https://www.facebook.com/divien', '나는 페이스북을 하는 악어입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'dymira', 'https://blog.naver.com/dymira', '나는 블로그를 하는 치와와입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'degink', 'https://www.instagram.com/degink', '나는 인스타를 하는 고양이입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'dweald', 'https://www.facebook.com/dweald');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'duwaino', 'https://blog.naver.com/duwaino', '나는 블로그를 하는 사자입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'dogwen', 'https://www.instagram.com/dogwen', '나는 인스타를 하는 팬더입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'derbonie', 'https://www.facebook.com/derbonie');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'dodulla', 'https://www.instagram.com/dodulla', '나는 인스타를 하는 코끼리입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'chiania', 'https://www.facebook.com/chiania', '나는 페이스북을 하는 메이플스토리입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'cointer', 'https://blog.naver.com/cointer', '나는 블로그를 하는 던전앤파이터입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BERMEDA', 'https://www.instagram.com/BERMEDA', '나는 인스타를 하는 순대입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BERSON', 'https://www.facebook.com/BERSON', '나는 페이스북을 하는 햄버거입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BJOREEN', 'https://blog.naver.com/BJOREEN', '나는 블로그를 하는 스테이크입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BLISSET', 'https://www.instagram.com/BLISSET', '나는 인스타를 하는 규카츠입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'BRATHAID', 'https://www.facebook.com/BRATHAID', '나는 페이스북을 하는 돼지국밥입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'anlant', 'https://blog.naver.com/anlant');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'aladanne', 'https://www.instagram.com/aladanne', '나는 인스타를 하는 히야신스입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'armelorc', 'https://www.facebook.com/armelorc', '나는 페이스북을 하는 플록스입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'adalleif', 'https://blog.naver.com/adalleif');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'alberic', 'https://www.instagram.com/alberic', '나는 인스타를 하는 플라타너스입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'annetia', 'https://www.facebook.com/annetia', '나는 페이스북을 하는 카모밀레입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'arthisef', 'https://blog.naver.com/arthisef', '나는 블로그를 하는 제라늄입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'adiard', 'https://www.instagram.com/adiard', '나는 인스타를 하는 사프란입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'advice', 'https://www.facebook.com/advice', '나는 페이스북을 하는 리아트리스입니다.');
+INSERT INTO USER_SUB(ID, USERID)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'EDAINE');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'EDROSINK', 'https://www.facebook.com/EDROSINK', '나는 페이스북을 하는 다람쥐입니다.');
+INSERT INTO USER_SUB(ID, USERID)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'EITLIAS');
+INSERT INTO USER_SUB(ID, USERID)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'ELLELL');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'ELRONE', 'https://www.facebook.com/ELRONE', '나는 페이스북을 하는 멜리사입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'EREDUI', 'https://blog.naver.com/EREDUI', '나는 블로그를 하는 메리골드입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'ERVETAN', 'https://www.instagram.com/ERVETAN', '나는 인스타를 하는 라벤더입니다.');
+INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'EVERETTE', 'https://blog.naver.com/EVERETTE', '나는 블로그를 하는 라일락입니다.');
+INSERT INTO USER_SUB(ID, USERID)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'EVROGAN');
+INSERT INTO USER_SUB(ID, USERID, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'EADWYNDA', '나는 아무것도 않하는 참새입니다.');
+INSERT INTO USER_SUB(ID, USERID, INTRODUCE)
+VALUES(USER_SUB_SEQ.NEXTVAL, 'dunarea', '나는 블로그를 하는 사슴입니다.');
+
+--○ DEL_USER 테이블 INSERT 쿼리문
+INSERT INTO DEL_USER(ID,USERID,DELETEDATE)
+VALUES(DEL_USER_SEQ.NEXTVAL,'ERVETAN',SYSDATE);
+INSERT INTO DEL_USER(ID,USERID,DELETEDATE)
+VALUES(DEL_USER_SEQ.NEXTVAL,'adalleif',SYSDATE);
+INSERT INTO DEL_USER(ID,USERID,DELETEDATE)
+VALUES(DEL_USER_SEQ.NEXTVAL,'BERSON',SYSDATE);
+INSERT INTO DEL_USER(ID,USERID,DELETEDATE)
+VALUES(DEL_USER_SEQ.NEXTVAL,'dogwen',SYSDATE);
+INSERT INTO DEL_USER(ID,USERID,DELETEDATE)
+VALUES(DEL_USER_SEQ.NEXTVAL,'cirdan',SYSDATE);
+
+--○ FOLLOW 테이블 INSERT 쿼리문
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'B001','cointer',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'chiania','Dagona',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'BLUMBALD','crowen',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'chrigh','BRADOCUS',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'EITLIAS','anlant',SYSDATE);   
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'BROGAN','ciriel',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'collerva','BAHEELA',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'BROGAN','channa',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'EVERETTE','advice',SYSDATE);
+INSERT INTO FOLLOW(ID,GIVEUSERID,TAKEUSERID,FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL,'arthisef','dunarea',SYSDATE);
+
+--○ USER_INTEREST 테이블 INSERT 쿼리문
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'B001', 'IS00001');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'B001', 'IS00002');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'Dagona', 'IS00005');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'Dagona', 'IS00007');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BLUMBALD', 'IS00015');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BLUMBALD', 'IS00011');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BLUMBALD', 'IS00010');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BRADOCUS', 'IS00033');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BRADOCUS', 'IS00032');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'anlant', 'IS00062');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'anlant', 'IS00058');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'anlant', 'IS00004');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BROGAN', 'IS00005');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BROGAN', 'IS00012');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BAHEELA', 'IS00009');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BAHEELA', 'IS00013');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BAHEELA', 'IS00015');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BERMEDA', 'IS00017');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BERMEDA', 'IS00016');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BERMEDA', 'IS00014');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BERSON', 'IS00019');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BERSON', 'IS00001');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BJOREEN', 'IS00028');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BJOREEN', 'IS00029');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BLISSET', 'IS00039');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BLISSET', 'IS00040');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BLISSET', 'IS00020');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BRATHAID', 'IS00022');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'BRATHAID', 'IS00018');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'aberine', 'IS00030');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'aberine', 'IS00032');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EADWYNDA', 'IS00021');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EADWYNDA', 'IS00023');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EADWYNDA', 'IS00024');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EDAINE', 'IS00002');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EDROSINK', 'IS00033');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EDROSINK', 'IS00035');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EITLIAS', 'IS00047');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EITLIAS', 'IS00045');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EITLIAS', 'IS00044');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ELLELL', 'IS00051');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ELLELL', 'IS00054');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ELLELL', 'IS00048');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ELRONE', 'IS00059');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ELRONE', 'IS00060');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ELRONE', 'IS00063');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EREDUI', 'IS00064');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EREDUI', 'IS00065');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ERVETAN', 'IS00051');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ERVETAN', 'IS00050');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EVERETTE', 'IS00049');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EVERETTE', 'IS00033');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EVERETTE', 'IS00046');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EVROGAN', 'IS00038');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EVROGAN', 'IS00037');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'EVROGAN', 'IS00031');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'aladanne', 'IS00016');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'aladanne', 'IS00012');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'aladanne', 'IS00010');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'armelorc', 'IS00052');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'armelorc', 'IS00034');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'armelorc', 'IS00035');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'adalleif', 'IS00021');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'adalleif', 'IS00036');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'alberic', 'IS00019');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'alberic', 'IS00024');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'annetia', 'IS00039');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'arthisef', 'IS00015');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'arthisef', 'IS00001');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'arthisef', 'IS00049');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'adiard', 'IS00033');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'adiard', 'IS00004');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'adiard', 'IS00044');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'advice', 'IS00018');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'advice', 'IS00029');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'advice', 'IS00055');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'divien', 'IS00066');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'divien', 'IS00048');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dymira', 'IS00015');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dymira', 'IS00049');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'degink', 'IS00040');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'degink', 'IS00016');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'degink', 'IS00013');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dweald', 'IS00045');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dweald', 'IS00056');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dweald', 'IS00020');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'duwaino', 'IS00003');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'duwaino', 'IS00009');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dogwen', 'IS00017');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dogwen', 'IS00024');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'derbonie', 'IS00034');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'derbonie', 'IS00026');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dunarea', 'IS00015');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dunarea', 'IS00016');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dunarea', 'IS00064');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'dodulla', 'IS00058');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'caroin', 'IS00057');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'caroin', 'IS00019');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'caroin', 'IS00013');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'coimhin', 'IS00024');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'coimhin', 'IS00008');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'coimhin', 'IS00009');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'channa', 'IS00011');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'channa', 'IS00010');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'collerva', 'IS00052');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'collerva', 'IS00043');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'collerva', 'IS00026');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ciriel', 'IS00010');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'ciriel', 'IS00006');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'cirdan', 'IS00001');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'cirdan', 'IS00002');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'crowen', 'IS00006');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'chrigh', 'IS00008');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'chrigh', 'IS00015');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'chrigh', 'IS00062');
+INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID) VALUES(USER_INTEREST_SEQ.NEXTVAL, 'chiania', 'IS00051');
+
+--○ USER_CERTIFIVATION 테이블 INSERT 쿼리문
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'B001','198587',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'B001','123456',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'B001','456512',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'B001','125442',SYSDATE,'CT00005');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'Dagona','123457',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BLUMBALD','245672',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BRADOCUS','213567',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BRADOCUS','257482',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'anlant','234561',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'anlant','321641',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'anlant','236547',SYSDATE,'CT00005');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BROGAN','123451',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BROGAN','985441',SYSDATE,'CT00004');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BROGAN','445672',SYSDATE,'CT00006');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BAHEELA','123451',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BAHEELA','877452',SYSDATE,'CT00004');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BERMEDA','122341',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BERMEDA','236571',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BERSON','215413',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BERSON','322142',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BJOREEN','366454',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BJOREEN','332141',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BLISSET','231541',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'BRATHAID','123141',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'aberine','231541',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EADWYNDA','123141',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EDAINE','123411',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EDAINE','222342',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EDROSINK','234567',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EDROSINK','336541',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EITLIAS','123456',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EITLIAS','236654',SYSDATE,'CT00005');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EITLIAS','324123',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'ELLELL','213451',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'ELRONE','985112',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EREDUI','784612',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'ERVETAN','123541',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'ERVETAN','233654',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EVERETTE','123541',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EVERETTE','233654',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EVERETTE','784612',SYSDATE,'CT00005');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EVROGAN','123452',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EVROGAN','665412',SYSDATE,'CT00004');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'EVROGAN','788541',SYSDATE,'CT00005');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'aladanne','213451',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'aladanne','874561',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'aladanne','966541',SYSDATE,'CT00006');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'armelorc','123154',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'adalleif','874634',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'alberic','123443',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'annetia','123154',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'arthisef','874634',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'adiard','123443',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'advice','123154',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'advice','123154',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'divien','123154',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'divien','874634',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dymira','123154',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dymira','123443',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'degink','123154',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'degink','874634',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'degink','874634',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dweald','123154',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dweald','123443',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'duwaino','213421',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'duwaino','654712',SYSDATE,'CT00004');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'duwaino','995412',SYSDATE,'CT00006');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dogwen','326541',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dogwen','998541',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'derbonie','326541',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'derbonie','998541',SYSDATE,'CT00005');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dunarea','123452',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dunarea','988541',SYSDATE,'CT00003');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dodulla','123452',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'dodulla','966521',SYSDATE,'CT00004');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'caroin','988541',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'coimhin','123452',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'coimhin','988541',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'channa','123452',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'channa','988541',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'collerva','234581',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'collerva','332145',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'ciriel','234581',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'cirdan','332145',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'cirdan','123451',SYSDATE,'CT00004');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'cirdan','955412',SYSDATE,'CT00006');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'crowen','234581',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'crowen','652142',SYSDATE,'CT00005');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'chrigh','332145',SYSDATE,'CT00001');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'chrigh','955412',SYSDATE,'CT00006');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'chiania','234581',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'cointer','332145',SYSDATE,'CT00002');
+INSERT INTO USER_CERTIFICATION(ID,USERID,CODE,CERTIDATE,CERTIID)
+VALUES(USER_CERTIFICATION_SEQ.NEXTVAL,'cointer','966541',SYSDATE,'CT00006');
+
+--○ MESSAGE 테이블 INSERT 쿼리문
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'caroin', '가입축하드려요! 리그오브레전드(caroin) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'coimhin', '가입축하드려요! 전략적팀게임(coimhin) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'channa', '가입축하드려요! 마인크래프트(channa) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'collerva', '가입축하드려요! 하스스톤(collerva) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'ciriel', '가입축하드려요! 와우(ciriel) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'cirdan', '가입축하드려요! 패스오브엑자일(cirdan) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'crowen', '가입축하드려요! 오토체스(crowen) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'chrigh', '가입축하드려요! 오버워치(chrigh) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'chiania', '가입축하드려요! 메이플스토리(chiania) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'cointer', '가입축하드려요! 던전앤파이터(cointer) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'admin001', '가입축하드려요! 관리자001(admin001) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'anlant', '가입축하드려요! 마로니에(anlant) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'aberine', '가입축하드려요! 베아트리스(aberine) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'aladanne', '가입축하드려요! 히야신스(aladanne) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'armelorc', '가입축하드려요! 플록스(armelorc) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'adalleif', '가입축하드려요! 프리지아(adalleif) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'alberic', '가입축하드려요! 플라타너스(alberic) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'annetia', '가입축하드려요! 카모밀레(annetia) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'arthisef', '가입축하드려요! 제라늄(arthisef) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'adiard', '가입축하드려요! 사프란(adiard) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'advice', '가입축하드려요! 리아트리스(advice) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'ELRONE', '가입축하드려요! 멜리사(ELRONE) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'EREDUI', '가입축하드려요! 메리골드(EREDUI) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'ERVETAN', '가입축하드려요! 라벤더(ERVETAN) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'EVERETTE', '가입축하드려요! 라일락(EVERETTE) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'EVROGAN', '가입축하드려요! 데이지(EVROGAN) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'Dagona', '가입축하드려요! 말티즈(Dagona) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'divien', '가입축하드려요! 악어(divien) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'dymira', '가입축하드려요! 치와와(dymira) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'degink', '가입축하드려요! 고양이(degink) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'dweald', '가입축하드려요! 호랑이(dweald) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'duwaino', '가입축하드려요! 사자(duwaino) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'dogwen', '가입축하드려요! 팬더(dogwen) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'derbonie', '가입축하드려요! 기린(derbonie) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'dunarea', '가입축하드려요! 사슴(dunarea) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'dodulla', '가입축하드려요! 코끼리(dodulla) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'EADWYNDA', '가입축하드려요! 참새(EADWYNDA) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'EDAINE', '가입축하드려요! 비둘기(EDAINE) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'EDROSINK', '가입축하드려요! 다람쥐(EDROSINK) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'EITLIAS', '가입축하드려요! 돼지(EITLIAS) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'ELLELL', '가입축하드려요! 웰시코기(ELLELL) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'B001', '가입축하드려요! 치킨(B001) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BLUMBALD', '가입축하드려요! 피자(BLUMBALD) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BRADOCUS', '가입축하드려요! 국수(BRADOCUS) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BROGAN', '가입축하드려요! 돈가스(BROGAN) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BAHEELA', '가입축하드려요! 김밥(BAHEELA) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BERMEDA', '가입축하드려요! 순대(BERMEDA) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BERSON', '가입축하드려요! 햄버거(BERSON) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BJOREEN', '가입축하드려요! 스테이크(BJOREEN) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BLISSET', '가입축하드려요! 규카츠(BLISSET) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE, CHECKDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', 'BRATHAID', '가입축하드려요! 돼지국밥(BRATHAID) 님! 이제 SAGYO를 즐겨주세요!', SYSDATE, SYSDATE);
+
+--○ POST 테이블 INSERT 쿼리문
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'aberine', '축구에 대한 뜨거운 열정', 'GU00001', 'IS00003', TO_DATE('20190705','YYYY-MM-DD'), SYSDATE, '우리 축구에 대해 진지하게 얘기좀 해봐요.', 'MI00001', 1, 2, 4, 'DR00001', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'BLUMBALD', '농구에 대한 진지한 얘기', 'GU00001', 'IS00003', TO_DATE('20190705','YYYY-MM-DD'), SYSDATE, '우리 축구에 대해 진지하게 얘기좀 해봐요.', 'MI00002', 1, 2, 4, 'DR00001', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'BROGAN', '족구에 대한 진지한 얘기', 'GU00001', 'IS00003', TO_DATE('20190705','YYYY-MM-DD'), SYSDATE, '우리 축구에 대해 진지하게 얘기좀 해봐요.', 'MI00002', 1, 2, 4, 'DR00001', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'EVERETTE', '야구에 대한 진지한 얘기', 'GU00003', 'IS00003', TO_DATE('20190627','YYYY-MM-DD'), SYSDATE, '우리 야구에 대해 진지하게 얘기좀 해봐요.', 'MI00002', 1, 2, 4, 'DR00001', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'EVROGAN', '테니스에 대한 진지한 얘기', 'GU00004', 'IS00003', TO_DATE('20190701','YYYY-MM-DD'), SYSDATE, '우리 테니스에 대해 진지하게 얘기좀 해봐요.', 'MI00002', 1, 2, 4, 'DR00001', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'BRATHAID', '필라테스 이야기해요~', 'GU00015', 'IS00007', TO_DATE('20190707','YYYY-MM-DD'), SYSDATE,'필라테스하는 방법을 이야기해요', 'MI00001', 2, 2, 6, 'DR00002', 'SG00001');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'collerva', '티엔티엔 중국어 ', 'GU00018', 'IS00036', TO_DATE('20190706','YYYY-MM-DD'), SYSDATE,'진지하게 중국어 쉽게 배우는 법을 이야기 해요', 'MI00002', 2, 4, 9, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'advice', 'DIY(가죽공예) 이야기 하실분', 'GU00002', 'IS00018', TO_DATE('20190624','YYYY-MM-DD'), TO_DATE('20190619','YYYY-MM-DD'), '가죽공예(가죽벨트) 만드는 노하우에 대해 이야기 하실분', 'MI00003', 1, 2, 3, 'DR00002', 'SG00001');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'dunarea', '괌 유명한 관광지에 대해 이야기 하실분', 'GU00012', 'IS00064', TO_DATE('20190628','YYYY-MM-DD'), TO_DATE('20190621','YYYY-MM-DD'), '괌 여행가기 좋은 관광지에 대해 잘 아시는분 찾아요', 'MI00002', 1, 2, 4, 'DR00001', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, INTERSUBID, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
+VALUES(ADD_ID('POST', 'POSTID','PT'), 'admin001', '글 쓰기 테스트 진행중', 'GU00001', 'IS00001', TO_DATE('20190710','YYYY-MM-DD'), SYSDATE, '글 쓰기 테스트 진행중입니다 양해 부탁드립니다.', 'MI00002', 5, 2, 2, 'DR00002', 'SG00002');
+
+
+
+
+------------------------------------------------------ 주황 ------------------------------------------------------
+--○ DEL_MESSAGE 테이블 INSERT 쿼리문
+INSERT INTO DEL_MESSAGE(ID, MESSAGEID, DELETEDATE, USERID) VALUES(DEL_MESSAGE_SEQ.NEXTVAL, 'MS00001', SYSDATE, 'admin001');
+INSERT INTO DEL_MESSAGE(ID, MESSAGEID, DELETEDATE, USERID) VALUES(DEL_MESSAGE_SEQ.NEXTVAL, 'MS00002', SYSDATE, 'admin001');
+
+--○ DEL_POST 테이블 INSERT 쿼리문
+INSERT INTO DEL_POST(ID, POSTID,DELETEDATE)VALUES(DEL_POST_SEQ.NEXTVAL,'PT00001',SYSDATE);
+
+--○ REPORT_POST 테이블 INSERT 쿼리문
+INSERT INTO REPORT_POST(ID, POSTID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_POST_SEQ.NEXTVAL, 'PT00002','BLUMBALD','RC00001','욕했어요',SYSDATE);
+INSERT INTO REPORT_POST(ID, POSTID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_POST_SEQ.NEXTVAL, 'PT00003','BLUMBALD','RC00002','만졌어요',SYSDATE);
+
+--○ JOIN 테이블 INSERT 쿼리문
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00002','B001','ST00002','참가 신청 해요~',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00002','Dagona','ST00002','참가 신청 합니다',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00003','anlant','ST00001','참가 신청 해요~',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00003','BAHEELA','ST00001','참가 신청 합니다',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00003','BJOREEN','ST00002','참가 신청',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00003','BERMEDA','ST00002','같이 이야기해요~ 참가 신청 합니다',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00004','EVERETTE','ST00001','참가합니다',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00004','alberic','ST00001','참가 신청 합니다',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00004','derbonie','ST00001','참가하고싶어요',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00004','divien','ST00001','같이 이야기하고 싶어요',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00005','EDROSINK','ST00003','참가합니다',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00005','dymira','ST00003','참가 신청 합니다',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00005','crowen','ST00003','참가하고싶어요',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00005','chiania','ST00003','같이 이야기하고 싶어요',SYSDATE);
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00007','arthisef','ST00003','참가합니다',TO_DATE('20190629','YYYY-MM-DD'));
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00007','alberic','ST00003','참가 신청 합니다',TO_DATE('20190628','YYYY-MM-DD'));
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00007','channa','ST00003','참가하고싶어요',TO_DATE('20190629','YYYY-MM-DD'));
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00006','B001','ST00003','참가합니다',TO_DATE('20190625','YYYY-MM-DD'));
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00006','Dagona','ST00003','참가 신청 합니다',TO_DATE('20190626','YYYY-MM-DD'));
+INSERT INTO JOIN (JOINID, POSTID,USERID, STATUSID,CONTENTS, JOINDATE)
+VALUES (ADD_ID('JOIN', 'JOINID','JN'),'PT00006','cointer','ST00003','참가하고싶어요',TO_DATE('20190626','YYYY-MM-DD'));
+INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE)
+VALUES(ADD_ID('JOIN', 'JOINID', 'JN'), 'PT00008', 'EDROSINK', 'ST00003', '신청합니다1', TO_DATE('20190621', 'YYYY-MM-DD'));
+INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE)
+VALUES(ADD_ID('JOIN', 'JOINID', 'JN'), 'PT00008', 'BERMEDA', 'ST00003', '신청합니다2', TO_DATE('20190621', 'YYYY-MM-DD'));
+INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE)
+VALUES(ADD_ID('JOIN', 'JOINID', 'JN'), 'PT00009', 'B001', 'ST00003', '신청합니다1', TO_DATE('20190623', 'YYYY-MM-DD'));
+INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE)
+VALUES(ADD_ID('JOIN', 'JOINID', 'JN'), 'PT00009', 'derbonie', 'ST00003', '신청합니다2', TO_DATE('20190623', 'YYYY-MM-DD'));
+
+--○ REVIEW 테이블 INSERT 쿼리문
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00008', 'advice', 'EDROSINK', '4', TO_DATE('20190625', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00008', 'advice', 'BERMEDA', '4', TO_DATE('20190625', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00008', 'EDROSINK', 'advice', '4', TO_DATE('20190625', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00008', 'EDROSINK', 'BERMEDA', '4', TO_DATE('20190625', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00008', 'BERMEDA', 'advice', '4', TO_DATE('20190625', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00008', 'BERMEDA', 'EDROSINK', '4', TO_DATE('20190625', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00009', 'dunarea', 'B001', '4', TO_DATE('20190629', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00009', 'dunarea', 'derbonie', '4', TO_DATE('20190629', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00009', 'B001', 'dunarea', '4', TO_DATE('20190629', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00009', 'B001', 'derbonie', '4', TO_DATE('20190629', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00009', 'derbonie', 'dunarea', '4', TO_DATE('20190629', 'YYYY-MM-DD'));
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), 'PT00009', 'derbonie', 'B001', '4', TO_DATE('20190629', 'YYYY-MM-DD'));
+
+
+------------------------------------------------------ 분홍 ------------------------------------------------------
+--○ REPORT_JOIN 테이블 INSERT 쿼리문
+INSERT INTO REPORT_JOIN(ID,JOINID,USERID,REPORTCATEID,REPORTDETAIL,REPORTDATE)
+VALUES(REPORT_JOIN_SEQ.NEXTVAL,'JN00008','EREDUI','RC00004','스팸 싫어요!',SYSDATE);
+
+--○ DEL_JOIN 테이블 INSERT 쿼리문
+INSERT INTO DEL_JOIN(ID,JOINID,DELETEDATE)
+VALUES(DEL_JOIN_SEQ.NEXTVAL,'JN00004',SYSDATE);
+INSERT INTO DEL_JOIN(ID,JOINID,DELETEDATE)
+VALUES(DEL_JOIN_SEQ.NEXTVAL,'JN00007',SYSDATE);
+
+
+--○ REPLY 테이블 INSERT 쿼리문
+INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), 'JN00001','참가 신청 완료했어요.',SYSDATE,'RU00001');
+INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), 'JN00001','감사합니다.',SYSDATE,'RU00002');
+INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), 'JN00002','KIN.',SYSDATE,'RU00002');
+INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), 'JN00002','욕설 신고했어요~',SYSDATE,'RU00001');
+
+--○ REVIEW_SUB 테이블 INSERT 쿼리문
+INSERT INTO REVIEW_SUB(ID,REVIEWID,BADGEPOINTID,CONTENTS)VALUES(REVIEW_SUB_SEQ.NEXTVAL,'RV00001','BP00001','코멘트다');
+INSERT INTO REVIEW_SUB(ID,REVIEWID,BADGEPOINTID,CONTENTS)VALUES(REVIEW_SUB_SEQ.NEXTVAL,'RV00005','BP00002','코멘트지롱~');
+INSERT INTO REVIEW_SUB(ID,REVIEWID,BADGEPOINTID,CONTENTS)VALUES(REVIEW_SUB_SEQ.NEXTVAL,'RV00007','BP00002','코멘트에용~~~');
+INSERT INTO REVIEW_SUB(ID,REVIEWID,BADGEPOINTID,CONTENTS)VALUES(REVIEW_SUB_SEQ.NEXTVAL,'RV00011','BP00002','코멘트에용~');
+INSERT INTO REVIEW_SUB(ID,REVIEWID,BADGEPOINTID,CONTENTS)VALUES(REVIEW_SUB_SEQ.NEXTVAL,'RV00012','BP00006','비매너포인트 코멘트에용~');
+INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) VALUES(REVIEW_SUB_SEQ.NEXTVAL, 'RV00013', 'BP00001', '코멘트1');
+INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) VALUES(REVIEW_SUB_SEQ.NEXTVAL, 'RV00014', 'BP00001', '코멘트2');
+INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) VALUES(REVIEW_SUB_SEQ.NEXTVAL, 'RV00015', 'BP00001', '코멘트1');
+INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) VALUES(REVIEW_SUB_SEQ.NEXTVAL, 'RV00016', 'BP00002', '코멘트3');
+INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) VALUES(REVIEW_SUB_SEQ.NEXTVAL, 'RV00017', 'BP00006', '코멘트4');
+INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) VALUES(REVIEW_SUB_SEQ.NEXTVAL, 'RV00018', 'BP00002', '코멘트5');
+
+--○ USER_BADGE_LOG 테이블 INSERT 쿼리문
+INSERT INTO USER_BADGE_LOG(BADGELOGID, USERID, BADGEPOINTID, GETREVIEWID, EXPIRATIONREVIEWID) VALUES(ADD_ID('USER_BADGE_LOG','BADGELOGID','BL'),'alberic','BP00002','RV00005','RV00005'); 
+
+------------------------------------------------------ 빨강 ------------------------------------------------------
+--○ DEL_REPLY 테이블 INSERT 쿼리문
+INSERT INTO DEL_REPLY(ID,REPLYID,DELETEDATE)VALUES(DEL_REPLY_SEQ.NEXTVAL,'RV00002',SYSDATE);
+
+--○ REPORT_REPLY 테이블 INSERT 쿼리문
+INSERT INTO REPORT_REPLY(ID,REPLYID,USERID,REPORTCATEID,REPORTDETAIL,REPORTDATE)VALUES(REPORT_REPLY_SEQ.NEXTVAL,'RV00003','BLUMBALD','RC00001','욕설이에요',SYSDATE);
+
+

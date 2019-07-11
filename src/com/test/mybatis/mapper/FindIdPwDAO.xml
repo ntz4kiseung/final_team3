@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.test.mybatis.IFindIdPwDAO">
+ 
+ 	
+ 	<select id="findIdTelCheck" resultType="java.lang.Integer">
+	 	SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE NAME = #{name} AND TEL = #{tel}
+ 	</select>
+ 	
+ 	<select id="findIdEmailCheck" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE NAME = #{name} AND EMAIL = #{email}
+ 	</select>
+ 	
+ 	<select id="findPwTelCheck" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND NAME = #{name} AND TEL = #{tel}
+ 	</select>
+ 	
+ 	<select id="findPwEmailCheck" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND NAME = #{name} AND EMAIL = #{email}
+ 	</select>
+ 	
+ 	<select id = "findIdTel" resultType="java.lang.String">
+ 		SELECT USERID
+ 		FROM USER_ESSENTIAL
+ 		WHERE NAME = #{name} AND TEL = #{tel}
+ 	</select>
+ 	
+ 	<select id = "findIdEmail" resultType="java.lang.String">
+ 		SELECT USERID
+ 		FROM USER_ESSENTIAL
+ 		WHERE NAME = #{name} AND EMAIL = #{email}
+ 	</select>		
+ 	
+ 	<update id = "findPwTemp">
+		UPDATE LOGIN
+		SET PWD = CRYPTPACK.ENCRYPT(#{pwd}, 'JAVA006$')
+		WHERE UPPER(USERID) = UPPER(#{userId})
+		
+ 	</update>
+ 	
+ 	<select id="findPwdString" resultType="java.lang.String">
+ 		SELECT CRYPTPACK.DECRYPT(#{pwdtemp}, 'JAVA006$')
+		FROM LOGIN
+		WHERE UPPER(USERID) = UPPER(#{userId})
+ 	</select>
+ 	
+ 	<insert id="findIdTelInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00003')
+	 </insert>
+	 
+	 <insert id="findIdEmailInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00004')
+	 </insert>
+	 
+	 <insert id="findPwTelInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00005')
+	 </insert>
+	 
+	 <insert id="findPwEmailInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00006')
+	 </insert>
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+ </mapper>

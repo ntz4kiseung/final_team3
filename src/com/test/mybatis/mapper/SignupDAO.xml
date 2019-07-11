@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.test.mybatis.ISignupDAO">
+ 
+ 	<select id="checkId" resultType="java.lang.Integer">
+ 		SELECT COUNT(USERID) AS COUNT
+		FROM LOGIN
+		WHERE UPPER(USERID) = UPPER(#{userid })
+ 	</select>
+ 	
+ 	<select id="checkNick" resultType="java.lang.Integer">
+ 		SELECT COUNT(NICKNAME) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE UPPER(NICKNAME) = UPPER(#{nickname })
+ 	</select>
+ 	
+ 	<select id="addrSiList" resultType="com.test.mybatis.AddrDTO">
+ 		SELECT ADDRSIID AS ADDRSIID1, ADDRSINAME  AS ADDRSINAME1
+		FROM ADDR_SI
+ 	</select>
+ 	
+ 	<select id="addrGuList" resultType="com.test.mybatis.AddrDTO">
+		SELECT ADDRGUID AS ADDRGUID1, ADDRGUNAME AS ADDRGUNAME1
+		FROM ADDR_GU
+		WHERE ADDRSIID = #{siid }
+ 	</select>
+ 	
+ 	<!-- 대분류 출력 쿼리문 -->
+ 	<select id="interMainList" resultType="com.test.mybatis.InterDTO">
+ 		SELECT INTERMAINID AS INTERMAINID1, INTERMAINNAME AS INTERMAINNAME1
+		FROM INTEREST_MAIN
+ 	</select>
+ 	
+ 	<insert id = "userLoginInsert">
+ 	INSERT INTO LOGIN(USERID, PWD, ROLEID)
+	VALUES(#{userId }, CRYPTPACK.ENCRYPT(#{pwd }, 'JAVA006$'), 'RL00002')
+ 	</insert>
+ 	
+ 	<insert id = "userEssentialInsert">
+ 	INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
+	VALUES(#{userId }, #{nickname }, #{name } , TO_DATE(#{birth },'YYMMDD'), #{genderId }, #{tel }, #{email }, SYSDATE)
+ 	</insert>
+ 	
+ 	<insert id = "userSubInsert">
+ 	INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+	VALUES(USER_SUB_SEQ.NEXTVAL, #{userId }, #{sns }, #{introduce })
+ 	</insert>
+ 	
+ 	<insert id = "userAddrInsert">
+ 	INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
+	VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, 'GU00001')
+ 	</insert>
+ 	
+ 	
+ 	<insert id = "userInterInsert">
+ 	INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
+	VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, 'IS00001')
+ 	</insert>
+ 	
+ 	<insert id = "userTelInsert">
+	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+	VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00001')
+ 	</insert>
+ 	
+ 	<insert id = "userEmailInsert"> 	
+ 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+	VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00002')
+ 	</insert>
+  
+ </mapper>

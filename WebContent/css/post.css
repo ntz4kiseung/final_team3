@@ -1,0 +1,157 @@
+.body {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.navbar-box {
+	display: flex; /* navbar-box가 flex-container가 되고 하위 요소들이 flex-item이 됨 */
+	flex-direction: row; /* 기본값이 row */
+	height: 70px;
+	width: 100vw;
+	background-color: antiquewhite;
+}
+
+.navbar-left {
+	flex-basis: 25%;
+	display: flex;
+	align-items: center;
+	padding-left: 7.5px;
+	background-color: aquamarine;
+}
+
+.navbar-center {
+	flex-basis: 50%; /*고정값 너비*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: blueviolet;
+}
+
+.navbar-right {
+	flex-basis: 25%;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	padding-right: 7.5px;
+	background-color: cornflowerblue;
+}
+
+.logo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.logo-img {
+	height: 55px;
+	width: 55px;
+	background-color: cornflowerblue;
+}
+
+img {
+	height: 100%;
+	width: 100%;
+}
+
+.logo-text {
+	font-family: 'Handlee', cursive;
+	font-size: 40px;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.body-background {
+	background-color: darkgoldenrod;
+	width: 100vw;
+	min-height: 1010px;
+	display: flex;
+	justify-content: center;
+}
+
+.body {
+	width: 1200px;
+	background-color: darkgreen;
+}
+
+.search-result {
+	width: 100%;
+	height: 100%;
+	background-color: darkseagreen;
+}
+.post-result
+{
+	margin-left: 130px;
+	margin-right: 130px;
+	display: flex;
+}
+.post-title
+{
+	margin-top: 20px;
+	margin-bottom: 5px;
+}
+.posting-date
+{
+	display: inline-block;
+	margin-left: auto;
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+.hr-size
+{
+	margin-left: 100px;
+	margin-right: 100px;
+}
+.hr
+{
+	width: 1100px;
+	margin: 0px auto;
+}
+.img
+{
+	width: 70px;
+	height: 70px;
+}
+.post-inline-block
+{
+	display: inline-block;
+}
+.posting-details
+{
+	margin-left: auto;
+}
+.post-subhead
+{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.post-margin-left
+{
+	margin-left: auto;
+}
+.post-comments-date
+{
+	margin-left: 5px;
+}
+.post-comments-info
+{
+	margin-top: 7px;
+	margin-left: 5px;
+}
+.post-write-comments
+{
+	display: flex;
+	align-items: center;
+    justify-content: center;
+}
+.post-checkbox
+{
+	display: flex;
+	align-items: center;
+    justify-content: center;
+}
+.flex-center
+{
+	display: flex;
+    align-items: center;
+    justify-content: center;
+}
