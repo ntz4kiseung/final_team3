@@ -1,13 +1,25 @@
 package com.test.mybatis;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 @Controller
 public class MypageController
@@ -27,11 +39,78 @@ public class MypageController
 		model.addAttribute("myPageInterList", dao1.myPageInterList());
 		model.addAttribute("myReviewList", dao2.myReviewList());
 		
-		model.addAttribute("hostReview", dao2.hostReview());
+		//System.out.println(userId);
+		
+		//model.addAttribute("hostReview", dao2.hostReview(userId));
 		
 		
 		return "/WEB-INF/views/CreatePostList.jsp";
 	}
+	
+	/*
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value="/hostReview.action", method=RequestMethod.GET)
+	public ResponseEntity review(Model model, String postId, HttpServletRequest request)throws IOException
+	{
+		
+		HttpHeaders header = new HttpHeaders();
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		
+		ArrayList<PostDTO> result = dao.hostReview(postId);
+		
+		ArrayList<HashMap> hmlist = new ArrayList<HashMap>();
+		
+		System.out.println("size ===== " + result.size());
+		
+		for(PostDTO dto : result)
+		{
+			HashMap hm = new HashMap();
+			
+			hm.put("userId", dto.getUserId());
+			hm.put("url", dto.getUrl());
+			
+			hmlist.add(hm);
+		}
+		
+		JSONArray arr = new JSONArray(hmlist);
+		
+		System.out.println("json length ====== " + arr.length());
+		
+		return new ResponseEntity(arr.toString(), header, HttpStatus.CREATED);
+		
+	}
+	*/
+	
+	
+	 @RequestMapping(value="/hostReview.action", method=RequestMethod.GET) 
+	 public void review(String postId, HttpServletResponse response) throws IOException 
+	 {
+		 //System.out.println(postId);
+		 
+		 response.setContentType("text/html;charset=UTF-8");
+		 
+		 IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		 
+		 ArrayList<PostDTO> str = dao.hostReview(postId);
+		 
+		 String result = "";
+		 
+		 for (int i = 0; i < dao.hostReview(postId).size(); i++)
+		 {
+			 result += str.get(i).getUserId();
+	         result += ",";
+	         result += str.get(i).getUrl();
+	         result += ",";
+	         result += str.get(i).getNickname();
+	         result += ",";
+		 }
+		 
+		 System.out.println(result);
+		
+		 
+		 response.getWriter().print(result);
+	 }
+	
 	
 	
 	@RequestMapping(value="/joinpostlist.action", method=RequestMethod.GET)

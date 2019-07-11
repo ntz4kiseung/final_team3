@@ -13,7 +13,9 @@ public interface IPostDAO
 	public ArrayList<PostDTO> myReviewList();
 	public ArrayList<PostDTO> reviewList();
 	public ArrayList<PostDTO> searchList(SearchDTO s);
-	public ArrayList<PostDTO> hostReview();
+	
+	public ArrayList<PostDTO> hostReview(String postId);
+	
 	public ArrayList<PostDTO> guestReview();
 	public int joininsert(JoinDTO joinDTO);
 	public int reportpostinsert(ReportDTO reportDTO);

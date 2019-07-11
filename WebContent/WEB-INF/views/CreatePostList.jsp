@@ -34,6 +34,7 @@ $(document).ready(function()
 	$('#myModal').on('shown.bs.modal', function (){
 		$('#myInput').trigger('focus')
 	});
+	
 		      
 	$("[data-toggle=popover]").popover({
         html : true,
@@ -43,10 +44,16 @@ $(document).ready(function()
         }
     });
 	
-	$( ".star_rating a" ).click(function() {
+	$( ".star_rating a" ).on("click",function() {
 	     $(this).parent().children("a").removeClass("on");
 	     $(this).addClass("on").prevAll("a").addClass("on");
 	     return false;
+	     
+	});
+	
+	$(".on").on("onclick", "a.this()", function (){
+	    alert($(this).text());
+	    alert("경고");
 	});
 	
 
@@ -67,8 +74,81 @@ $(document).ready(function()
 				}
 			});
 	 */
+	 
+	 jQuery.ajaxSettings.traditional = true;
+	 
+	 $(".btn-review").click(function(){
+		 console.log($(this).val());
+		 var review = $(this).val();
+		 
+		 
+		 $.ajax({
+	         url : "<%=cp %>/hostReview.action",
+	         type : "get",
+	         data : {'postId': review},
+	         success: function(data)
+			{
+				console.log(data);
+				
+				reviewRes = data;
+				
+				reviewResult = reviewRes.split(',');
+				str = '';
+				for (var i = 0; i < Math.floor(reviewResult.length/3); i++)
+                {
+					str += '							<div class="review-post flex-review">';
+					str += '								<div id="asd" class="flex-review-first" style="text-align: center;">';
+					str += '									<div class="PostList-post-badge">';
+					str += '                                    	<img src="' + reviewResult[1+i*3] + '" alt="">';
+					str += '                               	 	</div>';
+					str += reviewResult[2+i*3];
+					str += '								<input class="hidden" value="' + reviewResult[0+i*3] + '"/>';
+					str += '								</div>';
+					str += '								<div class="flex-review-second" style="text-align: center;">';
+					str += '									<div>';
+					str += '	                               		<p class="star_rating">';
+					str += '										    <a href="#" class="on">★</a>';
+					str += '										    <a href="#" class="on">★</a>';
+					str += '										    <a href="#" class="on">★</a>';
+					str += '										    <a href="#">★</a>';
+					str += '										    <a href="#">★</a>';
+					str += '										</p>';
+					str += '	                           		</div>';
+					str += '                           		</div>';
+					str += '                           		<div class="flex-review-third" style="text-align: center;" >';
+					str += '                           			<div class="PostList-post-badge">';
+					str += '                           					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom">';
+					str += '                                              <img class="point" src="img/Logo_NoBorder.png" alt="포인트선택" onclick="pointSelect()">';
+					str += '                                            </a>';
+					str += '                               	 	</div>';
+					str += '                               	 	포인트 선택';
+					str += '                           		</div>';
+					str += '                           		<div class="flex-review-fourth">';
+					str += '                           			<textarea class="form-control"></textarea>';
+					str += '                           		</div>';
+					str += '							</div>';
+                }
+				
+				$("#ajaxTest").empty();
+                $("#ajaxTest").append(str);
+                
+                
+			}
+	        	 
+	         
+	     });
+		 
+	 });
 	
+	 $('.modal').on('hidden.bs.modal', function (e) {
+		    console.log('modal close');
+		  $(this).find('form')[0].reset()
+		});
+	 
+	 
+	 
 	
+
 });	
 
 		   
@@ -128,6 +208,7 @@ $(document).ready(function()
 			flex-grow: 1;
 			flex-basis: 25%;
 		}
+		
 		.modal-content{
 			width: 1000px;
     		height: 700px;
@@ -180,7 +261,6 @@ $(document).ready(function()
                     </div>
                 </div>
             </div>
-            
             <div class="navbar-center flex-item-grow flex-row-center-center">
                 <form action="" class="flex-row-center-center">
                     <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
@@ -213,7 +293,6 @@ $(document).ready(function()
                             <div class="MyPage-header-badge">
                             	
                             	
-                                <!-- <img src="img/badge150pixel_0001_뉴비.png" alt=""> -->
                                 <img src="${profile.url }" onerror="this.src='img/뉴비.png'">
                                	
                     		</div>
@@ -235,20 +314,16 @@ $(document).ready(function()
                             </div>
                             <div class="MyPage-header-detail">
                             
-                                <!-- <div>#서울특별시 송파구  #서울특별시 관악구</div> -->
                                 <c:forEach items="${myPageAddrList }" var="addr">
                                 	<div>
                                 		${addr.addrSiName1} ${addr.addrGuName1 } ${addr.addrSiName2} ${addr.addrGuName2 } ${addr.addrSiName3} ${addr.addrGuName3 }
                                 	</div>
                                 </c:forEach>
-                                <!-- <div>#영상편집 #필라테스</div> -->
                                 <c:forEach items="${myPageInterList }" var="inter">
                                 	<div>
                                 		${inter.interMainName1 } ${inter.interSubName1 } ${inter.interMainName2 } ${inter.interSubName2 } ${inter.interMainName3 } ${inter.interSubName3 }
                                 	</div>
                                 </c:forEach>
-                                <!-- <div>휴대전화 인증 완료</div> -->
-                                <!-- <div>Email 인증 완료</div> -->
                                 
                                 	<div style="color: orange;">
                                 		${profile.telCheck }
@@ -256,6 +331,7 @@ $(document).ready(function()
                                 	<div style="color: orange;">
                                 		${profile.emailCheck }
                                 	</div>
+                          
                        </c:forEach>
                                 	
                             </div>
@@ -287,11 +363,7 @@ $(document).ready(function()
                                     <div class="PostList-post flex-row-left-center">
                                         <div class="PostList-post-left flex-col-center-center">
                                             <div class="PostList-post-badge">
-                                                <!-- <img src="img/badge150pixel_0025_맛잘알.png" alt=""> -->
                                             	<img src="${list.url }" onerror="this.src='img/뉴비.png'">
-                                            	
-
-                                            	
                                             </div>
                                             <div>
                                                 <!-- nickname -->
@@ -300,23 +372,20 @@ $(document).ready(function()
                                         </div>
                                         <div class="PostList-post-center flex-col-left-center">
                                             <div class="PostList-post-title">
-                                                <!-- 이곳은 제목이 옵니다... -->
                                                 ${list.title }
                                             </div>
                                             <div class="PostList-post-contents">
-                                                <!-- 이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!! -->
                                                 ${list.contents }
                                             </div>
                                         </div>
                                         <div class="PostList-post-right flex-col-center-center">
                                         
                                             <div>
-                                                <button class="btn btn-outline-orange btn-120-35 mybtn review" data-toggle="modal" data-target="#reviewModal">후기남기기</button>
+                                                <button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기남기기</button>
+                                                <input type="hidden" id="review" name="review" class="review" value="${list.userId }">
                                             </div>
                                             <div class="PostList-post-detail flex-col-left-center">
-                                                <!-- <div>서울특별시 용산구</div> -->
                                                 <div>${list.addrSiName } ${list.addrGuName }</div>
-                                                <!-- <div>2019/06/04 19:06</div> -->
                                                 <div>${list.meetDate }</div>
                                             </div>
                                         </div>
@@ -331,7 +400,6 @@ $(document).ready(function()
                     </div>
                 </div>
             </div>
-        </div>
         
         
         
@@ -339,14 +407,14 @@ $(document).ready(function()
         
         
         <!-- Modal -->
-		<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog" role="document">
+		<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h2 class="modal-title" id="exampleModalLabel">후기 남기기</h2>
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		          <span aria-hidden="true">&times;</span>
-		        </button>
+		        </button> -->
 		      </div>
 		      <div class="modal-body">
 		        <div>
@@ -357,50 +425,14 @@ $(document).ready(function()
 						<div class="flex-review-fourth">코멘트</div>
 					</div>
 				</div>
-						<div style="overflow:auto; height: 50vh;">
-							<!-- <div class="review-post flex-review">
-								
-								<div class="flex-review-first" style="text-align: center;">
-									<div class="PostList-post-badge">
-                                    	<img src="맛잘알.png" alt="">
-                               	 	</div>
-									nickname
-								</div>
-								<div class="flex-review-second" style="text-align: center;">
-									<div>
-	                               		<p class="star_rating">
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#" class="on">★</a>
-										    <a href="#">★</a>
-										    <a href="#">★</a>
-										</p>
-	                           		</div>
-	                           		5점
-                           		</div>
+						<div id="ajaxTest" style="overflow:auto; height: 50vh;">
+							<%-- <c:forEach items="${hostReview }" var="review">
 							
-                           		<div class="flex-review-third" style="text-align: center;" >
-                           			<div class="PostList-post-badge">
-                           					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom">
-                                              <img class="point" src="img/Logo_NoBorder.png" alt="포인트선택" id="img">
-                                            </a>
-                               	 	</div>
-                               	 	포인트 선택
-                           		</div>
-									
-                           		<div class="flex-review-fourth">
-                           			<textarea class="form-control"></textarea>
-                           		</div>
-							</div> -->
-							<c:forEach items="${hostReview }" var="review">
 							<div class="review-post flex-review">
-								
-								<div class="flex-review-first" style="text-align: center;">
+								<div id="asd" class="flex-review-first" style="text-align: center;">
 									<div class="PostList-post-badge">
-                                    	<!-- <img src="맛잘알.png" alt=""> -->
                                     	<img src="${review.url }" alt="">
                                	 	</div>
-									<!-- nickname -->
 									${review.nickname }
 								</div>
 								<div class="flex-review-second" style="text-align: center;">
@@ -414,7 +446,6 @@ $(document).ready(function()
 										</p>
 	                           		</div>
                            		</div>
-							
                            		<div class="flex-review-third" style="text-align: center;" >
                            			<div class="PostList-post-badge">
                            					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom">
@@ -423,13 +454,11 @@ $(document).ready(function()
                                	 	</div>
                                	 	포인트 선택
                            		</div>
-									
                            		<div class="flex-review-fourth">
                            			<textarea class="form-control"></textarea>
                            		</div>
 							</div>
-							</c:forEach>
-							
+							</c:forEach> --%>
 							
 							
 						</div>
@@ -440,6 +469,7 @@ $(document).ready(function()
 		    </div>
 		  </div>
 		</div>
+
 		
 
 		<div id="badgeList" class="hidden">
@@ -568,7 +598,7 @@ $(document).ready(function()
 		      				<div>
 			      				<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/뒤통수.png" alt="뱃지">
+				      				<!-- <img src="img/뒤통수.png" alt="뱃지"> -->
 				      				</a>
 				      				뒷통수
 			      					
@@ -587,7 +617,5 @@ $(document).ready(function()
 		     	</div>
 		</div>
         
-        
-    </div>
 </body>
 </html>
