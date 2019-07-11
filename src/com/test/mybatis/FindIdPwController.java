@@ -134,15 +134,14 @@ public class FindIdPwController
 	
 	// 비밀번호 찾기 전화 인증번호 DB 입력
 	@RequestMapping(value="/findpwtelinsert.action", method=RequestMethod.POST)
-	public String findPwTelInsert(UserDTO user)
+	public String findPwTelInsert(UserDTO user, Model model)
 	{
 		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
 		
-		System.out.println("1 : " + user.getPwd() + ", " + user.getUserId());
-		
 		dao.findPwTemp(user);
+		dao.findPwTelInsert(user);
 		
-		System.out.println("2 : " + user.getPwd() + ", " + user.getUserId());
+		model.addAttribute("checkName", "휴대전화");
 		
 		return "redirect:findpwresult.action";
 	}
@@ -151,10 +150,15 @@ public class FindIdPwController
 	
 	// 비밀번호 찾기 이메일 인증번호 DB 입력
 	@RequestMapping(value="/findpwemailinsert.action", method=RequestMethod.POST)
-	public String findPwEmailInsert()
+	public String findPwEmailInsert(UserDTO user, Model model)
 	{
+		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
 		
-		System.out.println("악");
+		dao.findPwTemp(user);
+		dao.findPwEmailInsert(user);
+		
+		model.addAttribute("checkName", "E-mail");
+		
 		return "redirect:findpwresult.action";
 	}
 	

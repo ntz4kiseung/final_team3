@@ -24,4 +24,8 @@ public interface IFindIdPwDAO
 	
 	public String findPwdString(String userId);
 	
+	public int findPwTelInsert(UserDTO user);
+	
+	public int findPwEmailInsert(UserDTO user);
+	
 }

@@ -9,7 +9,8 @@ public interface ISignupDAO
 	public int checkNick(String nickname);
 	public ArrayList<AddrDTO> addrSiList();
 	public ArrayList<AddrDTO> addrGuList(String siid);
-	
+	public ArrayList<InterDTO> interMainList();
+	public ArrayList<InterDTO> interSubList(String mainid);
 	
 	public int userLoginInsert(UserDTO user);
 	public int userEssentialInsert(UserDTO user);
@@ -18,8 +19,5 @@ public interface ISignupDAO
 	public int userInterInsert(InterDTO inter);
 	public int userTelInsert(UserDTO user);
 	public int userEmailInsert(UserDTO user);
-	
-	
-	
 	
 }

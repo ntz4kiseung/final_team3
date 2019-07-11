@@ -43,8 +43,8 @@
  	
  	<update id = "findPwTemp">
 		UPDATE LOGIN
-		SET PWD = #{pwd}
-		WHERE USERID = #{userId}
+		SET PWD = CRYPTPACK.ENCRYPT(#{pwd}, 'JAVA006$')
+		WHERE UPPER(USERID) = UPPER(#{userId})
 		
  	</update>
  	
@@ -62,6 +62,16 @@
 	 <insert id="findIdEmailInsert">
 	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
 		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00004')
+	 </insert>
+	 
+	 <insert id="findPwTelInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00005')
+	 </insert>
+	 
+	 <insert id="findPwEmailInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00006')
 	 </insert>
 	 
 	 
