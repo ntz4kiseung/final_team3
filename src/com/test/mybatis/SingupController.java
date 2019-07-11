@@ -2,6 +2,7 @@ package com.test.mybatis;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -70,45 +71,31 @@ public class SingupController
 		return "redirect:signup.action";
 	}
 	
-	@RequestMapping(value="/addrgu.action", method=RequestMethod.GET)
-	public void signupGuList(String siid, HttpServletResponse response) throws IOException
+	@RequestMapping(value="/addrguajax.action", method=RequestMethod.GET)
+	public String addrGuAjax(String siid, ModelMap model)
 	{
-		System.out.println(siid);
-		
-		response.setContentType("text/html;charset=utf-8");
-		
+		System.out.println("siid = "+siid);
 		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
 		
-		
-		ArrayList<AddrDTO> str = dao.addrGuList(siid);
-		
-	    String result = "";
-	    
-	    for (int i = 0; i < dao.addrGuList(siid).size(); i++)
-		{
-			result += str.get(i).getAddrGuId1();
-			result += ",";
-			result += str.get(i).getAddrGuName1();
-			result += ",";
-		}
-	    System.out.println(result);
-		 
-	    response.getWriter().print(result);
+		/*
+		 * List<AddrDTO> list = dao.addrGuList(siid);
+		 */
+		model.addAttribute("list", dao.addrGuList(siid));
+		System.out.println(dao.addrGuList(siid).get(0).getAddrGuName2());
+		System.out.println(dao.addrGuList(siid).get(0).getAddrGuName1());
+		return "/WEB-INF/views/AddrGuAjax.jsp";
 	}
-	
-	
-	@RequestMapping(value="/addrguajax.action", method=RequestMethod.GET)
-	public String addrGuAjax()
+
+	@RequestMapping(value="/intersubajax.action", method=RequestMethod.GET)
+	public String intersubajax(String mainid, ModelMap model)
 	{
-		String result = "";
+		System.out.println("mainid = " + mainid);
+		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
+		model.addAttribute("list", dao.interSubList(mainid));
 		
-		
-		
-		
-		result = "/WEB-INF/views/AddrGuAjax.jsp";
-		return result;
+		System.out.println(dao.interSubList(mainid).get(0).getInterSubName1());
+		return "/WEB-INF/views/InterSubAjax.jsp";
 	}
-	
 	
 	
 	

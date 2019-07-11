@@ -10,6 +10,7 @@ public interface ISignupDAO
 	public ArrayList<AddrDTO> addrSiList();
 	public ArrayList<AddrDTO> addrGuList(String siid);
 	public ArrayList<InterDTO> interMainList();
+	public ArrayList<InterDTO> interSubList(String mainid);
 	
 	public int userLoginInsert(UserDTO user);
 	public int userEssentialInsert(UserDTO user);

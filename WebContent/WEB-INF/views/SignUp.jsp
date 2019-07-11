@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <!-- 부트스트랩 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -24,6 +25,7 @@
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link href="css/sagyo.css" rel="stylesheet">
+    
 	<style type="text/css">
 	
     
@@ -341,34 +343,11 @@
 		                   dataType: 'html',
 		                   data : {'siid': siid}
 		                }).done(function(result){
-		                   /* $('.Search-result-body').append(result); */
-		                   
-
+		                  
+							console.log('성공');
 							$("#inbodyB"+a).empty();
 							$("#inbodyB"+a).append(result);
 		                }); 
-					
-					
-					
-					<%-- $.ajax({
-						url : "<%=cp %>/addrguajax.action",
-						type : "get",
-						data : {'siid': siid},
-						success : function(guresult)
-						{
-							var gulistarr = guresult.split(',');
-							str = '';
-							
-							for (var i = 1, j = 0; i < gulistarr.length-1; i++, j++)
-							{
-								str += '<button type="button" class="btn btn-120-35 btn-pop-gu" value="'+ gulistarr[j] +'">'+ gulistarr[i] +'</button>'
-								i++;
-								j++;
-							}
-
-						}
-					}) --%>
-					
 				})
 			})
 			
@@ -387,86 +366,47 @@
 					console.log("구 이름 = " + $("#addrGuName"+c).val());
 				})
 			})
-			
-			
-			<%-- $(".btn-check-cate3").click(function() {
-				a = $(this).val();
-				console.log("a = " + a);
-				
+			/* interSubName1 */
+			var d;
+			$(".btn-check-cate3").click(function() {
+				d = $(this).val();
+				console.log(d);
 				$(".btn-pop-main").click(function() {
-					
-					$("#interMainName"+a).text($(this).text());
+					$("#interMainName"+d).text($(this).text());
 					
 					var mainid = $(this).val();
-					var str = "";
+					console.log("메인아이디 = " + mainid);
 					$.ajax({
-						url : "<%=cp %>/intermain.action",
-						type : "get",
-						data : {'mainid': mainid},
-						success : function(guresult)
-						{
-							/* var gulistarr = guresult.split(',');
-							str = '';
+							url: '<%=cp %>/intersubajax.action',
+							type: 'GET',
+							dataType: 'html',
+							data: {'mainid': mainid}
+						}).done(function(result) {
+							console.log('성공')
 							
-							for (var i = 1, j = 0; i < gulistarr.length-1; i++, j++)
-							{
-								str += '<button type="button" class="btn btn-120-35 btn-pop-gu" value="'+ gulistarr[j] +'">'+ gulistarr[i] +'</button>'
-								i++;
-								j++;
-							}
-
-							$("#inbodyB"+a).empty();
-							$("#inbodyB"+a).append(str); */
-						}
-					})
-					
+							$("#inbodyD"+d).empty();
+							$("#inbodyD"+d).append(result);
+						})
 				})
 			})
-			 --%>
 			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+			var e;
+			$(".btn-check-cate4").click(function()
+			{
+				e = $(this).val();
+				console.log(e);
+				$(".btn-pop-sub").click(function()
+				{
+					console.log("값: " + $(this).text());
+					$("#btn-check-sub"+e).text($(this).text());
+					 
+					$("#interSubId"+e).val($(this).val());
+					$("#interSubName"+e).val($(this).text());
+					
+					console.log("서브 아이디 = " + $("#interSubId"+e).val());
+					console.log("서브 이름 = " + $("#interSubName"+e).val());
+				})
+			})
 			
 			function makeid()
 			{
@@ -822,9 +762,11 @@
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="interSubName1" name="interSubName1" value="1"
+                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub1" name="btn-check-sub1" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
+									 <input type= "hidden" id="interSubId1" name="interSubId1" value="">
+									 <input type= "hidden" id="interSubName1" name="interSubName1" value="">
                                 </div>
                             </div>
 
@@ -838,9 +780,11 @@
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#c2" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="interSubName2" name="interSubName2" value="2"
+                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub2" name="btn-check-sub2" value="2"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#d2" data-placement="bottom">소분류</button>
+									 <input type= "hidden" id="interSubId2" name="interSubId2" value="">
+									 <input type= "hidden" id="interSubName2" name="interSubName2" value="">
                                 </div>
                                 </div>
                             </div>
@@ -855,9 +799,11 @@
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#c3" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="interSubName3" name="interSubName3" value="3"
+                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub3" name="btn-check-sub3" value="3"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#d3" data-placement="bottom">소분류</button>
+									 <input type= "hidden" id="interSubId3" name="interSubId3" value="">
+									 <input type= "hidden" id="interSubName3" name="interSubName3" value="">
                                 </div>
                                 </div>
                             </div>
@@ -934,68 +880,6 @@
 </c:forEach>
 
 
-
-   
-<!-- 
-
-<div id="b1" class="hidden">
-    <div class="popover-heading">
-       구·군 선택
-    </div>
-    <div class="popover-body" >
-       <div id="inbody3">
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="스포츠">스포츠</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="음악&예술">음악&예술</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="공예&DIY">공예&DIY</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="사진&영상">사진&영상</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="요리&음료">요리&음료</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="학습">학습</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="스포츠">취업&재테크</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="음악&예술">미디어</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="공예&DIY">IT&테크</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="사진&영상">사진&영상</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="요리&음료">건강&애견</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="학습">여행</button>
-       </div> 
-    </div>
-</div>   
-
-<div id="b2" class="hidden">
-    <div class="popover-heading">
-       구·군 선택
-    </div>
-    
-    <div class="popover-body" >
-       <div id="inbody4">                                       
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="패러글라이딩">패러글라이딩</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="구기스포츠">구기스포츠</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="무도&댄스">무도&댄스</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="수영">수영</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="요가&발레">요가&발레</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="필라테스">필라테스</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="레저스포츠">레저스포츠</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="골프">골프</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="피아노">피아노</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="기타(악기)">기타(악기)</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="보컬">보컬</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="뮤지컬&연극">뮤지컬&연극</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="동양화">동양화</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="서양화 ">서양화</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="캘리그라피&드로잉">캘리그라피&드로잉</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="도예">도예</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="가죽공예">가죽공예</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="향수">향수</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="목공">목공</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="원예">원예</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="인테리어">인테리어</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="사진">사진</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="사진편집">사진편집</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="영상">영상</button>
-       </div>                                                                             
-                                                                                            
-    </div>                                                                                  
-</div>          -->                                                                         
-                                                                                          
 
 
 <!-- 인증모달 -->
