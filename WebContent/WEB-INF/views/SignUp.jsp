@@ -321,33 +321,152 @@
 				console.log($("#genderId").val());
 			})
 			
-			
-			
 			var a;
+			
+
+			
 			$(".btn-check-cate1").click(function() {
 				a = $(this).val();
-				b = a.replace(/[0-9]/g,"");
+				console.log("a = " + a);
 				
-				$(".btn-pop-sido"+b).click(function() {
-					$("#addrSiName" + a).html($(this).text());
+				$(".btn-pop-sido").click(function() {
+					
+					$("#addrSiName"+a).text($(this).text());
+					
 					var siid = $(this).val();
+					var str = "";
+					 $.ajax({
+		                   url: '<%=cp %>/addrguajax.action',
+		                   type: 'GET',
+		                   dataType: 'html',
+		                   data : {'siid': siid}
+		                }).done(function(result){
+		                   /* $('.Search-result-body').append(result); */
+		                   
+
+							$("#inbodyB"+a).empty();
+							$("#inbodyB"+a).append(result);
+		                }); 
 					
-					$("#addrSiName"+a).val(siid);
 					
 					
-					$.ajax({
-						url : "<%=cp %>/addrgu.action",
-						type : "post",
+					<%-- $.ajax({
+						url : "<%=cp %>/addrguajax.action",
+						type : "get",
 						data : {'siid': siid},
-						dataType : "json",
-						success : function(addrguname0)
+						success : function(guresult)
 						{
-							alert(addrguname0);
+							var gulistarr = guresult.split(',');
+							str = '';
+							
+							for (var i = 1, j = 0; i < gulistarr.length-1; i++, j++)
+							{
+								str += '<button type="button" class="btn btn-120-35 btn-pop-gu" value="'+ gulistarr[j] +'">'+ gulistarr[i] +'</button>'
+								i++;
+								j++;
+							}
+
 						}
-						
-					})
+					}) --%>
+					
 				})
 			})
+			
+			var c;
+			$(".btn-check-cate2").click(function()
+			{
+				c = $(this).val();
+				$(".btn-pop-gu").click(function()
+				{
+					$("#btn-check-gugun"+c).text($(this).text());
+					 
+					$("#addrGuId"+c).val($(this).val());
+					$("#addrGuName"+c).val($(this).text());
+					
+					console.log("구 아이디 = " + $("#addrGuId"+c).val());
+					console.log("구 이름 = " + $("#addrGuName"+c).val());
+				})
+			})
+			
+			
+			<%-- $(".btn-check-cate3").click(function() {
+				a = $(this).val();
+				console.log("a = " + a);
+				
+				$(".btn-pop-main").click(function() {
+					
+					$("#interMainName"+a).text($(this).text());
+					
+					var mainid = $(this).val();
+					var str = "";
+					$.ajax({
+						url : "<%=cp %>/intermain.action",
+						type : "get",
+						data : {'mainid': mainid},
+						success : function(guresult)
+						{
+							/* var gulistarr = guresult.split(',');
+							str = '';
+							
+							for (var i = 1, j = 0; i < gulistarr.length-1; i++, j++)
+							{
+								str += '<button type="button" class="btn btn-120-35 btn-pop-gu" value="'+ gulistarr[j] +'">'+ gulistarr[i] +'</button>'
+								i++;
+								j++;
+							}
+
+							$("#inbodyB"+a).empty();
+							$("#inbodyB"+a).append(str); */
+						}
+					})
+					
+				})
+			})
+			 --%>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			function makeid()
 			{
@@ -365,9 +484,6 @@
 			$('#myModal').on('shown.bs.modal', function () {
 		        $('#myInput').trigger('focus')
 		    });
-			
-			
-			
 			
 			$("#emailcerti, #email-re").click(function() {
 				
@@ -537,12 +653,10 @@
                                 <div class="div-check">
                                 	<span class="span-check" id="span-check-pw" value="0"></span>
                                 </div>
-                                
-                                
                             </div>
                             <div class="SignUp-input-group">
                                 <div class="SignUp-input-group-label">
-                                    닉네임*
+                                    닉네임* 
                                 </div>
                                 <input type="text" id="nickname" name="nickname" class="form-control input-245-40" placeholder="닉네임을 입력해주세요">
                                 <button type="button" id="btn-check-nick" class="btn" value="0">닉네임 중복확인</button>
@@ -658,7 +772,9 @@
 									 
                                 	<button type="button" class="btn btn-check-cate2" id="btn-check-gugun1" value="1"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#a2" data-placement="bottom">구·군</button>
+									 data-trigger="focus" data-popover-content="#b1" data-placement="bottom">구·군</button>
+									 <input type= "hidden" id="addrGuId1" name="addrGuId1" value="">
+									 <input type= "hidden" id="addrGuName1" name="addrGuName1" value="">
                                 </div>
                             </div>
 
@@ -669,11 +785,13 @@
                                 <div class="box-245-40">
                                     <button type="button" class="btn btn-check-cate1" id="addrSiName2" name="addrSiName2" value="2"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
+									 data-trigger="focus" data-popover-content="#a2" data-placement="bottom">시·도</button>
                                     
 									<button type="button" class="btn btn-check-cate2" id="btn-check-gugun2" value="2"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#a2" data-placement="bottom">구·군</button>
+									 data-trigger="focus" data-popover-content="#b2" data-placement="bottom">구·군</button>
+									 <input type= "hidden" id="addrGuId2" name="addrGuId2" value="">
+									 <input type= "hidden" id="addrGuName2" name="addrGuName2" value="">
                                 </div>
                             </div>
 
@@ -684,13 +802,13 @@
                                 <div class="box-245-40">
                                    <button type="button" class="btn btn-check-cate1" id="addrSiName3" name="addrSiName3" value="3"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
+									 data-trigger="focus" data-popover-content="#a3" data-placement="bottom">시·도</button>
                                     
                                     <button type="button" class="btn btn-check-cate2" id="btn-check-gugun3" value="3"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#a2" data-placement="bottom">구·군</button>
-                                    
-                                    
+									 data-trigger="focus" data-popover-content="#b3" data-placement="bottom">구·군</button>
+									 <input type= "hidden" id="addrGuId3" name="addrGuId3" value="">
+									 <input type= "hidden" id="addrGuName3" name="addrGuName3" value="">
                                 </div>
                             </div>
 
@@ -700,13 +818,13 @@
                                     관심사1
                                 </div>
                                 <div class="box-245-40 div-inter">
-                                    <button type="button" class="btn btn-check-cate3" id="btn-check-intermain1" value="intermain1"
+                                    <button type="button" class="btn btn-check-cate3" id="interMainName1" name="interMainName1" value="1"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#b1" data-placement="bottom">대분류</button>
+									 data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="btn-check-intersub1" value="intersub1"
+                                	<button type="button" class="btn btn-check-cate4" id="interSubName1" name="interSubName1" value="1"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#b2" data-placement="bottom">소분류</button>
+									 data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
                                 </div>
                             </div>
 
@@ -716,13 +834,13 @@
                                 </div>
                                 <div class="box-245-40">
                                     <div class="box-245-40">
-                                    <button type="button" class="btn btn-check-cate3" id="btn-check-intermain2" value="intermain2"
+                                    <button type="button" class="btn btn-check-cate3" id="interMainName2" name="interMainName2" value="2"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#b1" data-placement="bottom">대분류</button>
+									 data-trigger="focus" data-popover-content="#c2" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="btn-check-intersub2" value="intersub2"
+                                	<button type="button" class="btn btn-check-cate4" id="interSubName2" name="interSubName2" value="2"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#b2" data-placement="bottom">소분류</button>
+									 data-trigger="focus" data-popover-content="#d2" data-placement="bottom">소분류</button>
                                 </div>
                                 </div>
                             </div>
@@ -733,13 +851,13 @@
                                 </div>
                                 <div class="box-245-40">
                                     <div class="box-245-40">
-                                    <button type="button" class="btn btn-check-cate3" id="btn-check-intermain3" value="intermain3"
+                                    <button type="button" class="btn btn-check-cate3" id="interMainName3" name="interMainName3" value="3"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#b1" data-placement="bottom">대분류</button>
+									 data-trigger="focus" data-popover-content="#c3" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="btn-check-intersub3" value="intersub3"
+                                	<button type="button" class="btn btn-check-cate4" id="interSubName3" name="interSubName3" value="3"
 									 tabindex="0" data-toggle="popover"
-									 data-trigger="focus" data-popover-content="#b2" data-placement="bottom">소분류</button>
+									 data-trigger="focus" data-popover-content="#d3" data-placement="bottom">소분류</button>
                                 </div>
                                 </div>
                             </div>
@@ -751,55 +869,81 @@
                                 <textarea class="form-control" name="introduce" id="introduce" cols="30" rows="10"></textarea>
                             </div>
                         </form>
-    
-    
-    
-
-<!-- Content for Popover #1 -->    
-<div id="a1" class="hidden">
-
-    <div class="popover-heading">
-       시·도 선택
-    </div>
-    
-    
-    <div class="popover-body" >
-       <div id="inbody1">
-		    <c:forEach var="addrsi" items="${addrsilist }">
-				<button type="button" class="btn btn-120-35 btn-pop-sido" value="${addrsi.addrSiId1 }">${addrsi.addrSiName1 }</button>
-			</c:forEach>
-       </div> 
-
-    </div>
-</div>   
+<!-- Content for Popover #1 -->
+<c:forEach var="i" begin="1" end="3">
+	<div id="a${i}" class="hidden">
+	    <div class="popover-heading">
+	       시·도 선택
+	    </div>
+	    <div class="popover-body" >
+	       <div id="inbodyA${i}">
+			    <c:forEach var="addrsi" items="${addrsilist }" varStatus="status">
+					<button type="button" id="si${status.index}" name="si${status.index}" class="btn btn-120-35 btn-pop-sido" value="${addrsi.addrSiId1 }">${addrsi.addrSiName1 }</button>
+				</c:forEach>
+	       </div> 
+	
+	    </div>
+	</div>
+</c:forEach>
 
 
-<div id="a2" class="hidden">
+
+
+<c:forEach var="j" begin="1" end="3">
+<div id="b${j}" class="hidden">
     <div class="popover-heading">
        구·군 선택
     </div>
     
     <div class="popover-body" >
-       <div id="inbody1">
-       		<button type="button" class="btn btn-120-35 btn-pop-gugun" value="서교동">서교동</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-gugun" value="서교동">서교동</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-gugun" value="서교동">서교동</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-gugun" value="삼산동">삼산동</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-gugun" value="삼산동">삼산동</button>
-       		<button type="button" class="btn btn-120-35 btn-pop-gugun" value="삼산동">삼산동</button>
+       <div id="inbodyB${j}">
        </div> 
-
     </div>
 </div>   
+</c:forEach>
+
+
+<c:forEach var="k" begin="1" end="3">
+	<div id="c${k}" class="hidden">
+	    <div class="popover-heading">
+	       대 분류 선택
+	    </div>
+	    <div class="popover-body" >
+	       <div id="inbodyC${k}">
+			    <c:forEach var="intermain" items="${intermainlist }" varStatus="status">
+					<button type="button" id="main${status.index}" name="main${status.index}" class="btn btn-120-35 btn-pop-main" value="${intermain.interMainId1 }">${intermain.interMainName1 }</button>
+				</c:forEach>
+	       </div>
+	
+	    </div>
+	</div>
+</c:forEach>
+
+
+<c:forEach var="l" begin="1" end="3">
+<div id="d${l}" class="hidden">
+    <div class="popover-heading">
+       소 분류 선택
+    </div>
+    
+    <div class="popover-body" >
+       <div id="inbodyD${l}">
+       </div> 
+    </div>
+</div>   
+</c:forEach>
+
+
+
+   
+<!-- 
 
 <div id="b1" class="hidden">
     <div class="popover-heading">
        구·군 선택
     </div>
- 
-    
     <div class="popover-body" >
-       <div id="inbody">
+       <div id="inbody3">
        		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="스포츠">스포츠</button>
        		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="음악&예술">음악&예술</button>
        		<button type="button" class="btn btn-120-35 btn-pop-intermain" value="공예&DIY">공예&DIY</button>
@@ -822,7 +966,7 @@
     </div>
     
     <div class="popover-body" >
-       <div id="inbody">                                       
+       <div id="inbody4">                                       
        		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="패러글라이딩">패러글라이딩</button>
        		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="구기스포츠">구기스포츠</button>
        		<button type="button" class="btn btn-120-35 btn-pop-intersub" value="무도&댄스">무도&댄스</button>
@@ -850,7 +994,7 @@
        </div>                                                                             
                                                                                             
     </div>                                                                                  
-</div>                                                                                  
+</div>          -->                                                                         
                                                                                           
 
 

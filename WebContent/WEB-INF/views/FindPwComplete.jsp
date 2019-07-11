@@ -21,6 +21,16 @@
     <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
+    <script type="text/javascript">
+    	$(document).ready(function()
+		{
+    		var check = $("#checkName").val();
+
+    		$("#result").text("회원님의 " + check + "로 임시비밀번호가 전송되었습니다.");
+		})
+		
+    
+    </script>
 
 </head>
 <body>
@@ -75,9 +85,10 @@
                                     Sagyo
                                 </div>
                             </div>
-                            <div class="FindIdComplete-message flex-item-grow flex-row-center-center">
-                                회원님의 휴대전화로 임시비밀번호가 전송되었습니다.
+                            <div class="FindIdComplete-message flex-item-grow flex-row-center-center" id= "result">
+                                
                             </div>
+                            <input type="hidden" id="checkName" name="checkName" value="${param.checkName }">
                             <div class="FindIdComplete-btn flex-row-center-center">
                                 <button class="btn btn-border-right">메인으로</button>
                                 <button class="btn">로그인</button>

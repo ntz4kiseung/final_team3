@@ -45,32 +45,49 @@
         	
             var radioCheck = $("input:radio[name=tel-email]:checked").val();
             
-            
-            if(radioCheck=="email")
-            {
-                $("#find-pw-tel").hide();
-                $("#find-pw-email").show();
-                $("#name").val("");
-                $("#tel").val("");
-                $("#name").attr('id','name1');
-                $("#name2").attr('id','name');
-                $("#userId").attr('id','userId1');
-                $("#userId2").attr('id','userId');
-                $("#find-pw-form").attr('action','findpwemailinsert.action');
-                
-            }
             if(radioCheck=="tel")
             {
                 $("#find-pw-tel").show();
-                $("#find-pw-email").hide();
+                $("#find-pw-email").hide(); 
                 $("#name").val("");
                 $("#email").val("");
                 $("#name").attr('id','name2');
                 $("#name1").attr('id','name');
+                
+                $("#name2").attr('name','name2');
+                $("#name").attr('name','name');
+                
+                
                 $("#userId").attr('id','userId2');
             	$("#userId1").attr('id','userId');
+            	
+            	$("#userId2").attr('name','userId2');
+             	$("#userId").attr('name','userId');
+             	
             	$("#find-pw-form").attr('action','findpwtelinsert.action');
             }
+            else if(radioCheck=="email")
+            { 
+                $("#find-pw-tel").hide();
+                $("#find-pw-email").show(); 
+                $("#name").val("");
+                $("#tel").val("");
+                $("#name").attr('id','name1');
+                $("#name2").attr('id','name');
+                
+                $("#name1").attr('name','name1');
+                $("#name").attr('name','name');
+                
+                $("#userId").attr('id','userId1');
+                $("#userId2").attr('id','userId');
+                
+                $("#userId1").attr('name','userId1')
+                $("#userId").attr('name','userId');
+                
+                $("#find-pw-form").attr('action','findpwemailinsert.action');
+                
+            }
+            
         })
         
         function makeid()
@@ -201,7 +218,7 @@
 			var inputid = $("#userId").val();
 			var inputname = $("#name").val();
 			var inputemail = $("#email").val();
-				
+			
 				console.log(inputid + inputname + inputemail);
 			
 			var findpwemail = [inputid ,inputname, inputemail];
@@ -297,8 +314,6 @@
 			var temp = makepw();
 			$("#pwd").val(temp);
 			
-			alert($("#pwd").val() + ", " + $("#userId").val());
-			
 			document.getElementById("find-pw-form").submit();
 				
 		})
@@ -373,13 +388,13 @@
                                     <div>
                                         아이디
                                     </div>
-                                    <input type="text" class="input-underline" id="userId" name="userId">
+                                    <input type="text" class="input-underline" id="userId" name="userId" value="">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline" id="name" name="name">
+                                    <input type="text" class="input-underline" id="name" name="name" value="">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
@@ -412,13 +427,13 @@
                                     <div>
                                         아이디
                                     </div>
-                                    <input type="text" class="input-underline" id="userId2" name="userId">
+                                    <input type="text" class="input-underline" id="userId2" name="userId2" value="">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>
                                         이름
                                     </div>
-                                    <input type="text" class="input-underline" id="name2" name="name">
+                                    <input type="text" class="input-underline" id="name2" name="name2" value="">
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div>

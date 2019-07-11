@@ -28,8 +28,13 @@
 		WHERE ADDRSIID = #{siid }
  	</select>
  	
- 	<insert id = "userLoginInsert">
+ 	<!-- 대분류 출력 쿼리문 -->
+ 	<select id="interMainList" resultType="com.test.mybatis.InterDTO">
+ 		SELECT INTERMAINID AS INTERMAINID1, INTERMAINNAME AS INTERMAINNAME1
+		FROM INTEREST_MAIN
+ 	</select>
  	
+ 	<insert id = "userLoginInsert">
  	INSERT INTO LOGIN(USERID, PWD, ROLEID)
 	VALUES(#{userId }, CRYPTPACK.ENCRYPT(#{pwd }, 'JAVA006$'), 'RL00002')
  	</insert>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,9 @@ public class SingupController
 		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
 		
 		model.addAttribute("addrsilist",dao.addrSiList());
+		model.addAttribute("intermainlist", dao.interMainList());
+		
+		System.out.println(dao.interMainList().size());
 		
 		return result;
 	}
@@ -66,31 +70,53 @@ public class SingupController
 		return "redirect:signup.action";
 	}
 	
+	@RequestMapping(value="/addrgu.action", method=RequestMethod.GET)
+	public void signupGuList(String siid, HttpServletResponse response) throws IOException
+	{
+		System.out.println(siid);
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
+		
+		
+		ArrayList<AddrDTO> str = dao.addrGuList(siid);
+		
+	    String result = "";
+	    
+	    for (int i = 0; i < dao.addrGuList(siid).size(); i++)
+		{
+			result += str.get(i).getAddrGuId1();
+			result += ",";
+			result += str.get(i).getAddrGuName1();
+			result += ",";
+		}
+	    System.out.println(result);
+		 
+	    response.getWriter().print(result);
+	}
+	
+	
+	@RequestMapping(value="/addrguajax.action", method=RequestMethod.GET)
+	public String addrGuAjax()
+	{
+		String result = "";
+		
+		
+		
+		
+		result = "/WEB-INF/views/AddrGuAjax.jsp";
+		return result;
+	}
 	
 	
 	
-	/*
-	 * @RequestMapping(value="/addrgu.action") public void signupGiList(String
-	 * siid,HttpServletResponse response) throws IOException {
-	 * 
-	 * String result = ""; ArrayList<AddrDTO> addrgulist = null; ISignupDAO dao =
-	 * sqlSession.getMapper(ISignupDAO.class); addrgulist = dao.addrGuList(siid);
-	 * 
-	 * System.out.println(addrgulist.get(0).getAddrGuName1());
-	 * 
-	 * result += "{";
-	 * 
-	 * for (int i = 0; i < addrgulist.size(); i++) { result += "\"addrguid"+i+"\":"
-	 * +"\"" + addrgulist.get(i).getAddrGuId1() + "\", \"addrguname" + i + "\":" +
-	 * "\"" + addrgulist.get(i).getAddrGuName1() + "\"" + ","; }
-	 * 
-	 * result += "\"}";
-	 * 
-	 * 
-	 * response.getWriter().print(result); }
-	 */
 	
-	
+	@RequestMapping(value="intermain.action", method=RequestMethod.GET)
+	public void signupMainList(String mainid, HttpServletResponse reponse)
+	{
+		
+	}
 	
 	@RequestMapping(value="/idcheck.action")
 	public void singUpcheckId(String id, HttpServletResponse response) throws IOException
