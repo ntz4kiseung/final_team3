@@ -75,37 +75,32 @@
                     </div>
 
                     <div class="CustomerService-body flex-item-grow flex-col-center-center">
-						<form role="form" action="directquestioncomplete.action" method="post">
-                        <div class="DirectQuestion flex-item-grow  flex-col-center-center">
-                                <div class="DirectQuestion-desc flex-col-left-center">
-                                    <div>
-                                        1:1 문의 관련 안내사항<br>
-                                        1. 피어나는 군영과 같이 이상은 실로 인간의 부패를 방지하는 소금이라 할지니 인생에 가치를 주는 원질<br>
-                                        2. 이 되는 것이다 그들은 앞이 긴지라 착목한는 곳이 원대하고 그들은 피가 더운지라 실현에 대한 자신과 용기가<br>
-                                        3. 있다 그러므로 그들은 이상의 보배를 능히 품으며 그들의 이상은 아름답고 소담스러운 열매를 맺어 우리 인생을 풍부하게<br>
-                                        4.  하는 것이다 보라 청춘을 ! 그들의 몸이 얼마나 튼튼하며 그들의 피부가 얼마나 생생하며 그들의 눈<br>
+
+                        <div class="box-725-400 flex-col-center-center">
+
+                            <div class="Withdrawal-header flex-col-center-center">
+                                <div class="logo-box flex-item-grow flex-row-center-center">
+                                    <div class="logo-img">
+                                        <img src="img/Logo.png" alt="이미지 없음">
                                     </div>
-                                 </div>
-        
-                                <div class="DirectQuestion-title flex-row-left-center">
-                                    <div>
-                                        제목
+                                    <div class="logo-text">
+                                        Sagyo
                                     </div>
-                                    <input type="text" class="form-control" id="title" name="title">
                                 </div>
-        
-                                <div class="DirectQuestion-contents">
-                                    <textarea name="content" id="content" class="form-control" ></textarea>
-                                </div>
-        
-                                <div class="DirectQuestion-footer flex-row-center-center">
-                                	
-                                    <button class="btn-160-45 btn btn-orange">1:1문의 보내기</button>
-                                    
-                                </div>
+                            </div>
+
+                            <div>
+                                    지금까지 SAGYO를 이용해주셔서 감사합니다.
+                            </div>
+
+
+                            <div class="box-725-400-footer flex-row-center-center">
+                                <button class="btn-160-45 btn" onclick="location.href='main.action'">메인으로</button>
+                            </div>
+
                         </div>
-                        </form>
-                    </div>
+
+                    </div>                    
                 </div>
             </div>
         </div>

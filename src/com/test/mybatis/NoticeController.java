@@ -166,7 +166,7 @@ public class NoticeController
 		
 		result = "/WEB-INF/views/FAQ.jsp";
 	
-		System.out.println("real작동함? ");
+		
 		return result;
 			
 		
@@ -183,7 +183,7 @@ public class NoticeController
 		String title= request.getParameter("title");
 		String content = request.getParameter("content");
 		
-		System.out.println(title+content);
+		//System.out.println(title+content+"처음엔 널값 뜨고 두번째에도 널값? 뜰거같은데? ");
 		
 		
 		result = "/WEB-INF/views/DirectQuestionWrite.jsp";
@@ -193,6 +193,108 @@ public class NoticeController
 			
 		
 	}
+	
+	//
+	
+	@RequestMapping(value="/directquestioncomplete.action",method= {RequestMethod.POST, RequestMethod.GET})
+	public String DirectQuestionComplete(Model model, HttpServletRequest request, directquestioncompleteDTO d)
+	{	
+		String result= null;
+		
+		
+		IDirectquestioncompleteDAO dao = sqlSession.getMapper(IDirectquestioncompleteDAO.class);
+		
+		//directquestioncompleteDTO titleContent= d;
+		
+		
+		System.out.println(d+"뭐가넘어올까?");
+		// 일단 뭐 주소값이 넘어옴 
+		
+		dao.drwrite(d);
+		
+		
+		result = "/WEB-INF/views/DirectQuestionComplete.jsp";
+		
+		
+		return result;
+	}
+	
+	
+	
+	@RequestMapping(value="/withdrawal.action",method= {RequestMethod.POST, RequestMethod.GET})
+	public String Withdrawal(Model model, HttpServletRequest request, directquestioncompleteDTO d)
+	{	
+		
+		String result= null;
+		
+
+		
+		
+		result = "/WEB-INF/views/Withdrawal.jsp";
+		
+		
+		return result;
+	}
+	
+	@RequestMapping(value="/withdrawalcheck.action",method= {RequestMethod.POST, RequestMethod.GET})
+	public String Withdrawalcheck(Model model, HttpServletRequest request, directquestioncompleteDTO d)
+	{	
+		
+		String result= null;
+		
+	
+		
+		IWithdrawalDAO dao = sqlSession.getMapper(IWithdrawalDAO.class);
+		//id 불러오고~ 그걸 기반으로 닉네임 불러오고~ 
+		String userid = "coimhin"; // 현재 로그인한 아이디가 불러져야하는데 아직 session 으로 구현해야하는데 못함~ 
+				
+		model.addAttribute("userid",userid); // view페이지에 userid 뿌리기위해 넘겨주는거 WithdrawalCheck.jsp
+		// id 값으로 nickname 불러올수 있도록 처리하자~ 
+		
+		model.addAttribute("nickname",dao.nickname(userid));
+		
+		result = "/WEB-INF/views/WithdrawalCheck.jsp";
+		
+		
+		return result;
+	}
+	
+	//withdrawalcomplete.action.action
+	@RequestMapping(value="/withdrawalcomplete.action",method= {RequestMethod.POST, RequestMethod.GET})
+	public String Withdrawalcheckcomplete(Model model, HttpServletRequest request, WithdrawalDTO w)
+	{	
+		
+		String result= null;
+		
+		IWithdrawalDAO dao = sqlSession.getMapper(IWithdrawalDAO.class);
+		
+		String userid = request.getParameter("userid");
+		String pwd = request.getParameter("pwd");
+		System.out.println("userid확인 "+userid);// 잘넘어옴~~ 
+		System.out.println("password확인"+pwd);// 잘넘어옴~~
+		
+		// 이제 여기서 아이디 비번이 맞는지 검증을 해야함!! 
+		
+		int idpwcheckCount = dao.idpwcheck(w);
+		
+		if (idpwcheckCount==1) // 비번이 맞을 경우 
+		{
+			// del_user 테이블에 데이터 insert 문 들어가는걸로~ 
+			
+			
+			dao.del_user(userid);
+			result = "/WEB-INF/views/WithdrawalComplete.jsp"; 
+			
+		}else if (idpwcheckCount!=1) // 맞지 않을 경우 
+		{
+			result =  "withdrawalcheck.action";
+			
+		}
+		
+		return result;
+		
+	}		
+		
 }
 
 

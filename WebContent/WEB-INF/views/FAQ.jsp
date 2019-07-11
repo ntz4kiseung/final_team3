@@ -241,7 +241,7 @@
 								    <div class="card"> 
 								      <div class="card-header"> 
 								        <a class="card-link" data-toggle="collapse" data-parent="#accordion"  href="#collapse${faq.id }"> 
-								          <span style="border:1px;">공지</span> ${faq.title }  <span>${faq.faqdate }</span>
+								          <span style="border:1px;">FAQ</span> ${faq.title }  <span>${faq.faqdate }</span>
 								        </a> 
 								      </div> 
 								      <div id="collapse${faq.id }" class="collapse"> 
