@@ -22,6 +22,7 @@ public class MyProfileController
 		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
 		
 		model.addAttribute("UserList",dao.UserList()); 
+		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
 		model.addAttribute("myPageInterList", dao2.myPageInterList());
@@ -34,6 +35,7 @@ public class MyProfileController
 	{
 		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
 		
+		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
 		model.addAttribute("myPageInterList", dao2.myPageInterList());

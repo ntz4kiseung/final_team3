@@ -223,6 +223,22 @@
 				}
 			})
 		});
+		
+		$("#remsg").click(function()
+		{
+		    //alert($("#giveuserid").html());  
+		    $(".takeUserId").attr('value',$("#giveuserid").html());
+			
+		    $('#message-close').click(function()
+				      {
+				         $('#takeUserId').val("");
+				      });
+		    
+		    
+		    
+		});
+		
+		
 
 
 	});
@@ -278,7 +294,10 @@
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                               <div class="user-badge-box">
+                                         <img class="user-bad-badge" src=" ${MyPageBad[status.index].urlBad }" alt="">
+                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                 </div>
                             </div>
                               <div class="MyPage-header-grade-star">
                                 <c:forEach var="i" begin="1" end="${List.reviewGrade }">
@@ -389,9 +408,7 @@
                                                         	${message.contents }
                                                          </button>
                                                     </div>
-                                                    <div class="MyMessage-accordion-right">
-                                                       	${message.giveUserId }
-                                                    </div>
+                                                    <div class="MyMessage-accordion-right" id="giveuserid">${message.giveUserId }</div>
                                                     <div class="MyMessage-accordion-right">
                                                         ${message.sendDate }
                                                     </div>
@@ -410,7 +427,7 @@
                                                             <div class="MyMessage-date">보낸날짜:  ${message.sendDate }</div>&nbsp;&nbsp;
                                                             <div class="MyMessage-date">확인날짜: ${message.checkDate }</div>
                                                             <div class="flex-item-grow flex-row-right-center">
-                                                                <button class="btn btn-orange btn-85-25" data-toggle="modal" data-target="#messageModal">답장하기</button>
+                                                                <button class="btn btn-orange btn-85-25" id="remsg" data-toggle="modal" data-target="#messageModal">답장하기</button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -451,14 +468,14 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">쪽지쓰기</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">×</span>
+          <span aria-hidden="true" id="message-close">×</span>
         </button>
       </div>
        <form role="form" action="messagesend.action" method="post">
       <div class="modal-body">
        	<div class="control-group flex-row-center-center">
-            <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
-            <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" ></div>
+            <div for="destinataire" style="padding-right: 15px;" >받는 사람</div>
+            <div><input type="text" class="form-control takeUserId" name="takeUserId" id="takeUserId" ></div>
               <button type="button" class="btn" id="btn-check-id" value="0">아이디 중복확인</button>
 					 
          </div>

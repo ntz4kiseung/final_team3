@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public interface IMyPageDAO
 {
 	public ArrayList<UserDTO> myPageList();
+	public ArrayList<UserDTO> MyPageBad(); 
 	public ArrayList<AddrDTO> myPageAddrList();
 	public ArrayList<InterDTO> myPageInterList();
 	

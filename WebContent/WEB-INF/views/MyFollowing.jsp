@@ -77,8 +77,13 @@
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                                <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+
+                               <div class="user-badge-box">
+                                         <img class="user-bad-badge" src=" ${MyPageBad[status.index].urlBad }" alt="">
+                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                 </div>
                             </div>
+                            
                               <div class="MyPage-header-grade-star">
                                 <c:forEach var="i" begin="1" end="${List.reviewGrade }">
                                    <label style="color: #ffd700;">★</label>
@@ -133,8 +138,13 @@
 
 									<c:forEach var="fList" items="${ followingList }" varStatus="status">
                                     <div class="MyFollow-user flex-row-left-center">
-                                        <div class="MyFollow-user-badge">
-                                            <img src="<%=cp %>/${fList.url } " alt="">
+<!--                                         <div class="MyFollow-user-badge">
+                                            
+                                        </div>
+                                         -->
+                                        <div class="user-badge-box">
+                                                <img class="user-bad-badge" src="<%=cp %>/${followingBad[status.index].urlBad }" alt="">
+                                                <img src="<%=cp %>/${fList.url } " alt="">
                                         </div>
                                         <div class="MyFollow-user-detail">
                                         
@@ -159,7 +169,13 @@
                                         </div>
                                     </div>
 									</c:forEach>
-
+										
+										
+										<!-- <div class="user-badge-box">
+                                                <img class="user-bad-badge" src="${post.urlBad }" alt="">
+                                                <img src="${post.url }" alt="">
+                                            </div> -->
+										
 
                                 </div>
                             </div>
