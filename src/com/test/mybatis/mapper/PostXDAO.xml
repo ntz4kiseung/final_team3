@@ -47,4 +47,7 @@
 	<insert id="reportreplyinsert">
 		INSERT INTO REPORT_REPLY(ID, REPLYID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_REPLY_SEQ.NEXTVAL, #{reportId}, #{userId}, #{reportCateName}, #{reportDetail}, SYSDATE)
 	</insert>
+	<insert id="joindelcheckinsert">
+		INSERT INTO DEL_JOIN(ID, JOINID, DELETEDATE) VALUES(DEL_JOIN_SEQ.NEXTVAL, #{reportId}, SYSDATE)
+	</insert>
 </mapper>

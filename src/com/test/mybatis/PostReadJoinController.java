@@ -34,15 +34,11 @@ public class PostReadJoinController
 		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
 		String followIds = "anlant";
 		model.addAttribute("postlist",dao.postlist(followIds));
-		PostDTO postDTO = dao.postlist(followIds);
 		model.addAttribute("list",dao.joinlist()); 
 		model.addAttribute("replylist",dao.replylist());
 		model.addAttribute("reportlist", dao.reportlist());
 		ArrayList<JoinDTO> joindto =  dao.replylist();
-		for (JoinDTO joinDTO2 : joindto)
-		{
-			System.out.println(joinDTO2.getUserTypeId()+"test");
-		}
+		
 		result = "WEB-INF/views/PostReadJoin.jsp";
 
 		return result;
@@ -148,6 +144,16 @@ public class PostReadJoinController
 		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
 		joinDTO.setUserId("anlant");
 		dao.replyinsert(joinDTO);
+		result = "redirect:postreadjoin.action";
+		return result;
+	}
+	
+	@RequestMapping(value = "/joindelcheckinsert.action", method = RequestMethod.GET)
+	public String joinDelcheckInsert(Model model, ReportDTO reportDTO)
+	{
+		String result = null;
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		dao.joindelcheckinsert(reportDTO);
 		result = "redirect:postreadjoin.action";
 		return result;
 	}

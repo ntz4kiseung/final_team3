@@ -204,3 +204,9 @@ select *
 from mood;
 select *
 from same_gender;
+
+SELECT ID, JOINID, DELETEDATE
+FROM DEL_JOIN;
+
+--○ 신청댓글 삭제 넣는 곳
+INSERT INTO DEL_JOIN(ID, JOINID, DELETEDATE) VALUES(DEL_JOIN_SEQ.NEXTVAL, JOINID, SYSDATE);

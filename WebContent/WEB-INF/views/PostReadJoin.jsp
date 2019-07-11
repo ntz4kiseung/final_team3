@@ -106,7 +106,7 @@
 			$('#join-reset-Btn').click(function()
 			{
 				alert(join);
-				//location.href="";
+				location.href="joindelcheckinsert.action?reportId="+join;
 			});
 		});
 	});
@@ -347,7 +347,7 @@
 				    </div>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="join-reset-Btn">댓글 달기</button>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="join-reset-Btn">신청 취소</button>
 			      </div>
 			    </div>
 			  </div>
