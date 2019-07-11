@@ -2,11 +2,11 @@ package com.test.mybatis;
 
 public class PostDTO
 {
-	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId, interMainName, interSubId, interSubName, interDetail, postDate, meetDate, samegender, drink, grade, moodName, contents, urlBad, url, nickname, telCertiId, emailCertiId, followId;
+	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId, interMainName, interSubId, interSubName, interDetail, postDate, meetDate, samegender, drink, grade, moodName, contents, urlBad, url, nickname, telCertiId, emailCertiId, followId, postId;
 	
 	// 타입 수정 2019.07.10 15:40
 	private int minNum, maxNum, limitGrade, postStatus;
-	
+
 	public String getUserId()
 	{
 		return userId;
@@ -127,26 +127,6 @@ public class PostDTO
 		this.interDetail = interDetail;
 	}
 
-	public int getMinNum()
-	{
-		return minNum;
-	}
-
-	public void setMinNum(int minNum)
-	{
-		this.minNum = minNum;
-	}
-
-	public int getMaxNum()
-	{
-		return maxNum;
-	}
-
-	public void setMaxNum(int maxNum)
-	{
-		this.maxNum = maxNum;
-	}
-
 	public String getPostDate()
 	{
 		return postDate;
@@ -247,16 +227,6 @@ public class PostDTO
 		this.nickname = nickname;
 	}
 
-	public int getPostStatus()
-	{
-		return postStatus;
-	}
-
-	public void setPostStatus(int postStatus)
-	{
-		this.postStatus = postStatus;
-	}
-
 	public String getTelCertiId()
 	{
 		return telCertiId;
@@ -287,6 +257,36 @@ public class PostDTO
 		this.followId = followId;
 	}
 
+	public String getPostId()
+	{
+		return postId;
+	}
+
+	public void setPostId(String postId)
+	{
+		this.postId = postId;
+	}
+
+	public int getMinNum()
+	{
+		return minNum;
+	}
+
+	public void setMinNum(int minNum)
+	{
+		this.minNum = minNum;
+	}
+
+	public int getMaxNum()
+	{
+		return maxNum;
+	}
+
+	public void setMaxNum(int maxNum)
+	{
+		this.maxNum = maxNum;
+	}
+
 	public int getLimitGrade()
 	{
 		return limitGrade;
@@ -296,4 +296,16 @@ public class PostDTO
 	{
 		this.limitGrade = limitGrade;
 	}
+
+	public int getPostStatus()
+	{
+		return postStatus;
+	}
+
+	public void setPostStatus(int postStatus)
+	{
+		this.postStatus = postStatus;
+	}
+	
+	
 }

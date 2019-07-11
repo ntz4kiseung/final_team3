@@ -20,4 +20,6 @@ public interface IPostDAO
 	public int reportjoininsert(ReportDTO reportDTO);
 	public int replyinsert(JoinDTO joinDTO);
 	public int reportreplyinsert(ReportDTO reportDTO);
+	public int joindelcheckinsert(ReportDTO reportDTO);
+	public int postdelte(ReportDTO reportDTO);
 }
