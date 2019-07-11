@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mybatis.IPostDAO">  <!-- 인터페이스 지정  -->
 	<select id="joinlist" resultType="com.test.mybatis.JoinDTO"> 
-		SELECT POSTID, JOINID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, NVL(DELJOIN,'없음')
+		SELECT POSTID, JOINID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, NVL(DELJOIN,'없음'), STATUSID
 		FROM JOIN_VIEW
 		WHERE POSTID = 'PT00002'
 	</select>
@@ -59,16 +59,15 @@
 		INSERT INTO REPORT_JOIN(ID, JOINID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_JOIN_SEQ.NEXTVAL, #{reportId}, #{userId}, #{reportCateName}, #{reportDetail},  SYSDATE)
 	</insert>
 	<insert id="replyinsert">
-		INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), #{joinId}, #{contents}, SYSDATE, 'RU00002')
+		INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), #{joinId}, #{contents}, SYSDATE, #{userTypeId})
 	</insert>
 	<insert id="reportreplyinsert">
 		INSERT INTO REPORT_REPLY(ID, REPLYID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_REPLY_SEQ.NEXTVAL, #{reportId}, #{userId}, #{reportCateName}, #{reportDetail}, SYSDATE)
 	</insert>
-<<<<<<< HEAD:src/com/test/mybatis/mapper/PostXDAO.xml
 	<insert id="joindelcheckinsert">
 		INSERT INTO DEL_JOIN(ID, JOINID, DELETEDATE) VALUES(DEL_JOIN_SEQ.NEXTVAL, #{reportId}, SYSDATE)
 	</insert>
-=======
-
->>>>>>> ed1d3f09d25144e6b4c19ca01e8178beead1c3be:src/com/test/mybatis/mapper/PostDAO.xml
+	<insert id="postdelte">
+		INSERT INTO DEL_POST(ID, POSTID, DELETEDATE) VALUES(DEL_POST_SEQ.NEXTVAL, #{reportId}, SYSDATE)
+	</insert>
 </mapper>

@@ -95,10 +95,10 @@
 			var reply = $(this).attr('name');
 			$('#reply-insert-Btn').click(function()
 			{
-				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val();
+				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00002";
 			});	
 		});
-		// ------------------------------------------------------------------------------------------------- 댓글 추가 구간
+// ------------------------------------------------------------------------------------------------- 댓글 추가 구간
 		
 		$(".request-join").click(function()
 		{
@@ -175,10 +175,10 @@
                            	</div> 
                             <div>☆☆☆☆☆</div>
                             <c:if test="${not empty postlist.telCertiId}">
-                            	<div>휴대폰인증 완료</div>
+                            	<div>휴대폰 인증 완료 ✔</div>
                             </c:if>
                             <c:if test="${not empty postlist.emailCertiId != '없음'}">
-                            <div>이메일 인증완료</div>
+                            <div>이메일 인증 완료 ✔</div>
                             </c:if>
                         </div>
                         <div>
@@ -257,7 +257,7 @@
 				                                        <button class="btn replyreport" data-toggle="modal" data-target="#report-post" name="${replylist.replyId }">신고하기</button>
 				                                    </div>
 				                                    <div>
-				                                        <button class="btn btn-border-right reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
+				                                        <button class="btn reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
 				                                    </div>
 				                                </div>
 				                                <div>
@@ -282,7 +282,7 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="report-posts">게시글 신고</h5>
+			        <h5 class="modal-title" id="report-posts">신고</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
@@ -335,7 +335,7 @@
 			  <div class="modal-dialog" role="document">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <h5 class="modal-title" id="join-reset">댓글 달기</h5>
+			        <h5 class="modal-title" id="join-reset">참가신청 취소</h5>
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
