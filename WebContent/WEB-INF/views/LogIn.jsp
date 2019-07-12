@@ -20,8 +20,10 @@
     <!-- 폰트 (Noto Snas KR + Handlee) -->
     <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
     <!-- sagyo.css -->
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <link href="css/sagyo.css" rel="stylesheet">
-
    <style>
        .LogIn-box{
            width: 630px;
@@ -51,6 +53,43 @@
            width: 60%;
        }
    </style>
+<script type="text/javascript">
+   
+$(document).ready(function()
+{
+	$("#btn-login").click(function name()
+	{
+		var userid = $("#userId").val();
+		var pwd = $("#pwd").val();
+		console.log("유저 아이디 : " + userid);
+		console.log("유저 비밀번호 : " + pwd);
+		jQuery.ajaxSettings.traditional = true;
+		var logindata = [userid, pwd];
+		$.ajax({
+			url : "<%=cp %>/checklogin.action",
+			type : "post",
+			data : {'logindata': logindata},
+			success : function(count)
+			{
+				if (count == 0)
+				{
+					alert("로그인 실패");
+				}
+				else if(count == 1)
+				{
+					/* $("#loginForm").submit(); */
+					alert("로그인 성공");
+					$("#loginForm").submit();
+				}
+			}
+			
+		})
+		
+	})
+})
+   
+   
+</script>
 </head>
 <body>
     <div class="browser flex-col-center-center">
@@ -105,13 +144,14 @@
                         
                         <!-- 로그인 입력창 -->
                         <div class="flex-item-grow">
-                            <form action="" class="LogIn-form flex-col-center-center">
-                                <input type="text" class="input-underline" placeholder="userid">
-                                <input type="text" class="input-underline" placeholder="password">
-                                <div class="flex-row-center-center">
-                                    <button class="btn btn-orange flex-item-grow">로그인</button>&nbsp;&nbsp;
-                                    <button class="btn btn-outline-orange flex-item-grow">회원가입</button>
-                                </div>
+                            <form id="loginForm" name="loginForm" action="loginSuccess.action" class="LogIn-form flex-col-center-center">
+                                <input type="text" class="input-underline" id="userId" name="userId" placeholder="아이디">
+                                <input type="password" class="input-underline" id="pwd" name="pwd" placeholder="비밀번호">
+                            
+                            <div class="flex-row-center-center">
+                                <button type="button" id="btn-login" class="btn btn-orange flex-item-grow">로그인</button>&nbsp;&nbsp;
+                                <button type="button" id="btn-signUp" class="btn btn-outline-orange flex-item-grow">회원가입</button>
+                            </div>
                             </form>
                         </div>
                         <!-- 아디, 비번 찾기 -->

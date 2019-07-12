@@ -17,92 +17,82 @@ public class SingupController
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
 	@RequestMapping(value="/signup.action", method=RequestMethod.GET)
 	public String signupForm(ModelMap model)
 	{
-		String result = null;
-		result = "/WEB-INF/views/SignUp.jsp";
+		String result = "/WEB-INF/views/SignUp.jsp";
 		
-		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
+		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
+		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
 		
-		model.addAttribute("addrsilist",dao.addrSiList());
-		model.addAttribute("intermainlist", dao.interMainList());
+		model.addAttribute("addrsilist", addrA.addrSiList());
+		model.addAttribute("intermainlist", interA.interMainList());
 		
 		return result;
 	}
 	
-	
-
-	
-	
 	@RequestMapping(value="/insertuser.action", method=RequestMethod.POST)
 	public String signupInsert(UserDTO user, AddrDTO addr, InterDTO inter)
 	{
-		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
 		
-		dao.userLoginInsert(user);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
+		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
+		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
 		
-		dao.userNewBadgeInsert(user);
-		String badgelogid = dao.userNewBadgeSelect(user);
+		userA.userLoginInsert(user);
+		
+		userA.userNewBadgeInsert(user);
+		String badgelogid = userA.userNewBadgeSelect(user);
 		  
-		dao.userEssentialInsert(user, badgelogid);
+		userA.userEssentialInsert(user, badgelogid);
 		 
-		dao.userSubInsert(user);
+		userA.userSubInsert(user);
 		
-		dao.userTelInsert(user);
+		userA.userTelInsert(user);
 		
-		dao.userEmailInsert(user);
+		userA.userEmailInsert(user);
 		  
-		dao.userAddrInsert1(addr);
+		addrA.userAddrInsert1(addr);
 		
 		if(addr.getAddrGuId2() != "")
 		{
-			dao.userAddrInsert2(addr);
+			addrA.userAddrInsert2(addr);
 		}
 		else 
 		{
-			System.out.println("2번 구 입력 실패");
 		}
 		if(addr.getAddrGuId3() != "")
 		{
-			dao.userAddrInsert3(addr);
+			addrA.userAddrInsert3(addr);
 		}
 		else 
 		{
-			System.out.println("3번 구 입력 실패");
 		}
 		
-		dao.userInterInsert1(inter); 
+		interA.userInterInsert1(inter); 
 		if (inter.getInterSubId2() != "")
 		{
-			dao.userInterInsert2(inter);
+			interA.userInterInsert2(inter);
 		}
 		else 
 		{
-			System.out.println("2번 소주제 입력 실패");
 		}
 		if (inter.getInterSubId3() != "")
 		{
-			dao.userInterInsert3(inter);
+			interA.userInterInsert3(inter);
 		}
 		else 
 		{
-			System.out.println("3번 소주제 입력 실패");
 		}
-		  
-
-		
 		return "redirect:signup.action";
 	}
 	
 	@RequestMapping(value="/addrguajax.action", method=RequestMethod.GET)
 	public String addrGuAjax(String siid, ModelMap model)
 	{
+		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
 		
-		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
-		
-		model.addAttribute("list", dao.addrGuList(siid));
+		model.addAttribute("list", addrA.addrGuList(siid));
 		
 		return "/WEB-INF/views/AddrGuAjax.jsp";
 	}
@@ -110,28 +100,17 @@ public class SingupController
 	@RequestMapping(value="/intersubajax.action", method=RequestMethod.GET)
 	public String intersubajax(String mainid, ModelMap model)
 	{
-		System.out.println("mainid = " + mainid);
-		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
-		model.addAttribute("list", dao.interSubList(mainid));
-		
-		System.out.println(dao.interSubList(mainid).get(0).getInterSubName1());
+		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
+		model.addAttribute("list", interA.interSubList(mainid));
 		return "/WEB-INF/views/InterSubAjax.jsp";
-	}
-	
-	
-	
-	@RequestMapping(value="intermain.action", method=RequestMethod.GET)
-	public void signupMainList(String mainid, HttpServletResponse reponse)
-	{
-		
 	}
 	
 	@RequestMapping(value="/idcheck.action")
 	public void singUpcheckId(String id, HttpServletResponse response) throws IOException
 	{
 		int result = 0;
-		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
-		result = dao.checkId(id);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
+		result = userA.checkId(id);
 		
 		response.getWriter().print(result);
 	}
@@ -139,9 +118,10 @@ public class SingupController
 	@RequestMapping(value="/nickcheck.action")
 	public void singUpcheckNinkname(String nickname, HttpServletResponse response) throws IOException
 	{
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
+		
 		int result = 0;
-		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
-		result = dao.checkNick(nickname);
+		result = userA.checkNick(nickname);
 		response.getWriter().print(result);
 	}
 	
