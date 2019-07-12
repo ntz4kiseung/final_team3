@@ -81,7 +81,7 @@
 			var userId="";
 			$('.nickName').each(function(index)
 			{
-				if($(this).attr('id') == 'ST00004')
+				if($(this).attr('id') == 'ST00003')
 				{
 					userId += $(this).attr('name')+ " ";
 				}
@@ -90,8 +90,8 @@
 			
 			$('#message-close').click(function()
 			{
-				$('#takeUserIds').val("");
-				$('#contents').val("");
+				$('#takeUserIds').empty();
+				$('#contents').empty();
 				
 			});
 		});
@@ -115,9 +115,53 @@
 			}
 			else
 			{
-				console.log("체크해제");
+				jQuery.ajaxSettings.traditional = true;
+				var joinId = $(this).attr('name');
+				arr = [joinId, "ST00001"];
+				$.ajax({
+					url : 'hostjoinupdate.action',
+					data: {joinArr : arr},
+					type: 'GET',
+					dataType: 'html'
+				}).done(function(result){
+					console.log($(this).attr('name'));
+				});
 			}
 		});
+// 만남확정 ------------------------------------------------------------------------------------------------
+		$('.check-meeting').on('click', function()
+		{
+			alert("test");
+			var joinId = "";
+			$('input[class="nickName"]:checked').each(function(index)
+			{
+				joinId += $(this).attr('name')+ " ";
+				$.ajax({
+					url : 'hostalljoinupdate.action',
+					data: {joinIds : joinId, statusId : "ST00003"},
+					type: 'POST',
+					dataType: 'html'
+				}).done(function(result)
+				{
+					console.log($(this).attr('name'));
+				});
+			});
+			
+			$('input[class="nickName"]:not(:checked)').each(function(index)
+			{
+				joinId += $(this).attr('name')+ " ";
+				$.ajax({
+					url : 'hostalljoinupdate.action',
+					data: {joinIds : joinId, statusId : "ST00004"},
+					type: 'POST',
+					dataType: 'html'
+				}).done(function(result)
+				{
+					console.log($(this).attr('name'));
+				});
+			});
+		});
+		
 	});
 </script>
 
@@ -199,10 +243,10 @@
                     </div>
 
                     <div class="Post-Status">
-                        <div>현재 참가 신청인원 (3/${postlist.minNum }~${postlist.maxNum })</div>
+                        <div class="flex-row-center-center">현재 참가 신청인원 (3/<div id="minNum">${postlist.minNum }</div>~<div id="maxNum">${postlist.maxNum })</div></div>
                         <div class="flex-row-right-center">
                             <button class="btn btn-outline-secondary btn-120-35 allmessage" data-toggle="modal" data-target="#messageModal">참가자 전체 쪽지</button>
-                            <button class="btn btn-outline-orange btn-120-35">만남확정</button>
+                            <button class="btn btn-outline-orange btn-120-35 check-meeting" data-toggle="modal" data-target="#meetcheck">만남확정</button>
                         </div>
                     </div>
 
@@ -360,6 +404,33 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
 						data-dismiss="modal" id="reply-insert-Btn">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- 만남확정 ------------------------------------------------------------------------------------------- -->
+	 <!-- Modal -->
+	<div class="modal fade" id="meetcheck" tabindex="-1"
+		role="dialog" aria-labelledby="Confirmed-meeting" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="Confirmed-meeting">만남 확정</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="flex-col-center-center">
+						선택하신 인원으로 만남을 확정하시겠습니까?
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal" id="meeting">확인</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
 				</div>
 			</div>
 		</div>
