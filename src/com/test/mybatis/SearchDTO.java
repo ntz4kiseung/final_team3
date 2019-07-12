@@ -4,8 +4,16 @@ public class SearchDTO
 {
 	String keyword;
 	String addrGuId1, addrGuId2, addrGuId3, interSubId1, interSubId2, interSubId3, minMeetDate, maxMeetDate, moodId, drinkId, sameGenderId;
-	int minNum, maxNum, limitGrade;
+	int minNum, maxNum, limitGrade, pageNum;
 	
+	public int getPageNum()
+	{
+		return pageNum;
+	}
+	public void setPageNum(int pageNum)
+	{
+		this.pageNum = pageNum;
+	}
 	public String getKeyword()
 	{
 		return keyword;

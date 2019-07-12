@@ -36,7 +36,7 @@ public class SearchController
 	}
 	
 	@RequestMapping(value="/searchajax.action", method=RequestMethod.GET)
-	public String test(ModelMap model, SearchDTO s, String pageNum)
+	public String test(ModelMap model, SearchDTO s)
 	{
 		
 		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);

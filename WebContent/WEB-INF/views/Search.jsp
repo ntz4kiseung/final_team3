@@ -3,6 +3,8 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	session.setAttribute("userId", "lks");
 %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
@@ -230,14 +232,47 @@
             align-items: center;
             font-size: 16px;
         }
+        #filterBtn{
+        	background-color: rgba(0,0,0,0);
+        	border: none;
+        }
+        
+        
+        
+        
+        /* *************************************** */
+        .star-rating .off{
+        	filter: grayscale(100%);
+        }
+		/* *************************************** */
    </style>
 
    <script>
    	   var pageNum = 1;
    	   
+   	   
        $(document).ready(function(){
     	   
-    	    // 모달 함수 가능하게 해줌
+           /* *************************************** */
+           $(".star-rating>img").click(function(){
+        	   
+        	   var num = $(this).attr('id');
+        	   
+        	   $(this).parent().children('img').each(function(index, item){
+					$(item).addClass("off");
+        	   });
+        	   
+        	   for (var i = 0; i < num; i++)
+				{
+        		   $(this).parent().children("#"+(i+1)).removeClass("off");
+				}
+        	   
+        	   test = $(this).parent().children("input").val(num);
+        	   console.log(test.val());
+           });
+           
+           /* *************************************** */
+           // 모달 함수 가능하게 해줌
             $('#Search-filter-modal').on('shown.bs.modal', function () {
             });
 			
@@ -271,20 +306,41 @@
            		}
            	})
            	
-           	
+           	$(".ajaxbtn").click(function(){
+           		
+           		callList(pageNum);
+           	});
            	// 페이지 최초 요청시 게시글 불러오고, 스크롤 내리면 또 불러오는 함수
            	function callList(pageNum){
-
+				console.log('ajax 페이지 요청 : ', pageNum);
+				
            		$.ajax({
            			url: 'searchajax.action',
-           			data: {pageNum : pageNum},
+           			data: {pageNum : pageNum },
            			type: 'GET',
-           			dataType: 'html'        			
+           			dataType: 'html'
            		}).done(function(result){
-           			$('.Search-result-body').append(result);
+               		$('.Search-result-body').append(result);
            		}); 
            	};
-         
+         	
+           	$("#filterOnBtn").click(function(){
+ 	          	addrGuId = $(".addrGuId");							// 일단 모든 addrGuId인풋 가져옴
+ 	          	interSubId = $(".interSubId");                      // 일단 모든 interSubId인풋 가져옴
+ 	          	moodId = $("input:radio[name='moodId']:checked");   // 선택된 moodId를 가져옴
+				
+ 	          	addrGuId.each(function(index, item){
+ 	          		console.log(item.value);
+ 	          		console.log(item.name);
+ 	          	});
+ 	          	
+ 	          	interSubId.each(function(index, item){
+ 	          		console.log(item.value);
+ 	          		console.log(item.name);
+ 	          	});
+ 	          	
+ 	          	return false;
+           	});
        })
 
        
@@ -292,47 +348,26 @@
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
-
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
-
+		
+		
+		<c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
+		
+		
         <div class="body-box flex-item-grow flex-col-center-up">
 
             <div class="body flex-item-grow flex-col-center-center">
                 <div class="Search flex-item-grow flex-col-center-up">
                     <!-- 맨 위 -->
                     <div class="Main-navbar flex-row-left-center">
-                        통합검색&nbsp;&nbsp;&nbsp;<span>검색 키워드와 개설자의 신뢰도를 바탕으로 추천했습니다. 회원가입 후 더 상세한 추천을 받을 수 있습니다.</span>
+                        통합검색&nbsp;&nbsp;&nbsp;<span>검a색 키워드와 개설자의 신뢰도를 바탕으로 추천했습니다. 회원가입 후 더 상세한 추천을 받을 수 있습니다.</span>
+                    	<div class="flex-row-left-center star-rating">
+                    		<img class="off" id="1" src="img/star.png" alt=""/>
+                    		<img class="off" id="2"  src="img/star.png" alt="" />
+                    		<img class="off" id="3"  src="img/star.png" alt="" />
+                    		<img class="off" id="4"  src="img/star.png" alt="" />
+                    		<img class="off" id="5"  src="img/star.png" alt="" />
+                    		<input class="hidden" type="text" id="grade" name="grade" value="" />
+                    	</div>
                     </div>
 
                     <!-- 필터창 -->
@@ -361,14 +396,14 @@
                                 <!-- 카테고리용으로 비워둠 -->
                             </div>
                             <div>
-                                <button id="filterBtn" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Search-filter-modal">필터</button>
+                                <button id="filterBtn" type="button" class="btn btn-primary"  data-toggle="modal" data-target="#Search-filter-modal"><img src="img/필터.png" alt="" /></button>
                             </div>
                         </div>
 
                         <div class="modal fade" id="Search-filter-modal" tabindex="-1" role="dialog" aria-hidden="true">
                             <div class="modal-dialog modal-xlg Search-filter-modal">
                                 <div class="modal-content">
-                                    <form action="" class="flex-col-center-center">
+                                    <form action="" class="flex-col-center-center" id="filterForm">
 
                                         
                                         <div class="Search-filter-modal-header">
@@ -383,17 +418,17 @@
                                                  <div class="flex-col-left-center">
                                                     <div class="flex-row-left-center">
                                                         <button type="text" class="btn btn-120-35" name="addrSiId1" id="addrSiId1" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35" name="addrGuId1" id="addrGuId1" value="SI00003" >동작구</button>
+                                                        <button type="text" class="btn btn-120-35 addrGuId" name="addrGuId1" id="addrGuId1" value="SI00003" >동작구</button>
                                                         <button class="filter-plus">+</button>                              
                                                     </div>                                                                  
                                                     <div class="flex-row-left-center hidden additional-filter">                               
                                                         <button type="text" class="btn btn-120-35" name="addrSiId2" id="addrSiId2" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35" name="addrGuId2" id="addrGuId2" value="SI00003" >동작구</button>
+                                                        <button type="text" class="btn btn-120-35 addrGuId" name="addrGuId2" id="addrGuId2" value="SI00003" >동작구</button>
                                                         <button class="filter-plus">+</button>                               
                                                     </div>                                                                   
                                                     <div class="flex-row-left-center hidden additional-filter">                                
                                                         <button type="text" class="btn btn-120-35" name="addrSiId3" id="addrSiId3" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35" name="addrGuId3" id="addrGuId3" value="SI00003" >동작구</button>
+                                                        <button type="text" class="btn btn-120-35 addrGuId" name="addrGuId3" id="addrGuId3" value="SI00003" >동작구</button>
                                                     </div>                                                                           
                                                  </div>
                                             </div>
@@ -402,17 +437,17 @@
                                                 <div class="flex-col-left-center">
                                                     <div class="flex-row-left-center">
                                                         <button type="text" class="btn btn-120-35" name="interMainId1" id="interMainId1"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35" name="interSubId1"  id="interSubId1"  value="IS00003" readonly>축구</button>
+                                                        <button type="text" class="btn btn-120-35 interSubId" name="interSubId1"  id="interSubId1"  value="IS00003" readonly>축구</button>
                                                         <button class="filter-plus">+</button>                                     
                                                     </div>                                                                         
                                                     <div class="flex-row-left-center hidden additional-filter">                                      
                                                         <button type="text" class="btn btn-120-35" name="interMainId2" id="interMainId2"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35" name="interSubId2"  id="interSubId2"  value="IS00003" readonly>축구</button>
+                                                        <button type="text" class="btn btn-120-35 interSubId" name="interSubId2"  id="interSubId2"  value="IS00003" readonly>축구</button>
                                                         <button class="filter-plus">+</button>                                
                                                     </div>                                                                    
                                                     <div class="flex-row-left-center hidden additional-filter">                                 
                                                         <button type="text" class="btn btn-120-35" name="interMainId3" id="interMainId3"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35" name="interSubId3"  id="interSubId3"  value="IS00003" readonly>축구</button>
+                                                        <button type="text" class="btn btn-120-35 interSubId" name="interSubId3"  id="interSubId3"  value="IS00003" readonly>축구</button>
                                                     </div>                                                                                                        
                                                 </div>
                                             </div>
@@ -429,16 +464,30 @@
                                             <div class="filter-attribute">
                                                 <div>분위기</div>
                                                 <div>
-                                                    <input type="radio">
-                                                    <input type="radio">
-                                                    <input type="radio">
+                                                    <input type="radio" name="moodId" value="MD00001"> 무관
+                                                    <input type="radio" name="moodId" value="MD00002"> 진지한
+                                                    <input type="radio" name="moodId" value="MD00003"> 가벼운
                                                 </div>
                                             </div>
-                                            <div class="filter-attribute">필터6</div>
+                                            <div class="filter-attribute flex-col-left-center">
+                                            	<div>
+                                            		<div>참가제한</div>
+                                            		<div class="flex-row-left-center star-rating">
+							                    		<img class="off" id="1" src="img/star.png" alt=""/>
+							                    		<img class="off" id="2"  src="img/star.png" alt="" />
+							                    		<img class="off" id="3"  src="img/star.png" alt="" />
+							                    		<img class="off" id="4"  src="img/star.png" alt="" />
+							                    		<img class="off" id="5"  src="img/star.png" alt="" />
+							                    		<input class="hidden" type="text" id="grade" name="grade" value="" />
+							                    	</div>
+                                            	</div>
+                                            	<div></div>
+                                            	<div></div>
+                                            </div>
                                         </div>
 
                                         <div class="Search-filter-modal-footer flex-col-center-center">
-                                            <button class="btn btn-orange btn-160-45" >필터적용</button>
+                                            <button class="btn btn-orange btn-160-45" id="filterOnBtn" >필터적용</button>
                                         </div>
                                     </form>
                                 </div>
@@ -448,36 +497,15 @@
                         <!-- 진짜 글목록 -->
                         <div class="Search-result-body">
 
-							<c:forEach var="post" items="${list }">
-                                <div class="PostList-post flex-row-left-center">
-                                        <div class="PostList-post-left flex-col-center-center">
-                                            <div class="PostList-post-badge user-badge-box">
-                                                <img class="user-bad-badge" src="${post.urlBad }" alt="">
-                                                <img src="${post.url }" alt="">
-                                            </div>
-                                            <div>
-                                                ${post.nickname }
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-center flex-col-left-center">
-                                            <div class="PostList-post-title">
-                                                ${post.title}
-                                            </div>
-                                            <div class="PostList-post-contents">
-                                                ${post.contents}
-                                            </div>
-                                        </div>
-                                        <div class="PostList-post-right flex-col-center-center">
-                                            <div>
-                                                <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
-                                            </div>
-                                            <div class="PostList-post-detail flex-col-left-center">
-                                                <div>${post.addrSiName} ${post.addrGuName}</div>
-                                                <div>${post.meetDate}</div>
-                                            </div>
-                                        </div>
-                                    </div>
-   								</c:forEach>
+
+
+
+
+
+
+
+
+							
 
                         </div>
                     </div>

@@ -372,6 +372,9 @@ input:read-only {
     width: 100%;
     background: linear-gradient(to right, rgb(255,159,16), rgb(255,175,13));
     color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .navbar-box button{
     color: #fff;
@@ -381,12 +384,19 @@ input:read-only {
     background-color: rgb(250,250,250);
 }
 .navbar-left{
-    flex-basis: 440px; 
-    padding-left:7.5px; 
+    flex-basis: 200px; 
+    padding-left:10px;
+}
+.navbar-left>div{
+	flex-shrink: 0;
 }
 .navbar-right{
-    flex-basis: 440px;
+    flex-basis: 200px;
     padding-right:20px; 
+    flex-shrink: 0;
+}
+.navbar-right>div{
+	flex-shrink: 0;
 }
 .logo-img{
     width: 50px;
