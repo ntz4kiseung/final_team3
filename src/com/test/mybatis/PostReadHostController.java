@@ -143,7 +143,6 @@ public class PostReadHostController
 		String result = null;
 		System.out.println(joinArr[0]);
 		System.out.println(joinArr[1]);
-		
 		result = "redirect:postreadhost.action";
 		return result;
 	}
