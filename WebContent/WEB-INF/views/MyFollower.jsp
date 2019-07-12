@@ -78,12 +78,12 @@
                 <div class="MyPage flex-item-grow flex-col-center-up">
 
                     
-                   <c:forEach var="List" items="${ myPageList }" varStatus="status">
+                    <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
-                             <div class="MyPage-header-badge">
+                        <div class="MyPage-header-badge">
                                <div class="user-badge-box">
-                                         <img class="user-bad-badge" src=" ${MyPageBad[status.index].urlBad }" alt="">
+                                        <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
                                          <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                                  </div>
                             </div>
@@ -109,7 +109,7 @@
                                 ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
                                 <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
                                 <div>${myPageInterList[status.index].interSubName3 }</div> 
-                                		
+                                      
                                 <div style="color: orange;">${List.telCheck }</div>
                                 
                                 <div style="color: orange;">${List.emailCheck }</div>
@@ -141,8 +141,8 @@
                                    	<c:forEach var="fList" items="${followerList }" varStatus="status">
                                     <div class="MyFollow-user flex-row-left-center">
                                        <div class="user-badge-box">
-                                                <img class="user-bad-badge" src="<%=cp %>/${followerBad[status.index].urlBad }" alt="">
-                                                <img src="<%=cp %>/${fList.url } " alt="">
+                                                <img class="user-bad-badge" src="${followerBad[status.index].urlBad }" alt="">
+                    							 <img src="<%=cp %>/${fList.url } " alt="">
                                         </div>
                                           <div class="MyFollow-user-detail">
                                         
