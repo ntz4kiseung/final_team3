@@ -9,4 +9,7 @@ public interface IBadgeDAO
 	public ArrayList<BadgeDTO> BadgeList3();
 	public ArrayList<BadgeDTO> BadgeList4();
 	
+	public ArrayList<BadgeDTO> positiveBadge();
+	public ArrayList<BadgeDTO> negativeBadge();
+	public ArrayList<BadgeDTO> hostBadge();
 }
