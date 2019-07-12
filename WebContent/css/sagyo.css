@@ -1,5 +1,44 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+/* *************************************** */
+.grayscale{
+	filter: grayscale(100%);
+}
+.star-25-box{
+	width: 125px;
+	height: 25px;
+}
+.star-25-box img{
+	width: 25px;
+	height: 25px;
+}
+.star-20-box{
+	width: 100px;
+	height: 20px;
+}
+.star-20-box img{
+	width: 20px;
+	height: 20px;
+}
+.star-show{
+	position: relative;
+}
+.star-show>div{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+}
+.star-show>div:nth-child(2){
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	overflow-x: hidden;
+}
+.star-show>div:nth-child(2)>.fa-star{
+	color : rgb(255,159,16);
+}
+/* *************************************** */
+
 .user-badge-box{
 	position: relative;
 }
