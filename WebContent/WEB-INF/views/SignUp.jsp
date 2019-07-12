@@ -57,61 +57,109 @@
 			$("#signup-submit").click(function() {
 				
 				var userid = $("#userId").val();
+				var useridCheck = $("#btn-check-id").val();
+				
+				
 				var pwd1 = $("#pwd").val();
 				var pwd2 = $("#pwd2").val();
+				var pwdCheck = $("#pwdCheck").val();
+				
 				var nickname = $("#nickname").val();
+				var nicknameCheck = $("#btn-check-nick").val(); /* 이게 0이면 중복 */
+				
 				var name = $("#name").val();
+				
 				var birth = $("#birth").val();
+				
+				var genderid = $("#genderId").val();
+				
 				var tel = $("#tel").val();
+				var telCheck = $("#telCheck").val();
+				
 				var email = $("#email").val();
-				var useridC = $("#btn-check-id").val();
-				var pwdC = $("#span-check-pw").val();
-				var nicknameC = $("#btn-check-nick").val();
-				var telC = $("#telcerti").val();
-				var emailC = $("#emailcerti").val();
+				var emailCheck = $("#emailCheck").val();
+				
+				var sns = $("#sns").val();
+				
+				var addrsi1 = $("#addrSiId1").val();
+				var addrgu1 = $("#addrGuId1").val();
+				
+				var intermain1 = $("#interMainId1").val();
+				var intersub1 = $("#interSubId1").val();
 				
 				
 				
-				if (userid == "" || pwd1 == "" || pwd2 == "" || nickname == "" || name =="" || birth =="" || tel =="" || email == "")
+				
+				
+				console.log("유저 아이디 : " + userid);
+				console.log("유저 아이디 중복 체크 : " + useridCheck);
+				
+				console.log("비밀번호 1 : " + pwd1);
+				console.log("비밀번호 2 : " + pwd2);
+				console.log("비밀번호 확인 : " + pwdCheck);
+				
+				console.log("닉네임 : " + nickname);
+				console.log("닉네임 체크 : " + nicknameCheck);
+				
+				console.log("이름 : " + name);
+				
+				console.log("생년월일 : " + birth);
+				
+				console.log("성별 : " + genderid);
+				
+				console.log("휴대전화 : " + tel);
+				console.log("휴대전화 체크 : " + telCheck);
+				
+				console.log("이메일 : " + email);
+				console.log("이메일 체크 : " + emailCheck);
+				
+				console.log("SNS : " + sns);
+
+				console.log("시 주소 ID : " + addrsi1);
+				console.log("구 주소 ID : " + addrgu1);
+
+				console.log("대 분류 ID : " + intermain1);
+				console.log("소 분류 ID : " + intersub1);				
+				console.log("===============================================================");	
+				
+				if (userid == "" || pwd1 == "" || pwd2 =="" || nickname == "" || name == "" || birth == "" || tel == "" || email == ""
+						|| addrgu1 == "" || intersub1 == "")
 				{
 					alert("필수정보가 누락되었습니다.");
-					return;
+					return false;
 				}
-				else if(useridC == "0")
+				else if(useridCheck == "0")
 				{
-					console.log("아이디 밸류 : " + useridC);
 					alert("아이디 중복 확인을 완료해주세요.");
-					return;
+					return false;
 				}
-				else if(pwdC=="0")
+				else if(pwdCheck == "0")
 				{
-					console.log("비밀번호 밸류 : " + pwdC);
-					alert("비밀번호 입력 확인을 해주세요.");
-					return;
+					alert("비밀번호 입력 확인을 완료해주세요.");
+					return false;
 				}
-				else if(nicknameC=="0")
+				else if(useridCheck == "0")
 				{
-					console.log("닉네임 밸류 : " + nicknameC)
-					alert("닉네임 중복 확인을 완료해주세요.");
-					return;
+					alert("닉네임 입력 확인을 완료해주세요.");
+					return false;
 				}
-				else if(telC=="0")
+				else if(telCheck == "")
 				{
-					console.log("전화인증 밸류 : " + telC)
 					alert("휴대전화 인증을 완료해주세요.");
-					return;
+					return false;
 				}
-				else if(emailC=="0")
+				else if(emailCheck == "")
 				{
-					console.log("이메일 인증 밸류 : " + emailC);
 					alert("이메일 인증을 완료해주세요.");
-					return;
+					return false;
 				}
 				else
 				{
+					alert("회원가입 완료 접근");
 					var form = document.getElementById("signUp-submit-form");
-					form.submit;
+					form.submit();
 				}
+				
 			})
 			
 
@@ -156,23 +204,23 @@
 				
 				if($("#pwd").val() == "" && $("#pwd2").val() == "")
 				{
-					document.getElementById("span-check-pw").style.display = 'inline-block';
-					document.getElementById("span-check-pw").style.color = '#DF0101';
-					$("#span-check-pw").text("비밀번호를 입력해주세요.");		
+					document.getElementById("span-pwd-check").style.display = 'inline-block';
+					document.getElementById("span-pwd-check").style.color = '#DF0101';
+					$("#span-pwd-check").text("비밀번호를 입력해주세요.");		
 				}
 				
 				if ($("#pwd2").val() != "")
 				{
 					if ($("#pwd2").val() == $("#pwd").val()) {
-						document.getElementById("span-check-pw").style.display = 'inline-block';
-						document.getElementById("span-check-pw").style.color = '#31B404';
-						$("#span-check-pw").val("1");
-						$("#span-check-pw").text("사용하실수 있습니다.");
+						document.getElementById("span-pwd-check").style.display = 'inline-block';
+						document.getElementById("span-pwd-check").style.color = '#31B404';
+						$("#pwdCheck").val("1");
+						$("#span-pwd-check").text("사용하실수 있습니다.");
 					} else {
-						document.getElementById("span-check-pw").style.display = 'inline-block';
-						document.getElementById("span-check-pw").style.color = '#DF0101';
-						$("#span-check-pw").val("0");
-						$("#span-check-pw").text("비밀번호가 일치하지 않습니다.");
+						document.getElementById("span-pwd-check").style.display = 'inline-block';
+						document.getElementById("span-pwd-check").style.color = '#DF0101';
+						$("#pwdCheck").val("0");
+						$("#span-pwd-check").text("비밀번호가 일치하지 않습니다.");
 					}
 				}
 			})
@@ -181,15 +229,15 @@
 			$("#pwd2").keyup(function() {
 
 				if ($("#pwd2").val() == $("#pwd").val()) {
-					document.getElementById("span-check-pw").style.display = 'inline-block';
-					document.getElementById("span-check-pw").style.color = '#31B404';
-					$("#span-check-pw").val("1");
-					$("#span-check-pw").text("사용하실수 있습니다.");
+					document.getElementById("span-pwd-check").style.display = 'inline-block';
+					document.getElementById("span-pwd-check").style.color = '#31B404';
+					$("#pwdCheck").val("1");
+					$("#span-pwd-check").text("사용하실수 있습니다.");
 				} else {
-					document.getElementById("span-check-pw").style.display = 'inline-block';
-					document.getElementById("span-check-pw").style.color = '#DF0101';
-					$("#span-check-pw").val("0");
-					$("#span-check-pw").text("비밀번호가 일치하지 않습니다.");
+					document.getElementById("span-pwd-check").style.display = 'inline-block';
+					document.getElementById("span-pwd-check").style.color = '#DF0101';
+					$("#pwdCheck").val("0");
+					$("#span-pwd-check").text("비밀번호가 일치하지 않습니다.");
 				}
 			})
 			
@@ -314,23 +362,16 @@
 			})
 			
 			
-			$("input:radio[name=radio-check-gender]").click(function()
+			$("input:radio[name=radio-check-gender]").change(function()
 			{
-				var genderId = $("input:radio[name=radio-check-gender]").val();
-				
-				$("#genderId").val(genderId);
-				
-				console.log($("#genderId").val());
+				var test =  $('input:radio[name="radio-check-gender"]:checked').val();
+				$("#genderId").val(test);
 			})
 			
 			var a;
-			
-
-			
 			$(".btn-check-cate1").click(function() {
 				a = $(this).val();
 				console.log("a = " + a);
-				
 				$(".btn-pop-sido").click(function() {
 					
 					$("#addrSiName"+a).text($(this).text());
@@ -349,7 +390,11 @@
 							$("#inbodyB"+a).append(result);
 		                }); 
 				})
+				
 			})
+			
+			
+			
 			
 			var c;
 			$(".btn-check-cate2").click(function()
@@ -366,16 +411,19 @@
 					console.log("구 이름 = " + $("#addrGuName"+c).val());
 				})
 			})
+			
+			
+			
 			/* interSubName1 */
 			var d;
 			$(".btn-check-cate3").click(function() {
 				d = $(this).val();
-				console.log(d);
+				
 				$(".btn-pop-main").click(function() {
 					$("#interMainName"+d).text($(this).text());
 					
 					var mainid = $(this).val();
-					console.log("메인아이디 = " + mainid);
+					
 					$.ajax({
 							url: '<%=cp %>/intersubajax.action',
 							type: 'GET',
@@ -397,7 +445,6 @@
 				console.log(e);
 				$(".btn-pop-sub").click(function()
 				{
-					console.log("값: " + $(this).text());
 					$("#btn-check-sub"+e).text($(this).text());
 					 
 					$("#interSubId"+e).val($(this).val());
@@ -457,7 +504,6 @@
 					$("#email-certi-test").text(certi);
 				    $('#email-su').val(certi);
 				}
-				
 			})
 			
 			
@@ -567,7 +613,7 @@
                             </div>
                         </div>
     
-                        <form role="form" id="signUp-submit-form" action="insertuser.action" method="post" class="SignUp-body flex-col-left-up">
+                        <form role="form" id="signUp-submit-form" name="signUp-submit-form" action="insertuser.action" method="post" class="SignUp-body flex-col-left-up">
 
                             <div class="SignUp-input-group">
                                 <div class="SignUp-input-group-label">
@@ -591,7 +637,8 @@
                                 </div>
                                 <input type="password" id="pwd2" name="pwd2" class="form-control input-245-40" placeholder="비밀번호를 다시 입력해주세요">
                                 <div class="div-check">
-                                	<span class="span-check" id="span-check-pw" value="0"></span>
+                                	<span class="span-check" id="span-pwd-check"></span>
+                                	<input type="hidden" id="pwdCheck" name="pwdCheck" value="0">
                                 </div>
                             </div>
                             <div class="SignUp-input-group">
@@ -645,15 +692,14 @@
                                 </div>
                                 <div class="flex-row-left-center">
                                     <div class="radio-group">
-                                        <input type="radio" value="GD00001" name="radio-check-gender"/>
+                                        <input type="radio" name="radio-check-gender" value="GD00001" />
                                         <label for="">남성</label>
                                     </div>
                                     &nbsp;&nbsp;
                                     <div class="radio-group">
-                                        <input type="radio" value="GD00002" name="radio-check-gender"/>
+                                        <input type="radio" name="radio-check-gender" value="GD00002" />
                                         <label for="">여성</label>
-                                        <input type="text" id="genderId" name="genderId" value="" style="display : none">
-                                        
+                                        <input type="hidden" id="genderId" name="genderId" value="">
                                     </div>
                                 </div>
                             </div>
@@ -815,6 +861,26 @@
                                 <textarea class="form-control" name="introduce" id="introduce" cols="30" rows="10"></textarea>
                             </div>
                         </form>
+                            
+
+
+                        <div class="SignUp-footer flex-col-center-center">
+                            <button type="button" id="signup-submit" class="btn btn-orange btn-160-45">회원가입</button>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+                        
+                        
+                        
+                        
+                        
 <!-- Content for Popover #1 -->
 <c:forEach var="i" begin="1" end="3">
 	<div id="a${i}" class="hidden">
@@ -944,21 +1010,7 @@
   </div>
 </div>
     
-    
 
-
-                        <div class="SignUp-footer flex-col-center-center">
-                            <button type="button" id="signup-submit" class="btn btn-orange btn-160-45">회원가입</button>
-                        </div>
-                    </div>
-
-
-
-
-                </div>
-            </div>
-        </div>
-    </div>
 
 
 

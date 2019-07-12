@@ -1,15 +1,12 @@
 package com.test.mybatis;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,8 +29,6 @@ public class SingupController
 		model.addAttribute("addrsilist",dao.addrSiList());
 		model.addAttribute("intermainlist", dao.interMainList());
 		
-		System.out.println(dao.interMainList().size());
-		
 		return result;
 	}
 	
@@ -44,29 +39,59 @@ public class SingupController
 	@RequestMapping(value="/insertuser.action", method=RequestMethod.POST)
 	public String signupInsert(UserDTO user, AddrDTO addr, InterDTO inter)
 	{
-		
 		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
 		
+		dao.userLoginInsert(user);
 		
-		System.out.println(user.getTelCheck());
+		dao.userNewBadgeInsert(user);
+		String badgelogid = dao.userNewBadgeSelect(user);
+		  
+		dao.userEssentialInsert(user, badgelogid);
+		 
+		dao.userSubInsert(user);
 		
-		System.out.println(user.getEmailCheck());
+		dao.userTelInsert(user);
 		
+		dao.userEmailInsert(user);
+		  
+		dao.userAddrInsert1(addr);
 		
-		  dao.userLoginInsert(user);
+		if(addr.getAddrGuId2() != "")
+		{
+			dao.userAddrInsert2(addr);
+		}
+		else 
+		{
+			System.out.println("2번 구 입력 실패");
+		}
+		if(addr.getAddrGuId3() != "")
+		{
+			dao.userAddrInsert3(addr);
+		}
+		else 
+		{
+			System.out.println("3번 구 입력 실패");
+		}
+		
+		dao.userInterInsert1(inter); 
+		if (inter.getInterSubId2() != "")
+		{
+			dao.userInterInsert2(inter);
+		}
+		else 
+		{
+			System.out.println("2번 소주제 입력 실패");
+		}
+		if (inter.getInterSubId3() != "")
+		{
+			dao.userInterInsert3(inter);
+		}
+		else 
+		{
+			System.out.println("3번 소주제 입력 실패");
+		}
 		  
-		  dao.userEssentialInsert(user);
-		  
-		  dao.userSubInsert(user);
-		  
-		  dao.userAddrInsert(addr); 
-		  
-		  dao.userInterInsert(inter); 
-		  
-		  dao.userTelInsert(user);
-		  
-		  dao.userEmailInsert(user);
-		 	 
+
 		
 		return "redirect:signup.action";
 	}
@@ -74,15 +99,11 @@ public class SingupController
 	@RequestMapping(value="/addrguajax.action", method=RequestMethod.GET)
 	public String addrGuAjax(String siid, ModelMap model)
 	{
-		System.out.println("siid = "+siid);
+		
 		ISignupDAO dao = sqlSession.getMapper(ISignupDAO.class);
 		
-		/*
-		 * List<AddrDTO> list = dao.addrGuList(siid);
-		 */
 		model.addAttribute("list", dao.addrGuList(siid));
-		System.out.println(dao.addrGuList(siid).get(0).getAddrGuName2());
-		System.out.println(dao.addrGuList(siid).get(0).getAddrGuName1());
+		
 		return "/WEB-INF/views/AddrGuAjax.jsp";
 	}
 
