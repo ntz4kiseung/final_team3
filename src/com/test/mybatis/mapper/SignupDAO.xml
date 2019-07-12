@@ -46,8 +46,8 @@
  	</insert>
  	
  	<insert id = "userEssentialInsert">
- 	INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE)
-	VALUES(#{userId }, #{nickname }, #{name } , TO_DATE(#{birth },'YYMMDD'), #{genderId }, #{tel }, #{email }, SYSDATE)
+ 	INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE, BADGELOGID)
+	VALUES(#{user.userId }, #{user.nickname }, #{user.name } , TO_DATE(#{user.birth },'YYMMDD'), #{user.genderId }, #{user.tel }, #{user.email }, SYSDATE, #{badgelogid})
  	</insert>
  	
  	<insert id = "userSubInsert">
@@ -55,16 +55,37 @@
 	VALUES(USER_SUB_SEQ.NEXTVAL, #{userId }, #{sns }, #{introduce })
  	</insert>
  	
- 	<insert id = "userAddrInsert">
+ 	<insert id = "userAddrInsert1">
  	INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
-	VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, 'GU00001')
+	VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, #{addrGuId1 })
  	</insert>
  	
+ 	<insert id = "userAddrInsert2">
+ 	INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
+	VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, #{addrGuId2 })
+ 	</insert>
  	
- 	<insert id = "userInterInsert">
+ 	<insert id = "userAddrInsert3">
+ 	INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
+	VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, #{addrGuId3 })
+ 	</insert>
+ 	
+ 	<insert id = "userInterInsert1">
  	INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
-	VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, 'IS00001')
+	VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId1 })
  	</insert>
+ 	
+ 	<insert id = "userInterInsert2">
+ 	INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
+	VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId2 })
+ 	</insert>
+ 	
+ 	<insert id = "userInterInsert3">
+ 	INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
+	VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId3 })
+ 	</insert>
+ 	
+ 	
  	
  	<insert id = "userTelInsert">
 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
@@ -75,5 +96,23 @@
  	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
 	VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00002')
  	</insert>
+ 	
+ 	<!-- 뉴비 뱃지 주기 -->
+ 	
+ 	<insert id = "userNewBadgeInsert">
+ 	INSERT INTO USER_BADGE_LOG(BADGELOGID, USERID, BADGEPOINTID) 
+ 	VALUES(ADD_ID('USER_BADGE_LOG', 'BADGELOGID', 'BL'), #{userId}, 'BP00011')
+ 	</insert>
+ 	
+ 	<select id = "userNewBadgeSelect" resultType = "java.lang.String">
+ 	SELECT BADGELOGID
+	FROM USER_BADGE_LOG
+	WHERE USERID = #{userId}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
   
  </mapper>
