@@ -93,11 +93,23 @@ public class MessageController
 	}
 	
 	@RequestMapping(value="/messagedelete.action", method=RequestMethod.POST)	
-	public String messageDelete(Model model,MessageDTO m)
+	public String messageDelete(MessageDTO m,String[] checkArr)
 	{
+		System.out.println("11");
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
+		System.out.println("22");
 		
-		model.addAttribute("messageDelete",dao.messageDelete(m));
+		for (int i = 0; i < checkArr.length; i++)
+		{
+			System.out.println("삭제번호" + i + "=" + checkArr[i]);
+					
+		}
+		
+		
+		
+		/*
+		 * for(int i=0; i<checkArr.length; i++) { dao.messageDelete(m); }
+		 */
 		
 		return "redirect:mymessagerecevie.action";
 		

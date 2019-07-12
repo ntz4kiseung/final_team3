@@ -97,7 +97,7 @@
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
                                <div class="user-badge-box">
-                                         <img class="user-bad-badge" src=" ${MyPageBad[status.index].urlBad }" alt="">
+                                         <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
                                          <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                                  </div>
                             </div>
