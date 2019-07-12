@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.test.mybatis.IUserDAO">
+
+<!-- 조현우  ======================================================================================================================================-->
+
+  	<insert id = "userTelInsert">
+		INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00001')
+ 	</insert>
+ 	
+ 	<insert id = "userEmailInsert"> 	
+ 		INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00002')
+ 	</insert>
+ 	
+ 	<insert id = "userNewBadgeInsert">
+ 		INSERT INTO USER_BADGE_LOG(BADGELOGID, USERID, BADGEPOINTID) 
+ 		VALUES(ADD_ID('USER_BADGE_LOG', 'BADGELOGID', 'BL'), #{userId}, 'BP00011')
+ 	</insert>
+ 	
+ 	<select id = "userNewBadgeSelect" resultType = "java.lang.String">
+ 		SELECT BADGELOGID
+		FROM USER_BADGE_LOG
+		WHERE USERID = #{userId}
+ 	</select>
+ 	
+ 	<insert id = "userEssentialInsert">
+ 		INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE, BADGELOGID)
+		VALUES(#{user.userId }, #{user.nickname }, #{user.name } , TO_DATE(#{user.birth },'YYMMDD'), #{user.genderId }, #{user.tel }, #{user.email }, SYSDATE, #{badgelogid})
+ 	</insert>
+ 	
+	<select id="checkId" resultType="java.lang.Integer">
+		SELECT COUNT(USERID) AS COUNT
+		FROM LOGIN
+		WHERE UPPER(USERID) = UPPER(#{userid })
+ 	</select>
+ 	
+ 	<select id="checkNick" resultType="java.lang.Integer">
+ 		SELECT COUNT(NICKNAME) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE UPPER(NICKNAME) = UPPER(#{nickname })
+ 	</select>
+ 	
+ 	<insert id = "userLoginInsert">
+ 		INSERT INTO LOGIN(USERID, PWD, ROLEID)
+		VALUES(#{userId }, CRYPTPACK.ENCRYPT(#{pwd }, 'JAVA006$'), 'RL00002')
+ 	</insert>
+ 	
+ 	 	<insert id = "userSubInsert">
+ 		INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
+		VALUES(USER_SUB_SEQ.NEXTVAL, #{userId }, #{sns }, #{introduce })
+ 	</insert>
+ 	
+ 	<!-- 회원가입 -->
+ 	
+ 	<select id="findIdTelCheck" resultType="java.lang.Integer">
+	 	SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE NAME = #{name} AND TEL = #{tel}
+ 	</select>
+ 	
+ 	<select id="findIdEmailCheck" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE NAME = #{name} AND EMAIL = #{email}
+ 	</select>
+ 	
+ 	<select id="findPwTelCheck" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND NAME = #{name} AND TEL = #{tel}
+ 	</select>
+ 	
+ 	<select id="findPwEmailCheck" resultType="java.lang.Integer">
+ 		SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND NAME = #{name} AND EMAIL = #{email}
+ 	</select>
+ 	
+ 	<select id = "findIdTel" resultType="java.lang.String">
+ 		SELECT USERID
+ 		FROM USER_ESSENTIAL
+ 		WHERE NAME = #{name} AND TEL = #{tel}
+ 	</select>
+ 	
+ 	<select id = "findIdEmail" resultType="java.lang.String">
+ 		SELECT USERID
+ 		FROM USER_ESSENTIAL
+ 		WHERE NAME = #{name} AND EMAIL = #{email}
+ 	</select>		
+ 	
+ 	<update id = "findPwTemp">
+		UPDATE LOGIN
+		SET PWD = CRYPTPACK.ENCRYPT(#{pwd}, 'JAVA006$')
+		WHERE UPPER(USERID) = UPPER(#{userId})
+		
+ 	</update>
+ 	
+ 	<select id="findPwdString" resultType="java.lang.String">
+ 		SELECT CRYPTPACK.DECRYPT(#{pwdtemp}, 'JAVA006$')
+		FROM LOGIN
+		WHERE UPPER(USERID) = UPPER(#{userId})
+ 	</select>
+ 	
+ 	<insert id="findIdTelInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00003')
+	 </insert>
+	 
+	 <insert id="findIdEmailInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00004')
+	 </insert>
+	 
+	 <insert id="findPwTelInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00005')
+	 </insert>
+	 
+	 <insert id="findPwEmailInsert">
+	 	INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
+		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{emailCheck}, SYSDATE, 'CT00006')
+	 </insert>
+	 
+ 	<!-- 아이디/비밀번호 확인 -->
+ 	
+ 	<select id ="checkIdPw" resultType="java.lang.Integer">
+	 	SELECT COUNT(*) AS COUNT
+		FROM LOGIN
+		WHERE USERID = #{userId} AND CRYPTPACK.DECRYPT(PWD, 'JAVA006$') = UPPER(#{pwd})
+	 </select>
+ 	
+ 	<!-- 로그인 -->
+ 	
+<!--====================================================================================================================================== 조현우 -->
+
+
+</mapper>

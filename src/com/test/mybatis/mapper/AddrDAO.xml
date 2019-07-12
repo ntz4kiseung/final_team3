@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.test.mybatis.IAddrDAO">
+
+	<select id="addrSiList" resultType="com.test.mybatis.AddrDTO">
+ 		SELECT ADDRSIID AS ADDRSIID1, ADDRSINAME  AS ADDRSINAME1
+		FROM ADDR_SI
+ 	</select>
+ 	
+ 	<select id="addrGuList" resultType="com.test.mybatis.AddrDTO">
+		SELECT ADDRGUID AS ADDRGUID1, ADDRGUNAME AS ADDRGUNAME1
+		FROM ADDR_GU
+        where ADDRSIID=#{siid }
+ 	</select>
+ 	
+ 	<insert id = "userAddrInsert1">
+ 		INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
+		VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, #{addrGuId1 })
+ 	</insert>
+ 	
+ 	<insert id = "userAddrInsert2">
+ 		INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
+		VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, #{addrGuId2 })
+ 	</insert>
+
+ 	<insert id = "userAddrInsert3">
+ 		INSERT INTO USER_ADDR(ID, USERID, ADDRGUID)
+		VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, #{addrGuId3 })
+ 	</insert>
+ 	
+
+
+</mapper>

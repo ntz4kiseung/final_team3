@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.test.mybatis.IInterDAO">
+
+ 	<select id="interMainList" resultType="com.test.mybatis.InterDTO">
+ 		SELECT INTERMAINID AS INTERMAINID1, INTERMAINNAME AS INTERMAINNAME1
+		FROM INTEREST_MAIN
+ 	</select>
+ 	
+ 	<select id="interSubList" resultType="com.test.mybatis.InterDTO">
+ 		SELECT INTERSUBID AS INTERSUBID1, INTERSUBNAME AS INTERSUBNAME1
+		FROM INTEREST_SUB
+        WHERE INTERMAINID = #{mainid}
+ 	</select>
+ 	
+ 	<insert id = "userInterInsert1">
+ 		INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
+		VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId1 })
+ 	</insert>
+ 	
+ 	<insert id = "userInterInsert2">
+ 		INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
+		VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId2 })
+ 	</insert>
+ 	
+ 	<insert id = "userInterInsert3">
+ 		INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
+		VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId3 })
+ 	</insert>
+
+  
+
+</mapper>

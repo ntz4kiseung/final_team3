@@ -22,7 +22,7 @@ public class FindIdPwController
 	
 	// 아이디 찾기 폼
 	@RequestMapping(value="/findid.action", method=RequestMethod.GET)
-	public String findidForm(ModelMap model)
+	public String fIdForm(ModelMap model)
 	{
 		String result = null;
 		result = "/WEB-INF/views/FindId.jsp";
@@ -32,7 +32,7 @@ public class FindIdPwController
 	
 	// 비밀번호 찾기 폼
 	@RequestMapping(value="/findpw.action", method=RequestMethod.GET)
-	public String findpwForm(ModelMap model)
+	public String fPwForm(ModelMap model)
 	{
 		String result = null;
 		result = "/WEB-INF/views/FindPw.jsp";
@@ -42,13 +42,13 @@ public class FindIdPwController
 	
 	// 아이디 찾기 이름 전화번호 유효 확인
 	@RequestMapping(value="/findidtelcheck.action")
-	public void findIdTelCheck(String[] findidtel, HttpServletResponse response) throws IOException
+	public void fIdTelCheck(String[] findidtel, HttpServletResponse response) throws IOException
 	{
 		String result = "";
-
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
 		
-		result = dao.findIdTel(findidtel[0], findidtel[1]);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
+		
+		result = userA.findIdTel(findidtel[0], findidtel[1]);
 		
 		response.getWriter().print(result);
 	}
@@ -56,62 +56,47 @@ public class FindIdPwController
 	
 	// 아이디 찾기 이름 이메일 유효 확인
 	@RequestMapping(value="/findidemailcheck.action")
-	public void findIdEmailCheck(String[] findidemail, HttpServletResponse response) throws IOException
+	public void fIdEmailCheck(String[] findidemail, HttpServletResponse response) throws IOException
 	{
 		String result = "";
 		
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
 		
-		result = dao.findIdEmail(findidemail[0], findidemail[1]);
+		result = userA.findIdEmail(findidemail[0], findidemail[1]);
 		
 		response.getWriter().print(result);
 	}
 	
 	// 비밀번호 찾기 개인정보 체크 휴대전화
 	@RequestMapping(value="/findpwtelcheck.action")
-	public void findPwTelCheck(String[] findpwtel, HttpServletResponse response) throws IOException
+	public void fPwTelCheck(String[] findpwtel, HttpServletResponse response) throws IOException
 	{
 		int result = 0;
 		
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
-		result = dao.findPwTelCheck(findpwtel[0], findpwtel[1], findpwtel[2]);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
+		
+		result = userA.findPwTelCheck(findpwtel[0], findpwtel[1], findpwtel[2]);
 		response.getWriter().print(result);
 	}
 	// 비밀번호 찾기 개인정보 체크 이메일
 	@RequestMapping(value="/findpwemailcheck.action")
-	public void findPwEmailCheck(String[] findpwemail, HttpServletResponse response) throws IOException
+	public void fPwEmailCheck(String[] findpwemail, HttpServletResponse response) throws IOException
 	{
 		int result = 0;
 		
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
-		result = dao.findPwEmailCheck(findpwemail[0], findpwemail[1], findpwemail[2]);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
+		
+		result = userA.findPwEmailCheck(findpwemail[0], findpwemail[1], findpwemail[2]);
 		response.getWriter().print(result);
 	}
 	
-	// 임시비밀번호 변경
-	/*
-	 * @RequestMapping(value="/findpwtemp.action") public void findPwTemp(String[]
-	 * pwdtemp, HttpServletResponse response) throws IOException { String result =
-	 * ""; System.out.println("*"); IFindIdPwDAO dao =
-	 * sqlSession.getMapper(IFindIdPwDAO.class); System.out.println("1 : " +
-	 * pwdtemp[0]+", "+pwdtemp[1]); System.out.println("**");
-	 * dao.findPwTemp(pwdtemp[0], pwdtemp[1]); System.out.println("***");
-	 * System.out.println("2 : " + pwdtemp[0]+", "+pwdtemp[1]);
-	 * 
-	 * result = dao.findPwdString(pwdtemp[1]); System.out.println("****");
-	 * System.out.println("3 : " + pwdtemp[0]+", "+pwdtemp[1]);
-	 * 
-	 * response.getWriter().print(result); }
-	 */
-	// 변경후 찾기
-
 	// 아이디 찾기 전화 인증번호 DB입력
 	@RequestMapping(value="/findidtelinsert.action", method=RequestMethod.POST)
-	public String findIdTelInsert(UserDTO user, Model model)
+	public String fIdTelInsert(UserDTO user, Model model)
 	{
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
 		
-		dao.findIdTelInsert(user);
+		userA.findIdTelInsert(user);
 		
 		model.addAttribute("resultid", user.getUserId());
 		
@@ -120,11 +105,11 @@ public class FindIdPwController
 	
 	// 아이디 찾기 이메일 인증번호 DB입력
 	@RequestMapping(value="/findidemailinsert.action", method=RequestMethod.POST)
-	public String findIdEmailInsert(UserDTO user, Model model)
+	public String fIdEmailInsert(UserDTO user, Model model)
 	{
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
 		
-		dao.findIdEmailInsert(user);
+		userA.findIdEmailInsert(user);
 		
 		model.addAttribute("resultid", user.getUserId());
 		
@@ -134,12 +119,12 @@ public class FindIdPwController
 	
 	// 비밀번호 찾기 전화 인증번호 DB 입력
 	@RequestMapping(value="/findpwtelinsert.action", method=RequestMethod.POST)
-	public String findPwTelInsert(UserDTO user, Model model)
+	public String fPwTelInsert(UserDTO user, Model model)
 	{
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
 		
-		dao.findPwTemp(user);
-		dao.findPwTelInsert(user);
+		userA.findPwTemp(user);
+		userA.findPwTelInsert(user);
 		
 		model.addAttribute("checkName", "휴대전화");
 		
@@ -150,22 +135,21 @@ public class FindIdPwController
 	
 	// 비밀번호 찾기 이메일 인증번호 DB 입력
 	@RequestMapping(value="/findpwemailinsert.action", method=RequestMethod.POST)
-	public String findPwEmailInsert(UserDTO user, Model model)
+	public String fPwEmailInsert(UserDTO user, Model model)
 	{
-		IFindIdPwDAO dao = sqlSession.getMapper(IFindIdPwDAO.class);
+		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
 		
-		dao.findPwTemp(user);
-		dao.findPwEmailInsert(user);
+		userA.findPwTemp(user);
+		userA.findPwEmailInsert(user);
 		
 		model.addAttribute("checkName", "E-mail");
-		
 		return "redirect:findpwresult.action";
 	}
 	
 	
 	// 아이디 찾기 결과
 	@RequestMapping(value="/findidresult.action", method=RequestMethod.GET)
-	public String findidResult()
+	public String fIdResult()
 	{
 		String result = null;
 		result = "/WEB-INF/views/FindIdComplete.jsp";
@@ -175,7 +159,7 @@ public class FindIdPwController
 	
 	// 비밀번호 찾기 결과
 	@RequestMapping(value="/findpwresult.action", method=RequestMethod.GET)
-	public String findpwResult()
+	public String fPwResult()
 	{
 		String result = null;
 		
