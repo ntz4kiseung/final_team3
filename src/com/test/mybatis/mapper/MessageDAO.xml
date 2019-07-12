@@ -3,18 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.test.mybatis.IMessageDAO">  <!-- 인터페이스 지정  -->
+<mapper namespace="com.test.mybatis.IMessageDAO">  
   
 	<select id="messageRecevieList" resultType="com.test.mybatis.MessageDTO"> 
-		SELECT MESSAGEID,CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
-		FROM MESSAGE
-		WHERE TAKEUSERID='caroin'
+		SELECT M.MESSAGEID,M.CONTENTS,M.GIVEUSERID,M.TAKEUSERID,M.SENDDATE,M.CHECKDATE
+		FROM MESSAGE M LEFT JOIN DEL_MESSAGE DM  ON (M.MESSAGEID = DM.MESSAGEID AND M.TAKEUSERID=DM.USERID)
+		WHERE DM.MESSAGEID IS NULL AND UPPER(TAKEUSERID)=UPPER('caroin')
+		ORDER BY M.SENDDATE DESC
 	</select>  	
 
 	<select id="messageSendList" resultType="com.test.mybatis.MessageDTO"> 
-		SELECT  MESSAGEID,CONTENTS,GIVEUSERID,TAKEUSERID,SENDDATE,CHECKDATE
-		FROM MESSAGE
-		WHERE GIVEUSERID='admin001'
+		SELECT M.MESSAGEID,M.CONTENTS,M.GIVEUSERID,M.TAKEUSERID,M.SENDDATE,M.CHECKDATE
+		FROM MESSAGE M LEFT JOIN DEL_MESSAGE DM  ON (M.MESSAGEID = DM.MESSAGEID AND M.GIVEUSERID=DM.USERID)
+		WHERE DM.MESSAGEID IS NULL AND UPPER(GIVEUSERID)=UPPER('admin001')
+		ORDER BY M.SENDDATE
 	</select>  	
 	
 	<insert id="messageAdd">
@@ -23,9 +25,8 @@
 	</insert>
 	
 	<delete id="messageDelete">
-		DELETE
-		FROM MESSAGE
-		WHERE MESSAGEID=#{messageId }
+		INSERT INTO DEL_MESSAGE(ID,MESSAGEID,DELETEDATE,USERID)
+		VALUES (DEL_MESSAGE_SEQ.NEXTVAL ,#{messageId },SYSDATE, 'caroin')
 	</delete>
 	
 

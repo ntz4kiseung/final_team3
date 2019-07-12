@@ -119,7 +119,7 @@
         text-align: left;
         vertical-align: middle;
       }   
-    
+      
 
         
     </style>
@@ -165,37 +165,29 @@
           });
        });
        
-       
-       var checkArr = new Array();
-       $(".checkOne").on("click",function(){
-    	   alert($(this).val());
-           /* checkArr.push($(this).val()); */
-       });
-       
-   
 
        $(".delete").click(function(){
-           
+    	   
+    	   var checkArr = new Array();
     	  jQuery.ajaxSettings.traditional = true;
            var confirm_val = confirm("정말 삭제하시겠습니까?");
            
+           $("input[class='checkOne']:checked").each(function(){
+        	    checkArr.push($(this).val());
+        	 });
+           
+           
            if(confirm_val) {
-            
-        	
-            
-            console.log(checkArr[0] + ", " + checkArr[1]);
-            debugger;
-             
+     	
             $.ajax({
             url : 'messagedelete.action',
             type : 'post',
             data : { checkArr : checkArr },
-            dataType : 'html'
             }).done(function(result){
-            	location.href = 'WEB-INF/views/MyMessageReceive.jsp';
+            	location.href = "<%=cp%>/mymessagerecevie.action";
 			})
 			
-           } 
+           }  
            
           });
       
@@ -284,13 +276,14 @@
           
       }); */
       
-       $('#message-close').click(function()
+   /*     $('#message-close').click(function()
       {
           $('#takeUserId').val("");
        });
+       */
       
-      
-      
+      $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
+		
 
 
    });
@@ -351,7 +344,7 @@
                                          <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                                  </div>
                             </div>
-                              <div class="MyPage-header-grade-star">
+                              <%--
                                 <c:forEach var="i" begin="1" end="${List.reviewGrade }">
                                    <label style="color: #ffd700;">★</label>
                                 </c:forEach>
@@ -362,7 +355,25 @@
                             <div class="MyPage-header-grade">
                               ${List.reviewGrade } / 5.0
                               <input type="hidden" id="hidden" value="${List.reviewGrade }" />
-                            </div>
+                            </div> --%>
+                            <div class="star-show star-25-box">
+								<div>
+									<img class="grayscale" id="1" src="img/star.png" alt=""/>
+									<img class="grayscale" id="2"  src="img/star.png" alt="" />
+									<img class="grayscale" id="3"  src="img/star.png" alt="" />
+									<img class="grayscale" id="4"  src="img/star.png" alt="" />
+									<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+								</div>
+								<div>
+							  		<img class="" id="1" src="img/star.png" alt=""/>
+									<img class="" id="2"  src="img/star.png" alt="" />
+									<img class="" id="3"  src="img/star.png" alt="" />
+									<img class="" id="4"  src="img/star.png" alt="" />
+									<img class="" id="5"  src="img/star.png" alt="" />
+								</div>
+								<input class="hidden" type="text" id="grade2" name="grade2" value="${List.reviewGrade }"/>
+								<div class="MyPage-header-grade" style="padding-left: 40px;">${List.reviewGrade } / 5.0</div>
+							</div>
                         </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">

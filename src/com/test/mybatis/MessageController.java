@@ -25,7 +25,7 @@ public class MessageController
 	{
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
-		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
 		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
@@ -42,7 +42,7 @@ public class MessageController
 	{
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
-		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
 		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
@@ -93,27 +93,16 @@ public class MessageController
 	}
 	
 	@RequestMapping(value="/messagedelete.action", method=RequestMethod.POST)	
-	public String messageDelete(MessageDTO m,String[] checkArr)
+	public void messageDelete(String[] checkArr, HttpServletResponse response) throws IOException
 	{
-		System.out.println("11");
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
-		System.out.println("22");
+		int result = 0;
 		
 		for (int i = 0; i < checkArr.length; i++)
 		{
-			System.out.println("삭제번호" + i + "=" + checkArr[i]);
-					
+			result  = dao.messageDelete(checkArr[i]);
 		}
-		
-		
-		
-		/*
-		 * for(int i=0; i<checkArr.length; i++) { dao.messageDelete(m); }
-		 */
-		
-		return "redirect:mymessagerecevie.action";
-		
-	}
-	
 
+		response.getWriter().print(result);
+	}
 }

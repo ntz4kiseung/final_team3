@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class MyBadgeController
+public class BadgeController
 {
 	@Autowired
 	private SqlSession sqlSession;
@@ -21,7 +21,7 @@ public class MyBadgeController
 	public String myBadge(Model model)
 	{
 		IBadgeDAO dao = sqlSession.getMapper(IBadgeDAO.class);
-		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		model.addAttribute("BadgeList1",dao.BadgeList1());
 		model.addAttribute("BadgeList2",dao.BadgeList2());
 		model.addAttribute("BadgeList3",dao.BadgeList3());

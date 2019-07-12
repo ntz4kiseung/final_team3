@@ -18,8 +18,8 @@ public class FollowController
 	@RequestMapping(value="/myfollowing.action", method = RequestMethod.GET)
 	public String myFollowing(Model model)
 	{
-		IFollowingDAO dao = sqlSession.getMapper(IFollowingDAO.class);
-		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		IFollowDAO dao = sqlSession.getMapper(IFollowDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
 		model.addAttribute("followingBad",dao.followingBad());
 		model.addAttribute("followingList",dao.followingList());
@@ -37,8 +37,8 @@ public class FollowController
 	@RequestMapping(value="/myfollower.action", method = RequestMethod.GET)
 	public String myFollower(Model model)
 	{
-		IFollowerDAO dao = sqlSession.getMapper(IFollowerDAO.class);
-		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		IFollowDAO dao = sqlSession.getMapper(IFollowDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
 		model.addAttribute("followerBad",dao.followerBad());
 		model.addAttribute("followerList",dao.followerList());

@@ -31,6 +31,14 @@
 	font-weight: normal;
 }	
 </style>
+<script type="text/javascript">
+$(document).ready(function(){
+    
+	
+    $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
+	
+});
+</script>
 </head>
 <body>
  <div class="browser flex-col-center-center">
@@ -149,16 +157,28 @@
                                         
                                         
                                         	<div>${fList.nickname }</div>
-                                           <div >
-				                               <c:forEach var="i" begin="1" end="${fList.reviewGrade }">
-				                                   <label style="color: #ffd700;">★</label>
-				                                </c:forEach>
-				                                <c:forEach var="i" begin="${fList.reviewGrade }" end="4">
-				                                   <label style="color: #e9e9e9;">★</label>
-				                                </c:forEach>
-				                              ${fList.reviewGrade } / 5.0
-				                              <input type="hidden" id="hidden" value="${fList.reviewGrade }" />
-			                           	 	</div>
+                                           <div class="flex-row-center-center"> 
+				                              <div class="star-show star-20-box">
+													
+													<div>
+														<img class="grayscale" id="1" src="img/star.png" alt=""/>
+														<img class="grayscale" id="2"  src="img/star.png" alt="" />
+														<img class="grayscale" id="3"  src="img/star.png" alt="" />
+														<img class="grayscale" id="4"  src="img/star.png" alt="" />
+														<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+													</div>
+													<div>
+												  		<img class="" id="1" src="img/star.png" alt=""/>
+														<img class="" id="2"  src="img/star.png" alt="" />
+														<img class="" id="3"  src="img/star.png" alt="" />
+														<img class="" id="4"  src="img/star.png" alt="" />
+														<img class="" id="5"  src="img/star.png" alt="" />
+													</div>
+													<input class="hidden" type="text" id="grade2" name="grade2" value=" ${fList.reviewGrade }"/>
+													
+												</div>
+				                             	<div style="margin-left: 10px;">${fList.reviewGrade } / 5.0</div>
+				                            </div>
                                             <div>${followingAddrList[status.index].addrSiName1 }  ${followingAddrList[status.index].addrGuName1 } 
                                              ${followingAddrList[status.index].addrSiName2 }  ${followingAddrList[status.index].addrGuName2 } 
                                              ${followingAddrList[status.index].addrSiName3 }   ${followingAddrList[status.index].addrGuName3 } </div>
@@ -169,12 +189,7 @@
                                     </div>
 									</c:forEach>
 										
-										
-										<!-- <div class="user-badge-box">
-                                                <img class="user-bad-badge" src="${post.urlBad }" alt="">
-                                                <img src="${post.url }" alt="">
-                                            </div> -->
-										
+					
 
                                 </div>
                             </div>

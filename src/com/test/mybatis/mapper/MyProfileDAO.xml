@@ -5,13 +5,6 @@
   
 <mapper namespace="com.test.mybatis.IProfileDAO"> 
   
-	<select id="UserList" resultType="com.test.mybatis.UserDTO"> 
-		SELECT USERID, NICKNAME, NAME, BIRTH, GENDERID,TEL,EMAIL
-		FROM USER_ESSENTIAL
-		WHERE USERID='caroin'
-	</select>  	
 
-
-	
   
 </mapper>

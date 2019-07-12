@@ -10,9 +10,6 @@ public interface IUserDAO
 	
 	public ArrayList<UserDTO> CertiCheck();
 	
-	
-	/*조현우==================================================================================================*/
-	
 	public int userTelInsert(UserDTO user);
 	public int userEmailInsert(UserDTO user);
 	public int userNewBadgeInsert(UserDTO user);
@@ -44,8 +41,11 @@ public interface IUserDAO
 	
 	// 로그인 사용
 	
+	public ArrayList<UserDTO> myPageList();
 	
-	/*==================================================================================================조현우*/	
+	public ArrayList<UserDTO> MyPageBad(); 
 	
+	public ArrayList<AddrDTO> myPageAddrList();
 	
+	public ArrayList<InterDTO> myPageInterList();
 }
