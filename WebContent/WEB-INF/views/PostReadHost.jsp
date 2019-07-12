@@ -98,7 +98,6 @@
 		
 		$('.nickName').on("click", function()
 		{
-			
 			if($(this).is(":checked"))
 			{
 				jQuery.ajaxSettings.traditional = true;
@@ -129,38 +128,62 @@
 			}
 		});
 // 만남확정 ------------------------------------------------------------------------------------------------
-		$('.check-meeting').on('click', function()
-		{
-			alert("test");
-			var joinId = "";
-			$('input[class="nickName"]:checked').each(function(index)
+		
+		if($('#serchNum').html >= $('#minNum').html)
 			{
-				joinId += $(this).attr('name')+ " ";
-				$.ajax({
-					url : 'hostalljoinupdate.action',
-					data: {joinIds : joinId, statusId : "ST00003"},
-					type: 'POST',
-					dataType: 'html'
-				}).done(function(result)
+				if($('#serchNum').html <= $('#maxNum').html)
 				{
-					console.log($(this).attr('name'));
-				});
-			});
-			
-			$('input[class="nickName"]:not(:checked)').each(function(index)
+					$('.check-meeting').on('click', function()
+					{
+						$('#Confirmed-meeting-check').click(function()
+						{
+							var joinId = "";
+							{
+							$('input[class="nickName"]:checked').each(function(index)
+							{
+								joinId += $(this).attr('name')+ " ";	
+							});
+							$.ajax({
+								url : 'hostalljoinupdate.action',
+								data: {joinIds : joinId, statusId : "ST00003"},
+								type: 'POST',
+								dataType: 'html'
+							}).done(function(result)
+							{
+								console.log($(this).attr('name'));
+							});
+							}
+							joinId = "";
+							{
+							$('input[class="nickName"]:not(:checked)').each(function(index)
+							{
+								joinId += $(this).attr('name')+ " ";
+							});
+							$.ajax({
+								url : 'hostalljoinupdate.action',
+								data: {joinIds : joinId, statusId : "ST00004"},
+								type: 'POST',
+								dataType: 'html'
+							}).done(function(result)
+							{
+								console.log($(this).attr('name'));
+							});
+							}
+							$('#meeting-contents').html('선택하신 인원으로 만남을 확정하시겠습니까?');
+						});
+					});
+				}
+				else
+				{
+					$('#meeting-contents').html('최대인원보다 많습니다.');
+					alert("test2");
+				}
+			}
+			else
 			{
-				joinId += $(this).attr('name')+ " ";
-				$.ajax({
-					url : 'hostalljoinupdate.action',
-					data: {joinIds : joinId, statusId : "ST00004"},
-					type: 'POST',
-					dataType: 'html'
-				}).done(function(result)
-				{
-					console.log($(this).attr('name'));
-				});
-			});
-		});
+				$('#meeting-contents').html('최소인원보다 많습니다.');
+				alert("test3");
+			}	
 		
 	});
 </script>
@@ -243,7 +266,7 @@
                     </div>
 
                     <div class="Post-Status">
-                        <div class="flex-row-center-center">현재 참가 신청인원 (3/<div id="minNum">${postlist.minNum }</div>~<div id="maxNum">${postlist.maxNum })</div></div>
+                        <div class="flex-row-center-center">현재 참가 신청인원 (<div id="serchNum">${serchNum }</div>/<div id="minNum">${postlist.minNum }</div>~<div id="maxNum">${postlist.maxNum })</div></div>
                         <div class="flex-row-right-center">
                             <button class="btn btn-outline-secondary btn-120-35 allmessage" data-toggle="modal" data-target="#messageModal">참가자 전체 쪽지</button>
                             <button class="btn btn-outline-orange btn-120-35 check-meeting" data-toggle="modal" data-target="#meetcheck">만남확정</button>
@@ -423,13 +446,13 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="flex-col-center-center">
+					<div class="flex-col-center-center" id="meeting-contents">
 						선택하신 인원으로 만남을 확정하시겠습니까?
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal" id="meeting">확인</button>
+						data-dismiss="modal" id="Confirmed-meeting-check">확인</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
 				</div>
 			</div>

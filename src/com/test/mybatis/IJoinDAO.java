@@ -9,4 +9,5 @@ public interface IJoinDAO
 	public int joininsert(JoinDTO joinDTO);
 	public int replyinsert(JoinDTO joinDTO);
 	public int joinupdate(JoinDTO joinDTO);
+	public int serchjoin();
 }
