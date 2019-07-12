@@ -17,7 +17,7 @@
 	<select id="replylist" resultType="com.test.mybatis.JoinDTO">
 		SELECT JOINID, REPLYID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, USERTYPEID
 		FROM REPLY_VIEW
-		WHERE POSTID = 'PT00002's
+		WHERE POSTID = 'PT00002'
 	</select>
 	<select id="reportlist" resultType="com.test.mybatis.ReportDTO">
 		SELECT REPORTCATEID REPORTID, REPORTCATENAME
@@ -78,5 +78,8 @@
 	</insert>
 	<insert id="postdelte">
 		INSERT INTO DEL_POST(ID, POSTID, DELETEDATE) VALUES(DEL_POST_SEQ.NEXTVAL, #{reportId}, SYSDATE)
+	</insert>
+	<insert id="messageinsert">
+		INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'),#{giveUserId}, #{takeUserId}, #{contents}, SYSDATE)
 	</insert>
 </mapper>
