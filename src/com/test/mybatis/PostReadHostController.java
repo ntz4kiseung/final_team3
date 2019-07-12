@@ -115,10 +115,35 @@ public class PostReadHostController
 	{
 		String result = null;
 		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
-		System.out.println("TEST");
 		reportDTO.setReportId("PT00002");
-		System.out.println(reportDTO.getReportId());
 		dao.postdelte(reportDTO);
+		result = "redirect:postreadhost.action";
+		return result;
+	}
+	
+	@RequestMapping(value = "/hostmessagesend.action", method = RequestMethod.POST)
+	public String postMessage(Model model, MessageDTO messageDTO, String takeUserIds)
+	{
+		String result = null;
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		String[] takeuserid = takeUserIds.split(" ");
+		messageDTO.setGiveUserId("BLUMBALD");
+		for (int i = 0; i < takeuserid.length; i++)
+		{
+			messageDTO.setTakeUserId(takeuserid[i]);
+			dao.messageinsert(messageDTO);
+		}
+		result = "redirect:postreadhost.action";
+		return result;
+	}
+	
+	@RequestMapping(value = "/hostjoinupdate.action", method = RequestMethod.GET)
+	public String postJoinUpdate(Model model, JoinDTO joinDTO, String[] joinArr)
+	{
+		String result = null;
+		System.out.println(joinArr[0]);
+		System.out.println(joinArr[1]);
+		
 		result = "redirect:postreadhost.action";
 		return result;
 	}

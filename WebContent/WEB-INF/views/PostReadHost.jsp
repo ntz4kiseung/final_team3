@@ -12,6 +12,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Document</title>
 <!-- 부트스트랩 -->
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -19,6 +20,7 @@
 <!-- 폰트 (Noto Snas KR + Handlee) -->
 <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
 <!-- sagyo.css -->
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="css/sagyo.css" rel="stylesheet">
 <script type="text/javascript">
 	$(document).ready(function()
@@ -79,21 +81,42 @@
 			var userId="";
 			$('.nickName').each(function(index)
 			{
-				if($(this).attr('id') == 'ST00002')
+				if($(this).attr('id') == 'ST00004')
 				{
 					userId += $(this).attr('name')+ " ";
-					console.log(index +":"+$(this).attr('name'));
 				}
 			});	
-			userId.split("undefined");
-			$('#takeUserId').val(userId);
-		})
-		$('#message-close').click(function()
+			userId = $('#takeUserIds').val(userId);
+			
+			$('#message-close').click(function()
+			{
+				$('#takeUserIds').val("");
+				$('#contents').val("");
+				
+			});
+		});
+		
+		$('.nickName').on("click", function()
 		{
 			
-			$('#takeUserId').val("");
-			$('#message-contents').val("");
-			
+			if($(this).is(":checked"))
+			{
+				jQuery.ajaxSettings.traditional = true;
+				var joinId = $(this).attr('name');
+				arr = [joinId, "ST00002"];
+				$.ajax({
+					url : 'hostjoinupdate.action',
+					data: {joinArr : arr},
+					type: 'GET',
+					dataType: 'html'
+				}).done(function(result){
+					console.log($(this).attr('name'));
+				});
+			}
+			else
+			{
+				console.log("체크해제");
+			}
 		});
 	});
 </script>
@@ -212,7 +235,8 @@
 	                                </div>
 	                            </div>
 	                            <div class="PostWrite-row-right">
-	                            	<input class="nickName" id="${join.statusId }" name="${join.userId }" type="checkbox">
+	                            	<input class="nickName" id="${join.statusId }" name="${join.joinId }" type="checkbox"
+	                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
 	                            	참가수락
                             	</div>
 	                        </div>
@@ -351,11 +375,11 @@
 	          <span aria-hidden="true" id="message-close">×</span>
 	        </button>
 	      </div>
-	       <form role="form" action="messagesend.action" method="post">
+	       <form role="form" action="hostmessagesend.action" method="post">
 	      <div class="modal-body">
 	       	<div class="control-group flex-row-center-center">
 	            <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
-	            <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" ></div>
+	            <div><input type="text" class="form-control" name="takeUserIds" id="takeUserIds" ></div>
 	              <button type="button" class="btn" id="btn-check-id" value="0">아이디 중복확인</button>
 						 
 	         </div>
@@ -370,7 +394,7 @@
 	          <!-- TextArea Message -->
 	          <div class="control-group">
 	            <label for="destinataire" >내용</label>
-	            <textarea id="message-contents" name="contents" class="form-control" rows="5"></textarea>
+	            <textarea id="contents" name="contents" class="form-control" rows="5"></textarea>
 	          </div>
 	          <br />
 	        </div>
