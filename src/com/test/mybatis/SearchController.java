@@ -1,8 +1,11 @@
 package com.test.mybatis;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.session.SqlSession;
@@ -20,31 +23,28 @@ public class SearchController
 	
 	
 	@RequestMapping(value="/search.action", method=RequestMethod.GET)
-	public String findidForm(ModelMap model, SearchDTO s)
+	public String findidForm(String pageNum, HttpServletRequest request, ModelMap model)
 	{
-		String result = null;
-		result = "/WEB-INF/views/Search.jsp";
-		
-		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);
-		
-		SearchDTO searchDto = new SearchDTO();
-		searchDto.setKeyword("|키워드|");
-		
-		model.addAttribute("list", postDao.searchList(s));
-		
-		return result;
+		return "/WEB-INF/views/Search.jsp";
 	}
 	
 	@RequestMapping(value="/searchajax.action", method=RequestMethod.GET)
-	public String test(ModelMap model, SearchDTO s)
+	public String test(HttpServletRequest request, ModelMap model, String pageNum)
 	{
-		
+		Cookie[] cookies = request.getCookies();
 		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);
+		Map<String,String> cookieMap = new HashMap<String, String>();
 		
-		SearchDTO searchDto = new SearchDTO();
-		searchDto.setKeyword("|키워드|");
+		for (Cookie cookie : cookies)
+		{
+			System.out.println(cookie.getName());
+			System.out.println(cookie.getValue());
+			cookieMap.put(cookie.getName(), cookie.getValue());
+		}
 		
-		model.addAttribute("list", postDao.searchList(s));
+		System.out.println("pageNum in Controller : " + pageNum);
+		
+		model.addAttribute("list", postDao.searchList(pageNum, cookieMap));
 		
 		return "/WEB-INF/views/SearchAjax.jsp";
 	}

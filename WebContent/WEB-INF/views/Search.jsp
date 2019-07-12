@@ -320,7 +320,7 @@
 				
            		$.ajax({
            			url: 'searchajax.action',
-           			data: {pageNum : pageNum },
+           			data: {pageNum : pageNum},
            			type: 'GET',
            			dataType: 'html'
            		}).done(function(result){
@@ -335,10 +335,15 @@
  	          	moodId = $("input:radio[name='moodId']:checked");   // 선택된 moodId를 가져옴
  	          	
  	          	$( "#filterForm" ).submit(function( event ) {
- 	          		
- 	          	  console.log( $( this ).serializeArray() );
- 	          	  
- 	          	return false;
+ 	          	  values = $(this).serializeArray();
+				  values.forEach(function(item){
+					 document.cookie= item.name+"="+item.value;
+				  });
+				  console.log(document.cookie);
+				  $('.Search-result-body').empty();
+				  pageNum=1;
+				  callList(pageNum);
+ 	          	  return false;
  	          	});
            	});
            	
