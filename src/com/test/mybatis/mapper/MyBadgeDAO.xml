@@ -40,7 +40,23 @@
       ORDER BY BADGEPOINTID 
 	</select> 
 	
+	<select id="positiveBadge" resultType="com.test.mybatis.BadgeDTO"> 
+		SELECT BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID,BADGEPOINTDESC2, URL
+		FROM POINT
+		WHERE BADGEPOINTCATEID='BC00001'
+	</select>
 	
+	<select id="negativeBadge" resultType="com.test.mybatis.BadgeDTO"> 
+		SELECT BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID,BADGEPOINTDESC2, URL
+		FROM POINT
+		WHERE BADGEPOINTCATEID='BC00002'
+	</select> 
+	
+	<select id="hostBadge" resultType="com.test.mybatis.BadgeDTO"> 
+		SELECT BADGEPOINTID, BADGEPOINTNAME, BADGEPOINTCATEID,BADGEPOINTDESC2, URL
+		FROM POINT
+		WHERE BADGEPOINTCATEID='BC00003'
+	</select>  
 	
 	
   

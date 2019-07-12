@@ -9,16 +9,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
-import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 
 @Controller
@@ -32,17 +27,15 @@ public class MypageController
 	{
 		IMyPageDAO dao1 = sqlSession.getMapper(IMyPageDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
-		
+		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
 		
 		model.addAttribute("myPageList",dao1.myPageList());
 		model.addAttribute("myPageAddrList", dao1.myPageAddrList());
 		model.addAttribute("myPageInterList", dao1.myPageInterList());
 		model.addAttribute("myReviewList", dao2.myReviewList());
-		
-		//System.out.println(userId);
-		
-		//model.addAttribute("hostReview", dao2.hostReview(userId));
-		
+		model.addAttribute("positiveBadge", dao3.positiveBadge());
+		model.addAttribute("negativeBadge", dao3.negativeBadge());
+		model.addAttribute("hostBadge", dao3.hostBadge());
 		
 		return "/WEB-INF/views/CreatePostList.jsp";
 	}

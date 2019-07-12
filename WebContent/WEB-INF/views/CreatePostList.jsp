@@ -35,7 +35,7 @@ $(document).ready(function()
 		$('#myInput').trigger('focus')
 	});
 	
-		      
+	/* 	      
 	$("[data-toggle=popover]").popover({
         html : true,
         content: function() {
@@ -43,7 +43,7 @@ $(document).ready(function()
           return $(content).children(".popover-body").html();
         }
     });
-	
+	 */
 	$( ".star_rating a" ).on("click",function() {
 	     $(this).parent().children("a").removeClass("on");
 	     $(this).addClass("on").prevAll("a").addClass("on");
@@ -117,11 +117,10 @@ $(document).ready(function()
 					str += '                           		</div>';
 					str += '                           		<div class="flex-review-third" style="text-align: center;" >';
 					str += '                           			<div class="PostList-post-badge">';
-					str += '                           					<a href="#" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom">';
-					str += '                                              <img class="point" src="img/Logo_NoBorder.png" alt="포인트선택" onclick="pointSelect()">';
+					str += '                           					<a href="#" class="pointSelect" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-container="body">';
+					str += '                                              <img class="select" name="select" src="img/Logo_NoBorder.png" alt="포인트선택">';
 					str += '                                            </a>';
 					str += '                               	 	</div>';
-					str += '                               	 	포인트 선택';
 					str += '                           		</div>';
 					str += '                           		<div class="flex-review-fourth">';
 					str += '                           			<textarea class="form-control"></textarea>';
@@ -139,17 +138,37 @@ $(document).ready(function()
 	     });
 		 
 	 });
+	 
+	 $(document).on("click",".select",function(){
+		
+		//alert('경고');
+		$("[data-toggle=popover]").popover({
+	        html : true,
+	        content: function() {
+	        var content = $(this).attr("data-popover-content");
+	        return $(content).children(".popover-body").html();
+	        }
+	    })
+		
+	 });
 	
-	 $('.modal').on('hidden.bs.modal', function (e) {
-		    console.log('modal close');
-		  $(this).find('form')[0].reset()
-		});
-	 
-	 
-	 
 	
 
 });	
+
+function selectBadge()
+{
+	alert("경고창");
+	var src = $(this).attr("src");
+	alert(src);
+	//var alt = $(".badgePoint").attr("alt");
+	//alert(alt);
+	//var test = $(".select").attr("src",src);
+	//alert(test);
+	//document.pointSelect.src=src;
+	//$(".pointSelect").attr("alt",src);
+}
+
 
 		   
 
@@ -474,144 +493,80 @@ $(document).ready(function()
 
 		<div id="badgeList" class="hidden">
 		  	 	<div class="popover-body" class="badge-post flex-col-left-up">
-		  	 	
 		      		<div>
 		      			<div>
 		      				<h2>칭찬포인트</h2>
 		      			</div>
-		      			<div class="flex-badge">
+		      			
+		      			<div class="flex-badge" style="width: 500px;">
+		      			<c:forEach var="positive" items="${positiveBadge }">
 			      			<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img class="badgePoint" src="img/핵인싸.png" alt="뱃지">
+				      				<!-- <img class="badgePoint" src="img/핵인싸.png" alt="뱃지"> -->
+				      				<img class="badgePoint" alt="${positive.badgePointId }" src="${positive.url }" onclick="selectBadge()">
 				      				</a>
-				      				<button type="button" class="badgePoint">확인버튼</button>
-				      				핵인싸
+				      				${positive.badgePointName }
 				      				
 				      			</div>
-				      		</div>	
-				      		
-				      		<div>
-				      			<div class="flex-badge-list flex-item-grow">
-				      				<a href="#">
-				      				<img src="img/매너왕.png" alt="뱃지">
-				      				</a>
-				      				매너왕
-			      					
-			      				</div>
-		      				</div>
-		      				
-		      				<div>
-			      				<div class="flex-badge-list flex-item-grow">
-				      				<a href="#">
-				      				<img src="img/지식왕.png" alt="뱃지">
-				      				</a>
-				      				지식왕
-			      					
-			      				</div>
-		      				</div>
-		      				
-		      				<div class="flex-badge-list flex-item-grow">
-		      					
-		      				</div>
-		      			</div>	
+				      		</div>
+				      		${positive.badgePointDesc2 }
+				      			
+				      	</c:forEach>
+		      			</div>
 		      			
 		      		</div>
+		      		
 		      		<hr>
 		      		
 		      		<div>
 		      			<div>
 		      				<h2>꾸중포인트</h2>
 		      			</div>
-		      			<div class="flex-badge">
+		      			
+		      			<div class="flex-badge" style="width: 500px;">
+		      			<c:forEach var="negative" items="${negativeBadge }">
 			      			<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/불참러.png" alt="뱃지">
+				      				<!-- <img src="img/불참러.png" alt="뱃지"> -->
+				      				<img src="${negative.url }" alt="뱃지" onclick="selectBadge()">
 				      				</a>
-				      				불참러
-				      				
+				      				${negative.badgePointName }
 				      			</div>
+				      			
 				      		</div>	
-				      		
-				      		<div>
-				      			<div class="flex-badge-list flex-item-grow">
-				      				<a href="#">
-				      				<img src="img/비매너.png" alt="뱃지">
-				      				</a>
-				      				비매너
-			      					
-			      				</div>
-		      				</div>
-		      				
-		      				<div>
-			      				<div class="flex-badge-list flex-item-grow">
-				      				<a href="#">
-				      				<img src="img/지각러.png" alt="뱃지">
-				      				</a>
-				      				지각러
-			      					
-			      				</div>
-		      				</div>
-		      				
-		      				<div>
-			      				<div class="flex-badge-list flex-item-grow">
-				      				<a href="#">
-				      				<img src="img/여기왜왔니.png" alt="뱃지">
-				      				</a>
-				      				여기왜왔니
-			      					
-			      				</div>
-		      				</div>
+				      		${negative.badgePointDesc2 }
+		      			</c:forEach>
 		      			</div>	
 		      			
 		      		</div>
-		      		
 		      		
 		      		<hr>
 		      		
 		      		<div>
 		      			<div>
-		      				<h2>칭찬포인트</h2>
+		      				<h2>호스트포인트</h2>
 		      			</div>
-		      			<div class="flex-badge">
+		      			
+		      			<div class="flex-badge" style="width: 500px;">
+		      			<c:forEach var="host" items="${hostBadge }">
 			      			<div>
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<a href="#">
-				      				<img src="img/슈퍼방장.png" alt="뱃지">
+				      				<!-- <img src="img/슈퍼방장.png" alt="뱃지"> -->
+				      				<img src="${host.url }" alt="뱃지" onclick="selectBadge()">
 				      				</a>
-				      				슈퍼방장
-				      				
+				      				${host.badgePointName }
 				      			</div>
+				      			
 				      		</div>	
-				      		
-				      		<div>
-				      			<div class="flex-badge-list flex-item-grow">
-				      				<a href="#">
-				      				<img src="img/맛잘알.png" alt="뱃지">
-				      				</a>
-				      				맛잘알
-			      					
-			      				</div>
-		      				</div>
-		      				
-		      				<div>
-			      				<div class="flex-badge-list flex-item-grow">
-				      				<a href="#">
-				      				<!-- <img src="img/뒤통수.png" alt="뱃지"> -->
-				      				</a>
-				      				뒷통수
-			      					
-			      				</div>
-		      				</div>
-		      				
-		      				<div class="flex-badge-list flex-item-grow">
-		      					
-		      				</div>
+				      		${host.badgePointDesc2 }
+		      			</c:forEach>
+		      			
 		      			</div>	
 		      			
 		      		</div>
-		      		
 		      		
 		      		
 		     	</div>
