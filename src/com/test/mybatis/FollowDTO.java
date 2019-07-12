@@ -3,7 +3,9 @@ package com.test.mybatis;
 public class FollowDTO
 {
 	private String nickname, userId, addrSiName1, addrGuName1, addrSiName2, addrGuName2,addrSiName3, addrGuName3, interMainName1, interSubName1, interMainName2, interSubName2, interMainName3, interSubName3, urlBad, url, followId;
-	private int reviewGrade;
+	// int 에서 double 로 변경~~
+	private double reviewGrade;
+	
 	public String getNickname()
 	{
 		return nickname;
@@ -140,14 +142,16 @@ public class FollowDTO
 	{
 		this.followId = followId;
 	}
-	public int getReviewGrade()
+	public double getReviewGrade()
 	{
 		return reviewGrade;
 	}
-	public void setReviewGrade(int reviewGrade)
+	public void setReviewGrade(double reviewGrade)
 	{
 		this.reviewGrade = reviewGrade;
 	}
+	
+	
 	
 	
 

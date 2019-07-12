@@ -19,7 +19,7 @@ public class MyProfileController
 	public String myProfile(Model model)
 	{
 		IProfileDAO dao = sqlSession.getMapper(IProfileDAO.class);
-		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
 		model.addAttribute("UserList",dao.UserList()); 
 		model.addAttribute("MyPageBad",dao2.MyPageBad());
@@ -33,7 +33,7 @@ public class MyProfileController
 	@RequestMapping(value="/myprofilemodify.action", method = RequestMethod.GET)
 	public String myProfileModify(Model model)
 	{
-		IMyPageDAO dao2 = sqlSession.getMapper(IMyPageDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
 		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());

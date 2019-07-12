@@ -25,7 +25,7 @@ public class MypageController
 	@RequestMapping(value="/createpostlist.action", method=RequestMethod.GET)
 	public String myReviewList(Model model)
 	{
-		IMyPageDAO dao1 = sqlSession.getMapper(IMyPageDAO.class);
+		IUserDAO dao1 = sqlSession.getMapper(IUserDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
 		
@@ -109,7 +109,7 @@ public class MypageController
 	@RequestMapping(value="/joinpostlist.action", method=RequestMethod.GET)
 	public String reviewList(Model model)
 	{
-		IMyPageDAO dao1 = sqlSession.getMapper(IMyPageDAO.class);
+		IUserDAO dao1 = sqlSession.getMapper(IUserDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		
 		model.addAttribute("myPageList",dao1.myPageList());

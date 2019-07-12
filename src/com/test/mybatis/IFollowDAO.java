@@ -2,7 +2,7 @@ package com.test.mybatis;
 
 import java.util.ArrayList;
 
-public interface IFollowingDAO
+public interface IFollowDAO
 {
 	public ArrayList<FollowDTO> followingList();
 	
@@ -11,5 +11,13 @@ public interface IFollowingDAO
 	public ArrayList<FollowDTO> followingAddrList();
 	
 	public ArrayList<FollowDTO> followingInterList();
+	
+	public ArrayList<FollowDTO> followerList();
+	
+	public ArrayList<FollowDTO> followerBad();
+	
+	public ArrayList<FollowDTO> followerAddrList();
+	
+	public ArrayList<FollowDTO> followerInterList();
 	
 }

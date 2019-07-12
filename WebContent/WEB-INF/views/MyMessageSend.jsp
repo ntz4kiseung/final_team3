@@ -196,6 +196,35 @@
 					})
 				});
 	 	
+		   $(".delete").click(function(){
+	    	   
+	    	   var checkArr = new Array();
+	    	  jQuery.ajaxSettings.traditional = true;
+	           var confirm_val = confirm("정말 삭제하시겠습니까?");
+	           
+	           $("input[class='checkOne']:checked").each(function(){
+	        	    checkArr.push($(this).val());
+	        	 });
+	           
+	           //alert(checkArr);
+	          
+	           
+	           if(confirm_val) {
+	     	
+	            $.ajax({
+	            url : 'messagedelete.action',
+	            type : 'post',
+	            data : { checkArr : checkArr },
+	            }).done(function(result){
+	            	location.href = "<%=cp%>/mymessagesend.action";
+				})
+				
+	           }  
+	           
+	          });
+	      
+		
+		
 	 	
 	});
  	
@@ -305,7 +334,7 @@
                                 
                                     <!-- 전체선택, 쪽지쓰기 버튼 -->
                                     <div class="MyMessage-header flex-row-left-center">
-                                        <button class="btn btn-orange btn-85-25">
+                                        <button class="btn btn-orange btn-85-25 delete">
                                          	   선택 삭제
                                         </button>
                                         &nbsp;&nbsp;
@@ -348,7 +377,7 @@
                                              
                                                 <div class="card-header flex-row-left-center" id="headingOne">
                                                     <div class="MyMessage-accordion-checkbox flex-col-center-center">
-                                                        <input type="checkbox" class=""  name="checkOne" >
+                                                        <input type="checkbox" name="checkOne" class="checkOne" value="${message.messageId }">
                                                     </div>
                                                     <div class="flex-item-grow">
                                                         <button class="btn btn-link MyMessage-title" type="button" data-toggle="collapse" data-target="#collapse${message.messageId }" aria-expanded="true" aria-controls="collapseOne">

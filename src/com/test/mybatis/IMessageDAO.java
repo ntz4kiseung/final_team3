@@ -10,7 +10,5 @@ public interface IMessageDAO
 	public int messageAdd(MessageDTO m);
 	public ArrayList<MessageDTO> messageRecevieList();
 	public ArrayList<MessageDTO> messageSendList();
-	public int messageDelete(MessageDTO m);
-	
-	
+	public int messageDelete(String messageid);
 }
