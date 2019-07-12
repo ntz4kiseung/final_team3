@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.mybatis.IJoinDAO">  <!-- 인터페이스 지정  -->
+	<select id="joinlist" resultType="com.test.mybatis.JoinDTO"> 
+		SELECT POSTID, JOINID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, NVL(DELJOIN,'없음'), STATUSID
+		FROM JOIN_VIEW
+		WHERE POSTID = 'PT00002'
+	</select>
+	
+	<select id="replylist" resultType="com.test.mybatis.JoinDTO">
+		SELECT JOINID, REPLYID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, USERTYPEID
+		FROM REPLY_VIEW
+		WHERE POSTID = 'PT00002'
+	</select>
+	
+	<insert id="joininsert">
+		INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE) VALUES(ADD_ID('JOIN','JOINID','JN'),'PT00002',#{userId}, 'ST00001',#{contents},SYSDATE)
+	</insert>
+	<insert id="replyinsert">
+		INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), #{joinId}, #{contents}, SYSDATE, #{userTypeId})
+	</insert>
+	<update id="joinupdate">
+		UPDATE JOIN
+		SET STATUSID = 'ST00002'
+		WHERE JOINID = 'JN03916'
+	</update>
+</mapper>

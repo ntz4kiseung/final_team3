@@ -12,5 +12,7 @@ public interface IMessageDAO
 	public ArrayList<MessageDTO> messageSendList();
 	public int messageDelete(MessageDTO m);
 	
+	// 승원 추가부분
+	public int messageinsert(MessageDTO messageDTO);
 	
 }

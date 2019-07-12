@@ -34,8 +34,10 @@
 		FROM LOGIN
 		WHERE UPPER(USERID) = UPPER(#{takeUserId })
  	</select> 
- 	
-	
+<!-- 승원 추가 밑에 부분 -->
+	<insert id="messageinsert">
+		INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'),#{giveUserId}, #{takeUserId}, #{contents}, SYSDATE)
+	</insert>
 
 	
   

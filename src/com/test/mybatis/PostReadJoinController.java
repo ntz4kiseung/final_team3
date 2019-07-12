@@ -27,12 +27,14 @@ public class PostReadJoinController
 	public String readList(Model model)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IPostDAO postDAO = sqlSession.getMapper(IPostDAO.class);
+		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
+		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String followIds = "anlant";
-		model.addAttribute("postlist",dao.postlist(followIds));
-		model.addAttribute("list",dao.joinlist()); 
-		model.addAttribute("replylist",dao.replylist());
-		model.addAttribute("reportlist", dao.reportlist());
+		model.addAttribute("postlist",postDAO.postlist(followIds));
+		model.addAttribute("list",joinDAO.joinlist()); 
+		model.addAttribute("replylist",joinDAO.replylist());
+		model.addAttribute("reportlist", reportDAO.reportlist());
 		
 		result = "WEB-INF/views/PostReadJoin.jsp";
 
@@ -44,21 +46,22 @@ public class PostReadJoinController
 	{
 		
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IFollowDAO followdao = sqlSession.getMapper(IFollowDAO.class);
+		IPostDAO postDAO = sqlSession.getMapper(IPostDAO.class);
 		String followIdin = "anlant";
 		followDTO.setUserId(followIdin);
 		
-		PostDTO postDTO = dao.postlist(followIdin);
+		PostDTO postDTO = postDAO.postlist(followIdin);
 		int followId = Integer.parseInt(postDTO.getFollowId());
 		if(followId != 0)
 		{
-			dao.followdelete(followDTO);
+			followdao.followdelete(followDTO);
 		}
 		else
 		{
-			dao.followinsert(followDTO);
+			followdao.followinsert(followDTO);
 		}
-		postDTO = dao.postlist(followIdin);
+		postDTO = postDAO.postlist(followIdin);
 		followId = Integer.parseInt(postDTO.getFollowId());
 		model.addAttribute("followId",followId);
 		result = "WEB-INF/views/FollowUpdateAjax.jsp";
@@ -70,10 +73,10 @@ public class PostReadJoinController
 	public String JoinInsert(Model model, JoinDTO joinDTO)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IJoinDAO joindao = sqlSession.getMapper(IJoinDAO.class);
 		System.out.println(joinDTO.getContents());
 		joinDTO.setUserId("anlant");
-		dao.joininsert(joinDTO);
+		joindao.joininsert(joinDTO);
 		
 		result = "redirect:postreadjoin.action";
 		return result;
@@ -83,9 +86,9 @@ public class PostReadJoinController
 	public String reportPost(Model model, ReportDTO reportDTO)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		reportDTO.setUserId("anlant");
-		dao.reportpostinsert(reportDTO);
+		reportDAO.reportpostinsert(reportDTO);
 		
 		result = "redirect:postreadjoin.action";
 		return result;
@@ -95,9 +98,9 @@ public class PostReadJoinController
 	public String reportJoin(Model model, ReportDTO reportDTO)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		reportDTO.setUserId("anlant");
-		dao.reportjoininsert(reportDTO);
+		reportDAO.reportjoininsert(reportDTO);
 		
 		result = "redirect:postreadjoin.action";
 		return result;
@@ -107,9 +110,9 @@ public class PostReadJoinController
 	public String reportreply(Model model, ReportDTO reportDTO)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		reportDTO.setUserId("anlant");
-		dao.reportreplyinsert(reportDTO);
+		reportDAO.reportreplyinsert(reportDTO);
 		
 		result = "redirect:postreadjoin.action";
 		return result;
@@ -119,9 +122,9 @@ public class PostReadJoinController
 	public String replyInsert(Model model, JoinDTO joinDTO)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		joinDTO.setUserId("anlant");
-		dao.replyinsert(joinDTO);
+		joinDAO.replyinsert(joinDTO);
 		result = "redirect:postreadjoin.action";
 		return result;
 	}
@@ -130,8 +133,8 @@ public class PostReadJoinController
 	public String joinDelcheckInsert(Model model, ReportDTO reportDTO)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
-		dao.joindelcheckinsert(reportDTO);
+		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
+		reportDAO.joindelcheckinsert(reportDTO);
 		result = "redirect:postreadjoin.action";
 		return result;
 	}
@@ -140,11 +143,11 @@ public class PostReadJoinController
 	public String postDelete(Model model, ReportDTO reportDTO)
 	{
 		String result = null;
-		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		System.out.println("TEST");
 		reportDTO.setReportId("PT00002");
 		System.out.println(reportDTO.getReportId());
-		dao.postdelte(reportDTO);
+		reportDAO.postdelte(reportDTO);
 		result = "redirect:postreadjoin.action";
 		return result;
 	}
