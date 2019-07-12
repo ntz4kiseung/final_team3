@@ -249,6 +249,27 @@
    	   
        $(document).ready(function(){
     	   
+    	// Search.jsp 진입시 → setSearchCookies : 전에 있던 Search용 쿠키 값 비워주고 기본 값들로 채워줌
+    	
+    	function setSearchCookies(){
+    		document.cookie="userId="+sessionStorage.getItem("userId");
+    		document.cookie="keyword="+"|keyword|";
+    		document.cookie="addrGuId1=''";
+    		document.cookie="addrGuId2=''";
+    		document.cookie="addrGuId3=''";
+    		document.cookie="interSubId1=''";
+    		document.cookie="interSubId2=''";
+    		document.cookie="interSubId3=''";
+    		document.cookie="minMeetDate=2019-07-01";
+    		document.cookie="maxMeetDate=2020-07-31";
+    		document.cookie="moodId=MI00001";
+    		document.cookie="drinkId=DR00002";
+    		document.cookie="sameGenderId=SG00002";
+    		document.cookie="minNum=2";
+    		document.cookie="maxNum=20";
+    		document.cookie="limitGrade=1";
+    	}
+    	   
            /* *************************************** */
            
 		// 별점 보여줄때 쓰이는 jQuery. hidden input value 안에 입력받은 숫자 만큼 width를 바꿔줌
@@ -317,10 +338,11 @@
            	// 페이지 최초 요청시 게시글 불러오고, 스크롤 내리면 또 불러오는 함수
            	function callList(pageNum){
 				console.log('ajax 페이지 요청 : ', pageNum);
+				document.cookie = "pageNum="+pageNum;
 				
            		$.ajax({
            			url: 'searchajax.action',
-           			data: {pageNum : pageNum},
+           			data: cookieToJson(),
            			type: 'GET',
            			dataType: 'html'
            		}).done(function(result){
@@ -328,6 +350,18 @@
            		}); 
            	};
          	
+           	function cookieToJson(){
+           		var result='{';
+           		cookies = document.cookie;
+           		cookies.split("; ").forEach(function(cookie){
+           			result+=(',"'+cookie.split("=")[0]+'"');
+           			result+=(':"'+cookie.split("=")[1]+'"');
+           		});
+           		result+='}';
+           		var result2 = result.replace(",", "");
+           		console.log(JSON.parse(result2));
+           		return JSON.parse(result2);
+           	}
            	
            	$("#filterOnBtn").click(function(){
  	          	addrGuId = $(".addrGuId");							// 일단 모든 addrGuId인풋 가져옴
@@ -532,19 +566,19 @@
                                                     <div class="flex-row-left-center">
                                                         <button type="text" class="btn btn-120-35" name="interMainId1" id="interMainId1"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
                                                         <button type="text" class="btn btn-120-35 interSubId" name="interSubId1"  id="interSubId1"  value="IS00003" readonly>축구</button>
-                                                        <input type="text" class="hidden" name="interSubId1" value="IS00003"/>
+                                                        <input type="text" class="hidden" name="interSubId1" value=""/>
                                                         <button class="filter-plus">+</button>                                     
                                                     </div>                                                                         
                                                     <div class="flex-row-left-center hidden additional-filter">                                      
                                                         <button type="text" class="btn btn-120-35" name="interMainId2" id="interMainId2"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
                                                         <button type="text" class="btn btn-120-35 interSubId" name="interSubId2"  id="interSubId2"  value="IS00003" readonly>축구</button>
-                                                        <input type="text" class="hidden" name="interSubId2" value="IS000012"/>
+                                                        <input type="text" class="hidden" name="interSubId2" value=""/>
                                                         <button class="filter-plus">+</button>                                
                                                     </div>                                                                    
                                                     <div class="flex-row-left-center hidden additional-filter">                                 
                                                         <button type="text" class="btn btn-120-35" name="interMainId3" id="interMainId3"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
                                                         <button type="text" class="btn btn-120-35 interSubId" name="interSubId3"  id="interSubId3"  value="IS00003" readonly>축구</button>
-                                                    	<input type="text" class="hidden" name="interSubId3" value="IS00023"/>
+                                                    	<input type="text" class="hidden" name="interSubId3" value="S"/>
                                                     </div>                                                                                                        
                                                 </div>
                                             </div>
@@ -558,8 +592,8 @@
                                             <div class="filter-attribute">
                                                 <div>만남일</div>
                                                 <div>
-                                                    <input type="text" name="minMeedDate" value="2019/07/12" />임시
-                                                    <input type="text" name="maxMeetDate"  value="2019/07/20" />만남일
+                                                    <input type="text" name="minMeedDate" value="2019-07-12" />임시
+                                                    <input type="text" name="maxMeetDate"  value="2019-07-20" />만남일
 												</div>
                                             </div>
                                             <div class="filter-attribute">
@@ -580,7 +614,7 @@
 															<img class="grayscale" id="3"  src="img/star.png" alt="" />
 															<img class="grayscale" id="4"  src="img/star.png" alt="" />
 															<img class="grayscale" id="5"  src="img/star.png" alt="" />
-															<input class="hidden" type="text" id="grade" name="grade" value="" />
+															<input class="hidden" type="text" id="limitGrade" name="limitGrade" value="" />
 														</div>                                            		
                                             		</div>
 

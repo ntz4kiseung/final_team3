@@ -29,22 +29,32 @@ public class SearchController
 	}
 	
 	@RequestMapping(value="/searchajax.action", method=RequestMethod.GET)
-	public String test(HttpServletRequest request, ModelMap model, String pageNum)
+	public String test(SearchDTO s, ModelMap model)
 	{
-		Cookie[] cookies = request.getCookies();
+//		Cookie[] cookies = request.getCookies();
 		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);
-		Map<String,String> cookieMap = new HashMap<String, String>();
+//		Map<String,String> cookieMap = new HashMap<String, String>();
+//		cookieMap.put("pageNum", pageNum);
+//		for (Cookie cookie : cookies)
+//		{
+//			System.out.println(cookie.getName());
+//			System.out.println(cookie.getValue());
+//			cookieMap.put(cookie.getName(), cookie.getValue());
+//		}
 		
-		for (Cookie cookie : cookies)
-		{
-			System.out.println(cookie.getName());
-			System.out.println(cookie.getValue());
-			cookieMap.put(cookie.getName(), cookie.getValue());
-		}
+		System.out.println(s.getPageNum());
+		System.out.println(s.getAddrGuId1());
+		System.out.println(s.getAddrGuId2());		
+		System.out.println(s.getAddrGuId3());
+		System.out.println(s.getInterSubId1());
+		System.out.println(s.getInterSubId2());
+		System.out.println(s.getInterSubId3());
+		System.out.println(s.getDrinkId());
+		System.out.println(s.getLimitGrade());
 		
-		System.out.println("pageNum in Controller : " + pageNum);
+//		System.out.println("pageNum in Controller : " + pageNum);
 		
-		model.addAttribute("list", postDao.searchList(pageNum, cookieMap));
+		model.addAttribute("list", postDao.searchList(s));
 		
 		return "/WEB-INF/views/SearchAjax.jsp";
 	}

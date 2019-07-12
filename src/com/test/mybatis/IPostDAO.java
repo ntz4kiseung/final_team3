@@ -10,7 +10,7 @@ public interface IPostDAO
 	public PostDTO postlist(String followIds);
 	public ArrayList<PostDTO> myReviewList();
 	public ArrayList<PostDTO> reviewList();
-	public ArrayList<PostDTO> searchList(@Param("pageNum") String pageNum, @Param("search") Map<String, String> search);
+	public ArrayList<PostDTO> searchList(SearchDTO s);
 	public ArrayList<PostDTO> hostReview(String postId);
 	public ArrayList<PostDTO> guestReview();
 }
