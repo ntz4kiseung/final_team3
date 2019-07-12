@@ -14,8 +14,8 @@
 		SELECT *
 		FROM
 		(
-		SELECT FN_CAL_RANK(POSTID, '조회유저', '|키워드|키워드2|') AS POSTGRADE 
-		     , RANK() OVER(ORDER BY FN_CAL_RANK(POSTID, '조회유저', '|키워드|키워드2|'), MEETDATE DESC) AS POSTNUM
+		SELECT FN_CAL_RANK(POSTID, #{userId}, #{keyword}) AS POSTGRADE 
+		     , RANK() OVER(ORDER BY FN_CAL_RANK(POSTID, #{userId}, #{keyword}), MEETDATE DESC) AS POSTNUM
 		     , POSTID, USERID, NICKNAME, URL, URLBAD
 		     , TITLE, MINNUM, MAXNUM, CONTENTS
 		     , ADDRSINAME, ADDRGUNAME, TO_CHAR(MEETDATE, 'YYYY/MM/DD HH24:MI') AS MEETDATE
@@ -23,12 +23,12 @@
 		WHERE MEETDATE >= SYSDATE
 		  AND (ADDRGUID LIKE '%'||#{addrGuId1} OR ADDRGUID IN (#{addrGuId2} ,#{addrGuId3}))
 		  AND (INTERSUBID LIKE '%'||#{interSubId1} OR INTERSUBID IN (#{interSubId2} ,#{interSubId3}))
-		  AND (2<=MINNUM AND MAXNUM<=20)
+		  AND (#{minNum}<=MINNUM AND MAXNUM<=#{maxNum})
 		  AND (SYSDATE<=MEETDATE AND MEETDATE<=SYSDATE+2)
-		  AND MOOD = #{moodId}
+		  AND MOOD LIKE '%'||#{moodId}||'%'
 		  AND LIMITGRADE>=#{limitGrade}
-		  AND DRINK=#{drinkId}
-		  AND SAMEGENDER =#{sameGenderId}
+		  AND DRINK LIKE '%'||#{drinkId}||'%'
+		  AND SAMEGENDER LIKE '%'||#{sameGenderId}||'%'
 		)
 		WHERE (6*#{pageNum}-5) <= POSTNUM AND POSTNUM < (6*#{pageNum}+1)
 	]]>

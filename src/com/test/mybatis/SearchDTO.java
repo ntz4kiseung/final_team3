@@ -2,17 +2,14 @@ package com.test.mybatis;
 
 public class SearchDTO
 {
-	String keyword;
+	String keyword, userId;
 	String addrGuId1, addrGuId2, addrGuId3, interSubId1, interSubId2, interSubId3, minMeetDate, maxMeetDate, moodId, drinkId, sameGenderId;
-	int minNum, maxNum, limitGrade, pageNum;
-	
-	public int getPageNum()
-	{
-		return pageNum;
+	String minNum, maxNum, limitGrade, pageNum;
+	public String getUserId() {
+		return userId;
 	}
-	public void setPageNum(int pageNum)
-	{
-		this.pageNum = pageNum;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getKeyword()
 	{
@@ -110,30 +107,30 @@ public class SearchDTO
 	{
 		this.sameGenderId = sameGenderId;
 	}
-	public int getMinNum()
-	{
+	public String getMinNum() {
 		return minNum;
 	}
-	public void setMinNum(int minNum)
-	{
+	public void setMinNum(String minNum) {
 		this.minNum = minNum;
 	}
-	public int getMaxNum()
-	{
+	public String getMaxNum() {
 		return maxNum;
 	}
-	public void setMaxNum(int maxNum)
-	{
+	public void setMaxNum(String maxNum) {
 		this.maxNum = maxNum;
 	}
-	public int getLimitGrade()
-	{
+	public String getLimitGrade() {
 		return limitGrade;
 	}
-	public void setLimitGrade(int limitGrade)
-	{
+	public void setLimitGrade(String limitGrade) {
 		this.limitGrade = limitGrade;
 	}
-	
+	public String getPageNum() {
+		return pageNum;
+	}
+	public void setPageNum(String pageNum) {
+		this.pageNum = pageNum;
+	}
+
 	
 }

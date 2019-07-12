@@ -250,21 +250,21 @@
        $(document).ready(function(){
     	   
     	// Search.jsp 진입시 → setSearchCookies : 전에 있던 Search용 쿠키 값 비워주고 기본 값들로 채워줌
-    	
+    	setSearchCookies();
     	function setSearchCookies(){
     		document.cookie="userId="+sessionStorage.getItem("userId");
     		document.cookie="keyword="+"|keyword|";
-    		document.cookie="addrGuId1=''";
-    		document.cookie="addrGuId2=''";
-    		document.cookie="addrGuId3=''";
-    		document.cookie="interSubId1=''";
-    		document.cookie="interSubId2=''";
-    		document.cookie="interSubId3=''";
+    		document.cookie="addrGuId1=";
+    		document.cookie="addrGuId2=";
+    		document.cookie="addrGuId3=";
+    		document.cookie="interSubId1=";
+    		document.cookie="interSubId2=";
+    		document.cookie="interSubId3=";
     		document.cookie="minMeetDate=2019-07-01";
     		document.cookie="maxMeetDate=2020-07-31";
-    		document.cookie="moodId=MI00001";
-    		document.cookie="drinkId=DR00002";
-    		document.cookie="sameGenderId=SG00002";
+    		document.cookie="moodId=";
+    		document.cookie="drinkId=";
+    		document.cookie="sameGenderId=";
     		document.cookie="minNum=2";
     		document.cookie="maxNum=20";
     		document.cookie="limitGrade=1";
@@ -364,17 +364,13 @@
            	}
            	
            	$("#filterOnBtn").click(function(){
- 	          	addrGuId = $(".addrGuId");							// 일단 모든 addrGuId인풋 가져옴
- 	          	interSubId = $(".interSubId");                      // 일단 모든 interSubId인풋 가져옴
- 	          	moodId = $("input:radio[name='moodId']:checked");   // 선택된 moodId를 가져옴
- 	          	
+           		$('.Search-result-body').empty();
+           		
  	          	$( "#filterForm" ).submit(function( event ) {
  	          	  values = $(this).serializeArray();
 				  values.forEach(function(item){
 					 document.cookie= item.name+"="+item.value;
-				  });
-				  console.log(document.cookie);
-				  $('.Search-result-body').empty();
+				  });  
 				  pageNum=1;
 				  callList(pageNum);
  	          	  return false;
@@ -578,7 +574,7 @@
                                                     <div class="flex-row-left-center hidden additional-filter">                                 
                                                         <button type="text" class="btn btn-120-35" name="interMainId3" id="interMainId3"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
                                                         <button type="text" class="btn btn-120-35 interSubId" name="interSubId3"  id="interSubId3"  value="IS00003" readonly>축구</button>
-                                                    	<input type="text" class="hidden" name="interSubId3" value="S"/>
+                                                    	<input type="text" class="hidden" name="interSubId3" value=""/>
                                                     </div>                                                                                                        
                                                 </div>
                                             </div>
@@ -586,7 +582,7 @@
                                                 <div>인원수</div>
                                                 <div class="flex-row-left-center">
                                                     <input type="text" name="minNum" value="2" />임시
-                                                    <input type="text" name="maxNum"  value="12" />인원수
+                                                    <input type="text" name="maxNum"  value="19" />인원수
                                                 </div>
                                             </div>
                                             <div class="filter-attribute">
@@ -609,7 +605,7 @@
                                             		<div>참가제한</div>
                                             		<div>
 														<div class="star-rating star-20-box flex-row-left-center">
-															<img class="grayscale" id="1" src="img/star.png" alt=""/>
+															<img class="" id="1" src="img/star.png" alt=""/>
 															<img class="grayscale" id="2"  src="img/star.png" alt="" />
 															<img class="grayscale" id="3"  src="img/star.png" alt="" />
 															<img class="grayscale" id="4"  src="img/star.png" alt="" />
@@ -629,8 +625,8 @@
                                             	<div>
                                             	    <div>동성만</div>
                                             		<div>
-                                            			<input type="checkbox" name="sameGenderID" value="SG00001"/>
-                                            			<input type="hidden" name="sameGenderID" value="SG00002"/>
+                                            			<input type="checkbox" name="sameGenderId" value="SG00001"/>
+                                            			<input type="hidden" name="sameGenderIdss" value="SG00002"/>
                                             		</div>
                                             	</div>
                                             </div>

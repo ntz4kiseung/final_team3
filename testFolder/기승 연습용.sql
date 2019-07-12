@@ -151,8 +151,50 @@ WHERE MEETDATE >= SYSDATE
 )
 WHERE 1 <= POSTNUM AND POSTNUM <=6;
 
+
 select *
-from interest_sub;
+from mood;
+
+		SELECT *
+		FROM
+		(
+		SELECT FN_CAL_RANK(POSTID, '조회유저', '|키워드|키워드2|') AS POSTGRADE 
+		     , RANK() OVER(ORDER BY FN_CAL_RANK(POSTID, '조회유저', '|키워드|키워드2|'), MEETDATE DESC) AS POSTNUM
+		     , POSTID, USERID, NICKNAME, URL, URLBAD
+		     , TITLE, MINNUM, MAXNUM, CONTENTS
+		     , ADDRSINAME, ADDRGUNAME, TO_CHAR(MEETDATE, 'YYYY/MM/DD HH24:MI') AS MEETDATE
+		FROM POST_VIEW
+		WHERE MEETDATE >= SYSDATE
+		  AND (ADDRGUID LIKE '%'||'GU00003' OR ADDRGUID IN ('GU00001' ,'GU00010'))
+		  AND (INTERSUBID LIKE '%'||'' OR INTERSUBID IN ('' ,''))
+		  AND (2<=MINNUM AND MAXNUM<=20)
+		  AND (SYSDATE<=MEETDATE AND MEETDATE<=SYSDATE+2)
+		  AND MOOD LIKE '%'||'""'||'%'
+		  AND LIMITGRADE>=1
+		  AND DRINK LIKE '%'||'DR00002'||'%'
+		  AND SAMEGENDER LIKE '%'||'SG00002'||'%'
+		)
+		WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1)
+
+addrGuId1: "cc"
+addrGuId2: "GU00001"
+addrGuId3: "GU00010"
+drinkId: "DR00002"
+interSubId1: ""
+interSubId2: ""
+interSubId3: ""
+keyword: "|keyword|"
+limitGrade: ""
+maxMeetDate: "2019-07-20"
+maxNum: "20"
+minMeedDate: "2019-07-12"
+minMeetDate: "2019-07-01"
+minNum: "2"
+moodId: "''"
+pageNum: "1"
+sameGenderID: "SG00002"
+sameGenderId: "''"
+userId: "null"
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
