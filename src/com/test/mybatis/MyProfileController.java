@@ -18,10 +18,10 @@ public class MyProfileController
 	@RequestMapping(value="/myprofile.action", method = RequestMethod.GET)
 	public String myProfile(Model model)
 	{
-		IProfileDAO dao = sqlSession.getMapper(IProfileDAO.class);
+		
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
-		model.addAttribute("UserList",dao.UserList()); 
+		
 		model.addAttribute("MyPageBad",dao2.MyPageBad());
 		model.addAttribute("myPageList", dao2.myPageList());
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList());

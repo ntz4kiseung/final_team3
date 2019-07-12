@@ -40,20 +40,23 @@
     <script type="text/javascript">
     
 	$(document).ready(function()
-			{
+	{
 
-				$(".modify").click(function()
-				{
-					  $(location).attr("href","myprofilemodify.action");
+			$(".modify").click(function()
+			{
+				  $(location).attr("href","myprofilemodify.action");
 					  
-				});
 			});
+			
+			$(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
+					
+	});
     
     </script>
 </head>
 <body>
  <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
+       <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
 
             <div class="navbar-left flex-row-left-center">
                 <div class="logo-box flex-row-left-center">
@@ -92,27 +95,33 @@
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">
 					
-					<c:forEach var="List" items="${ myPageList }" varStatus="status">
+					 <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
-                            <div class="MyPage-header-badge">
+                        <div class="MyPage-header-badge">
                                <div class="user-badge-box">
-                                         <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
+                                          <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
                                          <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                                  </div>
                             </div>
-                              <div class="MyPage-header-grade-star">
-                                <c:forEach var="i" begin="1" end="${List.reviewGrade }">
-                                   <label style="color: #ffd700;">★</label>
-                                </c:forEach>
-                                <c:forEach var="i" begin="${List.reviewGrade }" end="4">
-                                   <label style="color: #e9e9e9;">★</label>
-                                </c:forEach>
-                            </div>
-                            <div class="MyPage-header-grade">
-                              ${List.reviewGrade } / 5.0
-                              <input type="hidden" id="hidden" value="${List.reviewGrade }" />
-                            </div>
+                            <div class="star-show star-25-box">
+								<div>
+									<img class="grayscale" id="1" src="img/star.png" alt=""/>
+									<img class="grayscale" id="2"  src="img/star.png" alt="" />
+									<img class="grayscale" id="3"  src="img/star.png" alt="" />
+									<img class="grayscale" id="4"  src="img/star.png" alt="" />
+									<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+								</div>
+								<div>
+							  		<img class="" id="1" src="img/star.png" alt=""/>
+									<img class="" id="2"  src="img/star.png" alt="" />
+									<img class="" id="3"  src="img/star.png" alt="" />
+									<img class="" id="4"  src="img/star.png" alt="" />
+									<img class="" id="5"  src="img/star.png" alt="" />
+								</div>
+								<input class="hidden" type="text" id="grade2" name="grade2" value="${List.reviewGrade }"/>
+								<div class="MyPage-header-grade" style="padding-left: 40px;">${List.reviewGrade } / 5.0</div>
+							</div>
                         </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
@@ -123,7 +132,7 @@
                                 ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
                                 <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
                                 <div>${myPageInterList[status.index].interSubName3 }</div> 
-                                		
+                                      
                                 <div style="color: orange;">${List.telCheck }</div>
                                 
                                 <div style="color: orange;">${List.emailCheck }</div>
