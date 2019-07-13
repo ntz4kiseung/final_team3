@@ -35,43 +35,20 @@
     
    
    </style> 
+   <script type="text/javascript">
+   
+   $(document).ready(function()
+   {
+	   $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
+		
+	   
+   });	
+   
+   </script>
 </head>
 <body>
    <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
-
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
-
+       <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
                 
@@ -87,18 +64,24 @@
                                          <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                                  </div>
                             </div>
-                              <div class="MyPage-header-grade-star">
-                                <c:forEach var="i" begin="1" end="${List.reviewGrade }">
-                                   <label style="color: #ffd700;">★</label>
-                                </c:forEach>
-                                <c:forEach var="i" begin="${List.reviewGrade }" end="4">
-                                   <label style="color: #e9e9e9;">★</label>
-                                </c:forEach>
-                            </div>
-                            <div class="MyPage-header-grade">
-                              ${List.reviewGrade } / 5.0
-                              <input type="hidden" id="hidden" value="${List.reviewGrade }" />
-                            </div>
+                             <div class="star-show star-25-box">
+								<div>
+									<img class="grayscale" id="1" src="img/star.png" alt=""/>
+									<img class="grayscale" id="2"  src="img/star.png" alt="" />
+									<img class="grayscale" id="3"  src="img/star.png" alt="" />
+									<img class="grayscale" id="4"  src="img/star.png" alt="" />
+									<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+								</div>
+								<div>
+							  		<img class="" id="1" src="img/star.png" alt=""/>
+									<img class="" id="2"  src="img/star.png" alt="" />
+									<img class="" id="3"  src="img/star.png" alt="" />
+									<img class="" id="4"  src="img/star.png" alt="" />
+									<img class="" id="5"  src="img/star.png" alt="" />
+								</div>
+								<input class="hidden" type="text" id="grade2" name="grade2" value="${List.reviewGrade }"/>
+								<div class="MyPage-header-grade" style="padding-left: 40px;">${List.reviewGrade } / 5.0</div>
+							</div>
                         </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
@@ -147,18 +130,28 @@
                                           <div class="MyFollow-user-detail">
                                         
                                         	<div>${fList.nickname }</div>
-                                           <div >
-				                                <c:forEach var="i" begin="1" end="${fList.reviewGrade }">
-				                                   <label style="color: #ffd700;">★</label>
-				                                </c:forEach>
-				                                <c:forEach var="i" begin="${fList.reviewGrade }" end="4">
-				                                   <label style="color: #e9e9e9;">★</label>
-				                                </c:forEach>
-				                                
-					                              ${fList.reviewGrade } / 5.0
-                            					  <input type="hidden" id="hidden" value="${fList.reviewGrade }" />
-				                            
-			                           	 	</div>
+	                                           <div class="flex-row-center-center"> 
+					                              <div class="star-show star-20-box">
+														
+														<div>
+															<img class="grayscale" id="1" src="img/star.png" alt=""/>
+															<img class="grayscale" id="2"  src="img/star.png" alt="" />
+															<img class="grayscale" id="3"  src="img/star.png" alt="" />
+															<img class="grayscale" id="4"  src="img/star.png" alt="" />
+															<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+														</div>
+														<div>
+													  		<img class="" id="1" src="img/star.png" alt=""/>
+															<img class="" id="2"  src="img/star.png" alt="" />
+															<img class="" id="3"  src="img/star.png" alt="" />
+															<img class="" id="4"  src="img/star.png" alt="" />
+															<img class="" id="5"  src="img/star.png" alt="" />
+														</div>
+														<input class="hidden" type="text" id="grade2" name="grade2" value=" ${fList.reviewGrade }"/>
+														
+													</div>
+					                             	<div style="margin-left: 10px;">${fList.reviewGrade } / 5.0</div>
+					                            </div>
                                             	
                                            <div>${followerAddrList[status.index].addrSiName1 }  ${followerAddrList[status.index].addrGuName1 } 
                                              ${followerAddrList[status.index].addrSiName2 }  ${followerAddrList[status.index].addrGuName2 } 

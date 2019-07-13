@@ -10,4 +10,5 @@ public interface IMessageDAO
 	public ArrayList<MessageDTO> messageSendList();
 	public int messageinsert(MessageDTO messageDTO);
 	public int messageDelete(String messageid);
+	public int messageCheckDate(String messageid);
 }

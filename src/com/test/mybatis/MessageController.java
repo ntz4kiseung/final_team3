@@ -105,4 +105,15 @@ public class MessageController
 
 		response.getWriter().print(result);
 	}
+	
+	@RequestMapping(value="/checkDateajax.action", method=RequestMethod.POST)	
+	public String messageCheckDate(String msgId) throws IOException
+	{
+		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
+	
+		dao.messageCheckDate(msgId);
+		
+		return "WEB-INF/views/messageCheckDateAjax.jsp";
+		
+	}
 }
