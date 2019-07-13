@@ -2,9 +2,11 @@ package com.test.mybatis;
 
 import java.util.ArrayList;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface IPostDAO
 {
-	public PostDTO postlist(String followIds);
+	public PostDTO postlist(@Param("followIds")String followIds, @Param("postHostId")String postHostId);
 	public ArrayList<PostDTO> myReviewList();
 	public ArrayList<PostDTO> reviewList();
 	public ArrayList<PostDTO> searchList(SearchDTO s);

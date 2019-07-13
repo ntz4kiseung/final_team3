@@ -25,14 +25,18 @@
 <script type="text/javascript">
 	$(window).on('load', function ()
 	{
-		
+		$($('#test99')).each(function(index)
+		{
+			console.log($(this).attr('name'));
+		});
+		$(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%"); // 스타 뷰
 		$('#myModal').on('shown.bs.modal', function () {
 			$('#myInput').trigger('focus')
 		});
 		
 		$('#followBtn').click(function()
 		{
-			$.post("followinsert.action",{followId : $("#followBtn").val()}, function(data){
+			$.post("followinsert.action",{followId : $("#followBtn").val(), postHostId : $('#postId').attr('name')}, function(data){
 				
 				followId = data;
 				if(parseInt(followId) == 0)
@@ -48,7 +52,7 @@
 		
 		$('#post-join-btn').click(function()
 		{
-			location.href="joininsert.action?contents="+$('#contents').val();
+			location.href="joininsert.action?contents="+$('#contents').val()+"&postHostId="+$('#postId').attr('name');
 		});
 		
 // 신고 구간 ------------------------------------------------------------------------------------------------------		
@@ -56,7 +60,7 @@
 		{
 			$('#reportBtn').click(function()
 			{
-				location.href="reportinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val();
+				location.href="reportinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&postHostId="+$('#postId').attr('name');
 			});
 		});
 		
@@ -116,40 +120,7 @@
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
-
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
-
+        <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-up">
                 <div class="Post flex-item-grow flex-col-center-up">
@@ -160,7 +131,7 @@
 
                     <div class="Post-host flex-row-left-center">
                         <div>
-                            <img src="${postlist.url }" alt="이미지 없음">
+                            <img src="${postlist.url }" alt="이미지 없음" id="postId" name="${postlist.postId }">
                         </div>
                         <div>
                             <div>${postlist.nickname }
@@ -173,7 +144,25 @@
                            	</c:when>
                            	</c:choose>
                            	</div> 
-                            <div>☆☆☆☆☆</div>
+                            <div>
+                            	<div class="star-show star-25-box">
+									<div>
+										<img class="grayscale" id="1" src="img/star.png" alt=""/>
+										<img class="grayscale" id="2"  src="img/star.png" alt="" />
+										<img class="grayscale" id="3"  src="img/star.png" alt="" />
+										<img class="grayscale" id="4"  src="img/star.png" alt="" />
+										<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+									</div>
+									<div>
+								  		<img class="" id="1" src="img/star.png" alt=""/>
+										<img class="" id="2"  src="img/star.png" alt="" />
+										<img class="" id="3"  src="img/star.png" alt="" />
+										<img class="" id="4"  src="img/star.png" alt="" />
+										<img class="" id="5"  src="img/star.png" alt="" />
+									</div>
+									<input class="hidden" type="text" id="grade2" name="grade2" value="${postlist.grade }"/>
+								</div>
+                            </div>
                             <c:if test="${not empty postlist.telCertiId}">
                             	<div>휴대폰 인증 완료 ✔</div>
                             </c:if>
@@ -201,7 +190,7 @@
                     </div>
                     <form action="joininsert.action" method="get"></form>
                     <div class="Post-join">
-                        <div>현재 참가 신청인원 (3/${postlist.minNum }~${postlist.maxNum })</div>
+                        <div>현재 참가 신청인원 (${serchNum }/${postlist.minNum }~${postlist.maxNum })</div>
                         <div class="flex-row-left-center">
                             <div><textarea name="contents" id="contents"></textarea></div>
                             <div><button id="post-join-btn"class="btn btn-outline-secondary">참가신청</button></div>
@@ -210,31 +199,40 @@
 <!-- 댓글 부분 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->					
                     <div class="Post-joinList">
  						<c:forEach var="join" items="${list}">
- 							<div class="comments flex-row-left-center">
-	                            <div class="comments-user"> <!-- 코멘트 유저 뱃지 + 닉네임 -->
-	                                <div> <!-- 뱃지 -->
-	                                    <img src="${join.url }" alt="">
+ 							<c:choose>
+ 								<c:when test="${!empty join.delJoin}">
+		                        	<div class="comments flex-row-left-center">
+		                        		삭제된 댓글입니다.
 	                                </div>
-	                                <div > <!-- 닉네임 -->
-	                                    ${join.nickname}
-	                                </div>
-	                            </div>
-	                            <div class="comments-else flex-item-grow">
-	                                <div class="comments-buttons flex-row-left-center">
-	                                    <div>${join.joinDate}</div>
-	                                    <div>
-	                                        <button class="btn joinreport" data-toggle="modal" data-target="#report-post" name="${join.joinId }">신고하기</button>
-	                                    </div>
-	                                    <div>
-	                                        <button class="btn btn-border-right reply-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId }">댓글달기</button>
-	                                        <button class="btn request-join" data-toggle="modal" data-target="#join-reset-modal" name="${join.joinId }">신청취소</button>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    ${join.contents}
-	                                </div>
-	                            </div>
-	                        </div>
+		                        </c:when>
+	 							<c:when test="${empty join.delJoin}">
+		 							<div class="comments flex-row-left-center">
+			                            <div class="comments-user"> <!-- 코멘트 유저 뱃지 + 닉네임 -->
+			                                <div> <!-- 뱃지 -->
+			                                    <img src="${join.url }" alt="" id="test99" name="${join.delJoin}">
+			                                </div>
+			                                <div> <!-- 닉네임 -->
+			                                    ${join.nickname}
+			                                </div>
+			                            </div>
+			                            <div class="comments-else flex-item-grow">
+			                                <div class="comments-buttons flex-row-left-center">
+			                                    <div>${join.joinDate}</div>
+			                                    <div>
+			                                        <button class="btn joinreport" data-toggle="modal" data-target="#report-post" name="${join.joinId }">신고하기</button>
+			                                    </div>
+			                                    <div>
+			                                        <button class="btn btn-border-right reply-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId }">댓글달기</button>
+			                                        <button class="btn request-join" data-toggle="modal" data-target="#join-reset-modal" name="${join.joinId }">신청취소</button>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    ${join.contents}
+			                                </div>
+			                            </div>
+			                        </div>
+		                        </c:when>
+	                        </c:choose>
 	                        <c:forEach var="replylist" items="${replylist }">
 	                        	<c:if test="${join.joinId eq replylist.joinId }">
 	                        		<c:if test="${not empty replylist.userTypeId}">

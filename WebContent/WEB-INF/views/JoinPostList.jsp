@@ -170,41 +170,39 @@ function change()
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
+		<div class="navbar-box flex-row-center-center">
 
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
+			<div class="navbar-left flex-row-left-center">
+				<div class="logo-box flex-row-left-center">
+					<div class="logo-img">
+						<img src="img/Logo.png" alt="이미지없음">
+					</div>
+					<div class="logo-text">Sagyo</div>
+				</div>
+			</div>
 
-        <div class="body-box flex-item-grow flex-col-center-up">
+			<div class="navbar-center flex-item-grow flex-row-center-center">
+				<form action="" class="flex-row-center-center">
+					<input type="text" placeholder="관심사의 키워드를 입력해주세요"
+						class="form-control flex-item-grow" id="navbar-search-input">
+					<button class="btn" id="navbar-search-btn">검색</button>
+				</form>
+			</div>
+
+			<div class="navbar-right flex-row-right-center">
+				<div>알람</div>
+				<div>
+					<button class="btn btn-border-right">모임개설</button>
+				</div>
+				<div>
+					<button class="btn btn-border-right">nickname</button>
+				</div>
+				<div>
+					<button class="btn btn-border-right">고객센터</button>
+				</div>
+			</div>
+		</div>
+		<div class="body-box flex-item-grow flex-col-center-up">
 			<div class="body flex-item-grow flex-col-center-center">
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">

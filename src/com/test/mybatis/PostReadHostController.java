@@ -23,41 +23,17 @@ public class PostReadHostController
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String followId = "anlant";
-		int serchNum = (Integer)joinDAO.serchjoin();
+		String postHostId = "PT00002";
+		int serchNum = (Integer)joinDAO.serchjoin(postHostId);
 		
 		model.addAttribute("serchNum",serchNum);
-		model.addAttribute("postlist",IPostDAO.postlist(followId)); 
-		model.addAttribute("list",joinDAO.joinlist()); 
-		model.addAttribute("replylist",joinDAO.replylist());
+		model.addAttribute("postlist",IPostDAO.postlist(followId, postHostId)); 
+		model.addAttribute("list",joinDAO.joinlist(postHostId)); 
+		model.addAttribute("replylist",joinDAO.replylist(postHostId));
 		model.addAttribute("reportlist", reportDAO.reportlist());
 		 
 		result = "WEB-INF/views/PostReadHost.jsp";
 
-		return result;
-	}
-	
-	@RequestMapping(value = "/hostjoininsert.action", method = RequestMethod.GET)
-	public String JoinInsert(Model model, JoinDTO joinDTO)
-	{
-		String result = null;
-		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
-		System.out.println(joinDTO.getContents());
-		joinDTO.setUserId("anlant");
-		joinDAO.joininsert(joinDTO);
-		
-		result = "redirect:postreadhost.action";
-		return result;
-	}
-	
-	@RequestMapping(value = "/hostreportinsert.action", method = RequestMethod.GET)
-	public String reportPost(Model model, ReportDTO reportDTO)
-	{
-		String result = null;
-		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
-		reportDTO.setUserId("anlant");
-		reportDAO.reportpostinsert(reportDTO);
-		
-		result = "redirect:postreadhost.action";
 		return result;
 	}
 	
@@ -150,16 +126,13 @@ public class PostReadHostController
 	{
 		String result = null;
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
-		System.out.println("test");
-		System.out.println(joinIds);
 		String[] joinId = joinIds.split(" ");
+		joinDTO.setStatusId(statusId);
 		for (int i = 0; i < joinId.length; i++)
 		{
-			System.out.println(joinId[i]);
+			joinDTO.setJoinId(joinId[i]);
+			joinDAO.joinupdate(joinDTO);
 		}
-		
-		System.out.println(statusId);
-		//joinDAO.joinupdate(joinDTO);
 		result = "redirect:postreadhost.action";
 		return result;
 	}
