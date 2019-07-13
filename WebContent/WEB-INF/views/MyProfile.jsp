@@ -1,5 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
@@ -56,7 +57,8 @@
 </head>
 <body>
  <div class="browser flex-col-center-center">
-       <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
+ 
+        <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
 
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
@@ -127,38 +129,42 @@
 
                             <div class="MyPage-body-body">
                                 <c:forEach var="List" items="${ myPageList }" varStatus="status">
-                                    <form class="MyProfile-body flex-col-left-up">
+                                    <form action="myprofilemodify.action" class="MyProfile-body flex-col-left-up">
 									
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     아이디*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${List.userId }" readonly>
+                                                <input type="text" id="userId" name="userId" class="form-control input-245-40" value="${List.userId }" readonly>
                                             </div>
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     닉네임*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${List.nickname }" readonly>
+                                                <input type="text" id="nickname" name="nickname"  class="form-control input-245-40" value="${List.nickname }" readonly>
                                             </div>                        
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     이름*
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${List.name }" readonly>
+                                                <input type="text" id="name" name="name" class="form-control input-245-40" value="${List.name }" readonly>
                                             </div>
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     생년월일
-                                                </div>  
-                                                <input type="text" class="form-control input-245-40" value="${user.birth }" readonly>
+                                                </div>
+                                                
+                                                
+                                                <input type="text" id="birthYear" name="birthYear" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 0,10),'-')[0]}" readonly>년
+                                                <input type="text" id="birthMonth" name="birthMonth" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[1]}" readonly>월
+                                                <input type="text" id="birthDay" name="birthDay" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[2]}" readonly>일
                                             </div>
                 
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     성별
                                                 </div>
-                                                <input type="text" class="form-control input-245-40" value="ss" readonly>
+                                                <input type="text" class="form-control input-245-40" value="${List.genderId }" readonly>
                                             </div>
                 
                                             <div class="MyProfile-input-group">
@@ -184,7 +190,8 @@
                                                 </div>  
                                                 <input type="text" class="form-control input-245-40" value="${List.sns }" readonly>
                                             </div>
-                
+                                            
+                							
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     만남장소1
@@ -194,9 +201,15 @@
                                                     <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName1 }" readonly>
                                                 </div>
                                             </div>
-                
-                                            <div class="MyProfile-input-group">
-                                                <div class="MyProfile-input-group-label">
+                                            
+
+											
+
+                                            
+                                            
+                						<c:if test="${not empty myPageAddrList[status.index].addrGuName2}">
+                							<div class="MyProfile-input-group">
+                                            	<div class="MyProfile-input-group-label">
                                                     만남장소2
                                                 </div>
                                                 <div class="box-245-40">
@@ -204,7 +217,10 @@
                                                     <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName2 }" readonly>
                                                 </div>
                                             </div>
-                
+                							</c:if>
+                							
+                							
+                							<c:if test="${not empty myPageAddrList[status.index].addrGuName3}">
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     만남장소3
@@ -214,8 +230,10 @@
                                                     <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName3 }" readonly>
                                                 </div>
                                             </div>
-                
-                
+                							</c:if>
+                							
+                							
+                							<c:if test="${not empty myPageInterList[status.index].interMainName2}">
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     관심사1
@@ -225,7 +243,10 @@
                                                     <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interSubName1 } " readonly>
                                                 </div>
                                             </div>
-                
+                							</c:if>
+                							
+                							
+                							<c:if test="${not empty myPageInterList[status.index].interMainName2}">
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     관심사2
@@ -235,8 +256,14 @@
                                                     <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interSubName2 }" readonly>
                                                 </div>
                                             </div>
-                
-                                            <div class="MyProfile-input-group">
+                							</c:if>
+                							
+                							
+                							
+                							
+                							
+                							<c:if test="${not empty myPageInterList[status.index].interMainName3}">
+                                                <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     관심사3
                                                 </div>
@@ -245,7 +272,9 @@
                                                     <input type="text" class="form-control input-120-40" value="${myPageInterList[status.index].interSubName3 }" readonly>
                                                 </div>
                                             </div>
-                
+                							</c:if>
+                							
+                                        
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     자기소개
@@ -255,18 +284,14 @@
                                         </form>
                                         </c:forEach>
                                           <div class="MyProfileModify-footer flex-row-center-center">
-                                            <button class="btn btn-orange btn-160-45 modify" >수정하기</button>
+                                            <button type="submit" class="btn btn-orange btn-160-45 modify" >수정하기</button>
                                         </div>
-
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 </html>

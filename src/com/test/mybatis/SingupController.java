@@ -27,7 +27,6 @@ public class SingupController
 		
 		model.addAttribute("addrsilist", addrA.addrSiList());
 		model.addAttribute("intermainlist", interA.interMainList());
-		
 		return result;
 	}
 	

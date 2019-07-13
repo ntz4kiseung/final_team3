@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,17 @@ public class MessageController
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value="/mymessagerecevie.action", method = RequestMethod.GET)
-	public String myMessageRecevie( Model model)
+	public String myMessageRecevie( Model model, HttpSession session)
 	{
+		String userId = (String) session.getAttribute("userId");
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
-		model.addAttribute("MyPageBad",dao2.MyPageBad());
-		model.addAttribute("myPageList", dao2.myPageList());
-		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
-		model.addAttribute("myPageInterList", dao2.myPageInterList());	
+		model.addAttribute("MyPageBad",dao2.MyPageBad(userId));
+		model.addAttribute("myPageList", dao2.myPageList(userId));
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
+		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
 		
 		model.addAttribute("messageRecevieList",dao.messageRecevieList());
 		 
@@ -38,16 +40,17 @@ public class MessageController
 	}
 	
 	@RequestMapping(value="/mymessagesend.action", method = RequestMethod.GET)
-	public String myMessageSend(Model model)
+	public String myMessageSend(Model model, HttpSession session)
 	{
+		String userId = (String) session.getAttribute("userId");
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
-		model.addAttribute("MyPageBad",dao2.MyPageBad());
-		model.addAttribute("myPageList", dao2.myPageList());
-		model.addAttribute("myPageAddrList", dao2.myPageAddrList());
-		model.addAttribute("myPageInterList", dao2.myPageInterList());	
+		model.addAttribute("MyPageBad",dao2.MyPageBad(userId));
+		model.addAttribute("myPageList", dao2.myPageList(userId));
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
+		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
 		
 		model.addAttribute("messageSendList",dao.messageSendList());
 		 

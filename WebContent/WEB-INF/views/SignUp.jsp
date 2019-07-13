@@ -254,6 +254,7 @@
 					document.getElementById("span-check-nick").style.display = 'inline-block';
 					document.getElementById("span-check-nick").style.color = '#DF0101';
 					$("#span-check-nick").text("닉네임을 입력해주세요.");
+					return false;
 				}
 
 				$.ajax({
@@ -328,28 +329,19 @@
 				}
 				
 			})
-			
 			$("#tel1, #tel2, #tel3").keyup(function()
 			{
-				var tel = $("#tel1").val() + $("#tel2").val() + $("#tel3").val();
-				
+				var tel = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();
 				var test = $("#tel").val(tel);
-				
 			})
-			
-			
-			
 			$("#select-check-y").keyup(function()
 			{
 				var year = $("#input-check-y").val();
 				var month = $("#select-check-m").val();
 				var day = $("#select-check-d").val();
 				var birth = year + month + day;
-				console.log(year + "+" + month + "+" + day + "=" + birth);
 				$("#birth").val(birth);
-				
 			})
-			
 			$("#select-check-d, #select-check-m").change(function()
 			{
 				var year = $("#input-check-y").val();
@@ -360,14 +352,11 @@
 				console.log(year + "+" + month + "+" + day + "=" + birth);
 				$("#birth").val(birth);
 			})
-			
-			
 			$("input:radio[name=radio-check-gender]").change(function()
 			{
 				var test =  $('input:radio[name="radio-check-gender"]:checked').val();
 				$("#genderId").val(test);
 			})
-			
 			var a;
 			$(".btn-check-cate1").click(function() {
 				a = $(this).val();
@@ -390,7 +379,6 @@
 							$("#inbodyB"+a).append(result);
 		                }); 
 				})
-				
 			})
 			
 			
@@ -562,39 +550,7 @@
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
-
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
+       <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
 
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow">
@@ -716,8 +672,8 @@
                                     <button type="button" id="telcerti" class="btn" data-toggle="modal" data-target="#telmodal" value="0">휴대전화 인증</button>
 	                                <div class="tel-check">
 	                                	<span id="telCheckresult"></span>
-	                                	<input type="text" id="telCheck" name="telCheck" value="" style="display : none">
-	                                	<input type="text" id="tel" name="tel" value="" style="display : none">
+	                                	<input type="hidden" id="telCheck" name="telCheck" value="">
+	                                	<input type="hidden" id="tel" name="tel" value="">
 	                                	
 	                                </div>
                                     
@@ -732,7 +688,7 @@
                                 </div>  
                                 <input type="text" id="email" name="email" class="form-control input-245-40" placeholder="E-mail을 입력해주세요">
                                 <button type="button" id="emailcerti" value="0" class="btn" data-toggle="modal" data-target="#emailmodal">Email인증</button>
-                                 <div class="div-check">
+                                <div class="div-check">
                                  	<span id="emailCheckresult"></span>
 	                                <input type="text" id="emailCheck" name="emailCheck" value="" style="display : none">
                                 </div>

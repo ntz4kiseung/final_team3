@@ -23,15 +23,17 @@ public class MypageController
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value="/createpostlist.action", method=RequestMethod.GET)
-	public String myReviewList(Model model)
+	public String myReviewList(Model model, HttpSession session)
 	{
+		String userId = (String) session.getAttribute("userId");
+		
 		IUserDAO dao1 = sqlSession.getMapper(IUserDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
 		
-		model.addAttribute("myPageList",dao1.myPageList());
-		model.addAttribute("myPageAddrList", dao1.myPageAddrList());
-		model.addAttribute("myPageInterList", dao1.myPageInterList());
+		model.addAttribute("myPageList",dao1.myPageList(userId));
+		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));
+		model.addAttribute("myPageInterList", dao1.myPageInterList(userId));
 		model.addAttribute("myReviewList", dao2.myReviewList());
 		model.addAttribute("positiveBadge", dao3.positiveBadge());
 		model.addAttribute("negativeBadge", dao3.negativeBadge());
@@ -107,14 +109,16 @@ public class MypageController
 	
 	
 	@RequestMapping(value="/joinpostlist.action", method=RequestMethod.GET)
-	public String reviewList(Model model)
+	public String reviewList(Model model, HttpSession session)
 	{
+		String userId = (String) session.getAttribute("userId");
+		
 		IUserDAO dao1 = sqlSession.getMapper(IUserDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		
-		model.addAttribute("myPageList",dao1.myPageList());
-		model.addAttribute("myPageAddrList", dao1.myPageAddrList());
-		model.addAttribute("myPageInterList", dao1.myPageInterList());
+		model.addAttribute("myPageList",dao1.myPageList(userId));
+		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));
+		model.addAttribute("myPageInterList", dao1.myPageInterList(userId));
 		model.addAttribute("reviewList", dao2.reviewList());
 		
 		return "/WEB-INF/views/JoinPostList.jsp";

@@ -3,6 +3,7 @@ package com.test.mybatis;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +35,13 @@ public class LogInController
 		response.getWriter().print(count);
 	}
 	
-	@RequestMapping(value="/loginSuccess.action", method=RequestMethod.POST)
-	public String successLogin()
+	@RequestMapping(value="/loginsuccess.action", method=RequestMethod.POST)
+	public String successLogin(HttpSession session, UserDTO user)
 	{
-		String result = "/WEB-INF/views/";
+		session.setAttribute("userId", user.getUserId());
+		System.out.println(user.getUserId());
 		
-		
-		return result;
+		return "redirect:myprofile.action";
 	}
 
 }
