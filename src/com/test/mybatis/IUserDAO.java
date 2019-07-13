@@ -41,11 +41,16 @@ public interface IUserDAO
 	
 	// 로그인 사용
 	
-	public ArrayList<UserDTO> myPageList();
+	public ArrayList<UserDTO> myPageList(String userid);
 	
-	public ArrayList<UserDTO> MyPageBad(); 
+	public ArrayList<UserDTO> MyPageBad(String userid); 
 	
-	public ArrayList<AddrDTO> myPageAddrList();
+	public ArrayList<AddrDTO> myPageAddrList(String userid);
 	
-	public ArrayList<InterDTO> myPageInterList();
+	public ArrayList<InterDTO> myPageInterList(String userid);
+	
+	public UserDTO userList(String userid);
+	
+	// 프로필 변경 사용
+	public int checkGuPwd(@Param("userId")String userId, @Param("pwd")String pwd);
 }

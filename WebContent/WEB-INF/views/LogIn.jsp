@@ -73,7 +73,7 @@ $(document).ready(function()
 			{
 				if (count == 0)
 				{
-					alert("로그인 실패");
+					alert("아이디 혹은 비밀번호가 틀렷습니다.");
 				}
 				else if(count == 1)
 				{
@@ -82,9 +82,7 @@ $(document).ready(function()
 					$("#loginForm").submit();
 				}
 			}
-			
 		})
-		
 	})
 })
    
@@ -93,39 +91,7 @@ $(document).ready(function()
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
-
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
+        <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
 
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
@@ -144,7 +110,7 @@ $(document).ready(function()
                         
                         <!-- 로그인 입력창 -->
                         <div class="flex-item-grow">
-                            <form id="loginForm" name="loginForm" action="loginSuccess.action" class="LogIn-form flex-col-center-center">
+                            <form id="loginForm" name="loginForm" action="loginsuccess.action" class="LogIn-form flex-col-center-center" method="POST">
                                 <input type="text" class="input-underline" id="userId" name="userId" placeholder="아이디">
                                 <input type="password" class="input-underline" id="pwd" name="pwd" placeholder="비밀번호">
                             
