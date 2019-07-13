@@ -1,9 +1,4 @@
 package com.test.mybatis;
-
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,36 +18,29 @@ public class SearchController
 	
 	
 	@RequestMapping(value="/search.action", method=RequestMethod.GET)
-	public String findidForm(String pageNum, HttpServletRequest request, ModelMap model)
+	public String search(String keyword, HttpServletRequest request, HttpServletResponse response, ModelMap model)
 	{
+		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
+		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
+		
+		model.addAttribute("addrsilist", addrA.addrSiList());
+		model.addAttribute("intermainlist", interA.interMainList());
+		model.addAttribute("inputKeyword", keyword);
+		
+		// 여기서 입력받은 키워드를 형태소 분석기로 분해해 |키워드1|키워드2|키워드3| 형태로 만들어줌
+		String keyword2 = "|" + keyword + "|";
+		// 여기서 입력받은 키워드를 형태소 분석기로 분해해 |키워드1|키워드2|키워드3| 형태로 만들어줌
+		
+		Cookie keywordCookie = new Cookie("keyword", keyword2);
+		response.addCookie(keywordCookie);
+		
 		return "/WEB-INF/views/Search.jsp";
 	}
 	
 	@RequestMapping(value="/searchajax.action", method=RequestMethod.GET)
-	public String test(SearchDTO s, ModelMap model)
+	public String searchAjax(SearchDTO s, ModelMap model)
 	{
-//		Cookie[] cookies = request.getCookies();
 		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);
-//		Map<String,String> cookieMap = new HashMap<String, String>();
-//		cookieMap.put("pageNum", pageNum);
-//		for (Cookie cookie : cookies)
-//		{
-//			System.out.println(cookie.getName());
-//			System.out.println(cookie.getValue());
-//			cookieMap.put(cookie.getName(), cookie.getValue());
-//		}
-		
-		System.out.println(s.getPageNum());
-		System.out.println(s.getAddrGuId1());
-		System.out.println(s.getAddrGuId2());		
-		System.out.println(s.getAddrGuId3());
-		System.out.println(s.getInterSubId1());
-		System.out.println(s.getInterSubId2());
-		System.out.println(s.getInterSubId3());
-		System.out.println(s.getDrinkId());
-		System.out.println(s.getLimitGrade());
-		
-//		System.out.println("pageNum in Controller : " + pageNum);
 		
 		model.addAttribute("list", postDao.searchList(s));
 		

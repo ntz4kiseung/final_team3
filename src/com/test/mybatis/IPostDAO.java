@@ -13,4 +13,8 @@ public interface IPostDAO
 	public ArrayList<PostDTO> searchList(SearchDTO s);
 	public ArrayList<PostDTO> hostReview(String postId);
 	public ArrayList<PostDTO> guestReview();
+	public ArrayList<PostDTO> mainHotList();
+	public ArrayList<PostDTO> mainRecommendList(String userId);
+	public ArrayList<PostDTO> mainApproachingList();
+	
 }

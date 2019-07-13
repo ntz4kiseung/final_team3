@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 부트스트랩 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- 폰트 (Noto Snas KR + Handlee) -->
+    <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
+    <!-- sagyo.css -->
+    <link href="css/sagyo.css" rel="stylesheet">
+
+   <style>
+       .Main{
+           width: 100%;
+       }
+       .Main>div{
+           width: 100%;
+       }
+       .Main-navbar{
+            flex-basis: 100px;
+            padding-left: 35px;
+            font-size: 30px;
+       }
+       .Main-search{
+            flex-basis: 455px;
+            background-image: url('img/Main.png');
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 120px;
+            padding-bottom: 75px;
+       }
+       .Main-search-text{
+           z-index: 1;
+           color: white;
+           font-size: 35px;
+           font-weight: bold;
+       }
+       .Main-search-form{
+           z-index: 1;
+           width: 570px;
+       }
+       .Main-search-form>form{
+           height: 95px;
+           display: flex;
+           flex-direction: column;
+           justify-content: space-between;
+           align-items: center;
+       }
+       .Main-search-form input{
+           height: 42px;
+       }
+       .Main-search-layer{
+           width: 100%;
+           height: 100%;
+           position: absolute;
+           top:0px;
+           left:0px;
+           background-color: rgba(0,0,0,0.3);
+           z-index: 0;
+       }
+       .Main-body{
+            padding: 0px 45px 0px 45px;
+       }
+       .Main-body>div{
+           width: 100%;
+       }
+       .Main-badge{
+           background-color: rgb(248,248,248);
+           padding: 0px 15px 0px 15px;
+           border-top: 2px solid rgb(220,220,220);
+           border-bottom: 2px solid rgb(220,220,220);
+       }
+
+       .Main-badge-box{
+           height: 185px;
+           border-top: 2px solid rgb(220,220,220);
+       }
+       .Main-badge-left{
+           width: 260px;
+       }
+       .Main-badge-badge{
+           width: 120px;
+           height: 120px;
+       }
+       .Main-badge-right, .Main-badge-center{
+            padding: 35px 0px 35px 0px;
+            width: 300px;
+            height: 100%;
+            justify-content: space-between;
+       }
+       .Main-badge-center{
+           padding-right: 100px;
+       }
+       .Main-badge-title{
+           font-size: 20px;
+           font-weight: bold;
+       }
+       .Main-badge-contents, .Main-badge-detail{
+           font-size: 16px;
+       }
+
+       
+        .PostList-label{
+            margin: 10px 0px 10px 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .footer-box{
+            flex-basis: 250px;
+            background-color: rgb(255,159,16);
+            width: 100%;
+        }
+   </style>
+</head>
+<body>
+    <div class="browser flex-col-center-center">
+        <div class="navbar-box flex-row-center-center">
+
+            <div class="navbar-left flex-row-left-center">
+                <div class="logo-box flex-row-left-center">
+                    <div class="logo-img">
+                        <img src="img/Logo.png" alt="이미지없음">
+                    </div>
+                    <div class="logo-text">
+                        Sagyo
+                    </div>
+                </div>
+            </div>
+            
+            <div class="navbar-center flex-item-grow flex-row-center-center">
+                <form action="" class="flex-row-center-center">
+                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
+                    <button class="btn" id="navbar-search-btn">검색</button>
+                </form>
+            </div>
+            
+            <div class="navbar-right flex-row-right-center">
+                <div>알람</div>
+                <div>
+                    <button class="btn btn-border-right">모임개설</button>
+                </div>
+                <div>
+                    <button class="btn btn-border-right">nickname</button>
+                </div>
+                <div>
+                    <button class="btn btn-border-right">고객센터</button>
+                </div>
+            </div>            
+        </div>
+
+        <div class="body-box flex-item-grow flex-col-center-up">
+            <div class="body flex-item-grow flex-col-center-center">
+                <div class="Main flex-item-grow flex-col-center-center">
+
+                    <!-- 맨 위 -->
+                    <div class="Main-navbar flex-col-left-center">
+                        메인&nbsp;&nbsp;&nbsp;카테고리
+                    </div>
+
+                    <!-- 사진있는 부분 -->
+                    <div class="Main-search">
+
+                        <!-- 사진있는 부분 텍스트 -->
+                        <div class="Main-search-text">
+                            Sagyo와 함께 잊지 못할 모임을 함께 하세요!
+                        </div>
+
+                        <!-- 사진있는 부분 검색창 -->
+                        <div class="Main-search-form">
+                            <form action="" class="">
+                                <!-- 만남장소, 관심사 선택장 → 로그인시 이 부분 display: none;으로만 바꾸면 됨 -->
+                                <div class="flex-row-center-center">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">만남장소</span>
+                                        </div>
+                                        <input type="text" value="서울특별시" class="form-control">
+                                        <input type="text" value="송파구" class="form-control">
+                                    </div>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">관심사</span>
+                                        </div>
+                                        <input type="text" value="스포츠" class="form-control">
+                                        <input type="text" value="전체" class="form-control">
+                                    </div>
+                                </div>
+
+                                <!-- 키워드 검색 -->
+                                <div class="input-group">  
+                                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-orange" type="button" id="button-addon2">Button</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 사진 위에 검은 배경 까는 용도 -->
+                        <div class="Main-search-layer"></div>
+                    </div>
+
+                    
+                    <div class="Main-body flex-item-grow flex-col-center-center">
+                        <!-- Sagyo 가 nickname 님에게 추천하는 모임 -->
+                        <div>
+                            <div class="PostList flex-col-left-center">
+
+                                <!-- 라벨 -->
+                                <div class="PostList-label">
+                                    Sagyo 가 nickname 님에게 추천하는 모임
+                                </div>
+                                
+                                <!-- 글1 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글2 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글3 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글4 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글5 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- 뱃지 소개 -->
+                        <div class="Main-badge">
+                            <!-- 라벨 -->
+                            <div class="PostList-label">
+                                뱃지 소개
+                            </div>
+
+                            <!-- 뱃지1 -->
+                            <div class="Main-badge-box flex-row-left-center">
+
+                                <div class="Main-badge-left flex-col-center-center">
+                                    <div class="Main-badge-badge">
+                                        <img src="img/badge150pixel_0011_핵인싸.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="Main-badge-center flex-item-grow flex-col-left-center">
+                                    <div class="Main-badge-title">
+                                        핵인싸
+                                    </div>
+                                    <div class="Main-badge-contents">
+                                        &nbsp;모임에서 분위기를 주도하는 '핵인싸'에게 핵인싸 포인트를
+                                        선물하세요! 핵인싸 포인트 3개를 획득하면 핵인싸 뱃지를 
+                                        얻을 수 있습니다.
+                                    </div>
+                                </div>
+
+                                <div class="Main-badge-right flex-col-left-center">
+                                    <div class="Main-badge-title">
+                                        신규 핵인싸
+                                    </div>
+                                    <div class="Main-badge-detail flex-col-left-center">
+                                        <div>'nicknam1'님 축하드립니다!</div>
+                                        <div>'nicknam1'님 축하드립니다!</div>
+                                        <div>'nicknam1'님 축하드립니다!</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                           <!-- 뱃지2 -->
+                           <div class="Main-badge-box flex-row-left-center">
+
+                                <div class="Main-badge-left flex-col-center-center">
+                                    <div class="Main-badge-badge">
+                                        <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                    </div>
+                                </div>
+
+                                <div class="Main-badge-center flex-item-grow flex-col-left-center">
+                                    <div class="Main-badge-title">
+                                        맛잘알
+                                    </div>
+                                    <div class="Main-badge-contents">
+                                        &nbsp;  맛있는 식당으로 안내해준 모임 개설자에게 맛잘알 포인트를 선물하세요! 맛잘알 포인트는 개설자에게만 부여 가능합니다. 맛잘알 포인트 3개를 획득하면 맛잘알 뱃지를 얻을 수 있습니다.
+                                    </div>
+                                </div>
+
+                                <div class="Main-badge-right flex-col-left-center">
+                                    <div class="Main-badge-title">
+                                        신규 맛잘알
+                                    </div>
+                                    <div class="Main-badge-detail flex-col-left-center">
+                                        <div>'nicknam1'님 축하드립니다!</div>
+                                        <div>'nicknam1'님 축하드립니다!</div>
+                                        <div>'nicknam1'님 축하드립니다!</div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div><!-- 뱃지소개 끝 -->
+
+
+
+                        <!-- 마감 임박 모임 -->
+                        <div>
+                            <div class="PostList flex-col-left-center">
+
+                                <!-- 라벨 -->
+                                <div class="PostList-label">
+                                    마감 임박 모임
+                                </div>
+                                
+                                <!-- 글1 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글2 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글3 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글4 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 글5 -->
+                                <div class="PostList-post flex-row-left-center">
+                                    <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-badge">
+                                            <img src="img/badge150pixel_0025_맛잘알.png" alt="">
+                                        </div>
+                                        <div>
+                                            nickname
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-title">
+                                            이곳은 제목이 옵니다...
+                                        </div>
+                                        <div class="PostList-post-contents">
+                                            이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!이곳은 본문이 오는데 중간에 잘려서 점선 처리가 될 겁니다!!!!
+                                        </div>
+                                    </div>
+                                    <div class="PostList-post-right flex-col-center-center">
+                                        <div>
+                                            <!-- 한얼이꺼랑 같이 쓰기 위해 버튼 빈칸을 남겨둠 -->
+                                        </div>
+                                        <div class="PostList-post-detail flex-col-left-center">
+                                            <div>서울특별시 용산구</div>
+                                            <div>2019/06/04 19:06</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-box">
+            footer 만들긴 했는데 뭐씀?
+        </div>
+    </div>
+</body>
+</html>

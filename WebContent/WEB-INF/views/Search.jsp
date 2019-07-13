@@ -11,17 +11,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <!-- 부트스트랩 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!-- 부트스트랩(bootstrap css, jquery, popper.js, bootstrap js 필요) -->
+    <link href="css/bootstrap-4.3.1.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper-1.14.7.min.js"></script>
+   	<script src="js/bootstrap-4.3.1.min.js"></script>
     <!-- 폰트 (Noto Snas KR + Handlee) -->
-    <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
-    <!-- sagyo.css -->
+    <link href="css/sagyo-font.css" rel="stylesheet">
+    <!-- sagyo.css, sagyo.js -->
     <link href="css/sagyo.css" rel="stylesheet">
-	<!-- jquery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	
    <style>
        .Main{
            width: 100%;
@@ -225,6 +226,9 @@
             align-items: center;
             padding: 15px 0px 15px 0px;
         }
+        .filter-attribute2{
+        	width: 50%;
+        }
         .filter-attribute>div:first-child{
             width: 120px;
             display: flex;
@@ -253,7 +257,6 @@
     	setSearchCookies();
     	function setSearchCookies(){
     		document.cookie="userId="+sessionStorage.getItem("userId");
-    		document.cookie="keyword="+"|keyword|";
     		document.cookie="addrGuId1=";
     		document.cookie="addrGuId2=";
     		document.cookie="addrGuId3=";
@@ -301,25 +304,23 @@
             $('#Search-filter-modal').on('shown.bs.modal', function () {
             });
 			
-    	    
+    	    // 필터창 킬때 주소, 관심사 1개만 노출(여러번 필터쓸때를 위해서)
 			$('#filterBtn').click(function(){
 				$('.filter-plus').removeClass('hidden');
 				$('.additional-filter').addClass("hidden");
 			});
 			
-			
     	    // 주소 추가 함수
             $('.filter-plus').click(function(){
                 console.log(this);
+                
 				$(this).addClass("hidden");
 				$(this).parent().next().removeClass("hidden");
 				return false;
             });
-            
     	    
             // 페이지 요청시 게시글 불러옴
             callList(pageNum);
-            
             
             // 무한 스크롤
            	$(".Search-result-body").scroll(function(){
@@ -331,10 +332,6 @@
            		}
            	})
            	
-           	$(".ajaxbtn").click(function(){
-           		
-           		callList(pageNum);
-           	});
            	// 페이지 최초 요청시 게시글 불러오고, 스크롤 내리면 또 불러오는 함수
            	function callList(pageNum){
 				console.log('ajax 페이지 요청 : ', pageNum);
@@ -350,6 +347,111 @@
            		}); 
            	};
          	
+           	// 현재 쿠키상태를 기반으로 필터창을 갈아줌
+           	function fillFilter(){
+           		// 비워주고
+           		$(".Search-filter-cookie").remove();
+           		// 쿠키 Json으로 만들고
+           		var json = cookieToJson();
+           		// 필수 필터들 입력 → 기본 값이 아닐시에만 출력
+           		if(json.minNum!="2" || json.maxNum!="20"){
+    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minNum">인원수 : '+json.minNum+' ~ '+json.maxNum+' <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
+           		}
+           		if(json.minMeetDate!=defaultMinMeetDate() || json.maxMeetDate!=defaultMaxMeetDate()){
+    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minMeetDate">만남일 : '+json.minMeetDate+' ~ '+json.maxMeetDate+' <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
+           		}
+				if(json.limitGrade!="1"){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="limitGrade">참가제한 : '+json.limitGrade+'점 이상 <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');					
+				}
+				// 부가 필터는 있으면 입력
+				if(json.addrGuId1!=""){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId1">'+$("#addrSiName1").text()+' '+json.addrGuName1+' <a class="filter-cancle2" href="" >&nbsp;&nbsp;Ｘ</a></div>');
+				}
+				if(json.addrGuId2!=""){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId2">'+$("#addrSiName2").text()+' '+json.addrGuName2+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+				}
+				if(json.addrGuId3!=""){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId3">'+$("#addrSiName3").text()+' '+json.addrGuName3+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+				}
+				if(json.interSubId1!=""){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId1">'+$("#interMainName1").text()+' > '+json.interSubName1+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+				}
+				if(json.interSubId2!=""){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId2">'+$("#interMainName2").text()+' > '+json.interSubName2+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+				}
+				if(json.interSubId3!=""){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId3">'+$("#interMainName3").text()+' > '+json.interSubName3+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+				}
+				if(json.moodId!=""){
+					if(json.moodId=="MI00002"){
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">진지한<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					}
+					else{
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">가벼운<a class="filter-cancle" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					}
+				}
+				if(json.drinkId!=""){
+					if(json.drinkId="DR00001"){
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주가능<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					}else{
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주불가<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					}
+				}
+				if(json.sameGenderId!=""){
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="sameGenderId">동성만<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+				}
+           	}
+           	
+           	// 필수 정보 필터는 취소하면 기본값으로 만듬
+           	$(document).on("click", ".filter-cancle1", function(){
+           		id = $(this).parent().attr("id");
+           		if(id=="minNum"){
+           			document.cookie="minNum=2";
+           			document.cookie="maxNum=20";
+           		}else if(id=="minMeetDate"){
+           			document.cookie="minMeetDate="+defaultMinMeetDate();
+           			document.cookie="maxMeetDate="+defaultMaxMeetDate();
+           		}else if(id=="limitGrade"){
+           			document.cookie="limitGrade=1";
+           		}
+           		// 필터창 갈아주고
+			  	fillFilter();
+           		// 결과창 비워주고
+           		$('.Search-result-body').empty();
+			  	// 필터 새로 적용하면 페이지 넘버 초기화
+			  	pageNum=1;
+			 	 // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
+			  	callList(pageNum);
+           		return false;
+           	})
+           	
+           	function defaultMinMeetDate(){
+           		var date = new Date();
+           		date.setDate(date.getDate()+2);
+           		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+           		return result;
+           	}
+           	function defaultMaxMeetDate(){
+           		var date = new Date();
+           		date.setDate(date.getDate()+20);
+           		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+           		return result;
+           	}
+           	// 부가정보 필터는 취소하면 쿠키 비움
+           	$(document).on("click", ".filter-cancle2", function(){
+           		document.cookie= $(this).parent().attr("id")+"=";
+			  	// 필터창 갈아주고
+			  	fillFilter();
+			  	// 결과창 비워주고
+			  	$('.Search-result-body').empty();
+			  	// 필터 새로 적용하면 페이지 넘버 초기화
+			  	pageNum=1;
+			 	 // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
+			  	callList(pageNum);
+           		return false;
+           	});
+
+           	// 현재 문서의 쿠키를 Json으로 바꿔줌
            	function cookieToJson(){
            		var result='{';
            		cookies = document.cookie;
@@ -363,28 +465,33 @@
            		return JSON.parse(result2);
            	}
            	
+           	// 필터 모달 적용시
            	$("#filterOnBtn").click(function(){
+           		// 결과창 비우는 함수
            		$('.Search-result-body').empty();
            		
+           		// 폼에 있는거 다 집어서
  	          	$( "#filterForm" ).submit(function( event ) {
  	          	  values = $(this).serializeArray();
-				  values.forEach(function(item){
+				  // 쿠키로 만들고
+ 	          	  values.forEach(function(item){
 					 document.cookie= item.name+"="+item.value;
-				  });  
+				  });
+				  
+				  // 필터창 갈아주고
+				  fillFilter();
+				  // 필터 새로 적용하면 페이지 넘버 초기화
 				  pageNum=1;
+				  // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
 				  callList(pageNum);
- 	          	  return false;
+				  return false;
  	          	});
            	});
            	
+           	// 필터에서 x 누르면 일어나는 함수
+
            	
-           	
-           	
-           	
-           	
-           	
-           	
-           	var a;
+			var a;
 			$(".btn-check-cate1").click(function() {
 				a = $(this).val();
 				console.log("a = " + a);
@@ -471,7 +578,23 @@
 				})
 			})
        })
-
+	
+       	$(function(){
+       		
+	    $("[data-toggle=popover]").popover({
+	        html : true,
+	        sanitize : false,
+	        content: function() {
+	          var content = $(this).attr("data-popover-content");
+	          return $(content).children(".popover-body").html();
+	        },
+	        title: function() {
+	          var title = $(this).attr("data-popover-content");
+	          return $(title).children(".popover-heading").html();
+	        }
+	    });
+	    
+	});
        
    </script>
 </head>
@@ -492,21 +615,8 @@
                     </div>
 
                     <!-- 필터창 -->
-                    <div class="Search-filter">
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
-                        <div class="Search-filter-item flex-row-center-center">사진 촬영<a href="" disabled>&nbsp;&nbsp;Ｘ</a></div>
+                    <div class="Search-filter" id="Search-filter">
+                        <div class="Search-filter-item flex-row-center-center">검색 : ${inputKeyword }</div>
                     </div>
 
                     <!-- 글목록 -->
@@ -536,45 +646,56 @@
                                         <div class="Search-filter-modal-body flex-col-center-center">
                                             <div class="filter-attribute">
                                                 <div>만남장소</div>
+                                                
                                                  <div class="flex-col-left-center">
+                                                 
                                                     <div class="flex-row-left-center">
-                                                        <button type="text" class="btn btn-120-35" name="addrSiId1" id="addrSiId1" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35 addrGuId" name="addrGuId1" id="addrGuId1" value="SI00003" >동작구</button>
-                                                        <input type="text" class="hidden" name="addrGuId1" value="GU00003"/>
-                                                        <button class="filter-plus">+</button>                                
-                                                    </div>                                                                  
+															<button type="button" class="btn btn-check-cate1" id="addrSiName1" name="addrSiName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
+						                                	<button type="button" class="btn btn-check-cate2" id="btn-check-gugun1"               value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#b1" data-placement="bottom">구·군</button>
+															 <input type= "hidden" id="addrGuId1" name="addrGuId1" value="">
+															 <input type= "hidden" id="addrGuName1" name="addrGuName1" value="">
+															 <button class="filter-plus">+</button>  
+                                                    </div>
+                                                                                                                      
                                                     <div class="flex-row-left-center hidden additional-filter">                               
-                                                        <button type="text" class="btn btn-120-35" name="addrSiId2" id="addrSiId2" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35 addrGuId" name="addrGuId2" id="addrGuId2" value="SI00003" >동작구</button>
-                                                        <input type="text" class="hidden" name="addrGuId2" value="GU00001"/>
-                                                        <button class="filter-plus">+</button>                               
-                                                    </div>                                                                   
+						                                    <button type="button" class="btn btn-check-cate1" id="addrSiName2" name="addrSiName2" value="2" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#a2" data-placement="bottom">시·도</button>
+															<button type="button" class="btn btn-check-cate2" id="btn-check-gugun2" value="2" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#b2" data-placement="bottom">구·군</button>
+															<input type= "hidden" id="addrGuId2" name="addrGuId2" value="">
+															<input type= "hidden" id="addrGuName2" name="addrGuName2" value="">
+															<button class="filter-plus">+</button>   
+                                                    </div>
+                                                                                                                       
                                                     <div class="flex-row-left-center hidden additional-filter">                                
-                                                        <button type="text" class="btn btn-120-35" name="addrSiId3" id="addrSiId3" value="SI00001" >서울특별시</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35 addrGuId" name="addrGuId3" id="addrGuId3" value="SI00003" >동작구</button>
-                                                        <input type="text" class="hidden" name="addrGuId3" value="GU00010"/>
-                                                    </div>                                                                           
+						                                   <button type="button" class="btn btn-check-cate1" id="addrSiName3" name="addrSiName3" value="3" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#a3" data-placement="bottom">시·도</button>
+						                                   <button type="button" class="btn btn-check-cate2" id="btn-check-gugun3" value="3" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#b3" data-placement="bottom">구·군</button>
+															<input type= "hidden" id="addrGuId3" name="addrGuId3" value="">
+															<input type= "hidden" id="addrGuName3" name="addrGuName3" value="">
+                                                    </div> 
+                                                                                                                              
                                                  </div>
                                             </div>
                                             <div class="filter-attribute">
-                                                <div>관심사a</div>
+                                                <div>관심사</div>
                                                 <div class="flex-col-left-center">
                                                     <div class="flex-row-left-center">
-                                                        <button type="text" class="btn btn-120-35" name="interMainId1" id="interMainId1"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35 interSubId" name="interSubId1"  id="interSubId1"  value="IS00003" readonly>축구</button>
-                                                        <input type="text" class="hidden" name="interSubId1" value=""/>
+					                                    <button type="button" class="btn btn-check-cate3" id="interMainName1" name="interMainName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
+					                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub1" name="btn-check-sub1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
+														 <input type= "hidden" id="interSubId1" name="interSubId1" value="">
+														 <input type= "hidden" id="interSubName1" name="interSubName1" value="">
                                                         <button class="filter-plus">+</button>                                     
                                                     </div>                                                                         
                                                     <div class="flex-row-left-center hidden additional-filter">                                      
-                                                        <button type="text" class="btn btn-120-35" name="interMainId2" id="interMainId2"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35 interSubId" name="interSubId2"  id="interSubId2"  value="IS00003" readonly>축구</button>
-                                                        <input type="text" class="hidden" name="interSubId2" value=""/>
+					                                    <button type="button" class="btn btn-check-cate3" id="interMainName2" name="interMainName2" value="2" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c2" data-placement="bottom">대분류</button>
+					                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub2" name="btn-check-sub2" value="2" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d2" data-placement="bottom">소분류</button>
+														 <input type= "hidden" id="interSubId2" name="interSubId2" value="">
+														 <input type= "hidden" id="interSubName2" name="interSubName2" value="">
                                                         <button class="filter-plus">+</button>                                
                                                     </div>                                                                    
                                                     <div class="flex-row-left-center hidden additional-filter">                                 
-                                                        <button type="text" class="btn btn-120-35" name="interMainId3" id="interMainId3"  value="IM00001" readonly>스포츠</button>&nbsp;&nbsp;
-                                                        <button type="text" class="btn btn-120-35 interSubId" name="interSubId3"  id="interSubId3"  value="IS00003" readonly>축구</button>
-                                                    	<input type="text" class="hidden" name="interSubId3" value=""/>
+					                                    <button type="button" class="btn btn-check-cate3" id="interMainName3" name="interMainName3" value="3" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c3" data-placement="bottom">대분류</button>
+					                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub3" name="btn-check-sub3" value="3" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d3" data-placement="bottom">소분류</button>
+														 <input type= "hidden" id="interSubId3" name="interSubId3" value="">
+														 <input type= "hidden" id="interSubName3" name="interSubName3" value="">
                                                     </div>                                                                                                        
                                                 </div>
                                             </div>
@@ -588,20 +709,31 @@
                                             <div class="filter-attribute">
                                                 <div>만남일</div>
                                                 <div>
-                                                    <input type="text" name="minMeedDate" value="2019-07-12" />임시
+                                                    <input type="text" name="minMeetDate" value="2019-07-12" />임시
                                                     <input type="text" name="maxMeetDate"  value="2019-07-20" />만남일
 												</div>
                                             </div>
-                                            <div class="filter-attribute">
-                                                <div>분위기</div>
-                                                <div>
-                                                    <input type="radio" name="moodId" value="MD00001"> 무관
-                                                    <input type="radio" name="moodId" value="MD00002"> 진지한
-                                                    <input type="radio" name="moodId" value="MD00003"> 가벼운
-                                                </div>
+                                            <div class="flex-row-left-center">
+                                            	<div class="filter-attribute filter-attribute2 flex-row-left-center">
+	                                                <div>분위기</div>
+	                                                <div>
+	                                                    <input type="radio" name="moodId" value="" checked> 무관
+	                                                    <input type="radio" name="moodId" value="MI00002"> 진지한
+	                                                    <input type="radio" name="moodId" value="MI00003"> 가벼운
+	                                                </div>
+                                            	</div>
+                                            	<div class="filter-attribute filter-attribute2 flex-row-left-center">
+                                            		<div>음주여부</div>
+                                            		<div>
+                                            			<input type="radio" name="drinkId" value="" checked> 무관
+	                                                    <input type="radio" name="drinkId" value="DR00001"> 음주가능
+	                                                    <input type="radio" name="drinkId" value="DR00002"> 음주불가
+                                            		</div>
+                                            	</div>
                                             </div>
-                                            <div class="filter-attribute flex-col-left-center">
-                                            	<div>
+                                            <div class="flex-row-left-center">
+                                            
+                                            	<div class="filter-attribute filter-attribute2 flex-row-left-center">
                                             		<div>참가제한</div>
                                             		<div>
 														<div class="star-rating star-20-box flex-row-left-center">
@@ -610,25 +742,20 @@
 															<img class="grayscale" id="3"  src="img/star.png" alt="" />
 															<img class="grayscale" id="4"  src="img/star.png" alt="" />
 															<img class="grayscale" id="5"  src="img/star.png" alt="" />
-															<input class="hidden" type="text" id="limitGrade" name="limitGrade" value="" />
+															<input class="hidden" type="text" id="limitGrade" name="limitGrade" value="1" />
 														</div>                                            		
                                             		</div>
 
                                             	</div>
-                                            	<div>
-                                            		<div>음주가능</div>
+                                            	
+                                            	<div class="filter-attribute filter-attribute2 flex-row-left-center">
+                                            	    <div>동성여부</div>
                                             		<div>
-                                            			<input type="checkbox" name="drinkId" value="DR00001"/>
-                                            			<input type="hidden" name="drinkId" value="DR00002"/>
+                                            		    <input type="radio" name="sameGenderId" value="" checked> 무관
+	                                                    <input type="radio" name="sameGenderId" value="SG00001"> 동성만
                                             		</div>
                                             	</div>
-                                            	<div>
-                                            	    <div>동성만</div>
-                                            		<div>
-                                            			<input type="checkbox" name="sameGenderId" value="SG00001"/>
-                                            			<input type="hidden" name="sameGenderIdss" value="SG00002"/>
-                                            		</div>
-                                            	</div>
+                                            	
                                             </div>
                                         </div>
 
@@ -668,10 +795,10 @@
     
     
     
-    
-    <!-- Content for Popover #1 -->
-    <!-- Content for Popover #1 -->
-    <!-- Content for Popover #1 -->
+
+
+
+<!-- Content for Popover #1 -->
 <c:forEach var="i" begin="1" end="3">
 	<div id="a${i}" class="hidden">
 	    <div class="popover-heading">
@@ -734,5 +861,10 @@
     </div>
 </div>   
 </c:forEach>
+
+
+
+
+
 </body>
 </html>

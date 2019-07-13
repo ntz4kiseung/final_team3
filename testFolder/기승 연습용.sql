@@ -1,3 +1,64 @@
+-- 1. 비로그인시 뿌려주는 핫한 모임
+SELECT POSTID, USERID, NICKNAME, TITLE, CONTENTS, MEETDATE, ADDRSINAME, ADDRGUNAME, URL, URLBAD
+FROM POST_VIEW
+WHERE MEETDATE>=SYSDATE
+  AND FN_POST_IS_ACCEPTED(POSTID)=0
+  AND INTERMAINID=(SELECT INTERMAINID
+                    FROM
+                    (
+                        SELECT IM.INTERMAINID, RANK() OVER(ORDER BY COUNT(*)) AS RANK
+                        FROM POST P JOIN INTEREST_SUB "IS" ON P.INTERSUBID="IS".INTERSUBID
+                                    JOIN INTEREST_MAIN IM ON "IS".INTERMAINID=IM.INTERMAINID
+                        WHERE P.MEETDATE>=SYSDATE
+                        GROUP BY IM.INTERMAINID
+                    )
+                    WHERE RANK=1)
+ORDER BY MEETDATE DESC;
+
+-- 2. 로그인시 뿌려주는 누구님에게 추천하는 모임
+SELECT POSTID, USERID, NICKNAME, TITLE, CONTENTS, MEETDATE, ADDRSINAME, ADDRGUNAME, URL, URLBAD
+FROM
+(
+    SELECT *
+    FROM POST_VIEW 
+    WHERE MEETDATE>=SYSDATE
+      AND FN_POST_IS_ACCEPTED(POSTID)=0
+    ORDER BY FN_CAL_RANK(POSTID, 'adiard', '||') DESC, MEETDATE DESC
+);
+
+-- 3. 마감 임박 모임
+SELECT *
+FROM
+(
+    SELECT POSTID, USERID, NICKNAME, TITLE, CONTENTS, MEETDATE, ADDRSINAME, ADDRGUNAME, URL, URLBAD
+    FROM POST_VIEW PV
+    WHERE FN_POST_IS_ACCEPTED(POSTID)=0
+      AND MEETDATE>=SYSDATE
+    ORDER BY MEETDATE DESC
+)
+WHERE ROWNUM<=5;
+
+-- 4-1. 랜덤 뱃지 소개 2개
+SELECT *
+FROM
+(
+SELECT BADGEPOINTNAME, BADGEPOINTDESC1, URL, BADGEPOINTID
+FROM POINT
+ORDER BY DBMS_RANDOM.VALUE
+)
+WHERE ROWNUM<=2;
+-- 4-2. 그 뱃지 최근 획득 유저 셋
+SELECT NICKNAME
+FROM
+(
+    SELECT NICKNAME
+    FROM USER_BADGE_LOG BL JOIN REVIEW RV ON BL.GETREVIEWID=RV.REVIEWID
+                           JOIN USER_ESSENTIAL UE ON BL.USERID=UE.USERID
+    WHERE BADGEPOINTID = 'BP00005'
+    GROUP BY UE.NICKNAME, RV.REVIEWDATE
+    ORDER BY REVIEWDATE DESC
+)
+WHERE ROWNUM<=3;
 /*
 가져올거
 ◎ 개설자id        userId
@@ -140,61 +201,19 @@ SELECT FN_CAL_RANK(POSTID, '조회유저', '|키워드|키워드2|') AS POSTGRADE
      , ADDRSINAME, ADDRGUNAME, TO_CHAR(MEETDATE, 'YYYY/MM/DD HH24:MI') AS MEETDATE
 FROM POST_VIEW
 WHERE MEETDATE >= SYSDATE
-  AND (ADDRGUID LIKE '%' OR ADDRGUID IN ('' ,''))
-  AND (INTERSUBID LIKE '%' OR INTERSUBID IN ('' ,''))
+  AND FN_POST_IS_ACCEPTED(POSTID)=0
+  AND (ADDRGUID LIKE '%'||'' OR ADDRGUID IN ('' ,''))
+  AND (INTERSUBID LIKE '%'||'' OR INTERSUBID IN ('' ,''))
   AND (2<=MINNUM AND MAXNUM<=20)
-  AND (SYSDATE+2<=MEETDATE AND MEETDATE<=SYSDATE+10)
-  AND MOOD LIKE '%%'
+  AND (SYSDATE<=MEETDATE AND MEETDATE<=SYSDATE+2)
+  AND MOOD LIKE '%'||'""'||'%'
   AND LIMITGRADE>=1
-  AND DRINK LIKE '%%'
-  AND SAMEGENDER LIKE '%%'
+  AND DRINK LIKE '%'||''||'%'
+  AND SAMEGENDER LIKE '%'||''||'%'
 )
-WHERE 1 <= POSTNUM AND POSTNUM <=6;
+WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1)
 
 
-select *
-from mood;
-
-		SELECT *
-		FROM
-		(
-		SELECT FN_CAL_RANK(POSTID, '조회유저', '|키워드|키워드2|') AS POSTGRADE 
-		     , RANK() OVER(ORDER BY FN_CAL_RANK(POSTID, '조회유저', '|키워드|키워드2|'), MEETDATE DESC) AS POSTNUM
-		     , POSTID, USERID, NICKNAME, URL, URLBAD
-		     , TITLE, MINNUM, MAXNUM, CONTENTS
-		     , ADDRSINAME, ADDRGUNAME, TO_CHAR(MEETDATE, 'YYYY/MM/DD HH24:MI') AS MEETDATE
-		FROM POST_VIEW
-		WHERE MEETDATE >= SYSDATE
-		  AND (ADDRGUID LIKE '%'||'GU00003' OR ADDRGUID IN ('GU00001' ,'GU00010'))
-		  AND (INTERSUBID LIKE '%'||'' OR INTERSUBID IN ('' ,''))
-		  AND (2<=MINNUM AND MAXNUM<=20)
-		  AND (SYSDATE<=MEETDATE AND MEETDATE<=SYSDATE+2)
-		  AND MOOD LIKE '%'||'""'||'%'
-		  AND LIMITGRADE>=1
-		  AND DRINK LIKE '%'||'DR00002'||'%'
-		  AND SAMEGENDER LIKE '%'||'SG00002'||'%'
-		)
-		WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1)
-
-addrGuId1: "cc"
-addrGuId2: "GU00001"
-addrGuId3: "GU00010"
-drinkId: "DR00002"
-interSubId1: ""
-interSubId2: ""
-interSubId3: ""
-keyword: "|keyword|"
-limitGrade: ""
-maxMeetDate: "2019-07-20"
-maxNum: "20"
-minMeedDate: "2019-07-12"
-minMeetDate: "2019-07-01"
-minNum: "2"
-moodId: "''"
-pageNum: "1"
-sameGenderID: "SG00002"
-sameGenderId: "''"
-userId: "null"
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------

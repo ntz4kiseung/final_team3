@@ -9,6 +9,7 @@
 		FROM POST_VIEW2 PV
 		WHERE POSTID = 'PT00002'
 	</select>
+	
 	<select id="searchList" resultType="com.test.mybatis.PostDTO">
 	<![CDATA[
 		SELECT *
@@ -24,7 +25,7 @@
 		  AND (ADDRGUID LIKE '%'||#{addrGuId1} OR ADDRGUID IN (#{addrGuId2} ,#{addrGuId3}))
 		  AND (INTERSUBID LIKE '%'||#{interSubId1} OR INTERSUBID IN (#{interSubId2} ,#{interSubId3}))
 		  AND (#{minNum}<=MINNUM AND MAXNUM<=#{maxNum})
-		  AND (SYSDATE<=MEETDATE AND MEETDATE<=SYSDATE+2)
+		  AND (TO_DATE(#{minMeetDate}, 'YYYY-MM-DD')<=MEETDATE AND MEETDATE<=TO_DATE(#{maxMeetDate}, 'YYYY-MM-DD'))
 		  AND MOOD LIKE '%'||#{moodId}||'%'
 		  AND LIMITGRADE>=#{limitGrade}
 		  AND DRINK LIKE '%'||#{drinkId}||'%'
@@ -33,4 +34,54 @@
 		WHERE (6*#{pageNum}-5) <= POSTNUM AND POSTNUM < (6*#{pageNum}+1)
 	]]>
 	</select>
+	
+	<select id="mainHotList" resultType="com.test.mybatis.PostDTO">
+	<![CDATA[
+		SELECT POSTID, USERID, NICKNAME, TITLE, CONTENTS, MEETDATE, ADDRSINAME, ADDRGUNAME, URL, URLBAD
+		FROM POST_VIEW
+		WHERE MEETDATE>=SYSDATE
+		  AND FN_POST_IS_ACCEPTED(POSTID)=0
+		  AND INTERMAINID=(SELECT INTERMAINID
+		                    FROM
+		                    (
+		                        SELECT IM.INTERMAINID, RANK() OVER(ORDER BY COUNT(*)) AS RANK
+		                        FROM POST P JOIN INTEREST_SUB "IS" ON P.INTERSUBID="IS".INTERSUBID
+		                                    JOIN INTEREST_MAIN IM ON "IS".INTERMAINID=IM.INTERMAINID
+		                        WHERE P.MEETDATE>=SYSDATE
+		                        GROUP BY IM.INTERMAINID
+		                    )
+		                    WHERE RANK=1)
+		ORDER BY MEETDATE DESC
+	]]>
+	</select>
+	
+	<select id="mainRecommendList" resultType="com.test.mybatis.PostDTO">
+	<![CDATA[
+		SELECT POSTID, USERID, NICKNAME, TITLE, CONTENTS, MEETDATE, ADDRSINAME, ADDRGUNAME, URL, URLBAD
+		FROM
+		(
+		    SELECT *
+		    FROM POST_VIEW 
+		    WHERE MEETDATE>=SYSDATE
+		      AND FN_POST_IS_ACCEPTED(POSTID)=0
+		    ORDER BY FN_CAL_RANK(POSTID, #{userId}, '||') DESC, MEETDATE DESC
+		)
+	]]>
+	</select>
+
+	<select id="mainApproachingList" resultType="com.test.mybatis.PostDTO">
+	<![CDATA[
+		SELECT *
+		FROM
+		(
+		    SELECT POSTID, USERID, NICKNAME, TITLE, CONTENTS, MEETDATE, ADDRSINAME, ADDRGUNAME, URL, URLBAD
+		    FROM POST_VIEW PV
+		    WHERE FN_POST_IS_ACCEPTED(POSTID)=0
+		      AND MEETDATE>=SYSDATE
+		    ORDER BY MEETDATE DESC
+		)
+		WHERE ROWNUM<=5
+	]]>
+	</select>
+	
 </mapper>

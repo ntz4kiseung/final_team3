@@ -24,9 +24,9 @@
             
             
             <div class="navbar-center flex-item-grow flex-row-center-center  ${param.isMain==null ? "" : "hidden"}">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <a href="search.action"><button class="btn" id="navbar-search-btn">검색</button></a>
+                <form action="search.action" class="flex-row-center-center">
+                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" name="keyword" class="form-control flex-item-grow" id="navbar-search-input">
+                    <button type="submit" class="btn" id="navbar-search-btn">검색</button>
                 </form>
             </div>
             

@@ -12,4 +12,7 @@ public interface IBadgeDAO
 	public ArrayList<BadgeDTO> positiveBadge();
 	public ArrayList<BadgeDTO> negativeBadge();
 	public ArrayList<BadgeDTO> hostBadge();
+	
+	public ArrayList<BadgeDTO> randomMainBadge();
+	public ArrayList<String> getUserList(String badgePointId);
 }

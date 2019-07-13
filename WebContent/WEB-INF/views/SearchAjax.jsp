@@ -1,5 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<c:if test="${fn:length(list) == 0 } ">
+	조회결과 없음
+</c:if>
 <c:forEach var="post" items="${list }">
 	<div class="PostList-post flex-row-left-center">
         <div class="PostList-post-left flex-col-center-center">

@@ -57,6 +57,32 @@
 		WHERE BADGEPOINTCATEID='BC00003'
 	</select>  
 	
-	
+	<select id="randomMainBadge" resultType="com.test.mybatis.BadgeDTO">
+	<![CDATA[
+		SELECT *
+		FROM
+		(
+		SELECT BADGEPOINTNAME, BADGEPOINTDESC1, URL, BADGEPOINTID
+		FROM POINT
+		ORDER BY DBMS_RANDOM.VALUE
+		)
+		WHERE ROWNUM<=2	
+	]]>
+	</select>
   
+  	<select id="getUserList" resultType="java.lang.String">
+  	<![CDATA[
+	  	SELECT NICKNAME
+		FROM
+		(
+		    SELECT NICKNAME
+		    FROM USER_BADGE_LOG BL JOIN REVIEW RV ON BL.GETREVIEWID=RV.REVIEWID
+		                           JOIN USER_ESSENTIAL UE ON BL.USERID=UE.USERID
+		    WHERE BADGEPOINTID = #{badgePointId}
+		    GROUP BY UE.NICKNAME, RV.REVIEWDATE
+		    ORDER BY REVIEWDATE DESC
+		)
+		WHERE ROWNUM<=3
+  	]]>
+  	</select>
 </mapper>

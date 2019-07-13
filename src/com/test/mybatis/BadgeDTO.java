@@ -8,7 +8,17 @@ public class BadgeDTO
 	//선아 DTO 추가 
 	private int badgeCk;
 	
-	
+	// 기승 추가 → MainBadgeDTO 를 없애도 될거 같음
+	private String nickname;
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public int getBadgeCk()
 	{
 		return badgeCk;
