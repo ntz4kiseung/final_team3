@@ -269,7 +269,29 @@
       
       $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
 		
+    
+      
+        $(document).on("click",".MyMessage-title",function()
+        {
+   	  
+	   	  var msgId = $(this).val();
 
+	   	  var checkDate = $("#checkDate"+msgId).text();
+	   	  
+	   	 if (checkDate == "")
+	   	 {
+	   		 $.ajax({
+            url : 'checkDateajax.action',
+            type : 'POST',
+            data : { msgId : msgId },
+            }).done(function(result){
+          	 	$("#checkDate"+msgId).text(result);
+          	 	
+            })
+ 
+	   	 }
+   	  
+   	  });
 
    });
     
@@ -452,17 +474,14 @@
                                                         <input type="checkbox"  name="checkOne" class="checkOne" value="${message.messageId }" >
                                                     </div>
                                                     <div class="flex-item-grow">
-                                                        <button class="btn btn-link MyMessage-title" type="button" data-toggle="collapse" data-target="#collapse${message.messageId }" aria-expanded="true" aria-controls="collapseOne">
+                                                        <button class="btn btn-link MyMessage-title" id="msgcontent${message.messageId }" 
+                                                        value="${message.messageId }" type="button" data-toggle="collapse" data-target="#collapse${message.messageId }" aria-expanded="true" aria-controls="collapseOne">
                                                            ${message.contents }
                                                          </button>
                                                     </div>
                                                     <div class="MyMessage-accordion-right" id="giveuserid">${message.giveUserId }</div>
-                                                    <div class="MyMessage-accordion-right">
-                                                        ${message.sendDate }
-                                                    </div>
-                                                    <div class="MyMessage-accordion-right">
-                                                       ${message.checkDate }
-                                                    </div>
+                                                    <div class="MyMessage-accordion-right">${message.sendDate }</div>
+                                                    <div class="MyMessage-accordion-right" id="checkDate${message.messageId }" >${message.checkDate }</div>
                                                 </div>
                                                 
                                                 <!-- card body -->
@@ -473,7 +492,7 @@
                                                         <br>
                                                         <div class="flex-row-left-center">
                                                             <div class="MyMessage-date">보낸날짜:  ${message.sendDate }</div>&nbsp;&nbsp;
-                                                            <div class="MyMessage-date">확인날짜: ${message.checkDate }</div>
+                                                            <div class="MyMessage-date " >확인날짜: ${message.checkDate }</div>
                                                             <div class="flex-item-grow flex-row-right-center">
                                                                 <button class="btn btn-orange btn-85-25" id="remsg" data-toggle="modal" data-target="#messageModal${message.messageId }">답장하기</button>
                                                             </div>
