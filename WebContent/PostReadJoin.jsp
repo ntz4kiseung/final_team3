@@ -74,7 +74,25 @@
                         </div>
                         <div>
                             <div>usernickname ♡</div>
-                            <div>☆☆☆☆☆</div>
+                            <div>
+                            	<div class="star-show star-25-box">
+									<div>
+										<img class="grayscale" id="1" src="img/star.png" alt=""/>
+										<img class="grayscale" id="2"  src="img/star.png" alt="" />
+										<img class="grayscale" id="3"  src="img/star.png" alt="" />
+										<img class="grayscale" id="4"  src="img/star.png" alt="" />
+										<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+									</div>
+									<div>
+								  		<img class="" id="1" src="img/star.png" alt=""/>
+										<img class="" id="2"  src="img/star.png" alt="" />
+										<img class="" id="3"  src="img/star.png" alt="" />
+										<img class="" id="4"  src="img/star.png" alt="" />
+										<img class="" id="5"  src="img/star.png" alt="" />
+									</div>
+									<input class="hidden" type="text" id="grade2" name="grade2" value="${postlist.grade }"/>
+								</div>
+                            </div>
                             <div>휴대전화 인증완료</div>
                             <div>이메일 인증완료</div>
                         </div>

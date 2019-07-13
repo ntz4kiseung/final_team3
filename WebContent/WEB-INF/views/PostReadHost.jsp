@@ -25,6 +25,7 @@
 <script type="text/javascript">
 	$(document).ready(function()
 	{
+		$(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%"); // 스타 뷰
 		$('#myModal').on('shown.bs.modal', function () {
 			$('#myInput').trigger('focus')
 		});
@@ -98,7 +99,6 @@
 		
 		$('.nickName').on("click", function()
 		{
-			
 			if($(this).is(":checked"))
 			{
 				jQuery.ajaxSettings.traditional = true;
@@ -129,38 +129,53 @@
 			}
 		});
 // 만남확정 ------------------------------------------------------------------------------------------------
-		$('.check-meeting').on('click', function()
-		{
-			alert("test");
-			var joinId = "";
-			$('input[class="nickName"]:checked').each(function(index)
+		
+		if($('#serchNum').html >= $('#minNum').html && $('#serchNum').html <= $('#maxNum').html)
 			{
-				joinId += $(this).attr('name')+ " ";
-				$.ajax({
-					url : 'hostalljoinupdate.action',
-					data: {joinIds : joinId, statusId : "ST00003"},
-					type: 'POST',
-					dataType: 'html'
-				}).done(function(result)
+				$('.check-meeting').on('click', function()
 				{
-					console.log($(this).attr('name'));
+					$('#meeting-contents').html('선택하신 인원으로 만남을 확정하시겠습니까?');
+					$('#Confirmed-meeting-check').click(function()
+					{
+						var joinId = "";
+						{
+						$('input[class="nickName"]:checked').each(function(index)
+						{
+							console.log("test3");
+							joinId += $(this).attr('name')+ " ";	
+						});
+						$.ajax({
+							url : 'hostalljoinupdate.action',
+							data: {joinIds : joinId, statusId : "ST00003"},
+							type: 'POST',
+							dataType: 'html'
+						}).done(function(result)
+						{
+						});
+						}
+						joinId = "";
+						{
+						$('input[class="nickName"]:not(:checked)').each(function(index)
+						{
+							joinId += $(this).attr('name')+ " ";
+						});
+						$.ajax({
+							url : 'hostalljoinupdate.action',
+							data: {joinIds : joinId, statusId : "ST00004"},
+							type: 'POST',
+							dataType: 'html'
+						}).done(function(result)
+						{
+							console.log($(this).attr('name'));
+						});
+						}
+					});
 				});
-			});
-			
-			$('input[class="nickName"]:not(:checked)').each(function(index)
+			}
+			else
 			{
-				joinId += $(this).attr('name')+ " ";
-				$.ajax({
-					url : 'hostalljoinupdate.action',
-					data: {joinIds : joinId, statusId : "ST00004"},
-					type: 'POST',
-					dataType: 'html'
-				}).done(function(result)
-				{
-					console.log($(this).attr('name'));
-				});
-			});
-		});
+				$('#meeting-contents').html('인원이 맞지 않습니다.');
+			}	
 		
 	});
 </script>
@@ -168,40 +183,7 @@
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
-
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
-
+        <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-up">
                 <div class="Post flex-item-grow flex-col-center-up">
@@ -212,11 +194,29 @@
 
                     <div class="Post-host flex-row-left-center">
                         <div>
-                            <img src="${postlist.url }" alt="이미지 없음">
+                            <img src="${postlist.url }" alt="이미지 없음" id="postId" name="${postlist.postId }">
                         </div>
                         <div>
                             <div>${postlist.nickname }</div> 
-                            <div>☆☆☆☆☆</div>
+                            <div>
+                            	<div class="star-show star-25-box">
+									<div>
+										<img class="grayscale" id="1" src="img/star.png" alt=""/>
+										<img class="grayscale" id="2"  src="img/star.png" alt="" />
+										<img class="grayscale" id="3"  src="img/star.png" alt="" />
+										<img class="grayscale" id="4"  src="img/star.png" alt="" />
+										<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+									</div>
+									<div>
+								  		<img class="" id="1" src="img/star.png" alt=""/>
+										<img class="" id="2"  src="img/star.png" alt="" />
+										<img class="" id="3"  src="img/star.png" alt="" />
+										<img class="" id="4"  src="img/star.png" alt="" />
+										<img class="" id="5"  src="img/star.png" alt="" />
+									</div>
+									<input class="hidden" type="text" id="grade2" name="grade2" value="${postlist.grade }"/>
+								</div>
+                            </div>
                             <c:if test="${not empty postlist.telCertiId}">
                             	<div>휴대폰 인증 완료 ✔</div>
                             </c:if>
@@ -243,7 +243,7 @@
                     </div>
 
                     <div class="Post-Status">
-                        <div class="flex-row-center-center">현재 참가 신청인원 (3/<div id="minNum">${postlist.minNum }</div>~<div id="maxNum">${postlist.maxNum })</div></div>
+                        <div class="flex-row-center-center">현재 참가 신청인원 (<div id="serchNum">${serchNum }</div>/<div id="minNum">${postlist.minNum }</div>~<div id="maxNum">${postlist.maxNum })</div></div>
                         <div class="flex-row-right-center">
                             <button class="btn btn-outline-secondary btn-120-35 allmessage" data-toggle="modal" data-target="#messageModal">참가자 전체 쪽지</button>
                             <button class="btn btn-outline-orange btn-120-35 check-meeting" data-toggle="modal" data-target="#meetcheck">만남확정</button>
@@ -254,36 +254,50 @@
 
                     <div class="Post-joinList">
  						<c:forEach var="join" items="${list}">
- 							<div class="comments flex-row-left-center">
-	
-	                            <div class="comments-user"> <!-- 코멘트 유저 뱃지 + 닉네임 -->
-	                                <div> <!-- 뱃지 -->
-	                                    <img src="${join.url }" alt="">
+ 							<c:choose>
+ 								<c:when test="${!empty join.delJoin}">
+		                        	<div class="comments flex-row-left-center">
+		                        		<div>삭제된 댓글입니다.</div>
+		                        		<div class="PostWrite-row-right">
+			                            	<input class="nickName" id="${join.statusId }" name="${join.joinId }" type="checkbox"
+			                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
+			                            	참가수락
+		                            	</div>
 	                                </div>
-	                                <div> <!-- 닉네임 -->
-	                                    ${join.nickname}
-	                                </div>
-	                            </div>
-	                            <div class="comments-else flex-item-grow">
-	                                <div class="comments-buttons flex-row-left-center">
-	                                    <div>${join.joinDate}</div>
-	                                    <div>
-	                                        <button class="btn joinreport" data-toggle="modal" data-target="#report-post" name="${join.joinId }">신고하기</button>
-	                                    </div>
-	                                    <div>
-	                                        <button class="btn reply-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId }">댓글달기</button>
-	                                    </div>
-	                                </div>
-	                                <div>
-	                                    ${join.contents}
-	                                </div>
-	                            </div>
-	                            <div class="PostWrite-row-right">
-	                            	<input class="nickName" id="${join.statusId }" name="${join.joinId }" type="checkbox"
-	                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
-	                            	참가수락
-                            	</div>
-	                        </div>
+	                                
+		                        </c:when>
+		                        <c:when test="${empty join.delJoin}">
+		 							<div class="comments flex-row-left-center">
+			                            <div class="comments-user"> <!-- 코멘트 유저 뱃지 + 닉네임 -->
+			                                <div> <!-- 뱃지 -->
+			                                    <img src="${join.url }" alt="">
+			                                </div>
+			                                <div> <!-- 닉네임 -->
+			                                    ${join.nickname}
+			                                </div>
+			                            </div>
+			                            <div class="comments-else flex-item-grow">
+			                                <div class="comments-buttons flex-row-left-center">
+			                                    <div>${join.joinDate}</div>
+			                                    <div>
+			                                        <button class="btn joinreport" data-toggle="modal" data-target="#report-post" name="${join.joinId }">신고하기</button>
+			                                    </div>
+			                                    <div>
+			                                        <button class="btn reply-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId }">댓글달기</button>
+			                                    </div>
+			                                </div>
+			                                <div>
+			                                    ${join.contents}
+			                                </div>
+			                            </div>
+			                            <div class="PostWrite-row-right">
+			                            	<input class="nickName" id="${join.statusId }" name="${join.joinId }" type="checkbox"
+			                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
+			                            	참가수락
+		                            	</div>
+			                        </div>
+	                        	</c:when>
+	                        </c:choose>
 	                        <c:forEach var="replylist" items="${replylist }">
 	                        	<c:if test="${join.joinId eq replylist.joinId }">
 	                        		<c:if test="${not empty replylist.userTypeId}">
@@ -423,13 +437,13 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<div class="flex-col-center-center">
+					<div class="flex-col-center-center" id="meeting-contents">
 						선택하신 인원으로 만남을 확정하시겠습니까?
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal" id="meeting">확인</button>
+						data-dismiss="modal" id="Confirmed-meeting-check">확인</button>
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>	
 				</div>
 			</div>
