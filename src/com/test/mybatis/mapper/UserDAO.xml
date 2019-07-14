@@ -5,7 +5,7 @@
   
 <mapper namespace="com.test.mybatis.IUserDAO"> 
   	
-  	<select id="myPageList" resultType="com.test.mybatis.UserDTO"> 
+ <!--  	<select id="myPageList" resultType="com.test.mybatis.UserDTO"> 
 	SELECT DISTINCT UE.USERID, UE.NICKNAME,UE.NAME,UE.BIRTH,G.GENDER,UE.TEL,US.SNS, US.INTRODUCE
                 ,UE.EMAIL,UE.BADGELOGID, BL.BADGEPOINTID ,P.BADGEPOINTNAME,P.URL,NVL2((SELECT C.CERTINAME 
                     FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
@@ -21,7 +21,7 @@
                         JOIN REVIEW R ON UE.USERID = R.TAKEUSERID
                         JOIN GENDER G ON G.GENDERID = UE.GENDERID                      
 	WHERE UE.USERID='BAHEELA'
-	</select> 
+	</select>  -->
   
   	<insert id = "userTelInsert">
 		INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)

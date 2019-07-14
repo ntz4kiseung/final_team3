@@ -114,9 +114,26 @@
        
        $(".popoverclick").click(function()
 	   {
+    	   
     	   $(".selectBadge").click(function(){
     		  
-    		   alert("test");
+    		 
+    		   var badgeLogId = $(this).val();
+    		   
+    		   
+    		   var confirm_val = confirm("대표뱃지로 설정하시겠습니까?");
+        	   if(confirm_val) 
+        	   {
+        	     	
+                   $.ajax({
+                   url : 'mainBadge.action',
+                   type : 'post',
+                   data : { badgeLogId : badgeLogId },
+                   }).done(function(result){
+                   		$("#user_main").attr("src",result)
+       			   })
+       			
+                  }   
     		   
     	   });
     	   
@@ -126,7 +143,8 @@
 		
 
     	   
-       
+    
+	  
       
 
      
@@ -153,7 +171,7 @@
                         <div class="MyPage-header-badge">
                                <div class="user-badge-box">
                                         <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
-                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                         <img id="user_main" src="<%=cp %>/${List.url } ">
                                  </div>
                             </div>
                              <div class="star-show star-25-box">
@@ -222,6 +240,7 @@
                                                     <img id="imgbadge1"  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
                                                     src="<%=cp %>/${List.url }" >
                                                  </button >
+                                                 
                                      </div>
                                <!-- 모달 -->      
                                <div id="badge${List.badgePointId }" class="hidden" >
@@ -234,13 +253,18 @@
                                                   </div>
                                                   <div>   
                                                  <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
-                                                       				    ${List.badgeCk==1 ? "" : "disabled='disabled'" } >대표뱃지 설정</button>
+                                                       				    ${List.badgeCk==1 ? "" : "disabled='disabled'" } value="${List.badgeLogId }">대표뱃지 설정</button>
                                                   </div>
+                                                 
                                              </div>
                                              <div class="flex-col-left-center" style="padding-left: 20px;">
                                                  <div class="MyBadge-header-nickname">${List.badgePointName }</div>
-                                                  <div class="MyBadge-header-detail">뱃지 포인트 : <progress value="5" max="10"></progress></div>
-                                                  <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
+                                                 <!--  <div class="MyBadge-header-detail">뱃지 포인트 : <progress value="5" max="10"></progress></div>
+                                                 -->  
+                                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
+                     60%
+                        </div>
+                                                 <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
                                                  <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
                                              </div>
                                           </div>
@@ -278,7 +302,7 @@
                                                         </div>
                                                         <div>   
                                                         <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
-                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } >대표뱃지 설정</button>
+                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } value="${List.badgeLogId }">대표뱃지 설정</button>
                                                         </div>
                                                    </div>
                                                    <div class="flex-col-left-center" style="padding-left: 20px;">
@@ -322,7 +346,7 @@
                                                         </div>
                                                         <div>   
                                                         <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
-                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } >대표뱃지 설정</button>
+                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } value="${List.badgeLogId }">대표뱃지 설정</button>
                                                         </div>
                                                    </div>
                                                    <div class="flex-col-left-center" style="padding-left: 20px;">
@@ -366,7 +390,7 @@
 		                                                        </div>
 		                                                        <div>   
 		                                                       <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
-		                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } >대표뱃지 설정</button>
+		                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } value="${List.badgeLogId }">대표뱃지 설정</button>
 		                                                        </div>
 		                                                   </div>
 		                                                   <div class="flex-col-left-center" style="padding-left: 20px;">
