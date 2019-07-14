@@ -1,7 +1,9 @@
 package com.test.mybatis;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
@@ -39,6 +41,17 @@ public class BadgeController
 		return "WEB-INF/views/MyBadge.jsp";
 	}
 	
+	
+	@RequestMapping(value="/mainBadge.action", method=RequestMethod.POST)	
+	public String mainBadge(String badgeLogId) throws IOException
+	{
+
+		IBadgeDAO dao = sqlSession.getMapper(IBadgeDAO.class);
+
+		dao.mainBadge(badgeLogId);
+		
+		return "WEB-INF/views/MainBadgeAjax.jsp";
+	}
 	
 
 }

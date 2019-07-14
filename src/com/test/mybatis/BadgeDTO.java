@@ -7,7 +7,18 @@ public class BadgeDTO
 	
 	//선아 DTO 추가 
 	private int badgeCk;
-	
+	private String badgeLogId;
+
+	public String getBadgeLogId()
+	{
+		return badgeLogId;
+	}
+
+	public void setBadgeLogId(String badgeLogId)
+	{
+		this.badgeLogId = badgeLogId;
+	}
+
 	// 기승 추가 → MainBadgeDTO 를 없애도 될거 같음
 	private String nickname;
 
@@ -98,6 +109,8 @@ public class BadgeDTO
 	{
 		this.badgePointDesc2 = badgePointDesc2;
 	}
+
+	
 	
 	
 	

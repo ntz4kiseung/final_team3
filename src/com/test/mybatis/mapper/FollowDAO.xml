@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.test.mybatis.IFollowDAO">  <!-- 인터페이스 지정  -->
+<mapper namespace="com.test.mybatis.IFollowDAO"> 
+	
 	<insert id="followinsert">
 		INSERT INTO FOLLOW(ID, GIVEUSERID, TAKEUSERID, FOLLOWDATE) VALUES(FOLLOW_SEQ.NEXTVAL, #{userId}, #{followId}, SYSDATE)
 	</insert>
@@ -12,10 +13,12 @@
 		FROM FOLLOW
 		WHERE GIVEUSERID = #{userId} AND TAKEUSERID = #{followId}
 	</delete>
+	
   	
   	<select id="followingList" resultType="com.test.mybatis.FollowDTO"> 
 		SELECT DISTINCT UE.NICKNAME ,UE.USERID, UE.BADGELOGID, BL.BADGEPOINTID ,P.BADGEPOINTNAME,P.URL
                  , ROUND(AVG(R.GRADE)OVER(),1) AS REVIEWGRADE
+                 , NVL((SELECT ID FROM FOLLOW WHERE GIVEUSERID='B001' AND TAKEUSERID=UE.USERID), 0) AS FOLLOWID
 		FROM FOLLOW F LEFT JOIN USER_ESSENTIAL UE  ON  UE.USERID = F.TAKEUSERID
                         JOIN USER_BADGE_LOG BL ON UE.BADGELOGID=BL.BADGELOGID
                         JOIN POINT P ON BL.BADGEPOINTID=P.BADGEPOINTID

@@ -37,9 +37,9 @@
  	</select> 
  	
  	<update id="messageCheckDate">
- 	UPDATE MESSAGE
-	SET CHECKDATE = SYSDATE
-	WHERE MESSAGEID = #{messageId }
+	 	UPDATE MESSAGE
+		SET CHECKDATE = SYSDATE
+		WHERE MESSAGEID = #{messageId }
  	</update>
  	
 <!-- 승원 추가 밑에 부분 -->
