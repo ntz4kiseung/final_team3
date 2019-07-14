@@ -1,5 +1,7 @@
 package com.test.mybatis;
 
+import java.util.ArrayList;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,16 @@ public class PostReadHostController
 		String followId = "anlant";
 		String postHostId = "PT00002";
 		int serchNum = (Integer)joinDAO.serchjoin(postHostId);
-		
+		ArrayList<JoinDTO> joinDTO = joinDAO.joinlist(postHostId);
+		for (JoinDTO joinDTOs : joinDTO)
+		{
+			String delJoin = joinDTOs.getDelJoin();
+			if(delJoin != null)
+			{
+				joinDTOs.setStatusId("ST00001");
+				joinDAO.joinupdate(joinDTOs);
+			}
+		}
 		model.addAttribute("serchNum",serchNum);
 		model.addAttribute("postlist",IPostDAO.postlist(followId, postHostId)); 
 		model.addAttribute("list",joinDAO.joinlist(postHostId)); 

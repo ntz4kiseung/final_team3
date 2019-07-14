@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.test.mybatis.IJoinDAO">  <!-- 인터페이스 지정  -->
 	<select id="joinlist" resultType="com.test.mybatis.JoinDTO"> 
-		SELECT POSTID, JOINID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, STATUSID
+		SELECT JOINID, USERID, URL, NICKNAME, JOINDATE, CONTENTS, DELJOIN, STATUSID
 		FROM JOIN_VIEW
 		WHERE POSTID = #{postHostId}
 	</select>
