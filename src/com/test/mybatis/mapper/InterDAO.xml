@@ -30,6 +30,25 @@
  		INSERT INTO USER_INTEREST(ID, USERID, INTERSUBID)
 		VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId3 })
  	</insert>
+ 	
+ 	<update id = "updateInter1">
+ 		UPDATE  USER_INTEREST
+		SET INTERSUBID = #{inter.interSubId1}
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND INTERSUBID = #{inter2.interSubId1}
+ 	</update>
+ 	
+ 	<update id = "updateInter2">
+ 		UPDATE  USER_INTEREST
+		SET INTERSUBID = #{inter.interSubId2}
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND INTERSUBID = #{inter2.interSubId2}
+ 	</update>
+ 	
+ 	<update id = "updateInter3">
+ 		UPDATE  USER_INTEREST
+		SET INTERSUBID = #{inter.interSubId3}
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND INTERSUBID = #{inter2.interSubId3}
+ 	</update>
+ 	
 
   
 

@@ -31,6 +31,31 @@
 		VALUES(USER_ADDR_SEQ.NEXTVAL, #{userId }, #{addrGuId3 })
  	</insert>
  	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<update id="updateAddr1">
+ 		UPDATE USER_ADDR
+		SET ADDRGUID = #{addr.addrGuId1}
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND  ADDRGUID = #{addr2.addrGuId1}
+ 	</update>
+ 	
+ 	
+ 	<update id="updateAddr2">
+ 		UPDATE USER_ADDR
+		SET ADDRGUID = #{addr.addrGuId2}
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND  ADDRGUID = #{addr2.addrGuId2}
+ 	</update>
+ 	
+ 	<update id="updateAddr3">
+ 		UPDATE USER_ADDR
+		SET ADDRGUID = #{addr.addrGuId3}
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND  ADDRGUID = #{addr2.addrGuId3}
+ 	</update>
+ 	
 
 
 </mapper>

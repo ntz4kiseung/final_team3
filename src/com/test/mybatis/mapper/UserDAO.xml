@@ -5,7 +5,7 @@
   
 <mapper namespace="com.test.mybatis.IUserDAO"> 
   	
-  	<select id="myPageList" resultType="com.test.mybatis.UserDTO"> 
+  	<!-- <select id="myPageList" resultType="com.test.mybatis.UserDTO"> 
 	SELECT DISTINCT UE.USERID, UE.NICKNAME,UE.NAME,UE.BIRTH,G.GENDER,UE.TEL,US.SNS, US.INTRODUCE
                 ,UE.EMAIL,UE.BADGELOGID, BL.BADGEPOINTID ,P.BADGEPOINTNAME,P.URL,NVL2((SELECT C.CERTINAME 
                     FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
@@ -20,9 +20,9 @@
                         JOIN POINT P ON BL.BADGEPOINTID=P.BADGEPOINTID
                         JOIN REVIEW R ON UE.USERID = R.TAKEUSERID
                         JOIN GENDER G ON G.GENDERID = UE.GENDERID                      
-	WHERE UE.USERID='BAHEELA'
+	WHERE UE.USERID=#{userid}
 	</select> 
-  
+   -->
   	<insert id = "userTelInsert">
 		INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
 		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00001')
@@ -210,7 +210,7 @@
                         JOIN POINT P ON BL.BADGEPOINTID=P.BADGEPOINTID
                         JOIN REVIEW R ON UE.USERID = R.TAKEUSERID
                         JOIN GENDER G ON G.GENDERID = UE.GENDERID                      
-	WHERE UPPER(UE.USERID)=UPPER('ERVETAN')
+	WHERE UPPER(UE.USERID)=UPPER(#{userid})
 	</select>
 	
 	
@@ -229,6 +229,28 @@
 		FROM LOGIN
 		WHERE UPPER(USERID) = UPPER(#{userId}) AND PWD = CRYPTPACK.ENCRYPT(#{pwd}, 'JAVA006$')
 	</select>
-  
-
+	
+	<select id="checkGuNick" resultType="java.lang.Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM USER_ESSENTIAL
+		WHERE UPPER(USERID) = UPPER(#{userId}) AND NICKNAME = UPPER(#{gunick})
+	</select>
+	
+	<update id = "updateLogin">
+		UPDATE LOGIN
+		SET PWD = CRYPTPACK.ENCRYPT(#{user.pwd}, 'JAVA006$')
+		WHERE UPPER(USERID) = UPPER(#{userId})
+	</update>
+	
+	<update id="updateEssential">
+		UPDATE USER_ESSENTIAL
+		SET NAME = #{user.name}, NICKNAME = #{user.nickname}, TEL = #{user.tel}, GENDERID = #{user.genderId}, EMAIL = #{user.email}, BIRTH = TO_DATE('20010928','YYMMDD')
+		WHERE UPPER(USERID) = UPPER(#{userId})
+	</update>
+	
+	<update id="updateSub">
+		UPDATE USER_SUB
+		SET SNS = '${user.sns}', INTRODUCE = #{user.introduce}
+		WHERE UPPER(USERID) = UPPER(#{userId})
+	</update>
 </mapper>
