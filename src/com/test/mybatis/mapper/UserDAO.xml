@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.test.mybatis.IUserDAO"> 
-  
+
   	<insert id = "userTelInsert">
 		INSERT INTO USER_CERTIFICATION(ID, USERID, CODE, CERTIDATE, CERTIID)
 		VALUES(USER_CERTIFICATION_SEQ.NEXTVAL, #{userId },  #{telCheck}, SYSDATE, 'CT00001')

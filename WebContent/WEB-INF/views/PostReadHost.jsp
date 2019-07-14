@@ -96,7 +96,7 @@
 				
 			});
 		});
-		
+// 인원 수락 확인 부분 --------------------------------------------------------------------------------------------------------------------------------------------------		
 		$('.nickName').on("click", function()
 		{
 			if($(this).is(":checked"))
@@ -258,11 +258,6 @@
  								<c:when test="${!empty join.delJoin}">
 		                        	<div class="comments flex-row-left-center">
 		                        		<div>삭제된 댓글입니다.</div>
-		                        		<div class="PostWrite-row-right">
-			                            	<input class="nickName" id="${join.statusId }" name="${join.joinId }" type="checkbox"
-			                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
-			                            	참가수락
-		                            	</div>
 	                                </div>
 	                                
 		                        </c:when>
