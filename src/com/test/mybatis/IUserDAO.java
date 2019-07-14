@@ -53,5 +53,13 @@ public interface IUserDAO
 	
 	// 프로필 변경 사용
 	public int checkGuPwd(@Param("userId")String userId, @Param("pwd")String pwd);
+	
+	public int checkGuNick(@Param("userId")String userId, @Param("gunick")String gunick);
+	
+	public int updateLogin(@Param("userId")String userId, @Param("user")UserDTO user);
+	
+	public int updateEssential(@Param("userId")String userId, @Param("user")UserDTO user);
+	
+	public int updateSub(@Param("userId")String userId, @Param("user")UserDTO user);
 
 }

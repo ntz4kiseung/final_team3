@@ -49,12 +49,13 @@
     
     $(window).load(function() {
 	for (var i = 1; i < 4; i++) {
+		console.log("지역" + i +" = " + $("#addrSiId"+i).val());
+		console.log("관심" + i +" = " + $("#interMainId"+i).val);
 			
-			if ($("#addrGuId"+i).val() != "") {
+			if ($("#addrSiId"+i).val() != "") {
 				var a=0;
-				a = i;
+				a = i-1;
 					var siid = $("#addrSiId"+i).val();
-					console.log();
 					var str = "";
 					 $.ajax({
 		                   url: '<%=cp %>/addrguajax.action',
@@ -68,7 +69,7 @@
 		                }); 
 			}
 			
-			if ($("#interSubId"+i).val != "") {
+			if ($("#interMainId"+i).val != "") {
 				var d = 0;
 				d = i;
 					var mainid = $("#interSubId"+i).val();
@@ -81,7 +82,8 @@
 							$("#inbodyB"+d).empty();
 							$("#inbodyD"+d).append(result);
 						})
-			}
+			
+			console.log("----------------------------");
 		}
     	
     	
@@ -166,7 +168,7 @@
 		
 		
 
-		
+		}
 	})
 	$(document).ready(function(){
 		
@@ -288,8 +290,10 @@
 				return false;
 			}
 			else
-			{
+			{	
+				var form = document.getElementById("update-submit-form");
 				alert("회원가입 완료 접근");
+				form.submit();
 			}
 			
 		})
@@ -310,6 +314,18 @@
 		$("#btn-check-id").click(function()
 		{
 			var inputid = $("#userId").val();
+			
+			var guid = "<%=(String)session.getAttribute("userId")%>";
+			
+			alert(guid)
+			
+			if (inputid == guid) {
+				document.getElementById("span-check-id").style.display = 'block';
+				document.getElementById("span-check-id").style.color = '#31B404';
+				$("#span-check-id").text("이전 아이디 입니다. 사용하실려면 넘어가세요.");
+				$("#btn-check-id").val("1");
+				return false;
+			}
 			
 			if (inputid == "") {
 				document.getElementById("span-check-id").style.display = 'block';
@@ -416,7 +432,22 @@
 					$("#span-check-nick").text("닉네임을 입력해주세요.");
 					return false;
 				}
+				$.ajax({
+					url : "<%=cp %>/gunickcheck.action",
+					type : "post",
+					data : {'nickname': inputnick},
+					success : function(count)
+					{
+						if (count == 1) 
+						{
+							document.getElementById("span-check-nick").style.display = 'inline-block';
+							document.getElementById("span-check-nick").style.color = '#31B404';
+							$("#btn-check-nick").val("1");
+							$("#span-check-nick").text("이전 닉네임입니다. 사용하실려면 넘어가세요.");
+						}
+					}
 				
+				})
 				$.ajax({
 					url : "<%=cp %>/nickcheck.action",
 					type : "post",
@@ -479,6 +510,7 @@
 					$("#select-check-d").append(option);
 				}
 			})
+			
 			$("#tel1, #tel2, #tel3").keyup(function()
 			{
 				var tel = $("#tel1").val() + $("#tel2").val() + $("#tel3").val();
@@ -673,11 +705,12 @@
 			          var title = $(this).attr("data-popover-content");
 			          return $(title).children(".popover-heading").html();
 			        }
-			    });
-			});
+			    })
+		})
+			
 });
-    
-</script>
+
+			</script>
    
 </head>
 <body>
@@ -753,7 +786,8 @@
 
                             <div class="MyPage-body-body">
                             <c:forEach var="List" items="${myPageList }" varStatus="status">    
-                                    <form class="MyProfile-body flex-col-left-up">
+                                   
+                                     <form role="form" id="update-submit-form" name="update-submit-form" action="updateprofile.action" method="post" class="MyProfile-body flex-col-left-up">
 
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
@@ -878,7 +912,7 @@
                                                 <div class="MyProfile-input-group-label">
                                                     Email
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${List.email}" placeholder="이메일를 입력해주세요">
+                                                <input type="text" id="email" name="email" class="form-control input-245-40" value="${List.email}" placeholder="이메일를 입력해주세요">
                                                 <button type="button" id="emailcerti" value="0" class="btn" data-toggle="modal" data-target="#emailmodal">Email인증</button>
 					                                <div class="div-check">
 					                                 	<span id="emailCheckresult"></span>
@@ -989,7 +1023,7 @@
 														 tabindex="0" data-toggle="popover"
 														 data-trigger="focus" data-popover-content="#a3" data-placement="bottom">시·도</button>
 														 
-					                                	<button type="button" class="form-control input-90-40 btn-check-cate3" id="btn-check-gugun3" value="3"
+					                                	<button type="button" class="form-control input-90-40 btn-check-cate2" id="btn-check-gugun3" value="3"
 														 tabindex="0" data-toggle="popover"
 														 data-trigger="focus" data-popover-content="#b3" data-placement="bottom">구·군</button>
 												    </c:when>
@@ -1123,7 +1157,7 @@
                                                 <div class="MyProfile-input-group-label">
                                                     자기소개
                                                 </div>  
-                                                <textarea class="form-control" name="" id="" cols="30" rows="10">${List.introduce }</textarea>
+                                                <textarea class="form-control" name="introduce" id="introduce" cols="30" rows="10">${List.introduce }</textarea>
                                             </div>
                                         </form>
 										</c:forEach>
