@@ -3,6 +3,21 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
+	
+	
+	String userInterMainId = "IM00001";
+	String userInterSubId = "";
+	
+	Cookie[] cookies = request.getCookies();
+	
+	for(int i=0; i < cookies.length; i++)
+	{
+		if(cookies[i].getName().equals("userInterMainId"))
+			userInterMainId = cookies[i].getValue();
+		if(cookies[i].getName().equals("userInterSubId"))
+			userInterSubId = cookies[i].getValue();
+	};
+	
 %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
@@ -128,11 +143,7 @@
             width: 100%;
         }
 
-        /*  */
-        .Main-navbar span{
-            width: 320px;
-            font-size: 13px;
-        }
+
         .Search{
             width: 100%;
         }
@@ -266,6 +277,10 @@
 	  border: 1.5px solid rgba(255,170,10);
 	  padding: 2px 2px 2px 2px;
 	}
+	
+	.font-bold{
+      	font-weight: bold;
+    }
    </style>
 
    <script>
@@ -618,6 +633,15 @@
 		});
        
    </script>
+   
+   <style>
+   .interMain-item{
+   		font-size: 24px;
+   }
+   .interSub-item{
+   		font-size: 20px;
+   }
+   </style>
 </head>
 <body>
     <div class="browser flex-col-center-center">
@@ -632,12 +656,26 @@
                 <div class="Search flex-item-grow flex-col-center-up">
                     <!-- 맨 위 -->
                     <div class="Main-navbar flex-row-left-center">
-                        통합검색&nbsp;&nbsp;&nbsp;<span>검색 키워드와 개설자의 신뢰도를 바탕으로 추천했습니다. 회원가입 후 더 상세한 추천을 받을 수 있습니다.</span>
+                        <span><a href="main.action">메인</a></span>&nbsp;&nbsp;&nbsp;<span class="font-bold">카테고리</span>
                     </div>
-
+					
+					<!-- 카테고리창 -->
+					<div class="Search-filter Search-cate">
+						<c:forEach var="interMain" items="${intermainlist }">
+							<c:set var="userInterMainId" value="${interMain.interMainId1 }" />
+							<span class="interMain-item  <%=(userInterMainId.equals((String)pageContext.getAttribute("userInterMainId")) ? "font-bold" : "") %>" id="${interMain.interMainId1 }"><a href="">${interMain.interMainName1 }</a></span>&nbsp;&nbsp;&nbsp;
+						</c:forEach>
+						<br>
+						<c:forEach var="interSub" items="${userInterSubList }">
+							<c:set var="userInterSubId" value="${interSub.interSubId1 }" />
+							<span class="interSub-item <%=(userInterSubId.equals((String)pageContext.getAttribute("userInterSubId")) ? "font-bold" : "" ) %>" id="${interSub.interSubId1 }"><a href="">${interSub.interSubName1 }</a></span>&nbsp;&nbsp;&nbsp;				
+						</c:forEach>
+					</div>
+                    
                     <!-- 필터창 -->
-                    <div class="Search-filter" id="Search-filter">
-                        <div class="Search-filter-item flex-row-center-center">검색 : ${inputKeyword }</div>
+                    <div class="Search-filter hidden" id="Search-filter">
+                    
+                    
                     </div>
 
                     <!-- 글목록 -->

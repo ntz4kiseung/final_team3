@@ -53,4 +53,5 @@ public interface IUserDAO
 	
 	// 프로필 변경 사용
 	public int checkGuPwd(@Param("userId")String userId, @Param("pwd")String pwd);
+
 }

@@ -31,6 +31,16 @@
 		VALUES (USER_INTEREST_SEQ.NEXTVAL, #{userId }, #{interSubId3 })
  	</insert>
 
-  
+  	<select id="userInterest" resultType="com.test.mybatis.InterDTO">
+		SELECT USERID, INTERSUBID AS INTERSUBID1, INTERMAINID AS INTERMAINID1
+		FROM
+		(
+		    SELECT UI.ID, UI.USERID, UI.INTERSUBID, "IS".INTERMAINID 
+		    FROM USER_INTEREST UI JOIN INTEREST_SUB "IS" ON UI.INTERSUBID="IS".INTERSUBID
+		    WHERE USERID=#{userId }
+		    ORDER BY UI.ID
+		)
+		WHERE ROWNUM=1	
+  	</select>
 
 </mapper>

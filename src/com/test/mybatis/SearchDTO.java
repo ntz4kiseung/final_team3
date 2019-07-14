@@ -5,6 +5,13 @@ public class SearchDTO
 	String keyword, userId;
 	String addrGuId1, addrGuId2, addrGuId3, interSubId1, interSubId2, interSubId3, minMeetDate, maxMeetDate, moodId, drinkId, sameGenderId;
 	String minNum, maxNum, limitGrade, pageNum;
+	String guestAddrGuId;
+	public String getGuestAddrGuId() {
+		return guestAddrGuId;
+	}
+	public void setGuestAddrGuId(String guestAddrGuId) {
+		this.guestAddrGuId = guestAddrGuId;
+	}
 	public String getUserId() {
 		return userId;
 	}

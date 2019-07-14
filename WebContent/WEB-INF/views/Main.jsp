@@ -128,14 +128,135 @@
             background-color: rgb(255,159,16);
             width: 100%;
         }
+        
+        .font-bold{
+        	font-weight: bold;
+        }
    </style>
+   
+   <script>
+    $(document).ready(function(){
+
+    	$("#mainSearchBtn").click(function(){
+    		
+    		/* 비로그인시 쿠키 하나 추가해줌 */
+    		if(sessionStorage.getItem("userId")==null || sessionStorage.getItem("userId")==""){
+        		document.cookie="guestAddrGuId="+$("#addrGuId1").val();   			
+        		console.log("비로그인유저 입력 만남장소",$("#addrGuId1").val());
+        		debugger;
+    		}
+			$("#mainSearchForm").submit();
+    	});
+    	
+    	
+    	var a;
+		$(".btn-check-cate1").click(function() {
+			a = $(this).val();
+			console.log("a = " + a);
+			$(".btn-pop-sido").click(function() {
+				
+				$("#addrSiName"+a).text($(this).text());
+				
+				var siid = $(this).val();
+				var str = "";
+				 $.ajax({
+	                   url: '<%=cp %>/addrguajax.action',
+	                   type: 'GET',
+	                   dataType: 'html',
+	                   data : {'siid': siid}
+	                }).done(function(result){
+	                  
+						console.log('성공');
+						$("#inbodyB"+a).empty();
+						$("#inbodyB"+a).append(result);
+	                }); 
+			})
+		})
+		
+		var c;
+		$(".btn-check-cate2").click(function()
+		{
+			c = $(this).val();
+			$(".btn-pop-gu").click(function()
+			{
+				$("#btn-check-gugun"+c).text($(this).text());
+				 
+				$("#addrGuId"+c).val($(this).val());
+				$("#addrGuName"+c).val($(this).text());
+				
+				console.log("구 아이디 = " + $("#addrGuId"+c).val());
+				console.log("구 이름 = " + $("#addrGuName"+c).val());
+			})
+		})
+		
+		/* interSubName1 */
+		var d;
+		$(".btn-check-cate3").click(function() {
+			d = $(this).val();
+			
+			$(".btn-pop-main").click(function() {
+				$("#interMainName"+d).text($(this).text());
+				
+				var mainid = $(this).val();
+				
+				$.ajax({
+						url: '<%=cp %>/intersubajax.action',
+						type: 'GET',
+						dataType: 'html',
+						data: {'mainid': mainid}
+					}).done(function(result) {
+						console.log('성공')
+						
+						$("#inbodyD"+d).empty();
+						$("#inbodyD"+d).append(result);
+					})
+			})
+		})
+		
+		var e;
+		$(".btn-check-cate4").click(function()
+		{
+			e = $(this).val();
+			console.log(e);
+			$(".btn-pop-sub").click(function()
+			{
+				$("#btn-check-sub"+e).text($(this).text());
+				 
+				$("#interSubId"+e).val($(this).val());
+				$("#interSubName"+e).val($(this).text());
+				
+				console.log("서브 아이디 = " + $("#interSubId"+e).val());
+				console.log("서브 이름 = " + $("#interSubName"+e).val());
+			})
+		})    	
+		
+    });
+    
+    
+  	$(function(){
+	    $("[data-toggle=popover]").popover({
+	        html : true,
+	        sanitize : false,
+	        content: function() {
+	          var content = $(this).attr("data-popover-content");
+	          return $(content).children(".popover-body").html();
+	        },
+	        title: function() {
+	          var title = $(this).attr("data-popover-content");
+	          return $(title).children(".popover-heading").html();
+	        }
+	    });
+	});
+   </script>
 </head>
 <body>
     <div class="browser flex-col-center-center">
         
         
         
-        <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
+        <c:import url="/WEB-INF/views/Navbar.jsp">
+        	<c:param name="isMain"><%=user %></c:param>
+        </c:import>
 
 
 
@@ -144,8 +265,8 @@
                 <div class="Main flex-item-grow flex-col-center-center">
 
                     <!-- 맨 위 -->
-                    <div class="Main-navbar flex-col-left-center">
-                        메인&nbsp;&nbsp;&nbsp;카테고리
+                    <div class="Main-navbar flex-row-left-center">
+                        <span class="font-bold">메인</span>&nbsp;&nbsp;&nbsp;<span><a href="searchcate.action">카테고리</a></span>
                     </div>
 
                     <!-- 사진있는 부분 -->
@@ -158,31 +279,31 @@
 
                         <!-- 사진있는 부분 검색창 -->
                         <div class="Main-search-form">
-                            <form action="" class="">
+                            <form action="search.action" class="" id="mainSearchForm">
                                 <!-- 만남장소, 관심사 선택장 → 로그인시 이 부분 display: none;으로만 바꾸면 됨 -->
                                 <div class="flex-row-center-center <%=( (user==null||user.equals("")) ? "" : "hidden")%> }">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">만남장소</span>
-                                        </div>
-                                        <input type="text" value="서울특별시" class="form-control">
-                                        <input type="text" value="송파구" class="form-control">
+                                    <div class="btn-group">
+	        							<button type="button" class="btn btn-outline-secondary">만남장소</button>
+										<button type="button" class="btn btn-check-cate1 btn-outline-secondary" id="addrSiName1" name="addrSiName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
+	                                	<button type="button" class="btn btn-check-cate2 btn-outline-secondary" id="btn-check-gugun1"               value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#b1" data-placement="bottom">구·군</button>
+										<input type= "hidden" id="addrGuId1" name="" value="">
+										<input type= "hidden" id="addrGuName1" name="" value="">
                                     </div>
                                     &nbsp;&nbsp;&nbsp;
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">관심사</span>
-                                        </div>
-                                        <input type="text" value="스포츠" class="form-control">
-                                        <input type="text" value="전체" class="form-control">
+                                    <div class="btn-group">
+										<button type="button" class="btn btn-outline-secondary">관심사</button>
+	                                    <button type="button" class="btn btn-check-cate3 btn-outline-secondary" id="interMainName1" name="interMainName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
+	                                	<button type="button" class="btn btn-check-cate4 btn-outline-secondary" id="btn-check-sub1" name="btn-check-sub1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
+										<input type= "hidden" id="interSubId1" name="" value="">
+										<input type= "hidden" id="interSubName1" name="" value="">
                                     </div>
                                 </div>
 
                                 <!-- 키워드 검색 -->
                                 <div class="input-group">  
-                                    <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input type="text" name="keyword" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="mainSearchBtn">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-orange" type="button" id="button-addon2">Button</button>
+                                        <button class="btn btn-outline-orange" type="button" id="mainSearchBtn">Button</button>
                                     </div>
                                 </div>
                             </form>
@@ -327,8 +448,57 @@
         </div>
         
         
-        
-        
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+        <!-- ----------------------------------------------------------------------------------------------------------- -->
+	    <div id="a1" class="hidden">
+		    <div class="popover-heading">
+		       시·도 선택
+		    </div>
+		    <div class="popover-body" >
+		       <div id="inbodyA1">
+				    <c:forEach var="addrsi" items="${addrsilist }" varStatus="status">
+						<button type="button" id="si${status.index}" name="si${status.index}" class="btn btn-120-35 btn-pop-sido" value="${addrsi.addrSiId1 }">${addrsi.addrSiName1 }</button>
+					</c:forEach>
+		       </div> 
+		    </div>
+		</div>
+		
+		<div id="b1" class="hidden">
+		    <div class="popover-heading">
+		       구·군 선택
+		    </div>
+		    
+		    <div class="popover-body" >
+		       <div id="inbodyB1">
+		       </div> 
+		    </div>
+		</div>   
+
+		<div id="c1" class="hidden">
+		    <div class="popover-heading">
+		       대 분류 선택
+		    </div>
+		    <div class="popover-body" >
+		       <div id="inbodyC1">
+				    <c:forEach var="intermain" items="${intermainlist }" varStatus="status">
+						<button type="button" id="main${status.index}" name="main${status.index}" class="btn btn-120-35 btn-pop-main" value="${intermain.interMainId1 }">${intermain.interMainName1 }</button>
+					</c:forEach>
+		       </div>
+		    </div>
+		</div>
+		
+		<div id="d1" class="hidden">
+		    <div class="popover-heading">
+		       소 분류 선택
+		    </div>
+		    
+		    <div class="popover-body" >
+		       <div id="inbodyD1">
+		       </div> 
+		    </div>
+		</div> 		
+		
     </div>
 </body>
 </html>

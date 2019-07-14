@@ -9,5 +9,5 @@ public interface IInterDAO
 	public int userInterInsert1(InterDTO inter);
 	public int userInterInsert2(InterDTO inter);
 	public int userInterInsert3(InterDTO inter);
-
+	public InterDTO userInterest(String userId);
 }

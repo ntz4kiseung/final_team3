@@ -45,6 +45,11 @@ public class MainController
 		{
 			// 로그인 안했다면
 			mainPostList1 = post.mainHotList();
+			IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
+			IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
+			
+			model.addAttribute("addrsilist", addrA.addrSiList());
+			model.addAttribute("intermainlist", interA.interMainList());
 		}
 		else
 		{
