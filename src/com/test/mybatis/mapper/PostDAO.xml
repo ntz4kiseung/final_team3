@@ -60,6 +60,33 @@
 	]]>
 	</select>
 	
+	<select id="searchCateList" resultType="com.test.mybatis.PostDTO">
+	<![CDATA[
+		SELECT *
+		FROM
+		(
+		SELECT FN_CAL_RANK(POSTID, #{userId}, #{keyword}) AS POSTGRADE 
+		     , RANK() OVER(ORDER BY FN_CAL_RANK(POSTID, #{userId}, #{keyword}), MEETDATE DESC) AS POSTNUM
+		     , POSTID, USERID, NICKNAME, URL, URLBAD
+		     , TITLE, MINNUM, MAXNUM, CONTENTS
+		     , ADDRSINAME, ADDRGUNAME, TO_CHAR(MEETDATE, 'YYYY/MM/DD HH24:MI') AS MEETDATE
+		FROM POST_VIEW
+		WHERE MEETDATE >= SYSDATE
+		  AND INTERMAINID=#{userInterMainId}
+		  AND INTERSUBID LIKE '%'||#{userInterSubId}
+		  AND (ADDRGUID LIKE '%'||#{addrGuId1} OR ADDRGUID IN (#{addrGuId2} ,#{addrGuId3}))
+		  AND (INTERSUBID LIKE '%'||#{interSubId1} OR INTERSUBID IN (#{interSubId2} ,#{interSubId3}))
+		  AND (#{minNum}<=MINNUM AND MAXNUM<=#{maxNum})
+		  AND (TO_DATE(#{minMeetDate}, 'YYYY-MM-DD')<=MEETDATE AND MEETDATE<=TO_DATE(#{maxMeetDate}, 'YYYY-MM-DD'))
+		  AND MOOD LIKE '%'||#{moodId}||'%'
+		  AND LIMITGRADE>=#{limitGrade}
+		  AND DRINK LIKE '%'||#{drinkId}||'%'
+		  AND SAMEGENDER LIKE '%'||#{sameGenderId}||'%'
+		)
+		WHERE (6*#{pageNum}-5) <= POSTNUM AND POSTNUM < (6*#{pageNum}+1)
+	]]>
+	</select>
+	
 	<select id="mainHotList" resultType="com.test.mybatis.PostDTO">
 	<![CDATA[
 		SELECT *

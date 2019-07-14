@@ -1,3 +1,5 @@
+
+
 -- 유저 관심사 뽑기
 SELECT USERID, INTERSUBID AS INTERSUBID1, INTERMAINID AS INTERMAINID1
 FROM
@@ -213,6 +215,7 @@ FROM USER_ESSENTIAL;
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
+-- 통합검색, 로그인 유저
 SELECT *
 FROM
 (
@@ -236,7 +239,7 @@ WHERE MEETDATE >= SYSDATE
 WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1);
 
 
-
+-- 통합검색, 비로그인 유저
 SELECT *
 FROM
 (
@@ -259,7 +262,29 @@ WHERE MEETDATE >= SYSDATE
 )
 WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1);
 
-
+-- 카테고리 검색, 로그인 유저
+SELECT *
+FROM
+(
+SELECT FN_CAL_RANK(POSTID, 'adiard', '|키워드|') AS POSTGRADE 
+     , RANK() OVER(ORDER BY FN_CAL_RANK(POSTID, 'adiard', '|키워드|'), MEETDATE DESC) AS POSTNUM
+     , POSTID, USERID, NICKNAME, URL, URLBAD
+     , TITLE, MINNUM, MAXNUM, CONTENTS
+     , ADDRSINAME, ADDRGUNAME, TO_CHAR(MEETDATE, 'YYYY/MM/DD HH24:MI') AS MEETDATE
+FROM POST_VIEW
+WHERE MEETDATE >= SYSDATE
+  AND INTERMAINID='IM00001'
+  AND INTERSUBID LIKE '%'||'IS00005'
+  AND (ADDRGUID LIKE '%'||'' OR ADDRGUID IN ('' ,''))
+  AND (INTERSUBID LIKE '%'||'' OR INTERSUBID IN ('' ,''))
+  AND (2<=MINNUM AND MAXNUM<=20)
+  AND (TO_DATE('2019-06-05', 'YYYY-MM-DD')<=MEETDATE AND MEETDATE<=TO_DATE('2019-07-20', 'YYYY-MM-DD'))
+  AND MOOD LIKE '%'||''||'%'
+  AND LIMITGRADE>=1
+  AND DRINK LIKE '%'||''||'%'
+  AND SAMEGENDER LIKE '%'||''||'%'
+)
+WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1)
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------

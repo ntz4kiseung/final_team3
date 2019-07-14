@@ -356,7 +356,7 @@
             });
     	    
             // 페이지 요청시 게시글 불러옴
-            callList(pageNum);
+            callListCate(pageNum);
             
             // 무한 스크롤
            	$(".Search-result-body").scroll(function(){
@@ -364,7 +364,7 @@
 				
            		if(div.scrollHeight==(div.scrollTop+div.clientHeight)){
            			pageNum++;
-					callList(pageNum);
+           			callListCate(pageNum);
            		}
            	})
            	
@@ -383,6 +383,20 @@
            		}); 
            	};
          	
+           	function callListCate(pageNum){
+				console.log('ajax 페이지 요청 : ', pageNum);
+				document.cookie = "pageNum="+pageNum;
+				
+           		$.ajax({
+           			url: 'searchcateajax.action',
+           			data: cookieToJson(),
+           			type: 'GET',
+           			dataType: 'html'
+           		}).done(function(result){
+               		$('.Search-result-body').append(result);
+           		}); 
+           	};
+           	
            	// 현재 쿠키상태를 기반으로 필터창을 갈아줌
            	function fillFilter(){
            		// 비워주고
@@ -457,7 +471,7 @@
 			  	// 필터 새로 적용하면 페이지 넘버 초기화
 			  	pageNum=1;
 			 	 // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
-			  	callList(pageNum);
+			  	callListCate(pageNum);
            		return false;
            	})
            	
@@ -483,7 +497,7 @@
 			  	// 필터 새로 적용하면 페이지 넘버 초기화
 			  	pageNum=1;
 			 	 // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
-			  	callList(pageNum);
+			  	callListCate(pageNum);
            		return false;
            	});
 
@@ -519,7 +533,7 @@
 				  // 필터 새로 적용하면 페이지 넘버 초기화
 				  pageNum=1;
 				  // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
-				  callList(pageNum);
+				  callListCate(pageNum);
 				  return false;
  	          	});
            	});
@@ -641,6 +655,12 @@
    .interSub-item{
    		font-size: 20px;
    }
+   .Search-cate{
+   		display: flex;
+   		flex-direction: column;
+   		justify-content: space-around;
+   		align-items: flex-start;
+   }
    </style>
 </head>
 <body>
@@ -661,15 +681,19 @@
 					
 					<!-- 카테고리창 -->
 					<div class="Search-filter Search-cate">
-						<c:forEach var="interMain" items="${intermainlist }">
-							<c:set var="userInterMainId" value="${interMain.interMainId1 }" />
-							<span class="interMain-item  <%=(userInterMainId.equals((String)pageContext.getAttribute("userInterMainId")) ? "font-bold" : "") %>" id="${interMain.interMainId1 }"><a href="">${interMain.interMainName1 }</a></span>&nbsp;&nbsp;&nbsp;
-						</c:forEach>
-						<br>
-						<c:forEach var="interSub" items="${userInterSubList }">
-							<c:set var="userInterSubId" value="${interSub.interSubId1 }" />
-							<span class="interSub-item <%=(userInterSubId.equals((String)pageContext.getAttribute("userInterSubId")) ? "font-bold" : "" ) %>" id="${interSub.interSubId1 }"><a href="">${interSub.interSubName1 }</a></span>&nbsp;&nbsp;&nbsp;				
-						</c:forEach>
+						<div>
+							<c:forEach var="interMain" items="${intermainlist }">
+								<c:set var="userInterMainId" value="${interMain.interMainId1 }" />
+								<span class="interMain-item  <%=(userInterMainId.equals((String)pageContext.getAttribute("userInterMainId")) ? "font-bold" : "") %>" id="${interMain.interMainId1 }"><a href="">${interMain.interMainName1 }</a></span>&nbsp;&nbsp;
+							</c:forEach>						
+						</div>
+						<div>
+							<span class="interSub-item <%=(userInterSubId.equals("") ? "font-bold" : "" ) %>" id="all"><a href="">전체</a></span>&nbsp;&nbsp;&nbsp;
+							<c:forEach var="interSub" items="${userInterSubList }">
+								<c:set var="userInterSubId" value="${interSub.interSubId1 }" />
+								<span class="interSub-item <%=(userInterSubId.equals((String)pageContext.getAttribute("userInterSubId")) ? "font-bold" : "" ) %>" id="${interSub.interSubId1 }"><a href="">${interSub.interSubName1 }</a></span>&nbsp;&nbsp;&nbsp;				
+							</c:forEach>						
+						</div>
 					</div>
                     
                     <!-- 필터창 -->
@@ -733,31 +757,7 @@
                                                                                                                               
                                                  </div>
                                             </div>
-                                            <div class="filter-attribute">
-                                                <div>관심사</div>
-                                                <div class="flex-col-left-center">
-                                                    <div class="flex-row-left-center">
-					                                    <button type="button" class="btn btn-check-cate3 btn-120-35 " id="interMainName1" name="interMainName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
-					                                	<button type="button" class="btn btn-check-cate4 btn-120-35 " id="btn-check-sub1" name="btn-check-sub1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
-														 <input type= "hidden" id="interSubId1" name="interSubId1" value="">
-														 <input type= "hidden" id="interSubName1" name="interSubName1" value="">
-                                                        <button class="btn filter-plus">+</button>                                     
-                                                    </div>                                                                         
-                                                    <div class="flex-row-left-center hidden additional-filter">                                      
-					                                    <button type="button" class="btn btn-check-cate3 btn-120-35 " id="interMainName2" name="interMainName2" value="2" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c2" data-placement="bottom">대분류</button>
-					                                	<button type="button" class="btn btn-check-cate4 btn-120-35 " id="btn-check-sub2" name="btn-check-sub2" value="2" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d2" data-placement="bottom">소분류</button>
-														 <input type= "hidden" id="interSubId2" name="interSubId2" value="">
-														 <input type= "hidden" id="interSubName2" name="interSubName2" value="">
-                                                        <button class="btn filter-plus">+</button>                                
-                                                    </div>                                                                    
-                                                    <div class="flex-row-left-center hidden additional-filter">                                 
-					                                    <button type="button" class="btn btn-check-cate3 btn-120-35 " id="interMainName3" name="interMainName3" value="3" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c3" data-placement="bottom">대분류</button>
-					                                	<button type="button" class="btn btn-check-cate4 btn-120-35 " id="btn-check-sub3" name="btn-check-sub3" value="3" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d3" data-placement="bottom">소분류</button>
-														 <input type= "hidden" id="interSubId3" name="interSubId3" value="">
-														 <input type= "hidden" id="interSubName3" name="interSubName3" value="">
-                                                    </div>                                                                                                        
-                                                </div>
-                                            </div>
+
                                             <div class="filter-attribute">
                                                 <div>인원수</div>
                                                 <div class="flex-row-left-center">

@@ -74,12 +74,17 @@ public class SearchController
 		model.addAttribute("inputKeyword", keyword);
 		
 //		로그인 상황 가정
-		session.setAttribute("userId", "adiard");
+		/*session.setAttribute("userId", "adiard");*/
 		
 		String userId = (String)session.getAttribute("userId");
 		if(userId==null||userId.equals(""))
 		{
-			
+			System.out.println("비로그인 유저 진입");
+			Cookie userInterMainCookie = new Cookie("userInterMainId", "IM00001"); 
+			Cookie userInterSubCookie = new Cookie("userInterSubId", "");
+			response.addCookie(userInterSubCookie);
+			response.addCookie(userInterMainCookie);
+			model.addAttribute("userInterSubList", interA.interSubList("IM00001"));
 		}
 		else
 		{
@@ -101,5 +106,26 @@ public class SearchController
 		response.addCookie(keywordCookie);
 		
 		return "/WEB-INF/views/SearchCate.jsp";
+	}
+	
+	@RequestMapping(value="/searchcateajax.action", method=RequestMethod.GET)
+	public String searchCateAjax(SearchDTO s, ModelMap model, HttpSession session)
+	{
+		IPostDAO postDao = sqlSession.getMapper(IPostDAO.class);
+		
+		// 비로그인시
+		if(session.getAttribute("userId")==null || session.getAttribute("userId").equals("") )
+		{
+			System.out.println("비로그인 통합검색");
+			model.addAttribute("list", postDao.searchCateList(s));
+		}
+		// 로그인시 
+		else
+		{
+			System.out.println("로그인 통합검색");
+			model.addAttribute("list", postDao.searchCateList(s));			
+		}
+		
+		return "/WEB-INF/views/SearchAjax.jsp";
 	}
 }

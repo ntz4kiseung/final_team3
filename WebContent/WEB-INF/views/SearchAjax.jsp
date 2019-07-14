@@ -17,7 +17,7 @@
 	    </div>
 	    <div class="PostList-post-center flex-col-left-center">
 	        <div class="PostList-post-title">
-	            ${post.title}
+	            ${post.title}, ${post.postId }
 	        </div>
 	        <div class="PostList-post-contents">
 	            ${post.contents}
