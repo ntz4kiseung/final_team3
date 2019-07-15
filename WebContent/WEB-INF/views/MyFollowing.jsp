@@ -9,22 +9,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- 	<!-- 부트스트랩 -->
- 	<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     -->
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-   	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-    
+ 	 <!-- 부트스트랩(bootstrap css, jquery, popper.js, bootstrap js 필요) -->
+    <link href="css/bootstrap-4.3.1.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper-1.14.7.min.js"></script>
+    <script src="js/bootstrap-4.3.1.min.js"></script>
     <!-- 폰트 (Noto Snas KR + Handlee) -->
-    <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
-    <!-- sagyo.css -->
+    <link href="css/sagyo-font.css" rel="stylesheet">
+    <!-- sagyo.css, sagyo.js -->
     <link href="css/sagyo.css" rel="stylesheet">
+
+
 <style type="text/css">
 
 .navclick {
@@ -37,6 +32,10 @@
 	color: inherit;
 	font-weight: normal;
 }	
+.followbadge{
+	width: 120px;
+	height: 120px;
+}
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -44,28 +43,29 @@ $(document).ready(function(){
 	
     $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
     
-     $('#followBtn').click(function()
+     $('.followBtn').click(function()
     {			
-    	  var followingId = $(this).val();
-    	  var fck = $(".followckId").val();
-    	 //alert(fck);
-    	 //alert(followingId);
-    	  $.ajax({
+    	 var followId = $(this).val(); // 테이크유저아이디
+    	 var fck = $("#followckId"+followId).val(); // 1 , 0
+		 
+ 		   $.ajax({
             url : 'followingajax.action',
-            type : 'POST',
-            data : { followingId : followingId ,
-            		fck : fck},
+            type : 'GET',
+            data : { followId : followId , fck : fck},
             }).done(function(result){
-            	if(parseInt(followId) == 0)
+            	if(result == 0)
 				{
-					$("#followBtn").html("♡");	
+            		$("#followBtn").html("♡");	
+            		
 				}
-				else if(parseInt(followId) != 0)
+				else 
 				{
 					$("#followBtn").html("❤");	
 				}
-          	 	
-            })
+            	
+            	location.href = "<%=cp%>/myfollowing.action";
+            	
+            })     
     }) 
    
     		
@@ -150,14 +150,11 @@ $(document).ready(function(){
 
 									<c:forEach var="fList" items="${ followingList }" varStatus="status">
                                     <div class="MyFollow-user flex-row-left-center">
-<!--                                         <div class="MyFollow-user-badge">
-                                            
-                                        </div>
-                                         -->
+        
                                         <div class="user-badge-box">
                                         		 <img class="user-bad-badge" src="${followingBad[status.index].urlBad }" alt="">
                      
-                                                <img src="<%=cp %>/${fList.url } " alt="">
+                                                <img class="followbadge" src="<%=cp %>/${fList.url } " alt="">
                                         </div>
                                         <div class="MyFollow-user-detail">
                                         
@@ -165,12 +162,13 @@ $(document).ready(function(){
                                         	<div>${fList.nickname }
                                         	<c:choose>
 				                           	<c:when test="${fList.followId != 0}">
-				                           		<button class="btn" id="followBtn" value="${fList.userId }">❤</button>
-				                           		<input type="hidden" class="followckId" value="${fList.followId}">
+				                           		<button class="btn followBtn" id="followBtn" value="${fList.userId }">❤</button>
+				                           		<input type="hidden" class="followckId" id="followckId${fList.userId }" value="${fList.followId}">
+				                           		
 				                           	</c:when>
 				                           	<c:when test="${fList.followId == 0}">
-				                           		<button class="btn" id="followBtn" value="${fList.userId }">♡</button>
-				                           		<input type="hidden" class="followckId" value="${fList.followId}">
+				                           		<button class="btn followBtn" id="followBtn" value="${fList.userId }">♡</button>
+				                           		<input type="hidden" class="followckId"  id="followckId${fList.userId }" value="${fList.followId}">
 				                           	</c:when>
 				                           	</c:choose>
 				                           	</div>

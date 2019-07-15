@@ -16,7 +16,9 @@ public interface IFollowDAO
 	public ArrayList<FollowDTO> followerAddrList();
 	public ArrayList<FollowDTO> followerInterList();
 	
-	public int followinsert2(@Param("followingId")String followingId, @Param("userId")String userId);
-	public int followdelete2(@Param("followingId")String followingId, @Param("userId")String userId);
-
+	public int followinsert2(String followId);
+	public int followdelete2(String followId);
+	
+	public int followinsert3(String followId);
+	public int followdelete3(String followId);
 }

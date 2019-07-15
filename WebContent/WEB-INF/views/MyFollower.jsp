@@ -10,18 +10,18 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
- 	<!-- 부트스트랩 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+ 	 <!-- 부트스트랩(bootstrap css, jquery, popper.js, bootstrap js 필요) -->
+    <link href="css/bootstrap-4.3.1.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper-1.14.7.min.js"></script>
+    <script src="js/bootstrap-4.3.1.min.js"></script>
     <!-- 폰트 (Noto Snas KR + Handlee) -->
-    <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
-    <!-- sagyo.css -->
+    <link href="css/sagyo-font.css" rel="stylesheet">
+    <!-- sagyo.css, sagyo.js -->
     <link href="css/sagyo.css" rel="stylesheet">
-   <style type="text/css">
-   
 
+    
+   <style type="text/css">
     .navclick {
 	display: block;
 	color: orange;
@@ -32,16 +32,42 @@
 		color: inherit;
 		font-weight: normal;
 	}	
-    
+    .followbadge{
+	width: 120px;
+	height: 120px;
+}
    
    </style> 
    <script type="text/javascript">
    
    $(document).ready(function()
    {
-	   $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
+	   /* $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%"); */
 		
-	   
+	    $('.followBtn').click(function()
+		{			
+	    	 var followId = $(this).val(); // 테이크유저아이디
+	    	 var fck = $("#followckId"+followId).val(); // 1 , 0
+			 
+	 		   $.ajax({
+	            url : 'followingajax.action',
+	            type : 'GET',
+	            data : { followId : followId , fck : fck},
+	            }).done(function(result){
+	            	if(result == 0)
+					{
+	            		$("#followBtn").html("♡");	
+	            		
+					}
+					else 
+					{
+						$("#followBtn").html("❤");	
+					}
+	            	
+	            	location.href = "<%=cp%>/myfollower.action";
+	            	
+	            	})     
+	    }) 
    });	
    
    </script>
@@ -61,7 +87,7 @@
                         <div class="MyPage-header-badge">
                                <div class="user-badge-box">
                                         <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
-                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                         <img class="" src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                                  </div>
                             </div>
                              <div class="star-show star-25-box">
@@ -125,11 +151,22 @@
                                     <div class="MyFollow-user flex-row-left-center">
                                        <div class="user-badge-box">
                                                 <img class="user-bad-badge" src="${followerBad[status.index].urlBad }" alt="">
-                    							 <img src="<%=cp %>/${fList.url } " alt="">
+                    							 <img class="followbadge" src="<%=cp %>/${fList.url } " alt="">
                                         </div>
                                           <div class="MyFollow-user-detail">
                                         
-                                        	<div>${fList.nickname }</div>
+                                        		<div>${fList.nickname }
+                                        	<c:choose>
+				                           	<c:when test="${fList.followId != 0}">
+				                           		<button class="btn followBtn" id="followBtn${status.index}" value="${fList.userId }">❤</button>
+				                           		<input type="hidden" class="followckId"  id="followckId${fList.userId }" value="${fList.followId}">
+				                           	</c:when>
+				                           	<c:when test="${fList.followId == 0}">
+				                           		<button class="btn followBtn"  id="followckId${status.index}" value="${fList.userId }">♡</button>
+				                           		<input type="hidden" class="followckId" id="followckId${fList.userId }" value="${fList.followId}">
+				                           	</c:when>
+				                           	</c:choose>
+				                           	</div>
 	                                           <div class="flex-row-center-center"> 
 					                              <div class="star-show star-20-box">
 														
