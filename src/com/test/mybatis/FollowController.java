@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.ParameterParser;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -63,22 +64,37 @@ public class FollowController
 		return "WEB-INF/views/MyFollower.jsp";
 	}
 	
-	@RequestMapping(value="/followingajax.action")
-	public void singUpcheckId(String followingId,String fck, HttpServletResponse response, HttpSession session) throws IOException
+	@RequestMapping(value="/followingajax.action", method = RequestMethod.GET)
+	public void singUpcheckId(ModelMap model,String followId,String fck,HttpServletResponse response,FollowDTO followDTO) throws IOException
 	{
-		int result = 0;
-		String userId = (String) session.getAttribute("userId");
-		IFollowDAO followdao = sqlSession.getMapper(IFollowDAO.class);
-		int followck = Integer.parseInt(fck);
-		if(followck != 0)
-		{
-			result =followdao.followdelete2(followingId, userId);
-		}
-		else
-		{
-			result =followdao.followinsert2(followingId, userId);
-		}
 
+		int result = 0;
+		IFollowDAO dao = sqlSession.getMapper(IFollowDAO.class);
+		
+	
+
+		int fck1 = Integer.parseInt(fck);
+		
+		//System.out.println(followId);
+		//System.out.println(userId);
+		//System.out.println(fck);
+		
+		if(fck1 == 0)
+		{
+			dao.followinsert2(followId);
+			result = 1;
+			
+		}
+		else if(fck1 == 1)
+		{
+			
+			dao.followdelete2(followId);
+			result = 0;
+			
+		}
+		followDTO.setFollowId(Integer.toString(result));
 		response.getWriter().print(result);
+
 	}
+	
 }

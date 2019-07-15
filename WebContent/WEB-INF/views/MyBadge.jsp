@@ -131,6 +131,7 @@
                    data : { badgeLogId : badgeLogId },
                    }).done(function(result){
                    		$("#user_main").attr("src",result)
+                   		location.href = "<%=cp%>/mybadge.action";
        			   })
        			
                   }   
@@ -261,7 +262,7 @@
                                                  <div class="MyBadge-header-nickname">${List.badgePointName }</div>
                                                  <!--  <div class="MyBadge-header-detail">뱃지 포인트 : <progress value="5" max="10"></progress></div>
                                                  -->  
-                                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 40%" >
+                                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="15" style="width: 40%" >
                      60%
                         </div>
                                                  <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
