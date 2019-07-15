@@ -19,14 +19,15 @@ public class NoticeController
 {
 	@Autowired
 	private SqlSession sqlSession;
+
 	
 	@SuppressWarnings("unused")
 	@RequestMapping(value="/notice.action",method= {RequestMethod.POST, RequestMethod.GET})
-	public String noticeList(Model model, HttpServletRequest request)
+	public String noticeList(Model model, HttpServletRequest request) throws NumberFormatException
 	{	
 		String result= null;
 		
-		INoticeDAO dao = sqlSession.getMapper(INoticeDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 	
 			String reqpage = request.getParameter("pagesu"); // 게시물 하단 페이지 1/2/3 요청시 돌아가는 구문~ 
@@ -43,30 +44,86 @@ public class NoticeController
 			}
 			model.addAttribute("list",dao.list(keyword, reqpage)); // 리스트에 요청페이지 담아서 dao 보내줌~~ 
 		
+			int reqpageN = Integer.parseInt(reqpage); // 요청페이지 강제 변환 ~ 
+			int start = 1;
+			int countPage = 5;  // 하단에 뿌려질 page 넘버의 갯수 
+			model.addAttribute("countPage",countPage);
+			//startPage + countPage - 1
+			int end = start+countPage-1; 
 			
-		int pages = (int)Math.ceil(dao.count(keyword)/10.0); // 
+			
+			
+		/*
+		 int page(reqpage) =  현재 페이지번호 
+		 int countList = 한 페이지에 출력될 게시물 수 
+		 int countPage = 한화면에 출력될 페이지 수 
+		 
+		 int totalCount = 게시물 총 갯수 
+		 
+		 int startPage
+		 */
+			
+			String paging = "";
+			
+		int pages = (int)Math.ceil(dao.count(keyword)/15.0); // 총 페이지 갯수 
+		
+		
+		
+		
+		
+		
+		
+		if (request.getParameter("nextpage") != null)
+		{
+			int nextpage = Integer.parseInt(request.getParameter("nextpage"));
+			System.out.println(nextpage+"넥스트페이지확인");
+			
+			start = countPage;
+			System.out.println(start+"  start  6나와야하고");
+			end = start+countPage-2;
+			System.out.println(end+"  end 10나와야함");
+		}
+		
+			
+		//System.out.println(start+"플러스1 하면 2나와야함");
+			
+			
+	
+		
+		
+		int nextpg =0;
+		
+		if (start>countPage)
+		{
+			paging += "<button>이전페이지</button>";
+		}
+		for (int i = start; i <= end; i++)
+		{
+			System.out.println(i+"i값 찍기 ");
+			paging += "<button type='submit' id='pagesu' name='pagesu' class='btn btn-deep-orange' value=" + i + ">" +i+ "</button>";
+			nextpg = i;
+		}
+		++end;
+		if (true)
+		{
+			paging+= "<button type='submit' id='nextpage' name='nextpage' value='"+end+"'>다음페이지</button>";
+		}
+		model.addAttribute("paging",paging);
+		
+		
 		
 		System.out.println(pages+"페이지수 확인");
 		model.addAttribute("pages",pages);
 		model.addAttribute("keyword",keyword);
 		
-		result = "/WEB-INF/views/Notice.jsp";
+		
 	
+		
+		result = "/WEB-INF/views/Notice.jsp";
 		return result;
 		
 		
-		// 변수 받기 성공~~ 
-		
-		
-		// 페이징 처리 시작? 
-		
-		
-				//int pages = (int)Math.ceil(dao.count()/10.0); // 
-				//System.out.println(pages+"페이지수 확인");
-				//model.addAttribute("pages",pages);
-				
-				
-		// 페이징 처리 끝 
+
 		
 		
 		
@@ -85,14 +142,14 @@ public class NoticeController
 		
 		String result= null;
 		
-		INoticeDAO dao = sqlSession.getMapper(INoticeDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 				
 		//System.out.println("ㅎㅎㅎ"+keyword+"데이터 확인");
 		//model.addAttribute("searchlist",dao.searchlist(keyword)); // 여기서 안들어가는듯??? 
 		//System.out.println("ㅎㅎㅎ"+keyword+"데이터 확인");
 		
 		//model.addAttribute("searchlist",keyword);  // 여기 key 값이 넘어가는 구조인듯. 
-		
+		 
 		
 		//dao.searchlist(keyword);// dao에있는 search라는 select문에 값을 보냄~ 
 		
@@ -139,7 +196,7 @@ public class NoticeController
 	{	
 		String result= null;
 		
-		IFaqDAO dao = sqlSession.getMapper(IFaqDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 	
 			String reqpage = request.getParameter("pagesu"); // 게시물 하단 페이지 1/2/3 요청시 돌아가는 구문~ 
@@ -155,10 +212,10 @@ public class NoticeController
 			{
 				keyword="";
 			}
-			model.addAttribute("list",dao.list(keyword, reqpage)); // 리스트에 요청페이지 담아서 dao 보내줌~~ 
+			model.addAttribute("list",dao.faqlist(keyword, reqpage)); // 리스트에 요청페이지 담아서 dao 보내줌~~ 
 		
 			
-		int pages = (int)Math.ceil(dao.count(keyword)/10.0); // 
+		int pages = (int)Math.ceil(dao.faqcount(keyword)/15.0); // 
 		
 		System.out.println(pages+"페이지수 확인");
 		model.addAttribute("pages",pages);
@@ -178,12 +235,12 @@ public class NoticeController
 		String result= null;
 		
 		
-		//IFaqDAO dao = sqlSession.getMapper(IFaqDAO.class);
+		
 		
 		String title= request.getParameter("title");
 		String content = request.getParameter("content");
 		
-		//System.out.println(title+content+"처음엔 널값 뜨고 두번째에도 널값? 뜰거같은데? ");
+		
 		
 		
 		result = "/WEB-INF/views/DirectQuestionWrite.jsp";
@@ -197,12 +254,12 @@ public class NoticeController
 	//
 	
 	@RequestMapping(value="/directquestioncomplete.action",method= {RequestMethod.POST, RequestMethod.GET})
-	public String DirectQuestionComplete(Model model, HttpServletRequest request, directquestioncompleteDTO d)
+	public String DirectQuestionComplete(Model model, HttpServletRequest request, CsDTO d)
 	{	
 		String result= null;
 		
 		
-		IDirectquestioncompleteDAO dao = sqlSession.getMapper(IDirectquestioncompleteDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		
 		//directquestioncompleteDTO titleContent= d;
 		
@@ -222,7 +279,7 @@ public class NoticeController
 	
 	
 	@RequestMapping(value="/withdrawal.action",method= {RequestMethod.POST, RequestMethod.GET})
-	public String Withdrawal(Model model, HttpServletRequest request, directquestioncompleteDTO d)
+	public String Withdrawal(Model model, HttpServletRequest request, CsDTO d)
 	{	
 		
 		String result= null;
@@ -237,21 +294,23 @@ public class NoticeController
 	}
 	
 	@RequestMapping(value="/withdrawalcheck.action",method= {RequestMethod.POST, RequestMethod.GET})
-	public String Withdrawalcheck(Model model, HttpServletRequest request, directquestioncompleteDTO d)
+	public String Withdrawalcheck(Model model, HttpServletRequest request, CsDTO d)
 	{	
 		
 		String result= null;
 		
 	
 		
-		IWithdrawalDAO dao = sqlSession.getMapper(IWithdrawalDAO.class);
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
 		//id 불러오고~ 그걸 기반으로 닉네임 불러오고~ 
-		String userid = "coimhin"; // 현재 로그인한 아이디가 불러져야하는데 아직 session 으로 구현해야하는데 못함~ 
+		String userId = "coimhin"; // 현재 로그인한 아이디가 불러져야하는데 아직 session 으로 구현해야하는데 못함~ 
 				
-		model.addAttribute("userid",userid); // view페이지에 userid 뿌리기위해 넘겨주는거 WithdrawalCheck.jsp
+		model.addAttribute("userId",userId); // view페이지에 userid 뿌리기위해 넘겨주는거 WithdrawalCheck.jsp
 		// id 값으로 nickname 불러올수 있도록 처리하자~ 
 		
-		model.addAttribute("nickname",dao.nickname(userid));
+		System.out.println(dao.nickname(userId));
+		
+		model.addAttribute("nickname",dao.nickname(userId));
 		
 		result = "/WEB-INF/views/WithdrawalCheck.jsp";
 		
@@ -261,36 +320,41 @@ public class NoticeController
 	
 	//withdrawalcomplete.action.action
 	@RequestMapping(value="/withdrawalcomplete.action",method= {RequestMethod.POST, RequestMethod.GET})
-	public String Withdrawalcheckcomplete(Model model, HttpServletRequest request, WithdrawalDTO w)
+	public String Withdrawalcheckcomplete(Model model, HttpServletRequest request, CsDTO w)
 	{	
 		
 		String result= null;
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
+		String userId = request.getParameter("userId");
 		
-		IWithdrawalDAO dao = sqlSession.getMapper(IWithdrawalDAO.class);
-		
-		String userid = request.getParameter("userid");
 		String pwd = request.getParameter("pwd");
-		System.out.println("userid확인 "+userid);// 잘넘어옴~~ 
+		System.out.println("userId확인 "+userId);// 잘넘어옴~~ 
 		System.out.println("password확인"+pwd);// 잘넘어옴~~
+		
 		
 		// 이제 여기서 아이디 비번이 맞는지 검증을 해야함!! 
 		
 		int idpwcheckCount = dao.idpwcheck(w);
+		// 여기까진 잘됨 
+		
+		System.out.println(idpwcheckCount+"<< 이거 idpwcheckCount");
 		
 		if (idpwcheckCount==1) // 비번이 맞을 경우 
 		{
 			// del_user 테이블에 데이터 insert 문 들어가는걸로~ 
 			
 			
-			dao.del_user(userid);
+			dao.del_user(userId);
+			System.out.println("실행되는지 테스트");
 			result = "/WEB-INF/views/WithdrawalComplete.jsp"; 
 			
 		}else if (idpwcheckCount!=1) // 맞지 않을 경우 
 		{
 			result =  "withdrawalcheck.action";
-			
+			System.out.println("2-1");
 		}
 		
+		System.out.println("3");
 		return result;
 		
 	}		

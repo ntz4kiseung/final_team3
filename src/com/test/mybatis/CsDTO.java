@@ -2,7 +2,27 @@ package com.test.mybatis;
 
 public class CsDTO
 {
-	private String id,userId,title,contents,csDate;
+	private String id,userId,title,contents,content,csDate,pwd;
+ 
+	public String getPwd()
+	{
+		return pwd;
+	}
+
+	public void setPwd(String pwd)
+	{
+		this.pwd = pwd;
+	}
+
+	public String getContent()
+	{
+		return content;
+	}
+
+	public void setContent(String content)
+	{
+		this.content = content;
+	}
 
 	public String getId()
 	{

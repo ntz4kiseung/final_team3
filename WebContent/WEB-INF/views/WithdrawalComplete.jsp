@@ -68,10 +68,10 @@
                     </div>
 
                     <div class="CustomerService-category flex-row-left-center">
-                        <span><a href="">공지사항</a></span>&nbsp;&nbsp;&nbsp;
-                        <span><a href="">자주묻는질문</a></span>&nbsp;&nbsp;&nbsp;
-                        <span><a href="">1:1문의</a></span>&nbsp;&nbsp;&nbsp;
-                        <span><a href="">회원탈퇴</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="notice.action">공지사항</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="faq.action">자주묻는질문</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="directquestionwrite.action">1:1문의</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="withdrawal.action">회원탈퇴</a></span>&nbsp;&nbsp;&nbsp;
                     </div>
 
                     <div class="CustomerService-body flex-item-grow flex-col-center-center">
