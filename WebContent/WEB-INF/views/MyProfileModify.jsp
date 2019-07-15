@@ -144,16 +144,12 @@
 		{
 			$('input:radio[name="radio-check-gender"][value="GD00001"]').prop('checked', true);
 			$('#genderId').val('GD00001');
-			
-			
 		}
 		else if(gender == '여자')
 		{
 			$('input:radio[name="radio-check-gender"][value="GD00002"]').prop('checked', true);
 			$('#genderId').val('GD00002');
 		}
-		
-		console.log("성별 : " + $('#genderId').val());
 		
 		var tel = $("#tel1").val() + "-" + $("#tel2").val() + "-" + $("#tel3").val();
 		$("#tel").val(tel);
@@ -293,7 +289,7 @@
 			{	
 				var form = document.getElementById("update-submit-form");
 				alert("회원가입 완료 접근");
-				form.submit();
+				/* form.submit(); */
 			}
 			
 		})
@@ -397,7 +393,7 @@
 		})
 		
 		
-		$("#pwd").keyup(function() {
+		$("#pwd, #pwd2").keyup(function() {
 				
 				if($("#pwd").val() == "" && $("#pwd2").val() == "")
 				{
@@ -444,6 +440,7 @@
 							document.getElementById("span-check-nick").style.color = '#31B404';
 							$("#btn-check-nick").val("1");
 							$("#span-check-nick").text("이전 닉네임입니다. 사용하실려면 넘어가세요.");
+							return false;
 						}
 					}
 				
@@ -522,7 +519,6 @@
 				var month = $("#select-check-m").val();
 				var day = $("#select-check-d").val();
 				var birth = year + month + day;
-				console.log(year + "+" + month + "+" + day + "=" + birth);
 				$("#birth").val(birth);
 			})
 			$("#select-check-d, #select-check-m").change(function()
@@ -530,12 +526,15 @@
 				var year = $("#input-check-y").val();
 				var month = $("#select-check-m").val();
 				var day = $("#select-check-d").val();
-				var sum = year + month + day;
-				var birth = sum.substring(2, 8);
-				console.log(year + "+" + month + "+" + day + "=" + birth);
+				var birth = year + month + day;
 				$("#birth").val(birth);
+				console.log($("#birth").val());
 			})
 			
+			$("input:radio[name=radio-check-gender]").click(function()
+			{
+				$("#genderId").val($(this).val());
+			})
 			$("#telcerti, #tel-re").click(function() {
 				
 				var certi = makeid();
@@ -793,11 +792,8 @@
                                                 <div class="MyProfile-input-group-label">
                                                     아이디*
                                                 </div>  
-                                                <input type="text" id="userId" name="userId" class="form-control input-245-40" value="${List.userId }" placeholder="아이디를 입력해주세요">
-                                                <button type="button" class="btn" id="btn-check-id" value="0">아이디 중복확인</button>
-                                                <div class="div-check">
-                                					<span class="span-check" id="span-check-id"></span>
-                                				</div>
+                                                <input type="text" id="userId" name="userId" class="form-control input-245-40" value="${List.userId }" placeholder="아이디를 입력해주세요" readonly = "readonly">
+                                                
                                             </div>
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
@@ -878,15 +874,15 @@
                                                 </div>
                                                 <div class="flex-row-left-center">
 				                                    <div class="radio-group">
-				                                        <input type="radio" name="radio-check-gender" value="GD00001" />
+				                                        <input type="radio" name="radio-check-gender" value="GD00001" checked=""/>
 				                                        <label for="">남성</label>
 				                                    </div>
 				                                    &nbsp;&nbsp;
 				                                    <div class="radio-group">
-				                                        <input type="radio" name="radio-check-gender" value="GD00002" />
+				                                        <input type="radio" name="radio-check-gender" value="GD00002" checked=""/>
 				                                        <label for="">여성</label>
 				                                    </div>
-				                                    <input type="hidden" id="genderId" name="genderId" value="${List.genderId }">
+				                                    <input type="hidden" id="genderId" name="genderId" value="${List.genderId}">
 			                                	</div>
                                             </div>
                 

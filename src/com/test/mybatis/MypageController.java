@@ -27,15 +27,41 @@ public class MypageController
 	public String myReviewList(Model model, HttpSession session)
 	{
 		String userId = (String) session.getAttribute("userId");
-		userId="B001";
+		
+		// 세션에서 로그인 정보 받아봄
+		// 비로그인이라면
+		if(userId==null||userId.equals(""))
+		{
+		   System.out.println("비로그인 유저 진입");
+		   return "redirect: login.action"; // 비로그인시 돌려보낼 곳 
+		}
+		// 로그인이라면
+		else
+		{
+		   System.out.println("로그인 유저 진입");
+		}
+		
 		IUserDAO dao1 = sqlSession.getMapper(IUserDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
 		
+		ArrayList<PostDTO> postIdlist = dao2.searchPostIdList(userId);
+		ArrayList<PostDTO> myReviewList = dao2.myReviewList(userId);
+		
+		
+		
+//		for (int i = 0; i < postIdlist.size(); i++)
+//		{
+//			myReviewList.get(i).setPostStatus(dao2.postlistCheck(userId, postIdlist.get(i).getPostId()));
+//		}
+		
+		
+		
+		
 		model.addAttribute("myPageList",dao1.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao1.myPageInterList(userId));
-		model.addAttribute("myReviewList", dao2.myReviewList());
+		model.addAttribute("myReviewList", myReviewList);
 		model.addAttribute("positiveBadge", dao3.positiveBadge());
 		model.addAttribute("negativeBadge", dao3.negativeBadge());
 		model.addAttribute("hostBadge", dao3.hostBadge());
@@ -133,13 +159,16 @@ public class MypageController
 			{
 				System.out.println("뱃지선택 or 코멘트 작성");
 				dao.reviewInsertSub(badgeId[i],contents[i]);
-				
 			}
-			
-			
 		}
-		
 		return "redirect:createpostlist.action";
+	 }
+	 
+	 @RequestMapping(value="/hostReviewView.action", method=RequestMethod.GET)
+	 public String reviewView()
+	 {
+		 
+		 return "";
 	 }
 	
 	

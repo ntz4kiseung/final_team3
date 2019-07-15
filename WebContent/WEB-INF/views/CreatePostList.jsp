@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	request.setCharacterEncoding("UTF-8");
-	String cp = request.getContextPath();
+   request.setCharacterEncoding("UTF-8");
+   String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +20,7 @@
 	 -->   
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     
     <!-- 폰트 (Noto Snas KR + Handlee) -->
     <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -31,12 +31,12 @@
 <script type="text/javascript">
 $(document).ready(function()
 {
-	$('#myModal').on('shown.bs.modal', function (){
-		$('#myInput').trigger('focus')
-	});
-	
-	/* 	      
-	$("[data-toggle=popover]").popover({
+   $('#myModal').on('shown.bs.modal', function (){
+      $('#myInput').trigger('focus')
+   });
+   
+   /*          
+   $("[data-toggle=popover]").popover({
         html : true,
         content: function() {
           var content = $(this).attr("data-popover-content");
@@ -44,8 +44,6 @@ $(document).ready(function()
         }
     });
 	 */
-
-	
 	$(".on").on("onclick", "a.this()", function (){
 	    alert($(this).text());
 	    alert("경고");
@@ -259,14 +257,10 @@ $(document).ready(function()
 		$('#'+selectPoint).next().attr('value', badgePointId);
 		
 	} )	
-	
-
-
 });
 /* 
 function selectBadge(url,click_id)
 {
-	
 	console.log(url);		// 이미지 url
 	console.log(click_id);	// 이미지 코드번호
 	//selectPoint.src = url;
@@ -281,169 +275,136 @@ function selectBadge(url,click_id)
 </script>
 <style type="text/css">
         .review-post{
-		    width: 900px;
-		    height: 125px;
-		    border-top: 2px solid rgb(220,220,220);
-		}	
-		
-		.badge-post{
-		    width: 900px;
-		    height: 100px;
-		    border-top: 2px solid rgb(220,220,220);
-		}	
-		
-		.flex-review{
-			display: flex;
-			align-content : space-around;
-			justify-content: center;
-		}	
-		
-		.flex-badge{
-			display : flex;
-			justify-content: flex-start;
-			
-		}
-		
-		.flex-review-first{
-			flex: auto;
-			flex-grow: 0;
-			flex-basis: 15%;
-			margin: auto;
-		}
-		.flex-review-second{
-			flex: auto;
-			flex-grow: 0;
-			flex-basis: 15%;
-			margin: auto;
-		}
-		.flex-review-third{
-			flex: auto;
-			flex-grow: 0;
-			flex-basis: 15%;
-			margin: auto;
-		}
-		
-		.flex-review-fourth{
-			flex: auto;
-			flex-grow: 0;
-			flex-basis: 55%;
-		}
-		.flex-badge-list{
-			flex:1;
-			flex-grow: 1;
-			flex-basis: 25%;
-		}
-		
-		.modal-content{
-			width: 1000px;
-    		height: 700px;
-		}
-		
-		.popover{
-   			min-width: 900px !important;
-   			
-		}
-		.box-75-75{
-		    width: 75px;
-		    height: 75px;
-		}
-
-
-		
+          width: 900px;
+          height: 125px;
+          border-top: 2px solid rgb(220,220,220);
+      }   
+      
+      .badge-post{
+          width: 900px;
+          height: 100px;
+          border-top: 2px solid rgb(220,220,220);
+      }   
+      
+      .flex-review{
+         display: flex;
+         align-content : space-around;
+         justify-content: center;
+      }   
+      
+      .flex-badge{
+         display : flex;
+         justify-content: flex-start;
+         
+      }
+      
+      .flex-review-first{
+         flex: auto;
+         flex-grow: 0;
+         flex-basis: 15%;
+         margin: auto;
+      }
+      .flex-review-second{
+         flex: auto;
+         flex-grow: 0;
+         flex-basis: 15%;
+         margin: auto;
+      }
+      .flex-review-third{
+         flex: auto;
+         flex-grow: 0;
+         flex-basis: 15%;
+         margin: auto;
+      }
+      
+      .flex-review-fourth{
+         flex: auto;
+         flex-grow: 0;
+         flex-basis: 55%;
+      }
+      .flex-badge-list{
+         flex:1;
+         flex-grow: 1;
+         flex-basis: 25%;
+      }
+      
+      .modal-content{
+         width: 1000px;
+          height: 700px;
+      }
+      
+      .popover{
+            min-width: 900px !important;
+            
+      }
+      .box-75-75{
+          width: 75px;
+          height: 75px;
+      }
 </style>
 
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
+    
+    
+    
+		<c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
 
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>          
-        </div>
 
-        <div class="body-box flex-item-grow flex-col-center-up">
-			<div class="body flex-item-grow flex-col-center-center">
+
+
+		<div class="body-box flex-item-grow flex-col-center-up">
+		<div class="body flex-item-grow flex-col-center-center">
                 
-                <div class="MyPage flex-item-grow flex-col-center-up">
+			<div class="MyPage flex-item-grow flex-col-center-up">
 
                     <div class="MyPage-header flex-row-left-center">
                     
-                    	<c:forEach items="${myPageList }" var="profile">
+                       <c:forEach items="${myPageList }" var="profile">
                         <div class="MyPage-header-left flex-col-center-center">
                             <div class="MyPage-header-badge">
-                            	
-                            	
                                 <img src="${profile.url }" onerror="this.src='img/뉴비.png'">
-                               	
-                    		</div>
+                            </div>
                             <div class="MyPage-header-grade-star">
                                 <c:forEach var="i" begin="1" end="${profile.reviewGrade }">
-                                	<label style="color: #ffd700;">★</label>
+                                   <label style="color: #ffd700;">★</label>
                                 </c:forEach>
                                 <c:forEach var="i" begin="${profile.reviewGrade }" end="4">
-                                	<label style="color: #e9e9e9;">★</label>
+                                   <label style="color: #e9e9e9;">★</label>
                                 </c:forEach>
                             </div>
                             <div class="MyPage-header-grade">
                               ${profile.reviewGrade } / 5.0
                             </div>
-						</div>
+                  		</div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
                                 ${profile.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                            	
                                 <c:forEach items="${myPageAddrList }" var="addr">
-                                	<div>
-                                		${addr.addrSiName1} ${addr.addrGuName1 } ${addr.addrSiName2} ${addr.addrGuName2 } ${addr.addrSiName3} ${addr.addrGuName3 }
-                                	</div>
+                                   <div>
+                                      ${addr.addrSiName1} ${addr.addrGuName1 } ${addr.addrSiName2} ${addr.addrGuName2 } ${addr.addrSiName3} ${addr.addrGuName3 }
+                                   </div>
                                 </c:forEach>
                                 <c:forEach items="${myPageInterList }" var="inter">
-                                	<div>
-                                		${inter.interMainName1 } ${inter.interSubName1 } ${inter.interMainName2 } ${inter.interSubName2 } ${inter.interMainName3 } ${inter.interSubName3 }
-                                	</div>
+                                   <div>
+                                      ${inter.interMainName1 } ${inter.interSubName1 } ${inter.interMainName2 } ${inter.interSubName2 } ${inter.interMainName3 } ${inter.interSubName3 }
+                                   </div>
                                 </c:forEach>
                                 
-                                	<div style="color: orange;">
-                                		${profile.telCheck }
-                                	</div>
-                                	<div style="color: orange;">
-                                		${profile.emailCheck }
-                                	</div>
-                          
+                                   <div style="color: orange;">
+                                      ${profile.telCheck }
+                                   </div>
+                                   <div style="color: orange;">
+                                      ${profile.emailCheck }
+                                   </div>
+                               </div>
+                          </div>
                        </c:forEach>
-                                	
-                            </div>
-                        </div>
-                        
-					</div>
+                    </div>
+
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
@@ -469,10 +430,11 @@ function selectBadge(url,click_id)
                                     <div class="PostList-post flex-row-left-center">
                                         <div class="PostList-post-left flex-col-center-center">
                                             <div class="PostList-post-badge">
-                                            	<img src="${list.url }" onerror="this.src='img/뉴비.png'">
+                                               <img src="${list.url }" onerror="this.src='img/뉴비.png'">
                                             </div>
                                             <div>
                                                 <!-- nickname -->
+                                                
                                                 ${list.nickname }
                                             </div>
                                         </div>
@@ -485,18 +447,47 @@ function selectBadge(url,click_id)
                                             </div>
                                         </div>
                                         <div class="PostList-post-right flex-col-center-center">
-                                        
                                             <div>
-                                                <button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기 남기기</button>
-                                                <input type="hidden" id="review-action${status.index}" name="review-action${status.index}" class="review" value="${list.userId }">
+                                             <!-- 1(모집중), 2(만남확정), 3(만남실패), 4(후기남기기), 5(후기조회) -->
+                                           <c:choose>
+                                            	<c:when test="${list.postStatus eq '1'}">
+                                            	<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">모집중</button>
+                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="1">
+												</c:when>
+												
+												<c:when test="${list.postStatus eq '2'}">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남확정</button>
+                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="2">
+												</c:when>
+												
+												<c:when test="${list.postStatus eq '3'}">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남실패</button>
+                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="3">
+												</c:when>
+												
+												<c:when test="${list.postStatus eq '4'}">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기남기기</button>
+                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="4">
+												</c:when>
+												
+												<c:when test="${list.postStatus eq '5'}">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기조회</button>
+                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="5">
+												</c:when>
+												
+												<c:otherwise>
+												오류
+												</c:otherwise>
+                                            </c:choose>
                                             </div>
                                             <div class="PostList-post-detail flex-col-left-center">
                                                 <div>${list.addrSiName } ${list.addrGuName }</div>
                                                 <div>${list.meetDate }</div>
                                             </div>
+                             
                                         </div>
-                                    </div>	
-									</c:forEach>
+                                    </div>   
+                           </c:forEach>
 
                                     
                                 </div>
@@ -505,7 +496,10 @@ function selectBadge(url,click_id)
                         </div>
                     </div>
                 </div>
-            </div>
+                        
+			</div>
+		</div>
+	</div>
         
         
         
@@ -628,6 +622,7 @@ function selectBadge(url,click_id)
 		      		
 		     	</div>
 		</div>
+
         
 </body>
 </html>
