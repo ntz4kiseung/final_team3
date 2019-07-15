@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -26,7 +27,7 @@ public class MypageController
 	public String myReviewList(Model model, HttpSession session)
 	{
 		String userId = (String) session.getAttribute("userId");
-		
+		userId="B001";
 		IUserDAO dao1 = sqlSession.getMapper(IUserDAO.class);
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
@@ -104,6 +105,41 @@ public class MypageController
 		
 		 
 		 response.getWriter().print(result);
+	 }
+	 
+	 @RequestMapping(value="/reviewinsert.action", method=RequestMethod.POST) 
+	 public String reviewInsertMain(HttpServletRequest request, HttpSession session)
+	 {
+		 String hostId = (String) session.getAttribute("userId");		// 평가한 유저 아이디
+		 hostId="B001";
+		 
+		 IReviewDAO dao = sqlSession.getMapper(IReviewDAO.class);
+		 
+		 String postId = request.getParameter("postId");				// 방 번호
+		 String[] grade = request.getParameterValues("grade");			// 등급
+		 String[] userId = request.getParameterValues("userId");		// 평가받는 유저 아이디
+		 String[] badgeId = request.getParameterValues("badgeId");		// 뱃지 아이디
+		 String[] contents = request.getParameterValues("contents");	// 내용
+		 
+		 
+		 
+		for (int i = 0; i < grade.length; i++)
+		{
+			
+			dao.reviewInsertMain(postId,hostId,grade[i],userId[i]);
+			
+			//System.out.println(badgeId[i]);
+			if (!badgeId[i].equals("nonSelect") || !contents[i].equals(""))
+			{
+				System.out.println("뱃지선택 or 코멘트 작성");
+				dao.reviewInsertSub(badgeId[i],contents[i]);
+				
+			}
+			
+			
+		}
+		
+		return "redirect:createpostlist.action";
 	 }
 	
 	
