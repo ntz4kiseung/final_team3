@@ -5,13 +5,11 @@
 	String cp = request.getContextPath();
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!-- 부트스트랩 -->
+<meta charset="UTF-8">
+<title>Insert title here</title>
+ <!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -87,9 +85,14 @@
         }
         
     </style>
+    
+    
+    <!-- ajax test1 끝  -->
+ 
 
 </head>
 <body>
+	<body>
     <div class="browser flex-col-center-center">
         <div class="navbar-box flex-row-center-center">
 
@@ -142,29 +145,36 @@
                     </div>
 
                     <div class="CustomerService-body flex-item-grow">
-
                         
-                        <div class="Notice flex-col-center-center">
-
-                            <!-- 검색창 -->
-                            <div class="Notice-search flex-row-left-center">
-                                <form class="input-group" action="faq.action" method="post">
-                                    <input type="text" class="form-control" placeholder="검색키워드를 입력하세요" name="keyword" id="keyword">
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="submit" id="search">검색</button>
-                                    </div>
-                                </form>
-                            </div>
-							<!-- 위에 검색창 일단 완료   -->
-							
-							<!-- 검색창 기존소스 끝  -->
-							
-                            <!-- 아코디언 -->
-                            <div class="Notice-body flex-item-grow">
-
-                                    <div class="accordion" id="NoticeAccordion">
-
-                                        <!-- header -->
+                        <div class="Withdrawal-body flex-col-center-start container"> <!--  게시판 영역 시작  -->
+                        	
+                        	<div class="Notice-search flex-row-left-center">
+                        	<!-- <form action="searchnotice.action" method="post"> -->
+                        	<form action="notice.action" method="post">
+                        		<div class="input-group">
+                        		<input type="text" class="form-control" name="keyword" id="keyword"> <!-- 입력 창 -->
+                        		
+                        		<!-- <input type="submit"   class="btn btn-success btn-default" value="검색" id="search"/> -->
+                        		<div class="input-group-append">
+                        			<button class="btn btn-outline-secondary" type="submit" id="search">검색</button>
+                        		</div>
+                        		</div>
+                        	</form>	
+                        	<!-- </form> -->
+                        	</div>
+                        	
+                            
+                            
+                            <!-- <div class="Withdrawal-desc">
+                                <div>
+                                	<a>[공지]</a><span>공지사항입니다.</span><span>2019-07-03</span>
+                                </div>
+                            </div> -->
+                            
+                            <!-- 아코디언 소스코드 시작  -->
+                            <div class="accordion" id="NoticeAccordion"> 
+                            
+                            	 <!-- header -->
                                         <div class="card">
                                             <div class="card-header flex-row-left-center" id="headingOne">
                                                 <div class="flex-col-center-center">
@@ -178,53 +188,29 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- header -->
-
-                                        <!-- card card card card card card card card card card card card card card card  -->
-                                        <c:forEach var="faq" items="${list }">
-                                        <div class="card">
-                                            <div class="card-header flex-row-left-center" id="headingOne">
-                                                <div class="flex-col-center-center">
-                                                    <span class="CustomerService-label">FAQ</span>
-                                                </div>
-                                                <div class="flex-item-grow flex-col-left-center">
-                                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${faq.id }" aria-expanded="true" aria-controls="collapse${faq.id }">
-                                                        ${faq.title }
-                                                    </button>
-                                                </div>
-                                                <div class="flex-col-center-center">
-                                                    ${faq.csDate }
-                                                </div>
-                                            </div>
-                                        
-                                            <div id="collapse${faq.id }" class="collapse" aria-labelledby="headingOne" data-parent="#NoticeAccordion">
-                                                <div class="card-body flex-col-left-up">
-                                                    <div class="flex-row-left-center">
-                                                        <div class="flex-item-grow">
-                                                            ${faq.title } 
-                                                        </div>
-                                                        <div>
-                                                           ${faq.csDate }
-                                                        </div>
-                                                    </div>
-                                                    <div> ${faq.contents} </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- card card card card card card card card card card card card card card card  -->
-										</c:forEach>
-
-                                  
-
-                            </div> <!--end accordion -->
-
-                        </div><!-- end Notice-body -->
-
-                        <!-- 페이징 -->
-                        <div class="Notice-footer flex-col-center-center">
-                            <div class="Notice-pagination">
-                             <form action="faq.action" method="post" id="formId">
-                                 <script type="text/javascript">
+                            
+                            <!-- 본래의 게시물 리스트 (시작) -->
+                            <div id="boardList">
+	                            <c:forEach var="notice" items="${list }">
+								    <div class="card"> 
+								      <div class="card-header"> 
+								        <a class="card-link" data-toggle="collapse" data-parent="#accordion"  href="#collapse${notice.id }"> 
+								          <span style="border:1px;">공지</span> ${notice.title }  <span>${notice.csDate }</span>
+								        </a> 
+								      </div> 
+								      <div id="collapse${notice.id }" class="collapse"> 
+								        <div class="card-body"> 
+								          ${notice.contents} 
+								        </div> 
+								      </div> 
+								    </div> 
+								 </c:forEach>  
+								 
+								  <!-- 페이징 처리 ~ 시작  -->
+			                           <div class="flex-row-center-center;">
+			                            <form action="notice.action" method="post" id="formId">
+			                            <div class="flex-row-center-center;" id="numbering">
+			                              <script type="text/javascript">
 			                              
 											var max = ${pages };
 											var print = "";
@@ -232,26 +218,70 @@
 											{
 												
 												print = i;
-												document.write("<button type='submit' id='pagesu' name='pagesu'  class='btn btn-deep-orange' value="+ print +">"+print+"</button>");
+												document.write("<button type='submit' id='pagesu' name='pagesu' value="+ print +">"+print+"</button>");
 											}
 											//alert(document.getElementById("keyword").value);
 											//document.write("<button type='submit' id='pagesu' name='pagesu' value="+ print +">"+print+"</button>");
 											
-							      </script>
+										  </script>
 										    <input type=hidden id="keyword" name = "keyword" value="${keyword }">
-							 </form>
-                            </div>
-                        </div>
-                        <div class="Notice-footer flex-col-center-center">
-                   
-                        </div>
-                        <div class="Notice-footer flex-col-center-center">
-                   
-                        </div>
-                    </div>
+										 </div>
+			                           </form>
+			                           </div>
+                               <!-- 페이징 처리 ~ 끝~  -->
+							 </div>
+							
+							
+							 
+							 </div>
+							  
+							  <!--참고자료 시작  -->
+							  <%-- <c:forEach var="student" items="${list }">
+									<tr>
+										<td>${student.sid }</td>
+										<td>${student.name }</td>
+										<td>${student.tel }</td>
+										
+										<c:if test="${student.sub == 0  }">
+										<td>X</td>
+										</c:if>
+										
+										<c:if test="${student.sub == 1 }">
+										<td>O</td>
+										</c:if>
+									</tr>
+								</c:forEach> --%>
+							  <!--참고자료 끝  -->
+							  
+                            <!-- 아코디언 소스코드 종료  -->
+                            
+                            
+                            
+                           <!--  <form action="noticelist.action" method="get">
+	                            <div class="flex-row-center-center;">
+	                               <a href="noticelist.action" id="pagesu" >1</a>
+	                               <a href="noticelist.action">2</a>
+	                               <a href="noticelist.action">3</a>
+									<button type="submit" id="pagesu" name="pagesu" value="1">1</button>
+									<button type="submit" id="pagesu" name="pagesu" value="2">2</button>
+									<button type="submit" id="pagesu" name="pagesu" value="3">3</button>
+	                            </div>
+                            </form> -->
+                            
+                        </div><!-- 게시판 영역 끝  -->
+
+                       <br />
+                       <br />
+                       <br />
+                       <br />
+                       <br />
+                       <br />
+
+                    </div>                    
                 </div>
             </div>
         </div>
     </div>
+</body>
 </body>
 </html>

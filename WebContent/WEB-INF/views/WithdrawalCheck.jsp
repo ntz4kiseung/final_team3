@@ -68,10 +68,10 @@
                     </div>
 
                     <div class="CustomerService-category flex-row-left-center">
-                        <span><a href="">공지사항</a></span>&nbsp;&nbsp;&nbsp;
-                        <span><a href="">자주묻는질문</a></span>&nbsp;&nbsp;&nbsp;
-                        <span><a href="">1:1문의</a></span>&nbsp;&nbsp;&nbsp;
-                        <span><a href="">회원탈퇴</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="notice.action">공지사항</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="faq.action">자주묻는질문</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="directquestionwrite.action">1:1문의</a></span>&nbsp;&nbsp;&nbsp;
+                        <span><a href="withdrawal.action">회원탈퇴</a></span>&nbsp;&nbsp;&nbsp;
                     </div>
 
                     <div class="CustomerService-body flex-item-grow flex-col-center-center">
@@ -96,16 +96,13 @@
                             <div class="Withdrawal-input-box">
                                 <div class="Withdrawal-input-group">
                                     <div class="Withdrawal-input-group-label">아이디</div>
-                                    <div>${userid }</div>
-                                    <input type="hidden" id="userid" name="userid" value=${userid } />
+                                    <div>${userId }</div>
+                                    <input type="hidden" id="userId" name="userId" value=${userId } />
                                 </div>
                                 <div class="Withdrawal-input-group">
                                     <div class="Withdrawal-input-group-label">닉네임</div>
                                     <div>
-                                    <c:forEach var="getnickname" items="${nickname }">
-                                    ${getnickname.nickname }
-                                    		
-                                    </c:forEach>
+                                 		  ${nickname }
                                     </div>
                                 </div>
                                 <div class="Withdrawal-input-group">
