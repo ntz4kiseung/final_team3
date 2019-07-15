@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>mvc01</display-name>
-  <welcome-file-list>
+  <!-- <welcome-file-list>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-  </welcome-file-list>
+  </welcome-file-list> -->
+  
+  <display-name>mvcFruit</display-name>
+  
+  	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/application-config.xml</param-value>
+	</context-param>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
   
   <!-- ※ Spring MVC Framework 등록 -->
   <!--   →  Front Controller 등록  -->
   <!--   →  DispatcherServlet 객체 등록 -->
-  
+ 
   <servlet>
-  	<servlet-name>dispatcher</servlet-name>
-  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-  	    <!-- dispatcherServlet은 스프링이 만든 거기 때문에 (자바에서 dispatcherservlet 치고 임포트해서 복붙 ) -->
-  </servlet>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/mvc-config.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
   
   <servlet-mapping>
   	<servlet-name>dispatcher</servlet-name>
-  	<url-pattern>*.action</url-pattern> <!-- 메인컨트롤러 이기 때문에 그냥 어떤 요청이던 action 이면~ 다 수행 -->
+  	<url-pattern>/</url-pattern> <!-- 메인컨트롤러 이기 때문에 그냥 어떤 요청이던 action 이면~ 다 수행 -->
   </servlet-mapping>
   
   <!-- 인코딩 필터 등록 → CharacterEncodingFilter -->

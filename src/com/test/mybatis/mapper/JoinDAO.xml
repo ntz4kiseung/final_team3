@@ -15,7 +15,7 @@
 	</select>
 	
 	<insert id="joininsert">
-		INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE) VALUES(ADD_ID('JOIN','JOINID','JN'),#{postHostId},#{userId}, 'ST00001',#{contents},SYSDATE)
+		INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE) VALUES(ADD_ID('JOIN','JOINID','JN'),#{postHostId},#{joinDTO.userId}, 'ST00001',#{joinDTO.contents}, SYSDATE)
 	</insert>
 	<insert id="replyinsert">
 		INSERT INTO REPLY(REPLYID, JOINID, CONTENTS, REPLYDATE, USERTYPEID) VALUES(ADD_ID('REPLY', 'REPLYID', 'RV'), #{joinId}, #{contents}, SYSDATE, #{userTypeId})

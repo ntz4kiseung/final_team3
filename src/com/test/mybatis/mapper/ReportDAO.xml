@@ -8,7 +8,7 @@
 		FROM REPORT_CATE
 	</select>
 	<insert id="reportpostinsert">
-		INSERT INTO REPORT_POST(ID, POSTID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_POST_SEQ.NEXTVAL, #{postHostId}, #{userId}, #{reportCateName}, #{reportDetail}, SYSDATE)
+		INSERT INTO REPORT_POST(ID, POSTID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_POST_SEQ.NEXTVAL, #{postHostId}, #{reportDTO.userId}, #{reportDTO.reportCateName}, #{reportDTO.reportDetail}, SYSDATE)
 	</insert>
 	<insert id="reportjoininsert">
 		INSERT INTO REPORT_JOIN(ID, JOINID, USERID, REPORTCATEID, REPORTDETAIL, REPORTDATE) VALUES(REPORT_JOIN_SEQ.NEXTVAL, #{reportId}, #{userId}, #{reportCateName}, #{reportDetail},  SYSDATE)
