@@ -34,7 +34,7 @@
 	<select id="checkId" resultType="java.lang.Integer">
 		SELECT COUNT(USERID) AS COUNT
 		FROM LOGIN
-		WHERE UPPER(USERID) = UPPER(#{userid })
+		WHERE UPPER(USERID) = UPPER(#{userId })
  	</select>
  	
  	<select id="checkNick" resultType="java.lang.Integer">
@@ -142,7 +142,7 @@
 	<select id="MyPageBad" resultType="com.test.mybatis.UserDTO"> 
 		SELECT USERID, FN_PROFILE_BAD_BADGE(USERID) AS URLBAD
 		FROM USER_ESSENTIAL
-		WHERE USERID=#{userid}
+		WHERE USERID=#{userId}
 	</select> 
 
 	<select id="myPageAddrList" resultType="com.test.mybatis.AddrDTO"> 
@@ -156,9 +156,9 @@
 		                ,LEAD(ADDRSIID,1) OVER (ORDER BY ID) AS ADDRSIID2,LEAD(ADDRGUID,1) OVER (ORDER BY ID) AS ADDRGUID2
 		                , LEAD(ADDRSIID,2) OVER (ORDER BY ID) AS ADDRSIID3,LEAD(ADDRGUID,2) OVER (ORDER BY ID) AS ADDRGUID3
 		    FROM USERADDR_VIEW
-		    WHERE USERID= #{userid}
+		    WHERE USERID= #{userId}
 		)
-		WHERE ID=(SELECT MIN(ID) FROM USERADDR_VIEW WHERE USERID=#{userid})
+		WHERE ID=(SELECT MIN(ID) FROM USERADDR_VIEW WHERE USERID=#{userId})
 	</select> 
 	
 	<select id="myPageInterList" resultType="com.test.mybatis.InterDTO"> 
@@ -172,18 +172,20 @@
 		                ,LEAD(INTERMAINID,1) OVER (ORDER BY ID) AS INTERMAINID2,LEAD(INTERSUBID,1) OVER (ORDER BY ID) AS INTERSUBID2
 		                , LEAD(INTERMAINID,2) OVER (ORDER BY ID) AS INTERMAINID3,LEAD(INTERSUBID,2) OVER (ORDER BY ID) AS INTERSUBID3
 		    FROM USERINTER_VIEW
-		    WHERE USERID=#{userid}
+		    WHERE USERID=#{userId}
 		)
-		WHERE ID=(SELECT MIN(ID) FROM USERINTER_VIEW WHERE USERID=#{userid})
+		WHERE ID=(SELECT MIN(ID) FROM USERINTER_VIEW WHERE USERID=#{userId})
 	</select>  	
 	
 	<select id="myPageList" resultType="com.test.mybatis.UserDTO"> 
 	SELECT DISTINCT UE.USERID, UE.NICKNAME,UE.NAME,UE.BIRTH,G.GENDER AS GENDERID,UE.TEL,US.SNS, US.INTRODUCE
-                ,UE.EMAIL,UE.BADGELOGID, BL.BADGEPOINTID ,P.BADGEPOINTNAME,P.URL,NVL2((SELECT C.CERTINAME 
+                ,UE.EMAIL,UE.BADGELOGID, BL.BADGEPOINTID ,P.BADGEPOINTNAME,P.URL
+                ,NVL2((SELECT COUNT(C.CERTINAME)
                     FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
                     ON U.CERTIID = C.CERTIID 
                     WHERE U.USERID=  UE.USERID AND C.CERTIID = 'CT00001'),'휴대폰 인증 완료 ✔','') AS TELCHECK
-                 , NVL2((SELECT C.CERTINAME FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
+                 , NVL2((SELECT COUNT(C.CERTINAME)
+                 FROM USER_CERTIFICATION U JOIN CERTIFICATION_CATE C
                   ON U.CERTIID = C.CERTIID
                   WHERE U.USERID= UE.USERID AND C.CERTIID = 'CT00002'),'이메일 인증 완료 ✔' ,'') AS EMAILCHECK
                   ,ROUND(AVG(R.GRADE)OVER(),1) AS REVIEWGRADE 
@@ -192,14 +194,14 @@
                         JOIN POINT P ON BL.BADGEPOINTID=P.BADGEPOINTID
                         JOIN REVIEW R ON UE.USERID = R.TAKEUSERID
                         JOIN GENDER G ON G.GENDERID = UE.GENDERID                      
-	WHERE UPPER(UE.USERID)=UPPER(#{userid})
+	WHERE UPPER(UE.USERID)=UPPER(#{userId})
 	</select>
 	
 	
 	<select id="userList" resultType="com.test.mybatis.UserDTO">
 		SELECT USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL
 		FROM USER_ESSENTIAL
-		WHERE UPPER(USERID) = UPPER(#{userid})
+		WHERE UPPER(USERID) = UPPER(#{userId})
 	</select>
 	
 	

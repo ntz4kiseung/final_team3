@@ -33,8 +33,6 @@ public class MyProfileController
 		model.addAttribute("myPageAddrList", user.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", user.myPageInterList(userId));
 		
-		System.out.println("성별 아이디 : " + user.myPageList(userId).get(0).getGenderId());
-		
 		return "WEB-INF/views/MyProfile.jsp";
 	}
 	
@@ -42,6 +40,7 @@ public class MyProfileController
 	public String myProfileModify(Model model, HttpSession session)
 	{
 		String userId = (String) session.getAttribute("userId");
+		
 		IUserDAO user = sqlSession.getMapper(IUserDAO.class);
 		IAddrDAO addr = sqlSession.getMapper(IAddrDAO.class);
 		IInterDAO inter = sqlSession.getMapper(IInterDAO.class);
@@ -85,11 +84,7 @@ public class MyProfileController
 		String userId = (String) session.getAttribute("userId");
 		IUserDAO user = sqlSession.getMapper(IUserDAO.class);
 		
-		System.out.println("아오 머리아퍼 아이디 : " + userId);
-		System.out.println("아오 대가리아퍼 별명 "  + nickname);
-		
 		result = user.checkGuNick(userId, nickname);
-		System.out.println("아오 머리 아퍼" + result);
 		response.getWriter().print(result);
 	}
 	
@@ -106,11 +101,8 @@ public class MyProfileController
 		userA.updateEssential(userId, user);
 		userA.updateSub(userId, user);
 		
-		/*
-		 * userA.userTelInsert(user);
-		 * 
-		 * userA.userEmailInsert(user);
-		 */
+		userA.userTelInsert(user);
+		userA.userEmailInsert(user);
 		
 		
 		ArrayList<AddrDTO> addrB = userA.myPageAddrList(userId);
@@ -121,6 +113,10 @@ public class MyProfileController
 		else
 			System.out.println("지역1 실패");
 		
+		System.out.println(addrB.get(0).getAddrGuId2());
+		System.out.println(userId);
+		
+		
 		if(!addr.getAddrGuId2().equals(addrB.get(0).getAddrGuId2()))
 			addrA.updateAddr2(userId, addr, addrB.get(0));
 		else
@@ -130,10 +126,6 @@ public class MyProfileController
 			addrA.updateAddr3(userId, addr, addrB.get(0));
 		else 
 			System.out.println("지역3 실패");
-		
-		System.out.println("관심사 1:" + inter.getInterSubId1() + "/" + interB.get(0).getInterSubId1());
-		System.out.println("관심사 2:" + inter.getInterSubId2() + "/" + interB.get(0).getInterSubId2());
-		System.out.println("관심사 3:" + inter.getInterSubId3() + "/" + interB.get(0).getInterSubId3());
 		
 		if (inter.getInterSubId1() != interB.get(0).getInterSubId1())
 			interA.updateInter1(userId, inter, interB.get(0));
