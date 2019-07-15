@@ -277,7 +277,6 @@
     	// Search.jsp 진입시 → setSearchCookies : 전에 있던 Search용 쿠키 값 비워주고 기본 값들로 채워줌
     	setSearchCookies();
     	function setSearchCookies(){
-    		document.cookie="userId="+sessionStorage.getItem("userId");
     		document.cookie="addrGuId1=";
     		document.cookie="addrGuId2=";
     		document.cookie="addrGuId3=";

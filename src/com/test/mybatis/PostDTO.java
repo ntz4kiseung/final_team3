@@ -6,6 +6,70 @@ public class PostDTO
 	
 	// 타입 수정 2019.07.10 15:40
 	private int minNum, maxNum, limitGrade, postStatus;
+	
+	// 점수 확인 테스트용 속성 → 추후 제거함
+	private int gradeHost, gradeAddr, gradeTitle, gradeContents, gradeInterDetail, gradeTotal;
+	
+
+	public int getGradeHost()
+	{
+		return gradeHost;
+	}
+
+	public void setGradeHost(int gradeHost)
+	{
+		this.gradeHost = gradeHost;
+	}
+
+	public int getGradeAddr()
+	{
+		return gradeAddr;
+	}
+
+	public void setGradeAddr(int gradeAddr)
+	{
+		this.gradeAddr = gradeAddr;
+	}
+
+	public int getGradeTitle()
+	{
+		return gradeTitle;
+	}
+
+	public void setGradeTitle(int gradeTitle)
+	{
+		this.gradeTitle = gradeTitle;
+	}
+
+	public int getGradeContents()
+	{
+		return gradeContents;
+	}
+
+	public void setGradeContents(int gradeContents)
+	{
+		this.gradeContents = gradeContents;
+	}
+
+	public int getGradeInterDetail()
+	{
+		return gradeInterDetail;
+	}
+
+	public void setGradeInterDetail(int gradeInterDetail)
+	{
+		this.gradeInterDetail = gradeInterDetail;
+	}
+
+	public int getGradeTotal()
+	{
+		return gradeTotal;
+	}
+
+	public void setGradeTotal(int gradeTotal)
+	{
+		this.gradeTotal = gradeTotal;
+	}
 
 	public String getUserId()
 	{

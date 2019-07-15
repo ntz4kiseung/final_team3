@@ -132,6 +132,8 @@
         .font-bold{
         	font-weight: bold;
         }
+        
+        
    </style>
    
    <script>
@@ -143,7 +145,6 @@
     		if(sessionStorage.getItem("userId")==null || sessionStorage.getItem("userId")==""){
         		document.cookie="guestAddrGuId="+$("#addrGuId1").val();   			
         		console.log("비로그인유저 입력 만남장소",$("#addrGuId1").val());
-        		debugger;
     		}
 			$("#mainSearchForm").submit();
     	});
@@ -171,14 +172,17 @@
 						$("#inbodyB"+a).append(result);
 	                }); 
 			})
-		})
+		});
 		
 		var c;
 		$(".btn-check-cate2").click(function()
 		{
 			c = $(this).val();
+			console.log("c = " + c);
+			
 			$(".btn-pop-gu").click(function()
 			{
+				console.log('진입 성공2');
 				$("#btn-check-gugun"+c).text($(this).text());
 				 
 				$("#addrGuId"+c).val($(this).val());
@@ -186,8 +190,8 @@
 				
 				console.log("구 아이디 = " + $("#addrGuId"+c).val());
 				console.log("구 이름 = " + $("#addrGuName"+c).val());
-			})
-		})
+			});
+		});
 		
 		/* interSubName1 */
 		var d;
@@ -211,7 +215,7 @@
 						$("#inbodyD"+d).append(result);
 					})
 			})
-		})
+		});
 		
 		var e;
 		$(".btn-check-cate4").click(function()
@@ -228,7 +232,7 @@
 				console.log("서브 아이디 = " + $("#interSubId"+e).val());
 				console.log("서브 이름 = " + $("#interSubName"+e).val());
 			})
-		})    	
+		});
 		
     });
     
@@ -283,27 +287,28 @@
                                 <!-- 만남장소, 관심사 선택장 → 로그인시 이 부분 display: none;으로만 바꾸면 됨 -->
                                 <div class="flex-row-center-center <%=( (user==null||user.equals("")) ? "" : "hidden")%> }">
                                     <div class="btn-group">
-	        							<button type="button" class="btn btn-outline-secondary">만남장소</button>
-										<button type="button" class="btn btn-check-cate1 btn-outline-secondary" id="addrSiName1" name="addrSiName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
-	                                	<button type="button" class="btn btn-check-cate2 btn-outline-secondary" id="btn-check-gugun1"               value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#b1" data-placement="bottom">구·군</button>
+	        							<button type="button" class="btn btn-light btn-80-40">만남장소</button>
 										<input type= "hidden" id="addrGuId1" name="" value="">
 										<input type= "hidden" id="addrGuName1" name="" value="">
+										<button type="button" class="btn btn-check-cate1 btn-light btn-100-40 btn-border-side" id="addrSiName1" name="addrSiName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
+	                                	<button type="button" class="btn btn-check-cate2 btn-light btn-100-40" id="btn-check-gugun1" name="btn-check-gugun1"  value="1" tabindex="0" data-toggle="popover"  data-popover-content="#b1" data-placement="bottom">구·군</button>
+
                                     </div>
                                     &nbsp;&nbsp;&nbsp;
                                     <div class="btn-group">
-										<button type="button" class="btn btn-outline-secondary">관심사</button>
-	                                    <button type="button" class="btn btn-check-cate3 btn-outline-secondary" id="interMainName1" name="interMainName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
-	                                	<button type="button" class="btn btn-check-cate4 btn-outline-secondary" id="btn-check-sub1" name="btn-check-sub1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
+										<button type="button" class="btn btn-light btn-80-40">관심사</button>
 										<input type= "hidden" id="interSubId1" name="" value="">
 										<input type= "hidden" id="interSubName1" name="" value="">
+	                                    <button type="button" class="btn btn-check-cate3 btn-light btn-100-40 btn-border-side" id="interMainName1" name="interMainName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
+	                                	<button type="button" class="btn btn-check-cate4 btn-light btn-100-40" id="btn-check-sub1" name="btn-check-sub1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
                                     </div>
                                 </div>
 
                                 <!-- 키워드 검색 -->
                                 <div class="input-group">  
-                                    <input type="text" name="keyword" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="mainSearchBtn">
+                                    <input type="text" name="keyword" class="form-control" placeholder="관심사의 키워드를 입력하세요" aria-describedby="mainSearchBtn">
                                     <div class="input-group-append">
-                                        <button class="btn btn-outline-orange" type="button" id="mainSearchBtn">Button</button>
+                                        <button class="btn btn-orange" type="button" id="mainSearchBtn">검색</button>
                                     </div>
                                 </div>
                             </form>

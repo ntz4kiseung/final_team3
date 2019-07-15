@@ -17,7 +17,7 @@
 	    </div>
 	    <div class="PostList-post-center flex-col-left-center">
 	        <div class="PostList-post-title">
-	            ${post.title}, ${post.postId }
+	            ${post.title}, ${post.postId },총점: ${post.gradeTotal }, 개설자: ${post.gradeHost }, 주소: ${post.gradeAddr }, 제목: ${post.gradeTitle }, 본문: ${post.gradeContents }, 관심사: ${post.gradeInterDetail }
 	        </div>
 	        <div class="PostList-post-contents">
 	            ${post.contents}

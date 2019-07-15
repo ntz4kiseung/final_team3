@@ -31,8 +31,9 @@ FROM
                                         JOIN INTEREST_MAIN IM ON "IS".INTERMAINID=IM.INTERMAINID
                             WHERE P.MEETDATE>=SYSDATE
                             GROUP BY IM.INTERMAINID
+                            ORDER BY RANK() OVER(ORDER BY COUNT(*))
                         )
-                        WHERE RANK=1)
+                        WHERE ROWNUM=1)
     ORDER BY MEETDATE DESC
 )
 WHERE ROWNUM <=5;
@@ -154,7 +155,6 @@ FROM POST P JOIN ADDR_GU G ON P.ADDRGUID=G.ADDRGUID
             JOIN USER_BADGE_LOG BL ON UE.BADGELOGID=BL.BADGELOGID
             JOIN POINT PO ON BL.BADGEPOINTID = PO.BADGEPOINTID;
  
-
 -- 나는 이것만 쓰면됨, 승원이도 이거만 있으면 될듯?
 SELECT FN_USER_POST_STATUS('adalleif', POSTID) , PV.*
      , (SELECT ID FROM FOLLOW WHERE GIVEUSERID='arthisef' AND TAKEUSERID=PV.USERID) AS FOLLOWID -- 조회한 사람에 따라 바뀜
@@ -284,12 +284,12 @@ WHERE MEETDATE >= SYSDATE
   AND DRINK LIKE '%'||''||'%'
   AND SAMEGENDER LIKE '%'||''||'%'
 )
-WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1)
+WHERE (6*1-5) <= POSTNUM AND POSTNUM < (6*1+1);
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
 -----------------------------------------------내가쓸 필터 + 리스트 쿼리문-------------------------------------------------------
-
-
+SELECT *
+FROM POST_VIEW;
 -----------------------------------------------게시글과 유저, 검색키워드 간 점수 평가 함수-----------------------------------------------------
 -----------------------------------------------게시글과 유저, 검색키워드 간 점수 평가 함수-------------------------------------------------------
 -----------------------------------------------게시글과 유저, 검색키워드 간 점수 평가 함수-------------------------------------------------------
@@ -530,7 +530,15 @@ INSERT INTO MATTRIX_ADDR_GU VALUES('GU00023',0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,0
 INSERT INTO MATTRIX_ADDR_GU VALUES('GU00024',0,0,0,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,1,0,0,1,0,0);
 INSERT INTO MATTRIX_ADDR_GU VALUES('GU00025',0,0,0,0,0,1,0,0,1,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0);
 
+SELECT FN_SEARCH_ADDR('BROGAN', 'GU00005')
+FROM DUAL;
 
+SELECT *
+FROM POST_VIEW
+WHERE POSTID='PT00683';
+SELECT *
+FROM POST_VIEW
+WHERE POSTID='PT00372';
 --------------------------------------------------------최종 만들어진 함수-------------------------------------------------------
 --------------------------------------------------------최종 만들어진 함수-------------------------------------------------------
 --------------------------------------------------------최종 만들어진 함수-------------------------------------------------------
@@ -1138,10 +1146,10 @@ set serveroutput on;
 SELECT COUNT(*)
 FROM
 (
-SELECT POSTID, MIN(REVIEWDATE), MIN(REVIEWID)
-FROM REVIEW
-WHERE TAKEUSERID = 'BLISSET'
-GROUP BY POSTID
+    SELECT POSTID, MIN(REVIEWDATE), MIN(REVIEWID)
+    FROM REVIEW
+    WHERE TAKEUSERID = 'BLISSET'
+    GROUP BY POSTID
 );
 -- 뉴비
 INSERT INTO USER_BADGE_LOG(BADGELOGID, USERID, BADGEPOINTID, GETREVIEWID, EXPIRATIONREVIEWID)
@@ -1283,6 +1291,7 @@ EXEC PRC_USER_BADGE_LOG_SAMPLE;
 -- 우선 뱃지가 활동뱃지면 만료기간을 따지지 않고
 -- 활동 뱃지가 아니면 만료기간을 따짐.
 -- 즉, 어느 유저의 활동 뱃지와 만료 이전의 일반 뱃지의 리스트를 뽑아줌
+
 SELECT MAX(BL.BADGELOGID) AS BADGELOGID, BL.BADGEPOINTID
 FROM USER_BADGE_LOG BL LEFT JOIN REVIEW RV ON BL.EXPIRATIONREVIEWID=RV.REVIEWID
                        JOIN POINT P ON BL.BADGEPOINTID=P.BADGEPOINTID
@@ -1357,4 +1366,82 @@ where meetdate >= to_date('2019-01-01', 'yyyy-mm-dd');
 SELECT UE.USERID, UE.BADGELOGID, BL.BADGEPOINTID ,P.BADGEPOINTNAME
 FROM USER_ESSENTIAL UE JOIN USER_BADGE_LOG BL ON UE.BADGELOGID=BL.BADGELOGID
                        JOIN POINT P ON BL.BADGEPOINTID=P.BADGEPOINTID;
+
+-- 유저의 반이 무작위로 서로 팔로우 하도록
+SELECT *
+FROM FOLLOW;
+
+SELECT USERID
+FROM USER_ESSENTIAL;
+
+INSERT INTO FOLLOW(ID, GIVEUSERID, TAKEUSERID, FOLLOWDATE)
+VALUES(FOLLOW_SEQ.NEXTVAL, 'GIVEUSER', 'TAKEUSER', SYSDATE);
+
+
+
+
+---------------------------------------------- 절반끼리 서로 막 팔로우 함--------------------------------------------------------
+---------------------------------------------- 절반끼리 서로 막 팔로우 함--------------------------------------------------------
+---------------------------------------------- 절반끼리 서로 막 팔로우 함--------------------------------------------------------
+TRUNCATE TABLE FOLLOW;
+
+DECLARE
+    V_GIVEUSERID USER_ESSENTIAL.USERID%TYPE;
+    V_TAKEUSERID USER_ESSENTIAL.USERID%TYPE;
+    CURSOR GIVEUSER_CURSOR 
+    IS 
+    (SELECT USERID FROM USER_ESSENTIAL);
+    CURSOR TAKEUSER_CURSOR
+    IS
+    (SELECT USERID
+    FROM
+    (
+        SELECT USERID
+        FROM USER_ESSENTIAL
+        ORDER BY DBMS_RANDOM.VALUE
+    )
+    WHERE ROWNUM<=(SELECT COUNT(*)/2 FROM USER_ESSENTIAL));
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('기존 팔로우 다 날림');
+
+    
+    OPEN GIVEUSER_CURSOR;
+    LOOP
+        FETCH GIVEUSER_CURSOR INTO V_GIVEUSERID;
+        EXIT WHEN GIVEUSER_CURSOR%NOTFOUND;
+        
+            OPEN TAKEUSER_CURSOR;
+            LOOP
+                FETCH TAKEUSER_CURSOR INTO V_TAKEUSERID;
+                EXIT WHEN TAKEUSER_CURSOR%NOTFOUND;
+                
+                IF(V_GIVEUSERID=V_TAKEUSERID)
+                    THEN DBMS_OUTPUT.PUT_LINE('이건 패스');
+                ELSE
+                    INSERT INTO FOLLOW(ID, GIVEUSERID, TAKEUSERID, FOLLOWDATE)
+                    VALUES(FOLLOW_SEQ.NEXTVAL, V_GIVEUSERID, V_TAKEUSERID, SYSDATE);
+                END IF;
+                
+            END LOOP;
+            CLOSE TAKEUSER_CURSOR;
+
+    END LOOP;
+    CLOSE GIVEUSER_CURSOR;
+    
+    COMMIT;
+END;
+---------------------------------------------- 절반끼리 서로 막 팔로우 함--------------------------------------------------------
+---------------------------------------------- 절반끼리 서로 막 팔로우 함--------------------------------------------------------
+---------------------------------------------- 절반끼리 서로 막 팔로우 함--------------------------------------------------------
+
+select *
+from user_addr
+where ;
+
+
+
+
+
+
+
 

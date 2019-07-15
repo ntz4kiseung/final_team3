@@ -222,6 +222,15 @@ input:read-only {
 }
 /* 조현우제작 */
 
+.btn-80-40{
+    width: 80px;
+    height: 40px;
+    padding: 6px 8px 6px 8px;
+}
+.btn-100-40{
+    width: 100px;
+    height: 40px;
+}
 .btn-120-35{
     width: 120px;
     height: 35px;
@@ -332,23 +341,23 @@ input:read-only {
 }
 .btn-border-side:after{
     content: '';
-    height: 50%;
+    height: 70%;
     width: 1px;
     
     position: absolute;
     right: 0%;
-    top: 25%;
+    top: 15%;
     
     background-color: rgb(140,140,140);
 }
 .btn-border-side:before{
     content: '';
-    height: 50%;
+    height: 70%;
     width: 1px;
     
     position: absolute;
     right: 100%;
-    top: 25%;
+    top: 15%;
     
     background-color: rgb(140,140,140);
 }

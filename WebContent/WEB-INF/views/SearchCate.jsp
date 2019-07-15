@@ -292,7 +292,6 @@
     	// Search.jsp 진입시 → setSearchCookies : 전에 있던 Search용 쿠키 값 비워주고 기본 값들로 채워줌
     	setSearchCookies();
     	function setSearchCookies(){
-    		document.cookie="userId="+sessionStorage.getItem("userId");
     		document.cookie="addrGuId1=";
     		document.cookie="addrGuId2=";
     		document.cookie="addrGuId3=";
@@ -627,6 +626,57 @@
 					console.log("서브 이름 = " + $("#interSubName"+e).val());
 				})
 			})
+			
+			// 막고싶은 a 태그는 href="#" 붙이면 됨
+			$(document).on('click', 'a[href="#"]', function(e){
+				e.preventDefault();
+			});
+
+			
+			// 관심사 소분류 클릭시
+			// 카테고리 내비게이션 굵은 글씨 바꿔주고
+			// 쿠키 바꿔주고
+			// 결과창 비우고
+			// 페이지 넘버 초기화하고
+			// callListCate(pageNum); 다시 요청
+			$(document).on("click", ".interSub-item ",function(){
+				console.log("관심사 sub 클릭");
+				$(".interSub-item").removeClass("font-bold");
+				$(this).addClass("font-bold");
+				document.cookie="userInterSubId="+$(this).attr("id");
+				$('.Search-result-body').empty();
+				pageNum=1;
+				callListCate(pageNum);
+			});
+			
+			
+			// 관심사 대분류 클릭시
+			// 카테고리 내비게이션 굵은 글씨 바꿔주고, 대분류 쿠키 바꾸고
+			// 소분류 다시 불러오고(ajax), 소분류 쿠키 바꾸고
+			// 결과창 비우고, 필터창 숨기고
+			// 페이지 넘버 초기화하고
+			// callListCate(pageNum); 다시 요청
+			$(document).on("click", ".interMain-item", function(){
+				console.log("관심사 main 클릭");
+				$(".interMain-item").removeClass("font-bold");
+				$(this).addClass("font-bold");
+				document.cookie="userInterMainId="+$(this).attr("id");
+				$.ajax({
+					url: '<%=cp %>/intersubajax2.action',
+					type: 'GET',
+					dataType: 'html',
+					data: {'mainid': $(this).attr("id")}
+				}).done(function(result) {
+					$("#interSubBox").empty();
+					$("#interSubBox").append(result);
+				});
+				document.cookie="userInterSubId=";
+				$('.Search-result-body').empty();
+				pageNum=1;
+				callListCate(pageNum);
+			});
+			
+			
        })
 	
        	$(function(){
@@ -684,21 +734,21 @@
 						<div>
 							<c:forEach var="interMain" items="${intermainlist }">
 								<c:set var="userInterMainId" value="${interMain.interMainId1 }" />
-								<span class="interMain-item  <%=(userInterMainId.equals((String)pageContext.getAttribute("userInterMainId")) ? "font-bold" : "") %>" id="${interMain.interMainId1 }"><a href="">${interMain.interMainName1 }</a></span>&nbsp;&nbsp;
+								<span class="interMain-item  <%=(userInterMainId.equals((String)pageContext.getAttribute("userInterMainId")) ? "font-bold" : "") %>" id="${interMain.interMainId1 }"><a href="#">${interMain.interMainName1 }</a></span>&nbsp;&nbsp;
 							</c:forEach>						
 						</div>
-						<div>
-							<span class="interSub-item <%=(userInterSubId.equals("") ? "font-bold" : "" ) %>" id="all"><a href="">전체</a></span>&nbsp;&nbsp;&nbsp;
+						<div id="interSubBox">
+							<span class="interSub-item <%=(userInterSubId.equals("") ? "font-bold" : "" ) %>" id=""><a href="#">전체</a></span>&nbsp;&nbsp;&nbsp;
 							<c:forEach var="interSub" items="${userInterSubList }">
 								<c:set var="userInterSubId" value="${interSub.interSubId1 }" />
-								<span class="interSub-item <%=(userInterSubId.equals((String)pageContext.getAttribute("userInterSubId")) ? "font-bold" : "" ) %>" id="${interSub.interSubId1 }"><a href="">${interSub.interSubName1 }</a></span>&nbsp;&nbsp;&nbsp;				
+								<span class="interSub-item <%=(userInterSubId.equals((String)pageContext.getAttribute("userInterSubId")) ? "font-bold" : "" ) %>" id="${interSub.interSubId1 }"><a href="#">${interSub.interSubName1 }</a></span>&nbsp;&nbsp;&nbsp;				
 							</c:forEach>						
 						</div>
 					</div>
                     
                     <!-- 필터창 -->
-                    <div class="Search-filter hidden" id="Search-filter">
-                    
+                    <div class="Search-filter" id="Search-filter">
+                        <div class="Search-filter-item flex-row-center-center">aa </div>
                     
                     </div>
 
