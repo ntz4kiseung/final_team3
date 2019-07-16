@@ -30,4 +30,33 @@ public class PostWriteController
 		return result;
 	}
 	
+	@RequestMapping(value = "/postInsert.action", method = RequestMethod.POST)
+	public String postWrite(Model model, PostDTO postDTO)
+	{
+		String result = null;
+		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
+		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
+		
+		System.out.println(postDTO.getTitle());
+		System.out.println(postDTO.getAddrSiId());
+		System.out.println(postDTO.getAddrGuId());
+		System.out.println(postDTO.getAddrDetail());
+		System.out.println(postDTO.getInterMainId());
+		System.out.println(postDTO.getInterSubId());
+		System.out.println(postDTO.getInterDetail());
+		System.out.println(postDTO.getMinNum());
+		System.out.println(postDTO.getMaxNum());
+		System.out.println(postDTO.getDrink());
+		System.out.println(postDTO.getSamegender());
+		System.out.println(postDTO.getGrade());
+		System.out.println(postDTO.getMeetDate());
+		System.out.println(postDTO.getMoodName());
+		System.out.println(postDTO.getContents());
+		model.addAttribute("addrsilist", addrA.addrSiList());
+		model.addAttribute("intermainlist", interA.interMainList());
+		result = "WEB-INF/views/PostWrite.jsp";
+		
+		return result;
+	}
+	
 }
