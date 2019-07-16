@@ -10,7 +10,7 @@
 <div class="review-post flex-review" id="list${status.index}">
 	<div id="repBadge" class="flex-review-first" style="text-align: center;">
 		<div class="inquList-post-badge">
-		<img src="img/${list.userurl }.png" alt="">
+		<img src="${inq.giveuserUrl }" alt="">
 		</div>
 		
 		<input class="hidden" value="" name="userId"/>
@@ -18,7 +18,7 @@
 	
 	<div class="flex-review-second" style="text-align: center;">
 		<div>
-			<div class="star-rating star-25-box flex-row-left-center" id="grade'+i+'">
+			<div class="star-rating star-25-box flex-row-left-center" id="grade${status.index }">
 				<img class="" id="1" src="img/star.png" alt=""/>
 				<img class="" id="2"  src="img/star.png" alt="" />
 				<img class="" id="3"  src="img/star.png" alt="" />
@@ -31,19 +31,29 @@
 	
 	<div class="flex-review-third" style="text-align: center;" >
 		<div class="PostList-post-badge">
-			<button type="button" class="pointSelect" value="#{status.index }" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-container="body" disabled="disabled">
-			<img class="select" name="select" id="selectPoint#{status.index}" name="image" src="#{list.takeurl}" alt="포인트선택">';
+			<button type="button" class="pointSelect" value="${status.index }" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="$badgeList" data-placement="bottom" data-container="body" disabled="disabled">
+			<img class="select" name="select" id="selectPoint${status.index}" name="image" src="${inq.takeurl}" alt="포인트선택">';
 			<span>
-				#{list.badgepointname}
+				${inq.giveuserName}
 			</span>
 			</button>
 		</div>
 	</div>
 	<div class="flex-review-fourth">
-		<textarea class="form-control" id="contests#{status.index }" name="contents#{status.index }">#{list.contents }</textarea>
+		<textarea class="form-control" id="contests${status.index }" name="contents${status.index }">${inq.contents }</textarea>
 	</div>
 </div>
 
+<%-- <div>
+${inq.userId}
+${inq.giveuserId}
+${inq.giveuserName}
+${inq.giveuserUrl}
+${inq.grade}
+${inq.takeurl}
+${inq.contents}
+
+</div> --%>
 
 </c:forEach>
 

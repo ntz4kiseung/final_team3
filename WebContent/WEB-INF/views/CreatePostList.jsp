@@ -136,14 +136,12 @@ $(document).ready(function()
 		 
 		 $.ajax({
 	         url : "<%=cp %>/hostInquiry.action",
-	         type : "get",
+	         type : "post",
 	         data : {'postId': inquiry},
 	     }).done(function(result)
 		 {
-	    	 console.log(reulst);
-	    	 $("#ajaxTest").empty();
-             $("#ajaxTest").append(result);
-			
+	    	 $("#A").empty();
+             $("#A").append(result);
 		 });
 		 
 	 });

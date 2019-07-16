@@ -189,27 +189,19 @@ public class MypageController
 		return "/WEB-INF/views/JoinPostList.jsp";
 	}
 	
-	@RequestMapping(value="/hostInquiry.action", method = RequestMethod.GET)
+	@RequestMapping(value="/hostInquiry.action", method = RequestMethod.POST)
 	public String reviewHostInquiry(String postId, ModelMap model, HttpSession session)
 	{
 		
 		IReviewDAO review = sqlSession.getMapper(IReviewDAO.class);
 		String userId = (String) session.getAttribute("userId");	
-		ArrayList<ReviewDTO> rv = review.inquryView(userId, postId);
 		
-		System.out.println("사이즈 : "+rv.size());
-		
-		for (int i = 0; i < rv.size(); i++)
-		{
-			System.out.println(rv.get(i).getBadgePointId()+" "+rv.get(i).getBadgePointName()+" "+rv.get(i).getContents()+" "+rv.get(i).getGrade());
-			System.out.println(rv.get(i).getHost()+" "+rv.get(i).getTakeurl()+" "+rv.get(i).getUserId()+" "+rv.get(i).getUserName()+" "+rv.get(i).getUserurl());
-			
-		}
-		
-		System.out.println("123:"+postId + userId);
 		model.addAttribute("list", review.inquryView(userId, postId));
 		
-		return "/WEB-INF/views/HostquiryAjax.jsp";
+
+		System.out.println("123:"+postId + userId);
+		
+		return "/WEB-INF/views/HostInquiryAjax.jsp";
 		
 	}
 
