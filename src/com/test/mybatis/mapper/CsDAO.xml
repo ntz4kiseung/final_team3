@@ -9,106 +9,68 @@
 <!-- 메소드명과 『id=식별자』가 되어야 한다.  -->
 <mapper namespace="com.test.mybatis.ICsDAO">
 
-	<!-- 기존 NoticeDAO.xml -->
-	<select id="list" resultType="com.test.mybatis.CsDTO">
-		<!-- SELECT ID, TITLE, CONTENTS, NOTICEDATE
+	<select id="noticeList" resultType="com.test.mybatis.CsDTO">
+		SELECT *
+		FROM
+		(
+		    SELECT ID,TITLE, CONTENTS, TO_CHAR(NOTICEDATE, 'YYYY-MM-DD HH24:MI') AS CSDATE
+		         , FLOOR( (ROW_NUMBER() OVER(ORDER BY NOTICEDATE DESC) - 1)/15 )+1 AS PAGENUM
+		         , CEIL( (FLOOR( (ROW_NUMBER() OVER(ORDER BY NOTICEDATE DESC) - 1)/15 )+1)/5 ) AS LARGEPAGENUM
+		    FROM NOTICE
+		    WHERE TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		      OR CONTENTS LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		    ORDER BY NOTICEDATE DESC
+		)
+		WHERE PAGENUM=#{pageNum}
+	</select>
+	
+	<select id="noticeTotalPageNum" resultType="java.lang.Integer">
+		SELECT CEIL(COUNT(*)/15) AS TOTALPAGE
 		FROM NOTICE
-		ORDER BY ID DESC -->
-
-		
-		SELECT RNUM, ID, TITLE, CONTENTS, NOTICEDATE AS CSDATE
-		FROM
-		(SELECT ROWNUM AS RNUM, ID, TITLE, CONTENTS, NOTICEDATE 
-		FROM (SELECT ID, TITLE, CONTENTS, NOTICEDATE
-		      FROM NOTICE
-		      WHERE TITLE LIKE '%'||#{keyword}||'%'
-		      ORDER BY ID DESC
-		     ) 				
-		ORDER BY ROWNUM
-		)
-		WHERE RNUM BETWEEN #{reqpage}*15-15+1 AND #{reqpage}*15			
-		
+		WHERE TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		   OR CONTENTS LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		ORDER BY NOTICEDATE DESC
 	</select>
-	
-   	<select id="searchlist" resultType="com.test.mybatis.CsDTO" parameterType="java.util.Map" >
-		<!-- SELECT ID, TITLE, CONTENTS, NOTICEDATE
+
+	<select id="noticeTotalLargePageNum" resultType="java.lang.Integer">
+		SELECT CEIL(CEIL(COUNT(*)/15)/5) AS TOTALLARGEPAGE
 		FROM NOTICE
-		WHERE TITLE LIKE '%'||#{keyword}||'%'
-		ORDER BY ID DESC -->
-		SELECT RNUM, ID, TITLE, CONTENTS, NOTICEDATE
-		FROM
-		(SELECT ROWNUM AS RNUM, ID, TITLE, CONTENTS, NOTICEDATE 
-		FROM (SELECT ID, TITLE, CONTENTS, NOTICEDATE
-		      FROM NOTICE
-		      WHERE TITLE LIKE '%'||#{keyword}||'%'
-		      ORDER BY ID DESC
-		     ) 				
-		ORDER BY ROWNUM
-		)
-		WHERE RNUM BETWEEN #{reqpage}*10-10+1 AND #{reqpage}*10			
-		
-		
-		
+		WHERE TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		   OR CONTENTS LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		ORDER BY NOTICEDATE DESC
 	</select>
-	
-	<!-- 게시물 카운트  -->
-	<select id="count" resultType="int">
-		SELECT COUNT(*) AS COUNT
-		FROM NOTICE
-		WHERE TITLE LIKE '%'||#{keyword}||'%'
-	</select> 
-	
-	<!-- 기존 FaqDAO.xml -->
-	<select id="faqlist" resultType="com.test.mybatis.CsDTO">
-		<!-- SELECT ID, TITLE, CONTENTS, FAQDATE
-		FROM FAQ
-		ORDER BY ID DESC -->
 
-		
-		SELECT RNUM, ID, TITLE, CONTENTS, FAQDATE AS CSDATE
+	<select id="faqList" resultType="com.test.mybatis.CsDTO">
+		SELECT *
 		FROM
-		(SELECT ROWNUM AS RNUM, ID, TITLE, CONTENTS, FAQDATE 
-		FROM (SELECT ID, TITLE, CONTENTS, FAQDATE
-		      FROM FAQ
-		      WHERE TITLE LIKE '%'||#{keyword}||'%'
-		      ORDER BY ID DESC
-		     ) 				
-		ORDER BY ROWNUM
+		(
+		    SELECT ID,TITLE, CONTENTS, TO_CHAR(FAQDATE, 'YYYY-MM-DD HH24:MI') AS CSDATE
+		         , FLOOR( (ROW_NUMBER() OVER(ORDER BY FAQDATE DESC) - 1)/15 )+1 AS PAGENUM
+		         , CEIL( (FLOOR( (ROW_NUMBER() OVER(ORDER BY FAQDATE DESC) - 1)/15 )+1)/5 ) AS LARGEPAGENUM
+		    FROM FAQ
+		    WHERE TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		      OR CONTENTS LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		    ORDER BY FAQDATE DESC
 		)
-		WHERE RNUM BETWEEN #{reqpage}*15-15+1 AND #{reqpage}*15			
-		
+		WHERE PAGENUM=#{pageNum}
 	</select>
 	
-   	<select id="faqsearchlist" resultType="com.test.mybatis.CsDTO" parameterType="java.util.Map" >
-		<!-- SELECT ID, TITLE, CONTENTS, FAQDATE
+	<select id="faqTotalPageNum" resultType="java.lang.Integer">
+		SELECT CEIL(COUNT(*)/15) AS TOTALPAGE
 		FROM FAQ
-		WHERE TITLE LIKE '%'||#{keyword}||'%'
-		ORDER BY ID DESC -->
-		SELECT RNUM, ID, TITLE, CONTENTS, FAQDATE
-		FROM
-		(SELECT ROWNUM AS RNUM, ID, TITLE, CONTENTS, FAQDATE 
-		FROM (SELECT ID, TITLE, CONTENTS, FAQDATE
-		      FROM FAQ
-		      WHERE TITLE LIKE '%'||#{keyword}||'%'
-		      ORDER BY ID DESC
-		     ) 				
-		ORDER BY ROWNUM
-		)
-		WHERE RNUM BETWEEN #{reqpage}*15-15+1 AND #{reqpage}*15			
-		
-		 
-		
+		WHERE TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		   OR CONTENTS LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		ORDER BY FAQDATE DESC  
 	</select>
-	
-	<!-- 게시물 카운트  -->
-	<select id="faqcount" resultType="int">
-		SELECT COUNT(*) AS COUNT
-		FROM FAQ
-		WHERE TITLE LIKE '%'||#{keyword}||'%'
-	</select> 
-	
 
-	
+	<select id="faqTotalLargePageNum" resultType="java.lang.Integer">
+		SELECT CEIL(CEIL(COUNT(*)/15)/5) AS TOTALLARGEPAGE
+		FROM FAQ
+		WHERE TITLE LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		   OR CONTENTS LIKE '%'||#{keyword, jdbcType=VARCHAR}||'%'
+		ORDER BY FAQDATE DESC 
+	</select>
+		
 	<!-- 기존 DirectquestionDAO.xml -->
 	
 	
@@ -131,20 +93,15 @@
 	<select id="idpwcheck" resultType="int">
 		SELECT COUNT(*) AS IDPWCHECK
 		FROM LOGIN
-		WHERE PWD = CRYPTPACK.ENCRYPT(#{pwd} ,#{pwd})
+		WHERE PWD = CRYPTPACK.ENCRYPT(#{pwd} ,'JAVA006$')
         AND UPPER(USERID)=UPPER(#{userId})
 	</select>
 	
 	<!--del_user  -->
-	
 	<insert id="del_user">
 		INSERT INTO DEL_USER(ID,USERID,DELETEDATE)
 		VALUES(DEL_USER_SEQ.NEXTVAL,#{userId},SYSDATE)
 	</insert>
-	
-	
-
-	
 
 </mapper>
 

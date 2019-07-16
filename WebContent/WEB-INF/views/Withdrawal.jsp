@@ -8,55 +8,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <!-- 부트스트랩 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <!-- 부트스트랩(bootstrap css, jquery, popper.js, bootstrap js 필요) -->
+    <link href="css/bootstrap-4.3.1.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper-1.14.7.min.js"></script>
+   	<script src="js/bootstrap-4.3.1.min.js"></script>
     <!-- 폰트 (Noto Snas KR + Handlee) -->
-    <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="css/sagyo-font.css" rel="stylesheet">
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
 
+	<style>
+	.Withdrawal-desc>textarea{
+		height: 100%;
+	}
+	</style>
 </head>
 <body>
     <div class="browser flex-col-center-center">
-        <div class="navbar-box flex-row-center-center">
-
-            <div class="navbar-left flex-row-left-center">
-                <div class="logo-box flex-row-left-center">
-                    <div class="logo-img">
-                        <img src="img/Logo.png" alt="이미지없음">
-                    </div>
-                    <div class="logo-text">
-                        Sagyo
-                    </div>
-                </div>
-            </div>
-            
-            <div class="navbar-center flex-item-grow flex-row-center-center">
-                <form action="" class="flex-row-center-center">
-                    <input type="text" placeholder="관심사의 키워드를 입력해주세요" class="form-control flex-item-grow" id="navbar-search-input">
-                    <button class="btn" id="navbar-search-btn">검색</button>
-                </form>
-            </div>
-            
-            <div class="navbar-right flex-row-right-center">
-                <div>알람</div>
-                <div>
-                    <button class="btn btn-border-right">모임개설</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">nickname</button>
-                </div>
-                <div>
-                    <button class="btn btn-border-right">고객센터</button>
-                </div>
-            </div>            
-        </div>
+        <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
 
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
@@ -71,13 +43,13 @@
                         <span><a href="notice.action">공지사항</a></span>&nbsp;&nbsp;&nbsp;
                         <span><a href="faq.action">자주묻는질문</a></span>&nbsp;&nbsp;&nbsp;
                         <span><a href="directquestionwrite.action">1:1문의</a></span>&nbsp;&nbsp;&nbsp;
-                        <span><a href="withdrawal.action">회원탈퇴</a></span>&nbsp;&nbsp;&nbsp;
+                        <span class="font-bold"><a href="withdrawal.action">회원탈퇴</a></span>&nbsp;&nbsp;&nbsp;
                     </div>
 
                     <div class="CustomerService-body flex-item-grow flex-col-center-up">
 
                         <div class="Withdrawal-header flex-col-center-center">
-                            <div class="logo-box flex-item-grow flex-row-center-center">
+                            <div class="logo-box-300-80 flex-item-grow flex-row-center-center">
                                 <div class="logo-img">
                                     <img src="img/Logo.png" alt="이미지 없음">
                                 </div>
@@ -92,7 +64,7 @@
                                 회원탈퇴 약관
                             </div>
                             <div class="Withdrawal-desc">
-                                <textarea name="" id="" disabled="disabled">
+                                <textarea class="form-control" disabled="disabled">
 ①회원은 언제든지 서면, e-mail, 전화, 기타 당사가 정하는 방법으로 회원탈퇴를 요청할 수 있으며, 
  당사와 제휴사는 다음 제1)호의 경우 또는 본 조 제②항 경우를 제외하고는 회원의 요청에 따라 조속히 회원탈퇴에 
   필요한 제반 절차를 수행합니다. 단, 회원탈퇴 시 이벤트 부정 이용 방지 등을 위하여 탈퇴일로부터 30일  
@@ -148,7 +120,7 @@
                         </div>
 
                         <div class="Withdrawal-footer flex-row-center-center">
-                            <button class="btn-160-45 btn btn-outline-orange"  onclick="location.href='main.action' ">메인으로</button>
+                            <button class="btn-160-45 btn btn-outline-orange"  onclick="location.href='main.action' ">메인으로</button>&nbsp;&nbsp;&nbsp;
                             <button class="btn-160-45 btn btn-orange"  onclick="location.href='withdrawalcheck.action' ">다음</button>
                         </div>
 

@@ -129,10 +129,7 @@
             width: 100%;
         }
         
-        .font-bold{
-        	font-weight: bold;
-        }
-        
+
         
    </style>
    

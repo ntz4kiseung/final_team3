@@ -3,7 +3,25 @@ package com.test.mybatis;
 public class CsDTO
 {
 	private String id,userId,title,contents,content,csDate,pwd;
+	private String pageNum, largePageNum;
  
+	
+	public String getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(String pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public String getLargePageNum() {
+		return largePageNum;
+	}
+
+	public void setLargePageNum(String largePageNum) {
+		this.largePageNum = largePageNum;
+	}
+
 	public String getPwd()
 	{
 		return pwd;

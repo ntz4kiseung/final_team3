@@ -83,6 +83,34 @@
 	color : rgb(255,159,16);
 }
 /* *************************************** */
+.logo-box-300-100{
+	width: 300px;
+	height: 100px;
+}
+.logo-box-300-100>.logo-img{
+	width: 80px;
+	height: 80px;
+}
+.logo-box-300-100>.logo-text{
+	font-size: 63px;
+}
+.logo-box-300-80{
+	width: 300px;
+	height: 80px;
+}
+.logo-box-300-80>.logo-img{
+	width: 70px;
+	height: 70px;
+}
+.logo-box-300-80>.logo-text{
+	font-size: 58px;
+}
+.font-bold{
+    font-weight: bold;
+}
+.font-orange{
+	color: rgb(252,170,10);
+}
 a{
 	color: black;
 	text-decoration:none;
