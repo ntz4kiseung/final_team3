@@ -260,7 +260,7 @@
 				                                    <div>
 				                                        <button class="btn replyreport" data-toggle="modal" data-target="#report-post" name="${replylist.replyId }">신고하기</button>
 				                                    </div>
-				                                    <c:if test="${replylist.userId eq 'B001'}">
+				                                    <c:if test="${replylist.userId eq 'B001' || replylist.userId eq postlist.userId}">
 				                                    <div>
 				                                        <button class="btn reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
 				                                    </div>
