@@ -236,11 +236,15 @@
                         <!-- 페이징 -->
                         <div class="Notice-footer flex-col-center-center">
                             <div class="Notice-pagination">
-                            	<form action="notice.action" method="post" id="formId">
-                                
-								<div>${paging }</div>
-										    <input type=hidden id="keyword" name = "keyword" value="${keyword }">
+                            	${paging }
+							     <input type='hidden' id='keyword' name = 'keyword' value="${keyword }"/>
+								
+								
+								<form action="noticenext.action"  style="display:inline">
+								${pagingNext }
+								 <input type='hidden' id='keyword' name = 'keyword' value= '${keyword }'> ;
 								</form>
+								
                             </div>
                         </div>
                         <div class="Notice-footer flex-col-center-center">
