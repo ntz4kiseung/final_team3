@@ -22,4 +22,14 @@
 	<insert id="postdelte">
 		INSERT INTO DEL_POST(ID, POSTID, DELETEDATE) VALUES(DEL_POST_SEQ.NEXTVAL, #{reportId}, SYSDATE)
 	</insert>
+	<select id="serchreportjoin" resultType="int">
+		SELECT COUNT(ID)
+		FROM REPORT_JOIN
+		WHERE JOINID = #{joinId}
+	</select>
+	<select id="serchreportreply" resultType="int">
+		SELECT COUNT(ID)
+		FROM REPORT_REPLY
+		WHERE REPLYID = #{reply}
+	</select>
 </mapper>

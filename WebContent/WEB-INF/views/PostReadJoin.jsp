@@ -188,10 +188,9 @@
                     <div class="Post-report flex-row-right-center">
                         <button class="btn report-post" data-toggle="modal"  data-target="#report-post">신고하기</button>
                     </div>
-                    <form action="joininsert.action" method="get"></form>
                     <div class="Post-join">
                         <div>현재 참가 신청인원 (${serchNum }/${postlist.minNum }~${postlist.maxNum })</div>
-                        <div class="flex-row-left-center">
+                        <div class="flex-row-left-center post-join-secondary">
                             <div><textarea name="contents" id="contents"></textarea></div>
                             <div><button id="post-join-btn"class="btn btn-outline-secondary">참가신청</button></div>
                         </div>
@@ -199,6 +198,11 @@
 <!-- 댓글 부분 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->					
                     <div class="Post-joinList">
  						<c:forEach var="join" items="${list}">
+ 							<c:if test="${join.userId eq 'B001' }">
+ 							<script type="text/javascript">
+ 								$('.post-join-secondary').css('display', 'none');
+ 							</script>
+ 							</c:if>
  							<c:choose>
  								<c:when test="${!empty join.delJoin}">
 		                        	<div class="comments flex-row-left-center">
@@ -221,10 +225,12 @@
 			                                    <div>
 			                                        <button class="btn joinreport" data-toggle="modal" data-target="#report-post" name="${join.joinId }">신고하기</button>
 			                                    </div>
+			                                    <c:if test="${join.userId eq 'B001'}">
 			                                    <div>
 			                                        <button class="btn btn-border-right reply-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId }">댓글달기</button>
 			                                        <button class="btn request-join" data-toggle="modal" data-target="#join-reset-modal" name="${join.joinId }">신청취소</button>
 			                                    </div>
+			                                    </c:if>
 			                                </div>
 			                                <div>
 			                                    ${join.contents}
@@ -254,9 +260,11 @@
 				                                    <div>
 				                                        <button class="btn replyreport" data-toggle="modal" data-target="#report-post" name="${replylist.replyId }">신고하기</button>
 				                                    </div>
+				                                    <c:if test="${replylist.userId eq 'B001'}">
 				                                    <div>
 				                                        <button class="btn reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
 				                                    </div>
+				                                    </c:if>
 				                                </div>
 				                                <div>
 				                                    ${replylist.contents }
