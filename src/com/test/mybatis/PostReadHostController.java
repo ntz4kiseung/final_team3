@@ -55,7 +55,11 @@ public class PostReadHostController
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		reportDTO.setUserId("anlant");
 		reportDAO.reportjoininsert(reportDTO);
-		
+		int serchNum = (Integer)reportDAO.serchreportjoin(reportDTO.getReportId());
+		if(serchNum>= 5)
+		{
+			reportDAO.joindelcheckinsert(reportDTO);
+		}
 		result = "redirect:postreadjoin.action";
 		return result;
 	}
@@ -67,7 +71,11 @@ public class PostReadHostController
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		reportDTO.setUserId("anlant");
 		reportDAO.reportreplyinsert(reportDTO);
-		
+		int serchNum = (Integer)reportDAO.serchreportreply(reportDTO.getReportId());
+		if(serchNum>= 5)
+		{
+			reportDAO.reportreplyinsert(reportDTO);
+		}
 		result = "redirect:postreadhost.action";
 		return result;
 	}

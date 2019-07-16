@@ -18,11 +18,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!-- 폰트 (Noto Snas KR + Handlee) -->
 <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
-<!-- sagyo.css -->
-<link href="css/sagyo.css" rel="stylesheet">
+
 <!-- 글쓰기 -->
 <script type="text/javascript" src="<%=cp%>/resource/se/js/HuskyEZCreator.js" charset="utf-8"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -32,8 +30,9 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
- 
 
+<!-- sagyo.css -->
+<link href="css/sagyo.css" rel="stylesheet">
 <style>
     .PostWrite{
         width: 100%;
@@ -89,16 +88,22 @@
     }
 
 /* 추가적으로 css 추가하는 부분 */
-	#input-w-20	 /* 인원수 크기 */
+	.input-w-20	 /* 인원수 크기 */
 	{
 		width: 20px;
 		background-color: white;
 		border: none;
 	}
-	#input-w-60	/* 인원수 범위 크기 */
+	.input-w-60	/* 인원수 범위 크기 */
 	{
 		width: 60px;
 		background-color: white;
+		border: none;
+	}
+	.input-w-40	/* 인원수 범위 크기 */
+	{
+		width: 40px;
+		/* background-color: white; */
 		border: none;
 	}
 	.input-w-250	/* range 길이 크기 */
@@ -147,30 +152,25 @@
 		    	      " ~ " + js( "#slider-range" ).slider( "values", 1 )+"명" );
 		  });
 		
-		$( function() {
-			js( "#slider-range-one" ).slider({
-		      range: "max",
+		js("input[name='minMeetDate']").val(sysdateToString(2));
+		
+		js("#filter-minMeetDate").text(sysdateToString(2));
+		js( "#slider-range-one" ).slider({
+			  range: "max",
 		      min: 2,
 		      max: 10,
 		      values: 2,
 		      slide: function( event, ui ) {
-		    	  js( ".price-slider-tree" ).val(ui.value);
+		    	  js(this).next().val(sysdateToString(ui.value));
+		    	  js("#filter-minMeetDate").text(sysdateToString(ui.value));
 		      }
 		    });
-		    js( ".price-slider-tree" ).val($( "#slider-range-one" ).slider("value"));
-		  } );
-		js( ".star_rating a" ).click(function() {
-			js(this).parent().children("a").removeClass("on");
-	        js(this).addClass("on").prevAll("a").addClass("on");
-	        return false;
-	    });
-// 테스트 중		
-		var a;
+
 		$(".btn-check-cate1").click(function() {
 			$(".btn-pop-sido").click(function() {
 				
 				$("#addrSiName").text($(this).text());
-				
+				$("#addrSiId").val($(this).val());
 				var siid = $(this).val();
 				var str = "";
 				 $.ajax({
@@ -209,7 +209,7 @@
 			
 			$(".btn-pop-main").click(function() {
 				$("#interMainName").text($(this).text());
-				
+				$("#interMainId").val($(this).val());
 				var mainid = $(this).val();
 				
 				$.ajax({
@@ -265,8 +265,7 @@
 		          return $(title).children(".popover-heading").html();
 		        }
 		    });
-		});
-// 태스트 중 ---------------			
+		});		
 		/* 글쓰기 용 */
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame(
@@ -286,7 +285,7 @@
 			  fOnAppLoad : function()
 			  {
 				  // 예제 코드
-				  // oEditors.getById["content"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text."]);
+				  //oEditors.getById["content"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text."]);
 			  }
 			, fCreator : "createSEditor2"
 		});
@@ -348,13 +347,117 @@
 		 	   // 색 칠해진 별의 갯수를 hidden input 태그에 넣어줌
 		 	   $(this).parent().children("input").val(num);
 		    });
-		    
-		
-	    $("#test").click(function(){
-	    	console.log($("#grade").val());
-	    })	
+	    $('#postWriteEvent').click(function()
+	    {
+	    	var title = $('#title').val();
+	    	var addrSiId = $('.btn-pop-sido').val();
+	    	var addrGuId = $('#addrGuId').val();
+	    	var addrDetail = $('#addrDetail').val();
+	    	var interMainId = $('.btn-pop-main').val();
+	    	var interSubId = $('#interSubId').val();
+	    	var interDetail = $('#interDetail').val();
+	    	var minNum = $('#minNum').val();
+	    	var maxNum = $('#maxNum').val();
+	    	if($('#drink').is(":checked"))
+	    	{
+	    		$('#drink').val('DR00001');
+	    	}
+	    	else
+	    	{
+	    		$('#drink').val('DR00002');
+	    	}
+	    	
+	    	if($('#samegenders').is(":checked"))
+	    	{
+	    		$('#samegender').val('SG00001');
+	    	}
+	    	else
+	    	{
+	    		$('#samegender').val('SG00002');
+	    	}
+	    	console.log($('#samegender').val());
+	    	var grade = $('#grade').val();
+	    	var hour = $('#hour').val();
+	    	var min = $('#min').val();
+	    	var meetDate = $('#filter-minMeetDate').html();
+	    	$('#meetDate').val(meetDate+hour+":"+min+":00");	
+	    	if(title == "")
+	    	{
+	    		alert("제목이 없습니다.");
+	    		return false;
+	    	}
+	    	else if(addrSiId == "")
+	    	{
+	    		alert("도시를 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(addrGuId == "")
+	    	{
+	    		alert("구를 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(addrDetail == "")
+	    	{
+	    		alert("상세지역를 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(interMainId == "")
+	    	{
+	    		alert("대카테고리를 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(interSubId == "")
+	    	{
+	    		alert("소카테고리를 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(interDetail == "")
+	    	{
+	    		alert("상세관심사 내용을 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(minNum == "")
+	    	{
+	    		alert("최소인원을 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(maxNum == "")
+	    	{
+	    		alert("최대인원을 선택하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(hour == "")
+	    	{
+	    		alert("만나는 시간을 입력하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else if(min == "")
+	    	{
+	    		alert("만나는 분을 입력하지 않았습니다.");
+	    		return false;
+	    	}
+	    	else
+			{
+				alert("글쓰기 완료 접근");
+				var form = document.getElementById("PostWriteForm");
+				form.submit();
+			}
+	    });
 	});
-	
+</script>
+<script type="text/javascript">
+	function sysdateToString(day){
+		var date = new Date();
+		date.setDate(date.getDate()+day);
+		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		return result;
+	}
+	function defaultMinMeetDate(){
+		var date = new Date();
+		date.setDate(date.getDate()+2);
+		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+		return result;
+	}
 </script>
 </head>
 <body>
@@ -362,14 +465,14 @@
         <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
-                <form class="PostWrite flex-item-grow">
+                <form class="PostWrite flex-item-grow" id="PostWriteForm" action="postInsert.action" method="post">
                     
                     <div class="PostWrite-row1 flex-row-left-center">
                         <div class="PostWrite-row1-label">
                             	제목*
                         </div>
                         <div class="PostWrite-row1-input-box">
-                            <input type="text" class="form-control">
+                            <input type="text" class="form-control" id="title" name="title" value="">
                         </div>
                     </div>
 
@@ -386,10 +489,11 @@
                                 	<button type="button" class="btn btn-check-cate2" id="btn-check-gugun" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#b" data-placement="bottom">구·군</button>
+									 <input type="hidden" id="addrSiId" name="addrSiId" value="">
 									 <input type= "hidden" id="addrGuId" name="addrGuId" value="">
 									 <input type= "hidden" id="addrGuName" name="addrGuName" value="">
                                 </div>
-                                <input type="text" class="form-control "> 
+                                <input type="text" class="form-control" id="addrDetail" name="addrDetail"> 
                         </div>
                     </div>
 
@@ -409,12 +513,11 @@
 									tabindex="0" data-toggle="popover" data-trigger="focus"
 									data-popover-content="#d" data-placement="bottom">소분류
 								</button>
-								<input type="hidden" id="interSubId" name="interSubId"
-									value=""> 
-								<input type="hidden" id="interSubName"
-									name="interSubName" value="">
+								<input type="hidden" id="interMainId" name="interMainId" value=""/>
+								<input type="hidden" id="interSubId" name="interSubId" value=""> 
+								<input type="hidden" id="interSubName" name="interSubName" value="">
 							</div>
-							<input type="text" class="form-control ">
+							<input type="text" class="form-control " id="interDetail" name="interDetail">
                         </div>
                     </div>
 
@@ -426,10 +529,10 @@
                             <div>
                             	<div class="PostWrite-row2-right">
                             		<div>
-                            			<input type="text" class="price-slider-one" id="input-w-20" readonly="readonly" value="2">명
+                            			<input type="text" class="price-slider-one input-w-20" id="minNum" name="minNum" readonly="readonly" value="2">명
                             		</div>
                             		<div>
-                            			<input type="text" class="price-slider-two" id="input-w-20" readonly="readonly" value="20">명
+                            			<input type="text" class="price-slider-two input-w-20" id="maxNum" name="maxNum" readonly="readonly" value="20">명
                             		</div>
                             	</div>
                             	<div class="PostWrite-row2-right">
@@ -438,21 +541,22 @@
                             </div>
                             
                             <div>
-                                <input type="text" class="post-people-range" id="input-w-60" readonly="readonly" value="2 ~ 20명">
+                                <input type="text" class="post-people-range input-w-60" readonly="readonly" value="2 ~ 20명">
                             </div>
                         </div>
                         <div class="PostWrite-row2-right">
                             <div>
                                	 음주가능
-                                <input type="checkbox">
+                                <input type="checkbox" id="drink" name="drink" value="">
                             </div>
 
                             <div>
-                                	동성만
-                                <input type="checkbox">
+                                동성만
+                                <input type="checkbox" id="samegenders" name="samegenders" value="">
+                                <input type="hidden" id="samegender" name="samegender" value="">
                             </div>
 
-                            <div>
+                            <div class="flex-row-center-center">
 								참가제한
 								<div class="star-rating star-25-box flex-row-left-center">
 									<img id="1" src="img/star.png" alt="" /> 
@@ -474,22 +578,25 @@
                             <div>
                             	<div id="slider-range-one" class="input-w-250"></div>
                             </div>
-                            <div><input type="text" class="price-slider-tree" id="input-w-20" value="2">일</div>
                             <div>
-                                2019.06.22
+                                <span id="filter-minMeetDate">2</span>
+                            </div>
+                            <div class="flex-row-center-center">
+                            	<div>
+                            		<input type="text" class="input-w-40" id="hour">
+                            	</div>
+                            	:
+                            	<div>
+                            		<input type="text" class="input-w-40" id="min">
+                            	</div>
+                            	<input type="hidden" id="meetDate" name="meetDate" value="">
                             </div>
                         </div>
                         <div class="PostWrite-row2-right flex-row-right-center">
                             <div>분위기</div>
-                            <div>
-                                <input type="radio">무관
-                            </div>
-                            <div>
-                                <input type="radio">진지한
-                            </div>
-                            <div>
-                                <input type="radio">가벼운
-                            </div>
+                            <div class="radio-div"><input type="radio" id="moodId1" name="moodName" value="MI00001" checked><label for="moodId1">무관</label></div>
+                            <div class="radio-div"><input type="radio" id="moodId2" name="moodName" value="MI00002"> <label for="moodId2">진지한</label></div>
+	                        <div class="radio-div"><input type="radio" id="moodId3" name="moodName" value="MI00003"> <label for="moodId3">가벼운</label></div>
                         </div>
                     </div>
 
@@ -530,7 +637,7 @@
 				    </div>
 			      </div>
 			      <div class="modal-footer">
-			      	<button type="button" class="btn btn-primary">모임 개설</button>
+			      	<button type="button" class="btn btn-primary" id="postWriteEvent" >모임 개설</button>
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>

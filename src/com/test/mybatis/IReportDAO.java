@@ -12,4 +12,6 @@ public interface IReportDAO
 	public int reportreplyinsert(ReportDTO reportDTO);
 	public int joindelcheckinsert(ReportDTO reportDTO);
 	public int postdelte(ReportDTO reportDTO);
+	public int serchreportjoin(String joinId);
+	public int serchreportreply(String reply);
 }
