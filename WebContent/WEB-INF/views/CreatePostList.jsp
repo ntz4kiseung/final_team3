@@ -50,10 +50,11 @@ $(document).ready(function()
 	});
 	 
 	 jQuery.ajaxSettings.traditional = true;
-	 
+	 // 후기 남기기
 	 $(".btn-review").click(function(){
 		 //console.log($(this).val());
 		 var review = $(this).val();
+		 //debugger;
 		 $("#postId").val($(this).val())
 		 
 		 $.ajax({
@@ -109,6 +110,24 @@ $(document).ready(function()
 			}
 	     });
 	 });
+	 
+	 // 후기 조회
+	 $(".btn-inquiry").click(function()
+	{
+		 var inquiry = $(this).val();
+		 console.log(inquiry);
+		 
+		 $.ajax({
+	         url : "<%=cp %>/hostInquiry.action",
+	         type : "post",
+	         data : {'postId': inquiry},
+	     }).done(function()
+		{
+			
+		});
+		 
+	});
+	
 
 	$("#review-submit").click(function() {
 		
@@ -135,75 +154,8 @@ $(document).ready(function()
 		
 		var form = document.getElementById("sendReview");
 		
-		
-		//console.log(count);
-		//console.log(grade[0]);
-		//console.log(grade[1]);
-		//console.log(userId);
-		//console.log(badgeId);
-		//console.log(contents);
-		
 		form.submit();
-		
-		
-		//var grade = $("#grade").val();		// 등급 여러개의 후기를 받아야 한다.
-		/* 
-		var grade = $('#grade0').children('.hidden').val();		// 등급 (1~5)
-		var userId = $('#list0').find('input.hidden').val();	// 받는 유저 ID
-		var badgeId = $("#badgePointId0").val();				// 뱃지 ID
-		var contents = $("#contents0").val();					// 내용
-		 */
-		
-		/*  
-		var ajaxTest = document.getElementById("ajaxTest");
-		
-		var count = ajaxTest.childElementCount;
-		
-		var list = "";
-		
-		for (var i = 0; i < count; i++)
-		{
-			list += $('#grade'+i).children('.hidden').val();	
-			list += ',';
-			list += $('#list'+i).find('input.hidden').val();	
-			list += ',';
-			list += $("#badgePointId"+i).val();		
-			list += ',';
-			list += $("#contents"+i).val();	
-			list += ',';
-		}
-		 */
-		 
-		
-		
-		/* 
-		for (var i = 0; i < reviewList.length(); i++)
-		{
-			console.log(reviewList[i]);
-		}
-		 */
-		
-		/*
-		var contents = $("#contents").val();
-		var grade = new Array();
-		
-		$("input[name=grade]").each(function(index, item){
-			grade.push($(item).val());
-		   });
-		 */
-		
-		
-		//console.log(postId);
-		//console.log(grade);
-		//console.log(userId);
-		//console.log(badgeId);
-		//console.log(contents);
-		
-		//alert(grade);
-		//alert(postId);
-		
-		//alert(contents);
-		//console.log(grade);
+
 	});
 	
 	 $(document).on("click",".select",function(){
@@ -451,28 +403,28 @@ function selectBadge(url,click_id)
                                              <!-- 1(모집중), 2(만남확정), 3(만남실패), 4(후기남기기), 5(후기조회) -->
                                            <c:choose>
                                             	<c:when test="${list.postStatus eq '1'}">
-                                            	<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">모집중</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="1">
+                                            	<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">모집중</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="1">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '2'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남확정</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="2">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남확정</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="2">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '3'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남실패</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="3">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남실패</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="3">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '4'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기남기기</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="4">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기남기기</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="4">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '5'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기조회</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="5">
+												<button data-toggle="modal" data-target="#inquiryModal" value="${list.postId }" class="btn btn-outline-orange btn-120-35 mybtn btn-inquiry">후기조회</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="5">
 												</c:when>
 												
 												<c:otherwise>
@@ -540,6 +492,37 @@ function selectBadge(url,click_id)
 		  </div>
 		</div>
 		</form>
+		
+		<!-- Modal -->
+		<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h2 class="modal-title" id="exampleModalLabel">후기 조회</h2>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <div>
+					<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px;">
+						<div class="flex-review-first" >유저</div>
+						<div class="flex-review-second">평점</div>
+						<div class="flex-review-third">뱃지 포인트</div>
+						<div class="flex-review-fourth">코멘트</div>
+					</div>
+				</div>
+						
+						<div id="A" style="overflow:auto; height: 50vh;">
+							
+						</div>
+						
+		      </div>
+		      <div class="modal-footer flex-review">
+		        <button type="button" data-dismiss="modal" class="btn btn-orange flex-col-center-center btn-160-45">후기 닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
 		
 		
 		

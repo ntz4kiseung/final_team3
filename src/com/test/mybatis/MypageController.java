@@ -45,18 +45,7 @@ public class MypageController
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
 		
-		ArrayList<PostDTO> postIdlist = dao2.searchPostIdList(userId);
 		ArrayList<PostDTO> myReviewList = dao2.myReviewList(userId);
-		
-		
-		
-//		for (int i = 0; i < postIdlist.size(); i++)
-//		{
-//			myReviewList.get(i).setPostStatus(dao2.postlistCheck(userId, postIdlist.get(i).getPostId()));
-//		}
-		
-		
-		
 		
 		model.addAttribute("myPageList",dao1.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));
@@ -149,8 +138,18 @@ public class MypageController
 		 
 		 
 		 
+		 
 		for (int i = 0; i < grade.length; i++)
 		{
+			String reviewId = dao.getNextReviewId();
+			
+			//System.out.println("reviewId : " + reviewId);
+			//System.out.println("hostId : " + hostId);
+			System.out.println("postId : " + postId);
+			System.out.println("grade : " + grade[i]);
+			System.out.println("userId : "+ userId[i]);
+			System.out.println("badgeId : " + badgeId[i]);
+			System.out.println("contents : " + contents[i]);
 			
 			dao.reviewInsertMain(postId,hostId,grade[i],userId[i]);
 			
@@ -158,8 +157,9 @@ public class MypageController
 			if (!badgeId[i].equals("nonSelect") || !contents[i].equals(""))
 			{
 				System.out.println("뱃지선택 or 코멘트 작성");
-				dao.reviewInsertSub(badgeId[i],contents[i]);
+				dao.reviewInsertSub(badgeId[i],contents[i],reviewId);
 			}
+			
 		}
 		return "redirect:createpostlist.action";
 	 }
