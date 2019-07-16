@@ -41,7 +41,14 @@ public class LogInController
 		session.setAttribute("userId", user.getUserId());
 		System.out.println(user.getUserId());
 		
-		return "redirect:myprofile.action";
+		return "redirect: main.action";
+	}
+	
+	@RequestMapping(value="/logout.action", method=RequestMethod.GET)
+	public String logOut(HttpSession session)
+	{
+		session.removeAttribute("userId");
+		return "redirect: main.action";
 	}
 
 }

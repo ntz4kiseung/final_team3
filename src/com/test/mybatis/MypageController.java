@@ -45,18 +45,7 @@ public class MypageController
 		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
 		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
 		
-		ArrayList<PostDTO> postIdlist = dao2.searchPostIdList(userId);
 		ArrayList<PostDTO> myReviewList = dao2.myReviewList(userId);
-		
-		
-		
-//		for (int i = 0; i < postIdlist.size(); i++)
-//		{
-//			myReviewList.get(i).setPostStatus(dao2.postlistCheck(userId, postIdlist.get(i).getPostId()));
-//		}
-		
-		
-		
 		
 		model.addAttribute("myPageList",dao1.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));

@@ -1,5 +1,50 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+/* slider */
+.ui-widget-header {
+    border: 1px solid #dddddd;
+    background: rgb(252,170,10);
+    color: #333333;
+    font-weight: bold;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border-radius: 50%;
+    /* border: 1px solid #c5c5c5; */
+    background: rgb(255,170,10);
+    font-weight: normal;
+    color: #454545;
+}
+.ui-widget-content {
+ /*    border: 1px solid #dddddd; */
+    background: rgba(255,170,10,0.2);
+    color: #333333;
+}
+.ui-widget.ui-widget-content {
+    border: none;
+}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border: none;
+}
+.ui-slider-horizontal {
+    height: 6px;
+}
+.ui-slider-horizontal .ui-slider-range {
+    top: 25%;
+    height: 40%;
+}
+.ui-slider-horizontal .ui-slider-handle {
+    top: -.2em;
+    margin-left: -.6em;
+}
+.ui-slider .ui-slider-handle {
+    position: absolute;
+    z-index: 2;
+    width: 12px;
+    height: 12px;
+    cursor: default;
+    -ms-touch-action: none;
+    touch-action: none;
+}
 /* *************************************** */
 .grayscale{
 	filter: grayscale(100%);
@@ -194,6 +239,11 @@ input:read-only {
 
 /* 크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼   */
 /* 크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼  크기 고정 박스, 버튼   */
+#input-w-60 {
+    width: 60px;
+    background-color: white;
+    border: none;
+}
 .input-245-40{
     width: 245px;
     height: 40px;

@@ -36,7 +36,7 @@
                     <a href="login.action"><button class="btn btn-border-right">로그인</button></a>
                 </div>
                 <div>
-                    <a href="notice.action"><button class="btn btn-border-right">고객센터</button></a>
+                    <a href="notice.action"><button class="btn">고객센터</button></a>
                 </div>
             </div> 
             
@@ -50,7 +50,10 @@
                     <a href="myprofile.action"><button class="btn btn-border-right">${userId}</button></a>
                 </div>
                 <div>
-                    <a href="notice.action"><button class="btn btn-border-right">고객센터</button></a>
+                    <a href="notice.action"><button class="btn ">고객센터</button></a>
+                </div>
+                <div>
+                    <a href="logout.action"><button class="btn btn-border-left">로그아웃</button></a>
                 </div>
             </div>     
         </div>

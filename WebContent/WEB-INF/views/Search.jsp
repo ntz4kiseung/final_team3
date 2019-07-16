@@ -17,6 +17,12 @@
    	<script src="js/bootstrap-4.3.1.min.js"></script>
     <!-- 폰트 (Noto Snas KR + Handlee) -->
     <link href="css/sagyo-font.css" rel="stylesheet">
+    
+    <!-- Slider -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <!-- sagyo.css, sagyo.js -->
     <link href="css/sagyo.css" rel="stylesheet">
 	
@@ -266,13 +272,49 @@
 	  border: 1.5px solid rgba(255,170,10);
 	  padding: 2px 2px 2px 2px;
 	}
+	
+	.slider-range-box{
+		width: 275px;
+	}
    </style>
 
    <script>
    	   var pageNum = 1;
-   	   
+   	   var js = jQuery.noConflict();
+
    	   
        $(document).ready(function(){
+    	   
+    	   
+			js( "#slider-range" ).slider({
+		      range: true,
+		      min: 2,
+		      max: 20,
+		      values: [ 2, 20 ],
+		      slide: function( event, ui ) {
+		    	  js(this).next().val(ui.values[ 0 ]);
+		    	  js(this).next().next().val(ui.values[ 1 ]);
+		    	  js("#filter-minNum").text(ui.values[ 0 ]);
+		    	  js("#filter-maxNum").text(ui.values[ 1 ]);
+		      }
+		    });
+			
+			// 필터에 있는 만남일 초기값은 현재일에 따라 바뀌어야 함
+			js("#filter-minMeetDate").text(sysdateToString(2));
+	    	js("#filter-maxMeetDate").text(sysdateToString(10));
+			js( "#slider-range2" ).slider({
+			      range: true,
+			      min: 2,
+			      max: 10,
+			      values: [ 2, 10 ],
+			      slide: function( event, ui ) {
+			    	  js(this).next().val(sysdateToString(ui.values[ 0 ]));
+			    	  js(this).next().next().val(sysdateToString(ui.values[ 1 ]));
+			    	  js("#filter-minMeetDate").text(sysdateToString(ui.values[ 0 ]));
+			    	  js("#filter-maxMeetDate").text(sysdateToString(ui.values[ 1 ]));
+			      }
+			    });
+    		
     	   
     	// Search.jsp 진입시 → setSearchCookies : 전에 있던 Search용 쿠키 값 비워주고 기본 값들로 채워줌
     	setSearchCookies();
@@ -445,6 +487,12 @@
            		return false;
            	})
            	
+           	function sysdateToString(day){
+           		var date = new Date();
+           		date.setDate(date.getDate()+day);
+           		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+           		return result;
+           	}
            	function defaultMinMeetDate(){
            		var date = new Date();
            		date.setDate(date.getDate()+2);
@@ -631,7 +679,7 @@
                 <div class="Search flex-item-grow flex-col-center-up">
                     <!-- 맨 위 -->
                     <div class="Main-navbar flex-row-left-center">
-                        통합검색&nbsp;&nbsp;&nbsp;<span>검색 키워드와 개설자의 신뢰도를 바탕으로 추천했습니다. 회원가입 후 더 상세한 추천을 받을 수 있습니다.</span>
+                       통합검색&nbsp;&nbsp;&nbsp;<span>검색 키워드와 개설자의 신뢰도를 바탕으로 추천했습니다. 회원가입 후 더 상세한 추천을 받을 수 있습니다.</span>
                     </div>
 
                     <!-- 필터창 -->
@@ -722,15 +770,25 @@
                                             <div class="filter-attribute">
                                                 <div>인원수</div>
                                                 <div class="flex-row-left-center">
-                                                    <input type="text" name="minNum" value="2" />임시
-                                                    <input type="text" name="maxNum"  value="19" />인원수
+                                                	<div class="slider-range-box">
+	                                                	<div id="slider-range" class=" input-w-250"></div>
+	                                                	<input type="text" name="minNum" class="price-slider-one hidden" value="2">
+               	                            			<input type="text" name="maxNum" class="price-slider-two hidden" value="20">
+                                                	</div>
+                                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<span id="filter-minNum">2</span>&nbsp;~&nbsp;<span id="filter-maxNum">20</span>&nbsp;명
                                                 </div>
                                             </div>
                                             <div class="filter-attribute">
                                                 <div>만남일</div>
-                                                <div>
-                                                    <input type="text" name="minMeetDate" value="2019-07-12" />임시
-                                                    <input type="text" name="maxMeetDate"  value="2019-07-20" />만남일
+                                                <div class="flex-row-left-center">
+                                                	<div class="slider-range-box">
+	                                                	<div id="slider-range2" class=" input-w-250"></div>
+	                                                	<input type="text" name="minMeetDate" class="price-slider-one hidden"value="2">
+               	                            			<input type="text" name="maxMeetDate" class="price-slider-two hidden"value="20">
+                                                	</div>
+                                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<span id="filter-minMeetDate">2</span>&nbsp;~&nbsp;<span id="filter-maxMeetDate">20</span>&nbsp;
 												</div>
                                             </div>
                                             <div class="flex-row-left-center">

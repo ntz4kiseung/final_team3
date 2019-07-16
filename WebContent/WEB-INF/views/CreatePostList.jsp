@@ -55,7 +55,7 @@ $(document).ready(function()
 		 //console.log($(this).val());
 		 var review = $(this).val();
 		 $("#postId").val($(this).val())
-		 
+		 debugger;
 		 $.ajax({
 	         url : "<%=cp %>/hostReview.action",
 	         type : "get",
@@ -451,28 +451,28 @@ function selectBadge(url,click_id)
                                              <!-- 1(모집중), 2(만남확정), 3(만남실패), 4(후기남기기), 5(후기조회) -->
                                            <c:choose>
                                             	<c:when test="${list.postStatus eq '1'}">
-                                            	<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">모집중</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="1">
+                                            	<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">모집중</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="1">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '2'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남확정</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="2">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남확정</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="2">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '3'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남실패</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="3">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-secondary btn-120-35 mybtn btn-review" disabled="disabled">만남실패</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="3">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '4'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기남기기</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="4">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기남기기</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="4">
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '5'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.userId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기조회</button>
-                                                <input type="hidden" id="review-action${list.userId }" name="review-action${list.userId }" class="review" value="5">
+												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기조회</button>
+                                                <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="5">
 												</c:when>
 												
 												<c:otherwise>
