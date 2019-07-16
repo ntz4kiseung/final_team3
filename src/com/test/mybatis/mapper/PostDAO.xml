@@ -171,7 +171,7 @@
 					WHERE E.USERID = #{userId}
 			        ORDER BY MEETDATE DESC
 		)
-		<![CDATA[ WHERE NUM>=1 AND NUM <=6 ]]>
+		<!-- <![CDATA[ WHERE NUM>=1 AND NUM <=6 ]]> -->
 	</select>
 	
 	<select id="reviewList" resultType="com.test.mybatis.PostDTO">
@@ -235,15 +235,7 @@
 		ORDER BY NUM
 	</select>
 	
-	<!-- 	<select id="searchPostIdList" resultType="com.test.mybatis.PostDTO">
-		SELECT *
-		FROM
-		(SELECT R.REVIEWID, R.POSTID, R.GIVEUSERID, R.TAKEUSERID, R.GRADE, R.REVIEWDATE, RS.CONTENTS, RS.BADGEPOINTID
-		FROM REVIEW R, REVIEW_SUB RS
-		WHERE RS.REVIEWID(+) = R.REVIEWID
-		ORDER BY REVIEWID)
-		WHERE POSTID = 'PT00008' AND TAKEUSERID = 'EDROSINK'
-	</select> -->
+	
 	
 	<!-- 조현우 제작 -->
 	<select id="searchPostIdList" resultType="com.test.mybatis.PostDTO">
@@ -257,4 +249,5 @@
 		FROM DUAL
 	</select>
 	
+
 </mapper>

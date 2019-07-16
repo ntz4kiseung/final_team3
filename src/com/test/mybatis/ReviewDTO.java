@@ -2,77 +2,75 @@ package com.test.mybatis;
 
 public class ReviewDTO
 {
-	private String userId, userName, url, grade, badgePointId, host, contents;
-
-	public String getUserId()
-	{
+	private String userId, userName, userurl, grade, badgePointId, badgePointName, takeurl, contents;
+	private String giveuserId, giveuserName, giveuserUrl;
+	public String getUserId() {
 		return userId;
 	}
-
-	public void setUserId(String userId)
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	public String getUserName()
-	{
+	public String getUserName() {
 		return userName;
 	}
-
-	public void setUserName(String userName)
-	{
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
-	public String getUrl()
-	{
-		return url;
+	public String getUserurl() {
+		return userurl;
 	}
-
-	public void setUrl(String url)
-	{
-		this.url = url;
+	public void setUserurl(String userurl) {
+		this.userurl = userurl;
 	}
-
-	public String getGrade()
-	{
+	public String getGrade() {
 		return grade;
 	}
-
-	public void setGrade(String grade)
-	{
+	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-
-	public String getBadgePointId()
-	{
+	public String getBadgePointId() {
 		return badgePointId;
 	}
-
-	public void setBadgePointId(String badgePointId)
-	{
+	public void setBadgePointId(String badgePointId) {
 		this.badgePointId = badgePointId;
 	}
-
-	public String getHost()
-	{
-		return host;
+	public String getBadgePointName() {
+		return badgePointName;
 	}
-
-	public void setHost(String host)
-	{
-		this.host = host;
+	public void setBadgePointName(String badgePointName) {
+		this.badgePointName = badgePointName;
 	}
-
-	public String getContents()
-	{
+	public String getTakeurl() {
+		return takeurl;
+	}
+	public void setTakeurl(String takeurl) {
+		this.takeurl = takeurl;
+	}
+	public String getContents() {
 		return contents;
 	}
-
-	public void setContents(String contents)
-	{
+	public void setContents(String contents) {
 		this.contents = contents;
 	}
-	
-	
+	public String getGiveuserId() {
+		return giveuserId;
+	}
+	public void setGiveuserId(String giveuserId) {
+		this.giveuserId = giveuserId;
+	}
+	public String getGiveuserName() {
+		return giveuserName;
+	}
+	public void setGiveuserName(String giveuserName) {
+		this.giveuserName = giveuserName;
+	}
+	public String getGiveuserUrl() {
+		return giveuserUrl;
+	}
+	public void setGiveuserUrl(String giveuserUrl) {
+		this.giveuserUrl = giveuserUrl;
+	}
+
+
+
 }

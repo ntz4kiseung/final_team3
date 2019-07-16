@@ -21,7 +21,7 @@ public interface IPostDAO
 	// 조현우 제작
 	public ArrayList<PostDTO> searchPostIdList(String userId);
 	public int postlistCheck(@Param("userId")String userId, @Param("postId")String postId);
-	public int endReviewView(@Param("userId")String userId, @Param("postId")String postId);
+	
 	
 	
 }

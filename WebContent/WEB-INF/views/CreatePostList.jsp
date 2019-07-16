@@ -22,6 +22,17 @@
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 <!-- 추가한거 -->
 <script type="text/javascript">
 $(document).ready(function()
@@ -47,9 +58,7 @@ $(document).ready(function()
 	 jQuery.ajaxSettings.traditional = true;
 	 // 후기 남기기
 	 $(".btn-review").click(function(){
-		 //console.log($(this).val());
 		 var postId = $(this).val();
-		 //debugger;
 		 $("#postId").val($(this).val())
 		 debugger;
 		 $.ajax({
@@ -63,6 +72,26 @@ $(document).ready(function()
 			 }
 	     });
 	 });
+
+	 
+	 // 후기 조회
+	 $(".btn-inquiry").click(function()
+	 {
+		 var inquiry = $(this).val();
+		 console.log(inquiry);
+		 
+		 $.ajax({
+	         url : "<%=cp %>/hostInquiry.action",
+	         type : "post",
+	         data : {'postId': inquiry},
+	     }).done(function(result)
+		 {
+	    	 $("#A").empty();
+             $("#A").append(result);
+		 });
+		 
+	 });
+	
 
 	$("#review-submit").click(function() {
 		var postId = $("#postId").val();		// 방 번호

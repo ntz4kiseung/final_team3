@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -97,8 +98,6 @@ public class MypageController
 	 public String myReviewInsert(HttpServletRequest request, HttpSession session)
 	 {
 		 String hostId = (String) session.getAttribute("userId");		// 평가한 유저 아이디
-		 
-		 
 		 IReviewDAO dao = sqlSession.getMapper(IReviewDAO.class);
 		 
 		 String postId = request.getParameter("postId");				// 방 번호
@@ -220,7 +219,19 @@ public class MypageController
 		return "/WEB-INF/views/JoinPostList.jsp";
 	}
 	
-	
+	@RequestMapping(value="/hostInquiry.action", method = RequestMethod.POST)
+	public String reviewHostInquiry(String postId, ModelMap model, HttpSession session)
+	{
+		
+		IReviewDAO review = sqlSession.getMapper(IReviewDAO.class);
+		String userId = (String) session.getAttribute("userId");	
+		
+		model.addAttribute("list", review.inquryView(userId, postId));
+		
 
-	
+		System.out.println("123:"+postId + userId);
+		
+		return "/WEB-INF/views/HostInquiryAjax.jsp";
+		
+	}
 }
