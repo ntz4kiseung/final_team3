@@ -30,6 +30,13 @@ public class BadgeController
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
 		model.addAttribute("BadgeList1",dao.BadgeList1());
+		model.addAttribute("BadgeList1_count",dao.BadgeList1_count());
+		model.addAttribute("BadgeList1_date",dao.BadgeList1_date());
+		
+
+		model.addAttribute("PointList",dao.PointList());
+		
+		
 		model.addAttribute("BadgeList2",dao.BadgeList2());
 		model.addAttribute("BadgeList3",dao.BadgeList3());
 		model.addAttribute("BadgeList4",dao.BadgeList4());
@@ -38,6 +45,8 @@ public class BadgeController
 		model.addAttribute("myPageList", dao2.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));
+		
+		
 		return "WEB-INF/views/MyBadge.jsp";
 	}
 	

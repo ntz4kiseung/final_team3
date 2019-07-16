@@ -5,7 +5,35 @@ public class PointLogDTO
 	private String reviewDate,expirationDate, reviewDate1, title1, reviewDate2, title2, reviewDate3, title3, reviewDate4, title4, reviewDate5, title5;
 	private int pointCount;
 	
+	private String takeUserId,giveUserId,BadgePointId;
 	
+	
+	
+	
+	public String getTakeUserId()
+	{
+		return takeUserId;
+	}
+	public void setTakeUserId(String takeUserId)
+	{
+		this.takeUserId = takeUserId;
+	}
+	public String getGiveUserId()
+	{
+		return giveUserId;
+	}
+	public void setGiveUserId(String giveUserId)
+	{
+		this.giveUserId = giveUserId;
+	}
+	public String getBadgePointId()
+	{
+		return BadgePointId;
+	}
+	public void setBadgePointId(String badgePointId)
+	{
+		BadgePointId = badgePointId;
+	}
 	public String getReviewDate()
 	{
 		return reviewDate;

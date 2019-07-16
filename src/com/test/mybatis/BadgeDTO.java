@@ -7,7 +7,20 @@ public class BadgeDTO
 	
 	//선아 DTO 추가 
 	private int badgeCk;
-	private String badgeLogId;
+	private String badgeLogId, badgeDate;
+
+	
+	
+
+	public String getBadgeDate()
+	{
+		return badgeDate;
+	}
+
+	public void setBadgeDate(String badgeDate)
+	{
+		this.badgeDate = badgeDate;
+	}
 
 	public String getBadgeLogId()
 	{
