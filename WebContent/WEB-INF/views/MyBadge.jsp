@@ -256,18 +256,88 @@
                                                  <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
                                                        				    ${List.badgeCk==1 ? "" : "disabled='disabled'" } value="${List.badgeLogId }">대표뱃지 설정</button>
                                                   </div>
-                                                 
                                              </div>
                                              <div class="flex-col-left-center" style="padding-left: 20px;">
                                                  <div class="MyBadge-header-nickname">${List.badgePointName }</div>
-                                                 <!--  <div class="MyBadge-header-detail">뱃지 포인트 : <progress value="5" max="10"></progress></div>
-                                                 -->  
-                                                  <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="15" style="width: 40%" >
-                     60%
-                        </div>
-                                                 <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
-                                                 <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
-                                             </div>
+                                                 
+                                                 
+                                                <!-- 진행 바 --> 
+				                           		 <c:choose>
+													<c:when test="${List.badgePointId eq 'BP00011' }">
+													</c:when>
+														
+													<c:otherwise>
+													
+					                           			 <c:choose>
+															<c:when test="${List.badgePointId eq 'BP00012' }">
+															<progress value="${BadgeList1_count }" max="15" style="width: 230px;"></progress>
+															</c:when>
+															<c:when test="${List.badgePointId eq 'BP00013' }">
+															<progress value="${BadgeList1_count }" max="30" style="width: 230px;"></progress>
+															</c:when>
+															<c:when test="${List.badgePointId eq 'BP00014' }">
+															<progress value="${BadgeList1_count }" max="50" style="width: 230px;"></progress>
+															</c:when>
+														</c:choose>
+					                           		
+					                           		</c:otherwise>
+												</c:choose>
+											
+				      						  <!-- 뱃지 설명  -->
+				                           		<c:choose>
+													
+													<c:when test="${List.badgeCk == 1}">
+														<c:set var="badge" value="${List.badgePointId}" />
+														
+													   <c:if test="${badge eq 'BP00011'}">
+													     <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>	
+													   </c:if>
+													
+													   <c:if test="${badge eq 'BP00012'}">
+														  <br>
+													      <div class="MyBadge-header-detail">sayyo 이용 15회 달성!</div>	
+													   </c:if>
+													   
+													    <c:if test="${badge eq 'BP00013'}">
+														  <br>
+													      <div class="MyBadge-header-detail">sayyo 이용 30회 달성!</div>	
+													   </c:if>
+													   
+													    <c:if test="${badge eq 'BP00014'}">
+														  <br>
+													      <div class="MyBadge-header-detail">sayyo 이용 50회 달성!</div>	
+													   </c:if>
+													</c:when>
+													
+													<c:when test="${List.badgeCk == 0}">
+													   <c:set var="badge" value="${List.badgePointId}" />
+													   <c:if test="${badge eq 'BP00012'}">
+														  <br>
+													      <div class="MyBadge-header-detail">${15-BadgeList1_count }회 더 이용시 일반 참석러 획득!</div>	
+													   </c:if>
+													    <c:if test="${badge eq 'BP00013'}">
+														  <br>
+													      <div class="MyBadge-header-detail">${30-BadgeList1_count }회 더 이용시 우수 참석러 획득!</div>	
+													   </c:if>
+													    <c:if test="${badge eq 'BP00014'}">
+														  <br>
+													        <div class="MyBadge-header-detail">${50-BadgeList1_count }회 더 이용시 프로 참석러 획득!</div>	
+													   </c:if>
+													</c:when>
+												</c:choose>
+										
+                                   				<!-- 뱃지 획득일 -->
+												<c:choose >
+													<c:when test="${List.badgePointId eq 'BP00011' }">
+													  <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일 : <div>${myPageList[status.index].registerDate} </div> </div>
+													</c:when>
+							
+													<c:otherwise>
+														<div class="MyBadge-header-detail flex-row-center-center">뱃지획득일 : <div>${BadgeList1_date[status.index ].badgeDate} </div></div> 
+													</c:otherwise>
+												</c:choose>
+                                                 
+                                            
                                           </div>
                                            </div>     
                                     </div>
@@ -312,8 +382,38 @@
                                                         <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
                                                        <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
                                                    </div>
+                                                   
+                                                   <hr>
                                                 </div>
-                                                 </div>     
+                                                
+                                                 </div>  
+                                                 <hr>
+                                                 <div class="flex-col-left-center" style="padding-left: 20px;">
+                                                 	최근 뱃지 포인트 내역
+                                                       <c:when test="${List.badgeCk == 1}">
+														<c:set var="badge" value="${List.badgePointId}" />
+														
+													   <c:if test="${badge eq 'BP00001'}">
+													    11
+													   </c:if>
+													
+													   <c:if test="${badge eq 'BP00002'}">
+															22
+													   </c:if>
+													   
+													    <c:if test="${badge eq 'BP00003'}">33
+														 </c:if>
+													   
+													    <c:if test="${badge eq 'BP00004'}">44
+														</c:if>
+													</c:when>
+                                                       
+                                                       
+                                                       <div class="">뱃지 포인트 </div>
+                                                       <div class="">뱃지 포인트 </div>
+                                                       <div class="">뱃지 포인트 </div>
+                                                       <div class="">뱃지 포인트 </div>
+                                                   </div>   
                                           </div>
                                        </div>                     
                                     </div>   

@@ -7,6 +7,19 @@ public class UserDTO
 	private int postStatus;
 	private double reviewGrade;
 	
+	//선아추가
+	private String registerDate;
+
+	
+	
+	public String getRegisterDate()
+	{
+		return registerDate;
+	}
+	public void setRegisterDate(String registerDate)
+	{
+		this.registerDate = registerDate;
+	}
 	public String getUserId()
 	{
 		return userId;
