@@ -11,19 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>개설모임</title>
-    <!-- 부트스트랩 -->
-	<!--  
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	 -->   
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
-   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     
+    <!-- 부트스트랩(bootstrap css, jquery, popper.js, bootstrap js 필요) -->
+    <link href="css/bootstrap-4.3.1.min.css" rel="stylesheet">
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/popper-1.14.7.min.js"></script>
+   	<script src="js/bootstrap-4.3.1.min.js"></script>
     <!-- 폰트 (Noto Snas KR + Handlee) -->
-    <link href="https://fonts.googleapis.com/css?family=Handlee|Noto+Sans+KR&display=swap" rel="stylesheet">
+    <link href="css/sagyo-font.css" rel="stylesheet">
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
     
@@ -50,70 +45,26 @@ $(document).ready(function()
 	});
 	 
 	 jQuery.ajaxSettings.traditional = true;
-	 
+	 // 후기 남기기
 	 $(".btn-review").click(function(){
 		 //console.log($(this).val());
-		 var review = $(this).val();
+		 var postId = $(this).val();
+		 //debugger;
 		 $("#postId").val($(this).val())
 		 debugger;
 		 $.ajax({
 	         url : "<%=cp %>/hostReview.action",
 	         type : "get",
-	         data : {'postId': review},
-	         success: function(data)
-			{
-				console.log(data);
-				
-				reviewRes = data;
-				
-				reviewResult = reviewRes.split(',');
-				str = '';
-				for (var i = 0; i < Math.floor(reviewResult.length/3); i++)
-                {
-					str += '							<div class="review-post flex-review" id="list'+i+'">';
-					str += '								<div id="repBadge" class="flex-review-first" style="text-align: center;">';
-					str += '									<div class="PostList-post-badge">';
-					str += '                                    	<img src="' + reviewResult[1+i*3] + '" alt="">';
-					str += '                               	 	</div>';
-					str += reviewResult[2+i*3];
-					str += '								<input class="hidden" value="' + reviewResult[0+i*3] + '" name="userId"/>';
-					str += '								</div>';
-					str += '								<div class="flex-review-second" style="text-align: center;">';
-					str += '									<div>';
-					str += '										<div class="star-rating star-25-box flex-row-left-center" id="grade'+i+'">';
-					str += '											<img class="" id="1" src="img/star.png" alt=""/>';
-					str += '											<img class="" id="2"  src="img/star.png" alt="" />';
-					str += '											<img class="" id="3"  src="img/star.png" alt="" />';
-					str += '											<img class="grayscale" id="4"  src="img/star.png" alt="" />';
-					str += '											<img class="grayscale" id="5"  src="img/star.png" alt="" />';
-					str += '											<input class="hidden" type="text" id="grade" name="grade" value="3" />';
-					str += '										</div>';
-					str += '	                           		</div>';
-					str += '                           		</div>';
-					str += '                           		<div class="flex-review-third" style="text-align: center;" >';
-					str += '                           			<div class="PostList-post-badge">';
-					str += '                           					<button type="button" class="pointSelect" value="'+i+'" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-container="body">';
-					str += '                                              	<img class="select" name="select" id="selectPoint'+i+'" name="image" src="img/Logo_NoBorder.png" value="badgeSelect" alt="포인트선택">';
-					str += '                                              	<input type="hidden" value="nonSelect" class="hidden" id="badgePointId'+i+'" name="badgeId">';
-					str += '                                            </button>';
-					str += '                               	 	</div>';
-					str += '                           		</div>';
-					str += '                           		<div class="flex-review-fourth">';
-					str += '                           			<textarea class="form-control" id="contents'+i+'" name="contents"></textarea>';
-					str += '                           		</div>';
-					str += '							</div>';
-                }
-				
-				$("#ajaxTest").empty();
-                $("#ajaxTest").append(str);
-			}
+	         data : {'postId': postId},
+	         success: function(result)
+			 {
+				$("#reviewList").empty();
+                $("#reviewList").append(result);
+			 }
 	     });
 	 });
 
 	$("#review-submit").click(function() {
-		
-		debugger;
-		
 		var postId = $("#postId").val();		// 방 번호
 		
 		grade = new Array();
@@ -121,9 +72,9 @@ $(document).ready(function()
 		badgeId = new Array();
 		contents = new Array();
 		
-		var ajaxTest = document.getElementById("ajaxTest");
+		var reviewList = document.getElementById("reviewList");
 		
-		var count = ajaxTest.childElementCount;
+		var count = reviewList.childElementCount;
 		
 		for (var i = 0; i < count; i++)
 		{
@@ -135,75 +86,8 @@ $(document).ready(function()
 		
 		var form = document.getElementById("sendReview");
 		
-		
-		//console.log(count);
-		//console.log(grade[0]);
-		//console.log(grade[1]);
-		//console.log(userId);
-		//console.log(badgeId);
-		//console.log(contents);
-		
 		form.submit();
-		
-		
-		//var grade = $("#grade").val();		// 등급 여러개의 후기를 받아야 한다.
-		/* 
-		var grade = $('#grade0').children('.hidden').val();		// 등급 (1~5)
-		var userId = $('#list0').find('input.hidden').val();	// 받는 유저 ID
-		var badgeId = $("#badgePointId0").val();				// 뱃지 ID
-		var contents = $("#contents0").val();					// 내용
-		 */
-		
-		/*  
-		var ajaxTest = document.getElementById("ajaxTest");
-		
-		var count = ajaxTest.childElementCount;
-		
-		var list = "";
-		
-		for (var i = 0; i < count; i++)
-		{
-			list += $('#grade'+i).children('.hidden').val();	
-			list += ',';
-			list += $('#list'+i).find('input.hidden').val();	
-			list += ',';
-			list += $("#badgePointId"+i).val();		
-			list += ',';
-			list += $("#contents"+i).val();	
-			list += ',';
-		}
-		 */
-		 
-		
-		
-		/* 
-		for (var i = 0; i < reviewList.length(); i++)
-		{
-			console.log(reviewList[i]);
-		}
-		 */
-		
-		/*
-		var contents = $("#contents").val();
-		var grade = new Array();
-		
-		$("input[name=grade]").each(function(index, item){
-			grade.push($(item).val());
-		   });
-		 */
-		
-		
-		//console.log(postId);
-		//console.log(grade);
-		//console.log(userId);
-		//console.log(badgeId);
-		//console.log(contents);
-		
-		//alert(grade);
-		//alert(postId);
-		
-		//alert(contents);
-		//console.log(grade);
+
 	});
 	
 	 $(document).on("click",".select",function(){
@@ -258,24 +142,11 @@ $(document).ready(function()
 		
 	} )	
 });
-/* 
-function selectBadge(url,click_id)
-{
-	console.log(url);		// 이미지 url
-	console.log(click_id);	// 이미지 코드번호
-	//selectPoint.src = url;
-	
- 	var changeBadge = document.getElementById(selectPoint);
-	var badgeId = document.getElementById("hidden");
-	changeBadge.src=url;
-	badgeId.value=click_id; 
-}
- */
 
 </script>
 <style type="text/css">
         .review-post{
-          width: 900px;
+          width: 100%;
           height: 125px;
           border-top: 2px solid rgb(220,220,220);
       }   
@@ -295,37 +166,44 @@ function selectBadge(url,click_id)
       .flex-badge{
          display : flex;
          justify-content: flex-start;
-         
+         flex-wrap: wrap;
       }
       
-      .flex-review-first{
-         flex: auto;
-         flex-grow: 0;
-         flex-basis: 15%;
-         margin: auto;
-      }
+		.flex-review-first {
+		    justify-content: center;
+		    align-items: center;
+		    flex-direction: column;
+		    display: flex;
+		    flex-basis: 15%;
+		}
       .flex-review-second{
          flex: auto;
          flex-grow: 0;
          flex-basis: 15%;
          margin: auto;
       }
-      .flex-review-third{
-         flex: auto;
-         flex-grow: 0;
-         flex-basis: 15%;
-         margin: auto;
-      }
+		.flex-review-third {
+		    flex-basis: 15%;
+		    margin: auto;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		}
       
-      .flex-review-fourth{
-         flex: auto;
-         flex-grow: 0;
-         flex-basis: 55%;
-      }
+		.flex-review-fourth {
+		    flex-basis: 55%;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		}
+		.flex-review-fourth>textarea{
+			height: 70%;
+		}
       .flex-badge-list{
-         flex:1;
-         flex-grow: 1;
-         flex-basis: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+         align-items: center;
       }
       
       .modal-content{
@@ -341,6 +219,65 @@ function selectBadge(url,click_id)
           width: 75px;
           height: 75px;
       }
+      #sendReview .modal-content{
+      	  padding: 0px 30px 0px 30px;
+      }
+      #sendReview .modal-content>div:FIRST-CHILD{
+      	 height: 70px;
+      }
+      #sendReview .modal-content>div:LAST-CHILD{
+      	 height: 80px;
+      }
+      #sendReview .modal-content>div:NTH-CHILD(2){
+      	 height: 550px;
+      }
+      #exampleModalLabel{
+    	  font-size: 24px;
+      }
+      #reviewModal{
+      	  top: 10%;
+      }
+ 	  #reviewModal>div:FIRST-CHILD{
+		    display: flex;
+		    margin: none;
+		    width: 1000px;
+		    max-width: none;
+		    justify-content: center;
+		    align-items: center; 	  
+ 	  }
+      .badge-cate-box{
+      	  width: 950px;
+      	  min-height: 180px;
+      }
+      .badge-cate-box>div:FIRST-CHILD {
+      	  display: flex;
+      	  align-items: center;
+		  height: 60px;
+		  font-size: 20px;
+		  padding-left: 15px;
+	  }
+	  .badgePoint-box{
+	  	width: 75px;
+	  	height: 75px;
+	  }
+	  .flex-badge-item{
+	  	display: flex;
+	  	justify-content: flex-start;
+	  	align-items: center;
+	  	width: 300px;
+	  	height: 120px;
+	  }
+	  .flex-badge-item>div:FIRST-CHILD {
+		width: 95px;
+		height: 100%;
+		}
+		.flex-badge-item>div:LAST-CHILD{
+			width: 205px;
+			height: 100%;
+			display:flex;
+			align-items: center;
+			padding-left: 10px;
+		}
 </style>
 
 </head>
@@ -412,14 +349,14 @@ function selectBadge(url,click_id)
                             <div><a href="#">쪽지함</a></div>
                             <div><a href="#">뱃지</a></div>
                             <div><a href="#">팔로우</a></div>
-                            <div><a href="createpostlist.action">내모임</a></div>
+                            <div><a  class="font-bold font-orange" href="createpostlist.action">내모임</a></div>
                         </div>
                         
                         
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
                             <div class="MyPage-body-header flex-row-left-center">
-                                <span><a href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;
+                                <span class="font-bold"><a href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;
                                 <span><a href="joinpostlist.action">참여모임</a></span>
                             </div>
 
@@ -433,8 +370,6 @@ function selectBadge(url,click_id)
                                                <img src="${list.url }" onerror="this.src='img/뉴비.png'">
                                             </div>
                                             <div>
-                                                <!-- nickname -->
-                                                
                                                 ${list.nickname }
                                             </div>
                                         </div>
@@ -471,7 +406,7 @@ function selectBadge(url,click_id)
 												</c:when>
 												
 												<c:when test="${list.postStatus eq '5'}">
-												<button data-toggle="modal" data-target="#reviewModal" value="${list.postId }" class="btn btn-outline-orange btn-120-35 mybtn btn-review">후기조회</button>
+												<button data-toggle="modal" data-target="#inquiryModal" value="${list.postId }" class="btn btn-outline-orange btn-120-35 mybtn btn-inquiry">후기조회</button>
                                                 <input type="hidden" id="review-action${list.postId }" name="review-action${list.postId }" class="review" value="5">
 												</c:when>
 												
@@ -507,7 +442,7 @@ function selectBadge(url,click_id)
         
         
         <!-- Modal -->
-        <form action="reviewinsert.action" method="post" role="form" id="sendReview">
+        <form action="myreviewinsert.action" method="post" role="form" id="sendReview">
 		<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
@@ -519,7 +454,7 @@ function selectBadge(url,click_id)
 		      </div>
 		      <div class="modal-body">
 		        <div>
-					<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px;">
+					<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 15px;">
 						<div class="flex-review-first" >유저</div>
 						<div class="flex-review-second">평점</div>
 						<div class="flex-review-third">뱃지 포인트</div>
@@ -527,7 +462,7 @@ function selectBadge(url,click_id)
 					</div>
 				</div>
 						
-						<div id="ajaxTest" style="overflow:auto; height: 50vh;">
+						<div id="reviewList" style="overflow:auto; height: 100%;">
 							
 						</div>
 						<input type="hidden" id="postId" name="postId" value="" />
@@ -541,88 +476,92 @@ function selectBadge(url,click_id)
 		</div>
 		</form>
 		
+		<!-- Modal -->
+		<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h2 class="modal-title" id="exampleModalLabel">후기 조회</h2>
+		      </div>
+		      <div class="modal-body">
+		        <div>
+					<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 15px;">
+						<div class="flex-review-first" >유저</div>
+						<div class="flex-review-second">평점</div>
+						<div class="flex-review-third">뱃지 포인트</div>
+						<div class="flex-review-fourth">코멘트</div>
+					</div>
+				</div>
+						
+						<div id="A" style="overflow:auto; height: 100%;">
+							
+						</div>
+						
+		      </div>
+		      <div class="modal-footer flex-review">
+		        <button type="button" data-dismiss="modal" class="btn btn-orange flex-col-center-center btn-160-45">후기 닫기</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		
 		
 		
 		<div id="badgeList" class="hidden">
 		  	 	<div class="popover-body" class="badge-post flex-col-left-up">
-		      		<div>
-		      			<div>
-		      				<h2>칭찬포인트</h2>
+		      		<div class="badge-cate-box">
+		      			<div class="badge-cate-name">
+		      				칭찬포인트
 		      			</div>
 		      			
-		      			<div class="flex-badge" style="width: 500px;">
+		      			<div class="flex-badge">
 		      			<c:forEach var="positive" items="${positiveBadge }" varStatus="status">
-			      			<div>
+			      			<div class="flex-badge-item">
 				      			<div class="flex-badge-list flex-item-grow">
-				      				<button type="button" id="${positive.url }" value="${positive.badgePointId }">
-				      				<img class="badgePoint" id="${status.count}" alt="${positive.badgePointId }" src="${positive.url }">
-				      				</button>
-				      				${positive.badgePointName }
-				      				
+				      				<div class="badgePoint-box">
+					      				<img class="badgePoint" id="${status.count}" alt="${positive.badgePointId }" src="${positive.url }">				      				
+										<input class="hidden" type="button" id="${positive.url }" value="${positive.badgePointId }" />
+				      				</div>
+				      				<div>
+					      				${positive.badgePointName }				      				
+				      				</div>
+				      			</div>
+				      			<div>
+					      			${positive.badgePointDesc2 }
 				      			</div>
 				      		</div>
-				      		${positive.badgePointDesc2 }
-				      			
+				      		
 				      	</c:forEach>
 		      			</div>
-		      			
 		      		</div>
 		      		
 		      		<hr>
 		      		
-		      		<div>
-		      			<div>
-		      				<h2>꾸중포인트</h2>
+		      		<div class="badge-cate-box">
+		      			<div class="badge-cate-name">
+		      				꾸중포인트
 		      			</div>
-		      			
-		      			<div class="flex-badge" style="width: 500px;">
+		      			<div class="flex-badge">
 		      			<c:forEach var="negative" items="${negativeBadge }">
-			      			<div>
+			      			<div class="flex-badge-item">
 				      			<div class="flex-badge-list flex-item-grow">
-				      				<button type="button" id="${negative.url }" value="${negative.badgePointId }">
-				      				<img class="badgePoint" id="${status.count}" alt="${negative.badgePointId }" src="${negative.url }">
-				      				</button>
-				      				${negative.badgePointName }
-				      				
+				      				<div class="badgePoint-box">
+					      				<img class="badgePoint" id="${status.count}" alt="${negative.badgePointId }" src="${negative.url }" />
+					      				<input class="hidden" id="${negative.url }" value="${negative.badgePointId }" />
+				      				</div>
+				      				<div>
+					      				${negative.badgePointName }				      				
+				      				</div>
 				      			</div>
-				      			
-				      		</div>	
-				      		${negative.badgePointDesc2 }
+					      		<div>
+					      			${negative.badgePointDesc2 }
+					      		</div>
+				      		</div>
 		      			</c:forEach>
 		      			</div>	
-		      			
 		      		</div>
-		      		<%-- // 개설자는 호스트포인트가 보일 필요가 없다 사실 JoinPostList에 가야함
-		      		<hr>
-		      		
-		      		<div>
-		      			<div>
-		      				<h2>호스트포인트</h2>
-		      			</div>
-		      			
-		      			<div class="flex-badge" style="width: 500px;">
-		      			<c:forEach var="host" items="${hostBadge }">
-			      			<div>
-				      			<div class="flex-badge-list flex-item-grow">
-				      				<button type="button" id="${host.url }" value="${host.badgePointId }">
-				      				<img class="badgePoint" id="${status.count}" alt="${host.badgePointId }" src="${host.url }">
-				      				</button>
-				      				${host.badgePointName }
-				      				
-				      			</div>
-				      			
-				      		</div>	
-				      		${host.badgePointDesc2 }
-		      			</c:forEach>
-		      			
-		      			</div>	
-		      			
-		      		</div>
-		      		 --%>
-		      		
 		     	</div>
 		</div>
-
-        
 </body>
 </html>
