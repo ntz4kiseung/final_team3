@@ -27,6 +27,17 @@
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 <!-- 추가한거 -->
 <script type="text/javascript">
 $(document).ready(function()
@@ -54,15 +65,21 @@ $(document).ready(function()
 	 $(".btn-review").click(function(){
 		 //console.log($(this).val());
 		 var review = $(this).val();
+		 
+		 console.log(review);
 		 //debugger;
 		 $("#postId").val($(this).val())
+		 
+		 
+		 
+		 
 		 
 		 $.ajax({
 	         url : "<%=cp %>/hostReview.action",
 	         type : "get",
 	         data : {'postId': review},
 	         success: function(data)
-			{
+			 {
 				console.log(data);
 				
 				reviewRes = data;
@@ -108,25 +125,28 @@ $(document).ready(function()
 				$("#ajaxTest").empty();
                 $("#ajaxTest").append(str);
 			}
-	     });
+	     }); 
 	 });
 	 
 	 // 후기 조회
 	 $(".btn-inquiry").click(function()
-	{
+	 {
 		 var inquiry = $(this).val();
 		 console.log(inquiry);
 		 
 		 $.ajax({
 	         url : "<%=cp %>/hostInquiry.action",
-	         type : "post",
+	         type : "get",
 	         data : {'postId': inquiry},
-	     }).done(function()
-		{
+	     }).done(function(result)
+		 {
+	    	 console.log(reulst);
+	    	 $("#ajaxTest").empty();
+             $("#ajaxTest").append(result);
 			
-		});
+		 });
 		 
-	});
+	 });
 	
 
 	$("#review-submit").click(function() {

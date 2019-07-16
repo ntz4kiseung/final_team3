@@ -96,13 +96,26 @@ public class SingupController
 		return "/WEB-INF/views/AddrGuAjax.jsp";
 	}
 
+	
+	
+	
+	
 	@RequestMapping(value="/intersubajax.action", method=RequestMethod.GET)
 	public String intersubajax(String mainid, ModelMap model)
 	{
 		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
+		
+		
 		model.addAttribute("list", interA.interSubList(mainid));
+		
+		
 		return "/WEB-INF/views/InterSubAjax.jsp";
 	}
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/idcheck.action")
 	public void singUpcheckId(String id, HttpServletResponse response) throws IOException

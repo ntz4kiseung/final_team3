@@ -2,7 +2,8 @@ package com.test.mybatis;
 
 public class ReviewDTO
 {
-	private String userId, userName, url, grade, badgePointId, host, contents;
+	private String userId, userName, userurl, takeurl, grade, badgePointId, badgePointName, host, contents;
+	
 
 	public String getUserId()
 	{
@@ -24,14 +25,24 @@ public class ReviewDTO
 		this.userName = userName;
 	}
 
-	public String getUrl()
+	public String getUserurl()
 	{
-		return url;
+		return userurl;
 	}
 
-	public void setUrl(String url)
+	public void setUserurl(String userurl)
 	{
-		this.url = url;
+		this.userurl = userurl;
+	}
+
+	public String getTakeurl()
+	{
+		return takeurl;
+	}
+
+	public void setTakeurl(String takeurl)
+	{
+		this.takeurl = takeurl;
 	}
 
 	public String getGrade()
@@ -54,6 +65,16 @@ public class ReviewDTO
 		this.badgePointId = badgePointId;
 	}
 
+	public String getBadgePointName()
+	{
+		return badgePointName;
+	}
+
+	public void setBadgePointName(String badgePointName)
+	{
+		this.badgePointName = badgePointName;
+	}
+
 	public String getHost()
 	{
 		return host;
@@ -73,6 +94,6 @@ public class ReviewDTO
 	{
 		this.contents = contents;
 	}
-	
-	
+
+
 }

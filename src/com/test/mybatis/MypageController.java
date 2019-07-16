@@ -12,6 +12,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -126,7 +127,6 @@ public class MypageController
 	 public String reviewInsertMain(HttpServletRequest request, HttpSession session)
 	 {
 		 String hostId = (String) session.getAttribute("userId");		// 평가한 유저 아이디
-		 hostId="B001";
 		 
 		 IReviewDAO dao = sqlSession.getMapper(IReviewDAO.class);
 		 
@@ -189,7 +189,29 @@ public class MypageController
 		return "/WEB-INF/views/JoinPostList.jsp";
 	}
 	
-
+	@RequestMapping(value="/hostInquiry.action", method = RequestMethod.GET)
+	public String reviewHostInquiry(String postId, ModelMap model, HttpSession session)
+	{
+		
+		IReviewDAO review = sqlSession.getMapper(IReviewDAO.class);
+		String userId = (String) session.getAttribute("userId");	
+		ArrayList<ReviewDTO> rv = review.inquryView(userId, postId);
+		
+		System.out.println("사이즈 : "+rv.size());
+		
+		for (int i = 0; i < rv.size(); i++)
+		{
+			System.out.println(rv.get(i).getBadgePointId()+" "+rv.get(i).getBadgePointName()+" "+rv.get(i).getContents()+" "+rv.get(i).getGrade());
+			System.out.println(rv.get(i).getHost()+" "+rv.get(i).getTakeurl()+" "+rv.get(i).getUserId()+" "+rv.get(i).getUserName()+" "+rv.get(i).getUserurl());
+			
+		}
+		
+		System.out.println("123:"+postId + userId);
+		model.addAttribute("list", review.inquryView(userId, postId));
+		
+		return "/WEB-INF/views/HostquiryAjax.jsp";
+		
+	}
 
 	
 }

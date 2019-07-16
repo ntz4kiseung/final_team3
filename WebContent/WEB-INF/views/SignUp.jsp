@@ -417,7 +417,8 @@
 							type: 'GET',
 							dataType: 'html',
 							data: {'mainid': mainid}
-						}).done(function(result) {
+						}).done(function(data) {
+							
 							console.log('성공')
 							
 							$("#inbodyD"+d).empty();
