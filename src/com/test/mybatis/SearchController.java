@@ -29,7 +29,7 @@ public class SearchController
 	public String search(String keyword, HttpServletResponse response, ModelMap model, HttpSession session)
 	{
 		String userId = (String) session.getAttribute("userId");
-		if(userId==null || userId.equals("userId"))
+		if(userId==null || userId.equals(""))
 		{
 			System.out.println("search.action 비로그인 진입");
 			Cookie userCookie = new Cookie("userId", "");

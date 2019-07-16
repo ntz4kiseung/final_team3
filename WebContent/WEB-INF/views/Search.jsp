@@ -300,6 +300,8 @@
 		    });
 			
 			// 필터에 있는 만남일 초기값은 현재일에 따라 바뀌어야 함
+			js("input[name='minMeetDate']").val(sysdateToString(2));
+			js("input[name='maxMeetDate']").val(sysdateToString(10));
 			js("#filter-minMeetDate").text(sysdateToString(2));
 	    	js("#filter-maxMeetDate").text(sysdateToString(10));
 			js( "#slider-range2" ).slider({
@@ -417,50 +419,50 @@
            		var json = cookieToJson();
            		// 필수 필터들 입력 → 기본 값이 아닐시에만 출력
            		if(json.minNum!="2" || json.maxNum!="20"){
-    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minNum">인원수 : '+json.minNum+' ~ '+json.maxNum+' <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
+    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minNum">인원수 : '+json.minNum+' ~ '+json.maxNum+' <a class="filter-cancle1" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
            		}
            		if(json.minMeetDate!=defaultMinMeetDate() || json.maxMeetDate!=defaultMaxMeetDate()){
-    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minMeetDate">만남일 : '+json.minMeetDate+' ~ '+json.maxMeetDate+' <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
+    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minMeetDate">만남일 : '+json.minMeetDate+' ~ '+json.maxMeetDate+' <a class="filter-cancle1" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
            		}
 				if(json.limitGrade!="1"){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="limitGrade">참가제한 : '+json.limitGrade+'점 이상 <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');					
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="limitGrade">참가제한 : '+json.limitGrade+'점 이상 <a class="filter-cancle1" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');					
 				}
 				// 부가 필터는 있으면 입력
 				if(json.addrGuId1!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId1">'+$("#addrSiName1").text()+' '+json.addrGuName1+' <a class="filter-cancle2" href="" >&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId1">'+$("#addrSiName1").text()+' '+json.addrGuName1+' <a class="filter-cancle2" href="#" >&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.addrGuId2!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId2">'+$("#addrSiName2").text()+' '+json.addrGuName2+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId2">'+$("#addrSiName2").text()+' '+json.addrGuName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.addrGuId3!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId3">'+$("#addrSiName3").text()+' '+json.addrGuName3+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId3">'+$("#addrSiName3").text()+' '+json.addrGuName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId1!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId1">'+$("#interMainName1").text()+' > '+json.interSubName1+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId1">'+$("#interMainName1").text()+' > '+json.interSubName1+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId2!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId2">'+$("#interMainName2").text()+' > '+json.interSubName2+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId2">'+$("#interMainName2").text()+' > '+json.interSubName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId3!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId3">'+$("#interMainName3").text()+' > '+json.interSubName3+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId3">'+$("#interMainName3").text()+' > '+json.interSubName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.moodId!=""){
 					if(json.moodId=="MI00002"){
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">진지한<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">진지한<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}
 					else{
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">가벼운<a class="filter-cancle" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">가벼운<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}
 				}
 				if(json.drinkId!=""){
 					if(json.drinkId="DR00001"){
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주가능<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주가능<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}else{
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주불가<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주불가<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}
 				}
 				if(json.sameGenderId!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="sameGenderId">동성만<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="sameGenderId">동성만<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
            	}
            	
@@ -501,13 +503,15 @@
            	}
            	function defaultMaxMeetDate(){
            		var date = new Date();
-           		date.setDate(date.getDate()+20);
+           		date.setDate(date.getDate()+10);
            		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
            		return result;
            	}
-           	// 부가정보 필터는 취소하면 쿠키 비움
+           	// 부가정보 필터는 취소하면 해당 쿠키 비움
            	$(document).on("click", ".filter-cancle2", function(){
            		document.cookie= $(this).parent().attr("id")+"=";
+           		moveAddrInter("addrGu");
+           		moveAddrInter("interSub");
 			  	// 필터창 갈아주고
 			  	fillFilter();
 			  	// 결과창 비워주고
@@ -518,7 +522,50 @@
 			  	callList(pageNum);
            		return false;
            	});
-
+           	
+           	// 필터 X 누르는 순서때문에 addr이나 inter중 앞에게 비었을때 메꿔주는거
+			function moveAddrInter(what){
+				var id1 = what+"Id1";
+				var id2 = what+"Id2";
+				var id3 = what+"Id3";
+				var name1 = what + "Name1";
+				var name2 = what + "Name2";
+				var name3 = what + "Name3";
+				if( cookieIsEmpty(id1) && (!cookieIsEmpty(id2)) ){
+					document.cookie=id1+"="+getCookie(id2);
+					document.cookie=id2+"=";
+					document.cookie=name1+"="+getCookie(name2);
+					document.cookie=name2+"=";
+					if( what=="addrGu" ){
+						document.cookie="addrSiName1="+getCookie("addrSiName2");
+					}else if( what=="interSub"){
+						document.cookie="interMainName1="+getCookie("interMainName2");
+					}
+				}else if( cookieIsEmpty(id1) && cookieIsEmpty(id2) && (!cookieIsEmpty(id3)) ){
+					document.cookie=id1+"="+getCookie(id3);
+					document.cookie=id3+"=";
+					document.cookie=name1+"="+getCookie(name3);
+					document.cookie=name3+"=";
+					if( what=="addrGu" ){
+						document.cookie="addrSiName1="+getCookie("addrSiName3");
+					}else if( what=="interSub"){
+						document.cookie="interMainName1="+getCookie("interMainName3");
+					}
+				}
+			}
+			// 쿠키가 비었니?
+			function cookieIsEmpty(cookieName){
+				var cookie = getCookie(cookieName);
+				if(cookie==null || cookie==""){
+					return true;
+				}
+				return false;
+			}
+			// 쿠키 얻기
+			function getCookie(name) {
+				  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+				  return value? value[2] : null;
+			};
            	// 현재 문서의 쿠키를 Json으로 바꿔줌
            	function cookieToJson(){
            		var result='{';
@@ -544,14 +591,22 @@
 				  // 쿠키로 만들고
  	          	  values.forEach(function(item){
 					 document.cookie= item.name+"="+item.value;
-				  });
-				  
+				  }); 
+				  // addrSiName, interSubName도 쿠키로 만듬
+				  for (var i = 1; i < 4; i++)
+				  {
+						document.cookie="addrSiName"+i+"="+$("#addrSiName"+i).text();
+						document.cookie="interMainName"+i+"="+$("#interMainName"+i).text();
+				  }
 				  // 필터창 갈아주고
 				  fillFilter();
 				  // 필터 새로 적용하면 페이지 넘버 초기화
 				  pageNum=1;
 				  // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
 				  callList(pageNum);
+				  
+				  $('#Search-filter-modal').modal("hide");
+				  
 				  return false;
  	          	});
            	});
@@ -562,11 +617,14 @@
 			var a;
 			$(".btn-check-cate1").click(function() {
 				a = $(this).val();
+				btn = $(this);
 				console.log("a = " + a);
 				$(".btn-pop-sido").click(function() {
 					
 					$("#addrSiName"+a).text($(this).text());
-					
+					btn.next().text("구·군");
+					btn.next().next().val("");
+					btn.next().next().next().val("");
 					var siid = $(this).val();
 					var str = "";
 					 $.ajax({
@@ -609,10 +667,12 @@
 			var d;
 			$(".btn-check-cate3").click(function() {
 				d = $(this).val();
-				
+				btn = $(this);
 				$(".btn-pop-main").click(function() {
 					$("#interMainName"+d).text($(this).text());
-					
+					btn.next().text("소분류");
+					btn.next().next().val("");
+					btn.next().next().next().val("");
 					var mainid = $(this).val();
 					
 					$.ajax({
@@ -784,8 +844,8 @@
                                                 <div class="flex-row-left-center">
                                                 	<div class="slider-range-box">
 	                                                	<div id="slider-range2" class=" input-w-250"></div>
-	                                                	<input type="text" name="minMeetDate" class="price-slider-one hidden"value="2">
-               	                            			<input type="text" name="maxMeetDate" class="price-slider-two hidden"value="20">
+	                                                	<input type="text" name="minMeetDate" class="price-slider-one hidden" value="">
+               	                            			<input type="text" name="maxMeetDate" class="price-slider-two hidden" value="">
                                                 	</div>
                                                 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 													<span id="filter-minMeetDate">2</span>&nbsp;~&nbsp;<span id="filter-maxMeetDate">20</span>&nbsp;
