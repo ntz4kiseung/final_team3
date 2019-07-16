@@ -224,22 +224,18 @@
                         <div class="Notice-footer flex-col-center-center">
                             <div class="Notice-pagination">
                              <form action="faq.action" method="post" id="formId">
-                                 <script type="text/javascript">
-			                              
-											var max = ${pages };
-											var print = "";
-											for (var i = 1; i <= max; i++)
-											{
-												
-												print = i;
-												document.write("<button type='submit' id='pagesu' name='pagesu'  class='btn btn-deep-orange' value="+ print +">"+print+"</button>");
-											}
-											//alert(document.getElementById("keyword").value);
-											//document.write("<button type='submit' id='pagesu' name='pagesu' value="+ print +">"+print+"</button>");
-											
-							      </script>
+                                 
+			                              ${paging }
+							    
 										    <input type=hidden id="keyword" name = "keyword" value="${keyword }">
 							 </form>
+							 
+							 <form action="faqnext.action" method="post">
+							 		<button id= 'nextbtn' name= 'nextbtn'  type='submit' value='${end }'></button>
+							 		 <input type=hidden id="keyword" name = "keyword" value="${keyword }">
+							 </form>
+							 
+							 
                             </div>
                         </div>
                         <div class="Notice-footer flex-col-center-center">

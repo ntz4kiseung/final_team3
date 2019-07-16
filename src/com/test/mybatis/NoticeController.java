@@ -34,7 +34,7 @@ public class NoticeController
 			String keyword = request.getParameter("keyword");
 			
 			System.out.println(keyword+"keyword확인");
-			if (reqpage==null) // 만약 최초 페이지 로드시 값은 NULL이기때문에 자동으로 1 넣어줄수 있도록 함 ! 
+			if (reqpage==null||reqpage.equals("")) // 만약 최초 페이지 로드시 값은 NULL이기때문에 자동으로 1 넣어줄수 있도록 함 ! 
 			{
 				reqpage = "1";
 			}
@@ -44,90 +44,149 @@ public class NoticeController
 			}
 			model.addAttribute("list",dao.list(keyword, reqpage)); // 리스트에 요청페이지 담아서 dao 보내줌~~ 
 		
-			int reqpageN = Integer.parseInt(reqpage); // 요청페이지 강제 변환 ~ 
-			int start = 1;
+			//int reqpageN = Integer.parseInt(reqpage); // 요청페이지 강제 변환 ~ 
+			int start = 1;		
+			int countPage = 5;  // 하단에 뿌려질 page 넘버의 갯수 
+			model.addAttribute("countPage",countPage);
+			//startPage + countPage - 1
+			int end = start+countPage-1; 
+			start=1;
+			System.out.println("start"+start+"end"+end+"countpage"+countPage+"확인");
+			
+			
+			
+			String paging = "";
+			
+		int pages = (int)Math.ceil(dao.count(keyword)/15.0); // 총 페이지 갯수 
+	
+		System.out.println(pages+"   <<--pages찍어보기");
+		
+		
+		if (start>countPage)
+		{
+			paging += "<form action='notice.action' method='post'  style='display:inline;'><button type='submit' >이전페이지</button></form>";
+		}
+		
+		paging += "<form action='notice.action' method='post' id='formId'  style='display:inline;'><span>";
+		
+		for (int i = start; i <= end; i++)
+		{
+			if (i>pages)
+			{
+				break;
+			}
+			
+
+			System.out.println(i+"i값 찍기 ");
+			paging += "<button  type='submit' id='pagesu' name='pagesu' class='btn btn-deep-orange' value=" + i + ">" +i+ "</button>";
+		}
+		
+		paging +="</span></form>";
+		
+		String pagingNext ="";
+		if (true)
+		{
+			++end;
+			pagingNext += " <button type='submit' id='nextpage' name='nextpage' value='"+end+"'>다음페이지</button>";
+					   
+			model.addAttribute("pagingNext",pagingNext);
+		}
+		model.addAttribute("paging",paging);
+		System.out.println(pages+"페이지수 확인");
+		model.addAttribute("pages",pages);
+		model.addAttribute("keyword",keyword);
+
+		result = "/WEB-INF/views/Notice.jsp";
+		return result;
+		
+	}
+	
+	@RequestMapping(value="/noticenext.action",method= {RequestMethod.POST, RequestMethod.GET})
+	public String noticeListPaging(Model model, HttpServletRequest request) throws NumberFormatException
+	{	
+		String result= null;
+		
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
+		
+	
+			String reqpage = request.getParameter("pagesu"); // 게시물 하단 페이지 1/2/3 요청시 돌아가는 구문~ 
+			String keyword = request.getParameter("keyword");
+			
+			System.out.println(keyword+"keyword확인");
+			if (reqpage==null||reqpage.equals("")) // 만약 최초 페이지 로드시 값은 NULL이기때문에 자동으로 1 넣어줄수 있도록 함 ! 
+			{
+				reqpage = "1";
+			}
+			if (keyword==null)
+			{
+				keyword="";
+			}
+			model.addAttribute("list",dao.list(keyword, reqpage)); // 리스트에 요청페이지 담아서 dao 보내줌~~ 
+		
+			//int reqpageN = Integer.parseInt(reqpage); // 요청페이지 강제 변환 ~
+			
+			int start = 6 ; 
+			if (request.getParameter("nextpage")!=null)
+			{
+				start = Integer.parseInt(request.getParameter("nextpage"));	
+			}
+				
 			int countPage = 5;  // 하단에 뿌려질 page 넘버의 갯수 
 			model.addAttribute("countPage",countPage);
 			//startPage + countPage - 1
 			int end = start+countPage-1; 
 			
+			System.out.println("start"+start+"end"+end+"countpage"+countPage+"확인");
 			
 			
-		/*
-		 int page(reqpage) =  현재 페이지번호 
-		 int countList = 한 페이지에 출력될 게시물 수 
-		 int countPage = 한화면에 출력될 페이지 수 
-		 
-		 int totalCount = 게시물 총 갯수 
-		 
-		 int startPage
-		 */
 			
 			String paging = "";
 			
 		int pages = (int)Math.ceil(dao.count(keyword)/15.0); // 총 페이지 갯수 
-		
-		
-		
-		
-		
-		
-		
-		if (request.getParameter("nextpage") != null)
-		{
-			int nextpage = Integer.parseInt(request.getParameter("nextpage"));
-			System.out.println(nextpage+"넥스트페이지확인");
-			
-			start = countPage;
-			System.out.println(start+"  start  6나와야하고");
-			end = start+countPage-2;
-			System.out.println(end+"  end 10나와야함");
-		}
-		
-			
-		//System.out.println(start+"플러스1 하면 2나와야함");
-			
-			
 	
-		
-		
-		int nextpg =0;
-		
-		if (start>countPage)
-		{
-			paging += "<button>이전페이지</button>";
-		}
-		for (int i = start; i <= end; i++)
-		{
-			System.out.println(i+"i값 찍기 ");
-			paging += "<button type='submit' id='pagesu' name='pagesu' class='btn btn-deep-orange' value=" + i + ">" +i+ "</button>";
-			nextpg = i;
-		}
-		++end;
-		if (true)
-		{
-			paging+= "<button type='submit' id='nextpage' name='nextpage' value='"+end+"'>다음페이지</button>";
-		}
-		model.addAttribute("paging",paging);
-		
-		
-		
-		System.out.println(pages+"페이지수 확인");
-		model.addAttribute("pages",pages);
-		model.addAttribute("keyword",keyword);
-		
-		
-	
-		
-		result = "/WEB-INF/views/Notice.jsp";
-		return result;
-		
-		
 
 		
 		
+		if (start>countPage)
+		{
+			paging += "<form action='notice.action' method='post' style='display:inline;'><button type='submit'>이전페이지</button></form>";
+		}
+		paging += "<form action='noticenext.action' method='post' id='formId'  style='display:inline;'><span>";
+		for (int i = start; i <= end; i++)
+		{
+			if (i>pages)
+			{
+				break;
+			}
+			
+			System.out.println(i+"i값 찍기 ");
+			paging += "<button type='submit' id='pagesu' name='pagesu' class='btn btn-deep-orange' value=" + i + ">" +i+ "</button>";
+			
+		}
+		paging +="</span></form>";
+		String pagingNext ="";
+		System.out.println(countPage+"  <<  countPage");
+		System.out.println(end+"  <<  end");
+		if (end+1<countPage)
+		{
+			++end;
+			pagingNext += "<button type='submit' id='nextpage' name='nextpage' value='"+end+"'>다음페이지</button>";
+			model.addAttribute("pagingNext",pagingNext);
+			
+			
+		}
+		model.addAttribute("paging",paging);
+		System.out.println(pages+"페이지수 확인");
+		model.addAttribute("pages",pages);
+		model.addAttribute("keyword",keyword);
+
+		result = "/WEB-INF/views/Notice.jsp";
+		return result;
 		
 	}
+	
+	
+	
 	
 	@RequestMapping(value="/searchnotice.action",method=RequestMethod.POST)
 	public String searchNotice(Model model /* ,String keyword */, HttpServletRequest request)
@@ -214,35 +273,115 @@ public class NoticeController
 			}
 			model.addAttribute("list",dao.faqlist(keyword, reqpage)); // 리스트에 요청페이지 담아서 dao 보내줌~~ 
 		
-			
 		int pages = (int)Math.ceil(dao.faqcount(keyword)/15.0); // 
 		
 		System.out.println(pages+"페이지수 확인");
 		model.addAttribute("pages",pages);
 		model.addAttribute("keyword",keyword);
+		int start =0;
+		int end = 0;
+		
+		start = 1;		
+		int countPage = 5;  // 하단에 뿌려질 page 넘버의 갯수 
+		//model.addAttribute("countPage",countPage);
+		//startPage + countPage - 1
+		 end = start+countPage-1;
+		
+		String paging ="";
+		for (int j = start; j <= end; j++)
+		{
+			paging += "<button type='submit' id='pagesu' name='pagesu'  class='btn btn-deep-orange' value="+ j +">"+j+"</button>";
+		}
+		model.addAttribute("paging",paging);
+		model.addAttribute("end",end+1);
+		
+		
+		
 		
 		result = "/WEB-INF/views/FAQ.jsp";
-	
 		
 		return result;
-			
-		
 	}
+	
+	
+	@RequestMapping(value="/faqnext.action",method= {RequestMethod.POST, RequestMethod.GET})
+	public String faqListNext(Model model, HttpServletRequest request)
+	{	
+		String result= null;
+		
+		ICsDAO dao = sqlSession.getMapper(ICsDAO.class);
+		
+	
+			String reqpage = request.getParameter("pagesu"); // 게시물 하단 페이지 1/2/3 요청시 돌아가는 구문~ 
+			String keyword = request.getParameter("keyword");
+			//System.out.println(keyword);
+			
+			System.out.println(keyword+"keyword확인");
+			if (reqpage==null) // 만약 최초 페이지 로드시 값은 NULL이기때문에 자동으로 1 넣어줄수 있도록 함 ! 
+			{
+				reqpage = "1";
+			}
+			if (keyword==null)
+			{
+				keyword="";
+			}
+			model.addAttribute("list",dao.faqlist(keyword, reqpage)); // 리스트에 요청페이지 담아서 dao 보내줌~~ 
+		
+		int pages = (int)Math.ceil(dao.faqcount(keyword)/15.0); // 
+		
+		System.out.println(pages+"페이지수 확인");
+		model.addAttribute("pages",pages);
+		model.addAttribute("keyword",keyword);
+		int start =0;
+		int end = 0;
+		
+		start = 1;		
+		int countPage = 5;  // 하단에 뿌려질 page 넘버의 갯수 
+		//model.addAttribute("countPage",countPage);
+		//startPage + countPage - 1
+		 end = start+countPage-1;
+		
+		String paging ="";
+		for (int j = start; j <= end; j++)
+		{
+			paging += "<button type='submit' id='pagesu' name='pagesu'  class='btn btn-deep-orange' value="+ j +">"+j+"</button>";
+		}
+		model.addAttribute("paging",paging);
+		model.addAttribute("end",end+1);
+		
+		
+		
+		
+		result = "/WEB-INF/views/FAQ.jsp";
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	@RequestMapping(value="/directquestionwrite.action",method= {RequestMethod.POST, RequestMethod.GET})
 	public String DirectQuestionWrite(Model model, HttpServletRequest request)
 	{	
 		String result= null;
 		
-		
-		
+
 		
 		String title= request.getParameter("title");
-		String content = request.getParameter("content");
-		
-		
-		
-		
+
 		result = "/WEB-INF/views/DirectQuestionWrite.jsp";
 		
 		
