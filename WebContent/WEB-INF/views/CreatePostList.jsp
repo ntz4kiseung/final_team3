@@ -105,33 +105,17 @@ $(document).ready(function()
 					str += '							</div>';
                 }
 				
-				$("#ajaxTest").empty();
-                $("#ajaxTest").append(str);
+				$("#reviewList").empty();
+                $("#reviewList").append(str);
+
+
 			}
 	     });
 	 });
-	 
-	 // 후기 조회
-	 $(".btn-inquiry").click(function()
-	{
-		 var inquiry = $(this).val();
-		 console.log(inquiry);
-		 
-		 $.ajax({
-	         url : "<%=cp %>/hostInquiry.action",
-	         type : "post",
-	         data : {'postId': inquiry},
-	     }).done(function()
-		{
-			
-		});
-		 
-	});
-	
 
 	$("#review-submit").click(function() {
 		
-		debugger;
+		//debugger;
 		
 		var postId = $("#postId").val();		// 방 번호
 		
@@ -140,9 +124,9 @@ $(document).ready(function()
 		badgeId = new Array();
 		contents = new Array();
 		
-		var ajaxTest = document.getElementById("ajaxTest");
+		var reviewList = document.getElementById("reviewList");
 		
-		var count = ajaxTest.childElementCount;
+		var count = reviewList.childElementCount;
 		
 		for (var i = 0; i < count; i++)
 		{
@@ -459,7 +443,7 @@ function selectBadge(url,click_id)
         
         
         <!-- Modal -->
-        <form action="reviewinsert.action" method="post" role="form" id="sendReview">
+        <form action="myreviewinsert.action" method="post" role="form" id="sendReview">
 		<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
@@ -479,7 +463,7 @@ function selectBadge(url,click_id)
 					</div>
 				</div>
 						
-						<div id="ajaxTest" style="overflow:auto; height: 50vh;">
+						<div id="reviewList" style="overflow:auto; height: 50vh;">
 							
 						</div>
 						<input type="hidden" id="postId" name="postId" value="" />
@@ -499,7 +483,6 @@ function selectBadge(url,click_id)
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <h2 class="modal-title" id="exampleModalLabel">후기 조회</h2>
-		        </button>
 		      </div>
 		      <div class="modal-body">
 		        <div>
