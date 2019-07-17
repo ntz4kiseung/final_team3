@@ -1,4 +1,6 @@
-
+select *
+from post
+where meetdate>=sysdate+2;
 
 
 

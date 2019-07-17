@@ -327,8 +327,8 @@
     		document.cookie="interSubId1=";
     		document.cookie="interSubId2=";
     		document.cookie="interSubId3=";
-    		document.cookie="minMeetDate=2019-07-01";
-    		document.cookie="maxMeetDate=2020-07-31";
+    		document.cookie="minMeetDate="+defaultMinMeetDate();
+    		document.cookie="maxMeetDate="+defaultMaxMeetDate();
     		document.cookie="moodId=";
     		document.cookie="drinkId=";
     		document.cookie="sameGenderId=";
@@ -376,8 +376,6 @@
 			
     	    // 주소 추가 함수
             $('.filter-plus').click(function(){
-                console.log(this);
-                
 				$(this).addClass("hidden");
 				$(this).parent().next().removeClass("hidden");
 				return false;
@@ -429,22 +427,22 @@
 				}
 				// 부가 필터는 있으면 입력
 				if(json.addrGuId1!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId1">'+$("#addrSiName1").text()+' '+json.addrGuName1+' <a class="filter-cancle2" href="#" >&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId1">'+json.addrSiName1+' '+json.addrGuName1+' <a class="filter-cancle2" href="#" >&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.addrGuId2!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId2">'+$("#addrSiName2").text()+' '+json.addrGuName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId2">'+json.addrSiName2+' '+json.addrGuName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.addrGuId3!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId3">'+$("#addrSiName3").text()+' '+json.addrGuName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId3">'+json.addrSiName3+' '+json.addrGuName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId1!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId1">'+$("#interMainName1").text()+' > '+json.interSubName1+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId1">'+json.interMainName1+' > '+json.interSubName1+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId2!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId2">'+$("#interMainName2").text()+' > '+json.interSubName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId2">'+json.interMainName2+' > '+json.interSubName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId3!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId3">'+$("#interMainName3").text()+' > '+json.interSubName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId3">'+json.interMainName3+' > '+json.interSubName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.moodId!=""){
 					if(json.moodId=="MI00002"){
@@ -538,8 +536,10 @@
 					document.cookie=name2+"=";
 					if( what=="addrGu" ){
 						document.cookie="addrSiName1="+getCookie("addrSiName2");
+						document.cookie="addrSiName2=";
 					}else if( what=="interSub"){
 						document.cookie="interMainName1="+getCookie("interMainName2");
+						document.cookie="interMainName2=";
 					}
 				}else if( cookieIsEmpty(id1) && cookieIsEmpty(id2) && (!cookieIsEmpty(id3)) ){
 					document.cookie=id1+"="+getCookie(id3);
@@ -548,8 +548,10 @@
 					document.cookie=name3+"=";
 					if( what=="addrGu" ){
 						document.cookie="addrSiName1="+getCookie("addrSiName3");
+						document.cookie="addrSiName3=";
 					}else if( what=="interSub"){
 						document.cookie="interMainName1="+getCookie("interMainName3");
+						document.cookie="interMainName3=";
 					}
 				}
 			}
@@ -607,9 +609,60 @@
 				  
 				  $('#Search-filter-modal').modal("hide");
 				  
+				  // 모달 초기화
+				  cleanModal();
+				  
 				  return false;
  	          	});
            	});
+           	function cleanModal(){
+           		$(".btn-check-cate1").text("시·도");
+           		$(".btn-check-cate2").text("구·군");
+           		$(".btn-check-cate3").text("대분류");
+           		$(".btn-check-cate4").text("소분류");
+           		
+           		$("input[name='']").val();
+           		
+           		$("input[name='addrGuId1']").val();
+           		$("input[name='addrGuId2']").val();
+           		$("input[name='addrGuId3']").val();
+           		$("input[name='addrGuName1']").val();
+           		$("input[name='addrGuName2']").val();
+           		$("input[name='addrGuName3']").val();
+           		
+           		$("input[name='interSubId1']").val();
+           		$("input[name='interSubId2']").val();
+           		$("input[name='interSubId3']").val();
+           		$("input[name='interSubName1']").val();
+           		$("input[name='interSubName2']").val();
+           		$("input[name='interSubName3']").val();
+           		
+           		$("input[name='minNum']").val("2");
+           		$("input[name='maxNum']").val("20");
+           		$("#filter-minNum").text("2");
+           		$("#filter-maxNum").text("20");
+           		
+           		$($("#slider-range .ui-slider-handle")[0]).css("left", "0%");
+           		$($("#slider-range .ui-slider-handle")[1]).css("left", "100%");
+           		$("#slider-range .ui-slider-range").css("width","100%");
+           		$("#slider-range .ui-slider-range").css("left","0%");
+           		
+           		$("input[name='minMeetDate']").val(defaultMinMeetDate());
+           		$("input[name='maxMeetDate']").val(defaultMaxMeetDate());
+           		$("#filter-minMeetDate").text(defaultMinMeetDate());
+           		$("#filter-maxMeetDate").text(defaultMaxMeetDate());
+
+           		$($("#slider-range2 .ui-slider-handle")[0]).css("left", "0%");
+           		$($("#slider-range2 .ui-slider-handle")[1]).css("left", "100%");
+           		$("#slider-range2 .ui-slider-range").css("width","100%");
+           		$("#slider-range2 .ui-slider-range").css("left","0%");
+           		
+           		$(".filter-attribute img").addClass("grayscale");
+           		$($(".filter-attribute img")[0]).removeClass("grayscale");
+           		$("input[name='limitGrade']").val("1");
+           		
+           		$(".filter-plus").removeClass("hidden");
+           	}
            	
            	// 필터에서 x 누르면 일어나는 함수
 

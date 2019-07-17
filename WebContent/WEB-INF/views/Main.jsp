@@ -172,22 +172,16 @@
 		});
 		
 		var c;
-		$(".btn-check-cate2").click(function()
-		{
-			c = $(this).val();
-			console.log("c = " + c);
-			
-			$(".btn-pop-gu").click(function()
-			{
-				console.log('진입 성공2');
+		$(document).on('click','.btn-pop-gu',function(){
+			c=1;
+			console.log('진입 성공2');
 				$("#btn-check-gugun"+c).text($(this).text());
-				 
-				$("#addrGuId"+c).val($(this).val());
-				$("#addrGuName"+c).val($(this).text());
-				
-				console.log("구 아이디 = " + $("#addrGuId"+c).val());
-				console.log("구 이름 = " + $("#addrGuName"+c).val());
-			});
+			 
+			$("#addrGuId"+c).val($(this).val());
+			$("#addrGuName"+c).val($(this).text()); 
+			
+			console.log("구 아이디 = " + $("#addrGuId"+c).val());
+			console.log("구 이름 = " + $("#addrGuName"+c).val()); 
 		});
 		
 		/* interSubName1 */
@@ -288,7 +282,7 @@
 										<input type= "hidden" id="addrGuId1" name="" value="">
 										<input type= "hidden" id="addrGuName1" name="" value="">
 										<button type="button" class="btn btn-check-cate1 btn-light btn-100-40 btn-border-side" id="addrSiName1" name="addrSiName1" value="1" tabindex="0" data-toggle="popover" data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
-	                                	<button type="button" class="btn btn-check-cate2 btn-light btn-100-40" id="btn-check-gugun1" name="btn-check-gugun1"  value="1" tabindex="0" data-toggle="popover"  data-popover-content="#b1" data-placement="bottom">구·군</button>
+	                                	<button type="button" class="btn btn-check-cate2 btn-light btn-100-40" id="btn-check-gugun1" name="btn-check-gugun1"  value="1" tabindex="0" data-toggle="popover" data-trigger="focus"  data-popover-content="#b1" data-placement="bottom">구·군</button>
 
                                     </div>
                                     &nbsp;&nbsp;&nbsp;

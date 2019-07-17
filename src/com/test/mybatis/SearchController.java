@@ -90,9 +90,6 @@ public class SearchController
 		model.addAttribute("intermainlist", interA.interMainList());
 		model.addAttribute("inputKeyword", keyword);
 		
-//		로그인 상황 가정
-		/*session.setAttribute("userId", "adiard");*/
-		
 		String userId = (String)session.getAttribute("userId");
 		if(userId==null||userId.equals(""))
 		{
@@ -109,12 +106,19 @@ public class SearchController
 		{
 			System.out.println("로그인 유저 진입");
 			InterDTO temp = interA.userInterest(userId);
-			Cookie userInterMainCookie = new Cookie("userInterMainId", temp.getInterMainId1()); 
-			Cookie userInterSubCookie = new Cookie("userInterSubId", temp.getInterSubId1());
+			
+			Cookie userInterMainIdCookie = new Cookie("userInterMainId", temp.getInterMainId1()); 
+			Cookie userInterMainNameCookie = new Cookie("userInterMainName", temp.getInterMainName1()); 
+			Cookie userInterSubIdCookie = new Cookie("userInterSubId", temp.getInterSubId1());
+			Cookie userInterSubNameCookie = new Cookie("userInterSubName", temp.getInterSubName1());
+			
 			Cookie userCookie = new Cookie("userId", userId);
+			
 			response.addCookie(userCookie);
-			response.addCookie(userInterSubCookie);
-			response.addCookie(userInterMainCookie);
+			response.addCookie(userInterMainIdCookie);
+			response.addCookie(userInterMainNameCookie);
+			response.addCookie(userInterSubIdCookie);
+			response.addCookie(userInterSubNameCookie);
 			
 			model.addAttribute("userInterSubList", interA.interSubList(temp.getInterMainId1()));
 		}

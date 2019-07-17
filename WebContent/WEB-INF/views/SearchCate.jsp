@@ -748,8 +748,7 @@
                     
                     <!-- 필터창 -->
                     <div class="Search-filter" id="Search-filter">
-                        <div class="Search-filter-item flex-row-center-center">aa </div>
-                    
+                        <div class="Search-filter-item flex-row-center-center"><span id="SearchCateFilterInterMainName"></span>&nbsp;&nbsp;<span id="SearchCateFilterInterSubName"></span></div>
                     </div>
 
                     <!-- 글목록 -->
