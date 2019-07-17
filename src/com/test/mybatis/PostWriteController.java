@@ -4,7 +4,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -36,26 +35,14 @@ public class PostWriteController
 		String result = null;
 		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
 		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
-		
-		System.out.println(postDTO.getTitle());
-		System.out.println(postDTO.getAddrSiId());
-		System.out.println(postDTO.getAddrGuId());
-		System.out.println(postDTO.getAddrDetail());
-		System.out.println(postDTO.getInterMainId());
-		System.out.println(postDTO.getInterSubId());
-		System.out.println(postDTO.getInterDetail());
-		System.out.println(postDTO.getMinNum());
-		System.out.println(postDTO.getMaxNum());
-		System.out.println(postDTO.getDrink());
-		System.out.println(postDTO.getSamegender());
-		System.out.println(postDTO.getGrade());
-		System.out.println(postDTO.getMeetDate());
-		System.out.println(postDTO.getMoodName());
-		System.out.println(postDTO.getContents());
+        IPostDAO postDAO = sqlSession.getMapper(IPostDAO.class);
+        postDTO.setContents("없음");
+        System.out.println(postDTO.getContents());
 		model.addAttribute("addrsilist", addrA.addrSiList());
 		model.addAttribute("intermainlist", interA.interMainList());
-		result = "WEB-INF/views/PostWrite.jsp";
-		
+        //postDAO.postinsert(postDTO);
+        result = "redirect:postwrite.action";
+        
 		return result;
 	}
 	

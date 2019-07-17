@@ -465,7 +465,7 @@
         <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
-                <form class="PostWrite flex-item-grow" id="PostWriteForm" action="postInsert.action" method="post">
+                <form class="PostWrite flex-item-grow" id="PostWriteForm" action="postInsert.action" method="post" onsubmit="return submitContents(this);">
                     
                     <div class="PostWrite-row1 flex-row-left-center">
                         <div class="PostWrite-row1-label">
@@ -605,7 +605,7 @@
 							<div style="width: 830px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 								<div align="left" style="border-bottom: 1px solid #cccccc;">
 									<div style="padding: 5px 0px 5px 10px;">
-										<textarea name="content" id="content" style="width: 95%; height: 400px;">${dto.content}</textarea>
+										<textarea name="content" id="content" style="width: 95%; height: 400px;"></textarea>
 									</div>
 								</div>
 							</div>
