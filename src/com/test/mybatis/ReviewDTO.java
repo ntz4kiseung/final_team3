@@ -3,9 +3,21 @@ package com.test.mybatis;
 public class ReviewDTO
 {
 	private String userId, userName, userurl, grade, badgePointId, badgePointName, takeurl, contents;
-	private String giveuserId, giveuserName, giveuserUrl;
+	private String giveUserId, takeUserId, giveuserName, giveuserUrl;
 	private String postId;
 	
+	public String getGiveUserId() {
+		return giveUserId;
+	}
+	public void setGiveUserId(String giveUserId) {
+		this.giveUserId = giveUserId;
+	}
+	public String getTakeUserId() {
+		return takeUserId;
+	}
+	public void setTakeUserId(String takeUserId) {
+		this.takeUserId = takeUserId;
+	}
 	public String getPostId()
 	{
 		return postId;
@@ -61,12 +73,6 @@ public class ReviewDTO
 	}
 	public void setContents(String contents) {
 		this.contents = contents;
-	}
-	public String getGiveuserId() {
-		return giveuserId;
-	}
-	public void setGiveuserId(String giveuserId) {
-		this.giveuserId = giveuserId;
 	}
 	public String getGiveuserName() {
 		return giveuserName;

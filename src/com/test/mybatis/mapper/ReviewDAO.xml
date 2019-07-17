@@ -5,17 +5,18 @@
 
 <mapper namespace="com.test.mybatis.IReviewDAO">
 	<insert id="reviewInsertMain">
-		INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE) 
-		VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'),#{postId}, #{hostId},#{userId}, #{grade}, SYSDATE)
+		INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+		VALUES(ADD_ID('REVIEW','REVIEWID', 'RV'), #{postId}, #{giveUserId}, #{takeUserId}, #{grade}, SYSDATE)
 	</insert>
+
+	<insert id="reviewInsertSub" statementType="CALLABLE">
+		{call INSERT_REVIEW_SUB(#{reviewId, jdbcType=VARCHAR}, #{badgePointId, jdbcType=VARCHAR}, #{contents, jdbcType=VARCHAR})}
+	</insert>
+	
 	<select id="getNextReviewId" resultType="java.lang.String">
-		SELECT ADD_ID('REVIEW', 'REVIEWID', 'RV')
+		SELECT ADD_ID('REVIEW','REVIEWID', 'RV')
 		FROM DUAL
 	</select>
-	<insert id="reviewInsertSub">
-		INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) 
-		VALUES(REVIEW_SUB_SEQ.NEXTVAL,#{reviewId},#{badgeId}, #{contents})
-	</insert>
 	
 	<select id="inquryView" resultType="com.test.mybatis.ReviewDTO">
 		SELECT POSTID ,USERID, GIVEUSERID, GIVEUSERNAME, GIVEUSERURL, GRADE, TAKEURL, CONTENTS

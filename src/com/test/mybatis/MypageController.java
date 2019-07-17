@@ -27,15 +27,11 @@ public class MypageController
 	public String myReviewList(Model model, HttpSession session)
 	{
 		String userId = (String) session.getAttribute("userId");
-		
-		// 세션에서 로그인 정보 받아봄
-		// 비로그인이라면
 		if(userId==null||userId.equals(""))
 		{
 		   System.out.println("비로그인 유저 진입");
 		   return "redirect: login.action"; // 비로그인시 돌려보낼 곳 
 		}
-		// 로그인이라면
 		else
 		{
 		   System.out.println("로그인 유저 진입");
@@ -94,30 +90,46 @@ public class MypageController
 	 }
 	 
 	 @RequestMapping(value="myreviewinsert.action", method=RequestMethod.POST) 
-	 public String myReviewInsert(String postId, String[] userId, String[] badgePointId, String[] contents, HttpServletRequest request, HttpSession session)
+	 public String myReviewInsert(String postId, String[] userId, String[] grade, String[] badgePointId, String[] contents, HttpServletRequest request, HttpSession session)
 	 {
+		 String giveUserId = (String) session.getAttribute("userId");
+		if(giveUserId==null||giveUserId.equals(""))
+		{
+		   System.out.println("비로그인 유저 진입");
+		   return "redirect: login.action"; // 비로그인시 돌려보낼 곳 
+		}
+		else
+		{
+		   System.out.println("로그인 유저 진입");
+		}
+		IReviewDAO dao = sqlSession.getMapper(IReviewDAO.class);
+		 
+		 
 		System.out.println("postId : " + postId);
 		System.out.println("userId Length: " + userId.length);
 		System.out.println("badgePointId Length: " + badgePointId.length);
 		System.out.println("contents Length: " + contents.length);
-			
+		
 		for (int i = 0; i < userId.length; i++)
 		{
 			System.out.println("userId : " + userId[i]);
 			System.out.println("badgePointId : " + badgePointId[i]);
 			System.out.println("contents : " + contents[i]);
+			System.out.println("grade : " + grade[i]);
 			System.out.println(contents[i].equals(""));
 			
 			// review에 인서트
+			String reviewId = dao.getNextReviewId();
+			dao.reviewInsertMain(postId, giveUserId, userId[i], grade[i]);
 			
 			// badgePointId가 nonSelect가 아니거나 contents가 ""이 아닐경우 reivew_sub에도 insert
-			if( !badgePointId.equals("nonSelect") || !contents.equals("")) {
+			if( !badgePointId[i].equals("nonSelect") || !contents[i].equals("")) {
+				if(badgePointId[i].equals("nonSelect"))
+					badgePointId[i]=null;
 				System.out.println("REVIEWSUB에도 인서트");
+				dao.reviewInsertSub(reviewId, badgePointId[i], contents[i]);
 			}
-			
-			
 		}
-		 
 		 return "redirect:createpostlist.action";
 	 }
 	 
@@ -180,9 +192,8 @@ public class MypageController
 		if(userId==null||userId.equals(""))
 		{
 		   System.out.println("비로그인 유저 진입");
-		   return "redirect: login.action"; // 비로그인시 돌려보낼 곳 
+		   return "redirect: login.action";
 		}
-		// 로그인이라면
 		else
 		{
 		   System.out.println("로그인 유저 진입");
@@ -193,7 +204,6 @@ public class MypageController
 		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
 		
 		ArrayList<PostDTO> reviewList = dao2.reviewList(userId);
-		
 		
 		model.addAttribute("myPageList",dao1.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));
@@ -206,19 +216,26 @@ public class MypageController
 		return "/WEB-INF/views/JoinPostList.jsp";
 	}
 	
-	@RequestMapping(value="/hostInquiry.action", method = RequestMethod.POST)
+	@RequestMapping(value="/hostInquiry.action", method = RequestMethod.GET)
 	public String reviewHostInquiry(String postId, ModelMap model, HttpSession session)
 	{
 		
 		IReviewDAO review = sqlSession.getMapper(IReviewDAO.class);
 		String userId = (String) session.getAttribute("userId");	
+		if(userId==null||userId.equals(""))
+		{
+		   System.out.println("비로그인 유저 진입");
+		   return "redirect: login.action";
+		}
+		else
+		{
+		   System.out.println("로그인 유저 진입");
+		}
 		
 		model.addAttribute("list", review.inquryView(userId, postId));
-		
 
 		System.out.println("123:"+postId + userId);
 		
 		return "/WEB-INF/views/HostInquiryAjax.jsp";
-		
 	}
 }

@@ -63,7 +63,7 @@ $(document).ready(function()
 		 
 		 $.ajax({
 	         url : "<%=cp %>/hostInquiry.action",
-	         type : "post",
+	         type : "get",
 	         data : {'postId': inquiry},
 	     }).done(function(result)
 		 {
@@ -91,6 +91,10 @@ $(document).ready(function()
  	   $(this).parent().children("input").val(num);
     });
     
+    
+    $(".star-show>div:nth-child(2)").each(function(index,item){
+		$(item).css("width", $(item).next().val()*20+"%")
+	});
     
     $(document).on('click','.selectPoint', function(){
     	
@@ -170,9 +174,9 @@ $(document).ready(function()
 			height: 70%;
 		}
       .flex-badge-list{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: space-evenly;
          align-items: center;
       }
       
@@ -189,25 +193,25 @@ $(document).ready(function()
           width: 75px;
           height: 75px;
       }
-      #sendReview .modal-content{
+      .modal-content{
       	  padding: 0px 30px 0px 30px;
       }
-      #sendReview .modal-content>div:FIRST-CHILD{
+      .modal-content>div:FIRST-CHILD{
       	 height: 70px;
       }
-      #sendReview .modal-content>div:LAST-CHILD{
+      .modal-content>div:LAST-CHILD{
       	 height: 80px;
       }
-      #sendReview .modal-content>div:NTH-CHILD(2){
+      .modal-content>div:NTH-CHILD(2){
       	 height: 550px;
       }
       #exampleModalLabel{
     	  font-size: 24px;
       }
-      #reviewModal{
+      #reviewModal, #inquiryModal{
       	  top: 10%;
       }
- 	  #reviewModal>div:FIRST-CHILD{
+ 	  #reviewModal>div:FIRST-CHILD, #inquiryModal>div:FIRST-CHILD{
 		    display: flex;
 		    margin: none;
 		    width: 1000px;
@@ -324,26 +328,7 @@ $(document).ready(function()
                                 <span class="font-bold"><a href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;
                                 <span><a href="joinpostlist.action">참여모임</a></span>
                             </div>
-							<form action="myreviewinsert.action" method="POST">
-								<input type="text" name="userId" value=""/>
-								<input type="text" name="badgePointId" value="" />
-								<input type="text" name="contents" value="" />
-								<input type="text" name="postId" value="" />
-								
-
-								<input type="text" name="userId" value=""/>
-								<input type="text" name="badgePointId" value="" />
-								<input type="text" name="contents" value="" />
-								<input type="text" name="postId" value="" />
-								
-								
-								<input type="text" name="userId" value=""/>
-								<input type="text" name="badgePointId" value="" />
-								<input type="text" name="contents" value="" />
-								<input type="text" name="postId" value="" />
-								
-								<button type="submit">제출</button>							
-							</form>
+							
                             <div class="MyPage-body-body">
                                 <div class="PostList flex-col-left-center">
                                     
@@ -430,12 +415,11 @@ $(document).ready(function()
 		<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
+		    
 		      <div class="modal-header">
 		        <h2 class="modal-title" id="exampleModalLabel">후기 남기기</h2>
-		        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-		          <span aria-hidden="true">&times;</span>
-		        </button> -->
 		      </div>
+		      
 		      <div class="modal-body">
 		        <div>
 					<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 15px;">
@@ -452,9 +436,11 @@ $(document).ready(function()
 						<input type="hidden" id="postId" name="postId" value="" />
 						
 		      </div>
+		      
 		      <div class="modal-footer flex-review">
 		        <button type="submit" id="review-submit" class="btn btn-orange flex-col-center-center btn-160-45">작성 완료</button>
 		      </div>
+		      
 		    </div>
 		  </div>
 		</div>
@@ -464,9 +450,11 @@ $(document).ready(function()
 		<div class="modal fade" id="inquiryModal" tabindex="-1" role="dialog" aria-labelledby="popupModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg" role="document">
 		    <div class="modal-content">
+		    
 		      <div class="modal-header">
 		        <h2 class="modal-title" id="exampleModalLabel">후기 조회</h2>
 		      </div>
+		      
 		      <div class="modal-body">
 		        <div>
 					<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 15px;">
@@ -477,14 +465,16 @@ $(document).ready(function()
 					</div>
 				</div>
 						
-						<div id="A" style="overflow:auto; height: 100%;">
+						<div id="A" style="overflow:auto; height: 495px;">
 							
 						</div>
 						
 		      </div>
+		      
 		      <div class="modal-footer flex-review">
 		        <button type="button" data-dismiss="modal" class="btn btn-orange flex-col-center-center btn-160-45">후기 닫기</button>
 		      </div>
+		      
 		    </div>
 		  </div>
 		</div>

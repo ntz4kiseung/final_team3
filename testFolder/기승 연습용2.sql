@@ -1,3 +1,96 @@
+
+-- REVIEWID 만들어주기
+SELECT ADD_ID('REVIEW','REVIEWID', 'RV')
+FROM DUAL;
+
+-- REVIEW INSERT 구문
+INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
+VALUES(ADD_ID('REVIEW','REVIEWID', 'RV'), 'POSTID', 'GIVEUSERID', 'TAKEUSERID', 'GRADE', SYSDATE);
+
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+-- REVIEW할 REVIEW ID와 BADGEPOINTID를 받아 놓음 + CONTENTS도 있어야 함
+-- REVIEW_SUB에 INSERT
+INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) 
+VALUES(REVIEW_SUB_SEQ.NEXTVAL, 'REVIEWID', 'BADGEPOINTID', 'CONTENTS');
+-- 방금 INSERT한 REVIEWID로 TAKEUSERID를 가져옴
+SELECT TAKEUSERID
+FROM REVIEW
+WHERE REVIEWID='RV00001';
+-- 유효기간 내 뱃지 포인트중 TAKEUSERID가 방금 받은 BADGEPOINTID에 해당하는 갯수를 찍어봄
+SELECT COUNT(*)
+FROM REVIEW_SUB RS JOIN REVIEW R ON RS.REVIEWID=R.REVIEWID
+WHERE TAKEUSERID = 'anlant'
+  AND ADD_MONTHS(REVIEWDATE,12)>=SYSDATE
+  AND BADGEPOINTID='BP00002';
+-- 찍은게 3이상이면 USER_BADGE_LOG에 기록을 남겨줘야 하는데 
+-- 기록 남기려면 추가로 필요한게 GETREVIEWID와 EXPIRATIONREVIEWID임. 
+-- GETREVIEWID는 이미 가지고 있음.
+-- EXPIRATIONREVIEWID를 뽑아옴. 위 조회문에서 3번째걸 뽑으면 됨
+SELECT REVIEWID
+FROM
+(
+SELECT RS.REVIEWID, RS.BADGEPOINTID, R.REVIEWDATE, ROW_NUMBER() OVER(ORDER BY R.REVIEWDATE DESC) AS NUM
+FROM REVIEW_SUB RS JOIN REVIEW R ON RS.REVIEWID=R.REVIEWID
+WHERE TAKEUSERID = 'anlant'
+  AND ADD_MONTHS(REVIEWDATE,12)>=SYSDATE
+  AND BADGEPOINTID='BP00002'
+)
+WHERE NUM=3;
+-- 받아온 걸로 USER_BADGE_LOG에 INSERT 해주면 됨
+INSERT INTO USER_BADGE_LOG(BADGELOGID, USERID, BADGEPOINTID, GETREVIEWID, EXPIRATIONREVIEWID)
+VALUES(ADD_ID('USER_BADGE_LOG','BADGELOGID', 'BL'), 'USERID', 'BP00011', 'GETREVIEWID', 'EXPIRATIONREVIEWID');  
+
+CREATE OR REPLACE PROCEDURE INSERT_REVIEW_SUB(V_REVIEWID VARCHAR2, V_BADGEPOINTID VARCHAR2, V_CONTETNS VARCHAR2)
+IS
+    V_TAKEUSERID            USER_ESSENTIAL.USERID%TYPE;
+    V_EXPIRATIONREVIEWID    REVIEW.REVIEWID%TYPE;
+    V_COUNT                 NUMBER;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('프로시저 시작');
+    INSERT INTO REVIEW_SUB(ID, REVIEWID, BADGEPOINTID, CONTENTS) 
+    VALUES(REVIEW_SUB_SEQ.NEXTVAL, V_REVIEWID, V_BADGEPOINTID, V_CONTETNS);
+    
+    SELECT TAKEUSERID INTO V_TAKEUSERID
+    FROM REVIEW
+    WHERE REVIEWID=V_REVIEWID;
+    
+    SELECT COUNT(*) INTO V_COUNT
+    FROM REVIEW_SUB RS JOIN REVIEW R ON RS.REVIEWID=R.REVIEWID
+    WHERE TAKEUSERID = V_TAKEUSERID
+      AND ADD_MONTHS(REVIEWDATE,12)>=SYSDATE
+      AND BADGEPOINTID=V_BADGEPOINTID;
+      
+    IF V_COUNT>=3
+        THEN    SELECT REVIEWID INTO V_EXPIRATIONREVIEWID
+                FROM
+                (
+                SELECT RS.REVIEWID, RS.BADGEPOINTID, R.REVIEWDATE, ROW_NUMBER() OVER(ORDER BY R.REVIEWDATE DESC) AS NUM
+                FROM REVIEW_SUB RS JOIN REVIEW R ON RS.REVIEWID=R.REVIEWID
+                WHERE TAKEUSERID = V_TAKEUSERID
+                  AND ADD_MONTHS(REVIEWDATE,12)>=SYSDATE
+                  AND BADGEPOINTID=V_BADGEPOINTID
+                )
+                WHERE NUM=3;
+                
+                DBMS_OUTPUT.PUT_LINE('USER_BADGE_LOG 기록남김');
+                
+                INSERT INTO USER_BADGE_LOG(BADGELOGID, USERID, BADGEPOINTID, GETREVIEWID, EXPIRATIONREVIEWID)
+                VALUES(ADD_ID('USER_BADGE_LOG','BADGELOGID', 'BL'), V_TAKEUSERID, V_BADGEPOINTID, V_REVIEWID, V_EXPIRATIONREVIEWID); 
+    END IF;
+     DBMS_OUTPUT.PUT_LINE('프로시저 종료');
+END;
+
+
+
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+
 SELECT *
 FROM
 (
