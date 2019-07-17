@@ -4,6 +4,16 @@ public class ReviewDTO
 {
 	private String userId, userName, userurl, grade, badgePointId, badgePointName, takeurl, contents;
 	private String giveuserId, giveuserName, giveuserUrl;
+	private String postId;
+	
+	public String getPostId()
+	{
+		return postId;
+	}
+	public void setPostId(String postId)
+	{
+		this.postId = postId;
+	}
 	public String getUserId() {
 		return userId;
 	}

@@ -8,8 +8,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>개설모임</title>
     
     <!-- 부트스트랩(bootstrap css, jquery, popper.js, bootstrap js 필요) -->
@@ -21,17 +19,6 @@
     <link href="css/sagyo-font.css" rel="stylesheet">
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
 <!-- 추가한거 -->
 <script type="text/javascript">
@@ -66,37 +53,7 @@ $(document).ready(function()
 			 }
 	     });
 		 
-
-		 $(document).on("click",".selectPoint", function(){
-				
-				$("[data-toggle=popover]").popover({
-				    html : true,
-				    sanitize : false,
-				    content: function() {
-				    var content = $(this).attr("data-popover-content");
-				    return $(content).children(".popover-body").html();
-				    }
-				 });
-				
-				var temp=$(this);
-				
-				debugger;
-				/* $(document).on('click', '.badgePoint', function(){
-					$(temp).attr("src", $(this).attr("src"));
-					$(temp).next().val($(this).next().val());
-					
-					debugger;
-				}); */
-				
-			});	
-		 
-		 
-		 
-		 
-		 
-		 
 	 });
-
 	 
 	 // 후기 조회
 	 $(".btn-inquiry").click(function()
@@ -116,38 +73,9 @@ $(document).ready(function()
 		 
 	 });
 	
-
-	$("#review-submit").click(function() {
-		
-		var postId = $("#postId").val();		// 방 번호
-		
-		grade = new Array();
-		userId = new Array();
-		badgeId = new Array();
-		contents = new Array();
-		
-		var reviewList = document.getElementById("reviewList");
-		
-		var count = reviewList.childElementCount;
-		
-		for (var i = 0; i < count; i++)
-		{
-			grade += $('#grade'+i).children('.hidden').val();	// 등급 (1~5)
-			userId += $('#list'+i).find('input.hidden').val();	// 받는 유저 ID
-			badgeId += $("#badgePointId"+i).val();				// 뱃지 ID
-			contents += $("#contents"+i).val();					// 내용
-		}
-		
-		var form = document.getElementById("sendReview");
-		
-		form.submit();
-
-	});
-	
     // 별점 평가시 쓰이는 jQuery
     // 평가용 별 누를때 마다 발동됨
-    $(".star-rating>img").click(function(){
- 	   
+    $(document).on('click','.star-rating>img',function(){
  	   var num = $(this).attr('id');
  	   
  	   $(this).parent().children('img').each(function(index, item){
@@ -162,21 +90,29 @@ $(document).ready(function()
  	   // 색 칠해진 별의 갯수를 hidden input 태그에 넣어줌
  	   $(this).parent().children("input").val(num);
     });
-		
-	
     
     
+    $(document).on('click','.selectPoint', function(){
+    	
+    	$("[data-toggle=popover]").popover({
+		    html : true,
+		    sanitize : false,
+		    content: function() {
+		    temp=$(this);
+		    var content = $(this).attr("data-popover-content");
+		    return $(content).children(".popover-body").html();
+		    }		    
+		 });
+    	
+    	$(document).on('click', '.badgePoint', function(){
+			$(temp).attr("src", $(this).attr("src"));
+			$(temp).next().val($(this).next().val());
+		}); 
+    });
     
     
 });
 	  
-	
-	 
-
-	
-	
-	
-
 </script>
 <style type="text/css">
         .review-post{
@@ -318,12 +254,7 @@ $(document).ready(function()
 <body>
     <div class="browser flex-col-center-center">
     
-    
-    
 		<c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
-
-
-
 
 		<div class="body-box flex-item-grow flex-col-center-up">
 		<div class="body flex-item-grow flex-col-center-center">
@@ -393,7 +324,26 @@ $(document).ready(function()
                                 <span class="font-bold"><a href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;
                                 <span><a href="joinpostlist.action">참여모임</a></span>
                             </div>
+							<form action="myreviewinsert.action" method="POST">
+								<input type="text" name="userId" value=""/>
+								<input type="text" name="badgePointId" value="" />
+								<input type="text" name="contents" value="" />
+								<input type="text" name="postId" value="" />
+								
 
+								<input type="text" name="userId" value=""/>
+								<input type="text" name="badgePointId" value="" />
+								<input type="text" name="contents" value="" />
+								<input type="text" name="postId" value="" />
+								
+								
+								<input type="text" name="userId" value=""/>
+								<input type="text" name="badgePointId" value="" />
+								<input type="text" name="contents" value="" />
+								<input type="text" name="postId" value="" />
+								
+								<button type="submit">제출</button>							
+							</form>
                             <div class="MyPage-body-body">
                                 <div class="PostList flex-col-left-center">
                                     
@@ -503,7 +453,7 @@ $(document).ready(function()
 						
 		      </div>
 		      <div class="modal-footer flex-review">
-		        <button type="button" id="review-submit" class="btn btn-orange flex-col-center-center btn-160-45">작성 완료</button>
+		        <button type="submit" id="review-submit" class="btn btn-orange flex-col-center-center btn-160-45">작성 완료</button>
 		      </div>
 		    </div>
 		  </div>
