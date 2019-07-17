@@ -2,6 +2,8 @@ package com.test.mybatis;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,17 +19,18 @@ public class PostReadHostController
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value = "/postreadhost.action", method = RequestMethod.GET)
-	public String hostList(Model model)
+	public String hostList(Model model,HttpSession session, String postId)
 	{
-		String result = null;
-		
 		IPostDAO IPostDAO = sqlSession.getMapper(IPostDAO.class);
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
+		
 		String followId = "anlant";
 		String postHostId = "PT00002";
+		
 		int serchNum = (Integer)joinDAO.serchjoin(postHostId);
 		ArrayList<JoinDTO> joinDTO = joinDAO.joinlist(postHostId);
+		
 		for (JoinDTO joinDTOs : joinDTO)
 		{
 			String delJoin = joinDTOs.getDelJoin();
@@ -37,15 +40,14 @@ public class PostReadHostController
 				joinDAO.joinupdate(joinDTOs);
 			}
 		}
+		
 		model.addAttribute("serchNum",serchNum);
 		model.addAttribute("postlist",IPostDAO.postlist(followId, postHostId)); 
 		model.addAttribute("list",joinDAO.joinlist(postHostId)); 
 		model.addAttribute("replylist",joinDAO.replylist(postHostId));
 		model.addAttribute("reportlist", reportDAO.reportlist());
 		 
-		result = "WEB-INF/views/PostReadHost.jsp";
-
-		return result;
+		return "WEB-INF/views/PostReadHost.jsp";
 	}
 	
 	@RequestMapping(value = "/hostreportjoininsert.action", method = RequestMethod.GET)
@@ -154,5 +156,27 @@ public class PostReadHostController
 		}
 		result = "redirect:postreadhost.action";
 		return result;
+	}
+	
+	@RequestMapping(value="post.action")
+	public String postRead(HttpSession session, String postId)
+	{
+		String logInUserId = (String) session.getAttribute("userId");
+		IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
+		String hostId = dao.getHost(postId);
+		
+		if(postId==null || postId.equals(""))
+			return "redirect: main.action";
+		
+		if(hostId==null || hostId.equals(""))
+			return "redirect: main.action";
+		
+		if(logInUserId==null || logInUserId.equals(""))
+			return "redirect: login.action";
+		
+		if(logInUserId==hostId)
+			return ("redirect: postreadhost.action?postId="+postId);
+		else
+			return ("redirect: postreadjoin.action?postId="+postId);
 	}
 }

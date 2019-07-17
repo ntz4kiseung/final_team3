@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MyProfileController
@@ -51,7 +49,6 @@ public class MyProfileController
 		model.addAttribute("myPageList", user.myPageList(userId));
 		model.addAttribute("myPageAddrList", user.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", user.myPageInterList(userId));
-	
 		
 		return "WEB-INF/views/MyProfileModify.jsp";
 	}
@@ -104,7 +101,6 @@ public class MyProfileController
 		userA.userTelInsert(user);
 		userA.userEmailInsert(user);
 		
-		
 		ArrayList<AddrDTO> addrB = userA.myPageAddrList(userId);
 		ArrayList<InterDTO> interB = userA.myPageInterList(userId);
 		
@@ -112,10 +108,6 @@ public class MyProfileController
 			addrA.updateAddr1(userId, addr, addrB.get(0));
 		else
 			System.out.println("지역1 실패");
-		
-		System.out.println(addrB.get(0).getAddrGuId2());
-		System.out.println(userId);
-		
 		
 		if(!addr.getAddrGuId2().equals(addrB.get(0).getAddrGuId2()))
 			addrA.updateAddr2(userId, addr, addrB.get(0));
@@ -142,21 +134,41 @@ public class MyProfileController
 		else
 			System.out.println("관심사3 실패");
 		
-		
 		return "redirect:myprofile.action";
 	}
 	
 	@RequestMapping(value="/opprofile.action")
-	public String goOpProfile(Model model, HttpSession session, String opuserid)
+	public String goOpProfile(Model model, HttpSession session, String userId)
 	{
 		IUserDAO user = sqlSession.getMapper(IUserDAO.class);
 		
-		model.addAttribute("UserList",user.userList(opuserid));
-		model.addAttribute("MyPageBad",user.MyPageBad(opuserid));
-		model.addAttribute("myPageList", user.myPageList(opuserid));
-		model.addAttribute("myPageAddrList", user.myPageAddrList(opuserid));
-		model.addAttribute("myPageInterList", user.myPageInterList(opuserid));
+		model.addAttribute("UserList",user.userList(userId));
+		model.addAttribute("MyPageBad",user.MyPageBad(userId));
+		model.addAttribute("myPageList", user.myPageList(userId));
+		model.addAttribute("myPageAddrList", user.myPageAddrList(userId));
+		model.addAttribute("myPageInterList", user.myPageInterList(userId));
 		
 		return "WEB-INF/views/OpponentProfile.jsp";
 	}
+	
+	@RequestMapping(value="/profile.action")
+	public String userProfile(HttpSession session, String userId)
+	{
+		String logInUserId = (String) session.getAttribute("userId");
+		
+		if(userId==null || userId.equals(""))
+			return "redirect: main.action";
+		
+		if(logInUserId==null || logInUserId.equals(""))
+			return ("redirect: opprofile.action?userId="+userId);
+		else
+		{
+			if(logInUserId==userId)
+				return "redirect: myprofile.action";
+			else
+				return ("redirect: opprofile.action?userId="+userId);
+		}
+		
+	}
+	
 }

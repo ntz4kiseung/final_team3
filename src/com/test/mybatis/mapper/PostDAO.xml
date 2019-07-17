@@ -258,5 +258,9 @@
 		FROM DUAL
 	</select>
 	
-
+	<select id="getHost" resultType="java.lang.String">
+		SELECT USERID
+		FROM POST
+		WHERE POSTID=#{postId}	
+	</select>
 </mapper>
