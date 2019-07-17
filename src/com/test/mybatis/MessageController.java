@@ -34,7 +34,7 @@ public class MessageController
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
 		
-		model.addAttribute("messageRecevieList",dao.messageRecevieList());
+		model.addAttribute("messageRecevieList",dao.messageRecevieList(userId));
 		 
 		return "WEB-INF/views/MyMessageReceive.jsp";
 	}
@@ -52,18 +52,18 @@ public class MessageController
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
 		
-		model.addAttribute("messageSendList",dao.messageSendList());
+		model.addAttribute("messageSendList",dao.messageSendList(userId));
 		 
 		return "WEB-INF/views/MyMessageSend.jsp";
 	}
 
 
 	@RequestMapping(value="/messagesend.action", method=RequestMethod.POST)	
-	public String MessageSend(MessageDTO m)
+	public String MessageSend(MessageDTO m, HttpSession session)
 	{
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
-		
-		dao.messageAdd(m); 
+		String userId = (String) session.getAttribute("userId");
+		dao.messageAdd(userId, m); 
 		
 		return "redirect:mymessagerecevie.action";
 		
@@ -78,18 +78,18 @@ public class MessageController
 
 		IMessageDAO dao2 = sqlSession.getMapper(IMessageDAO.class);
 		result = dao2.checkId(id);
-
+		System.out.println(result);
 		response.getWriter().print(result);
 		
 	}
 
 	
 	@RequestMapping(value="/messagesend2.action", method=RequestMethod.POST)	
-	public String MessageSend2(MessageDTO m)
+	public String MessageSend2(MessageDTO m, HttpSession session)
 	{
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
-		
-		dao.messageAdd(m); 
+		String userId = (String) session.getAttribute("userId");
+		dao.messageAdd(userId, m); 
 		
 		return "redirect:mymessagesend.action";
 		

@@ -146,5 +146,26 @@ public class MyProfileController
 		return "redirect:myprofile.action";
 	}
 	
+	
+	
+	@RequestMapping(value="/opprofile.action")
+	public String goOpProfile(Model model, HttpSession session, String opUserId)
+	{
+		String userId = (String) session.getAttribute("userId");
+		
+		opUserId = "B001";
+		
+		IUserDAO user = sqlSession.getMapper(IUserDAO.class);
+		
+		model.addAttribute("UserList",user.userList(opUserId));
+		model.addAttribute("MyPageBad",user.MyPageBad(opUserId));
+		model.addAttribute("myPageList", user.myPageList(opUserId));
+		model.addAttribute("myPageAddrList", user.myPageAddrList(opUserId));
+		model.addAttribute("myPageInterList", user.myPageInterList(opUserId));
+		
+		
+		return "WEB-INF/views/OpponentProfile.jsp";
+	}
+	
 
 }

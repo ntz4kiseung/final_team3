@@ -10,7 +10,9 @@
 <div class="review-post flex-review" id="list${status.index}">
 	<div id="repBadge" class="flex-review-first" style="text-align: center;">
 		<div class="inquList-post-badge">
-		<img src="${inq.giveuserUrl }" alt="">
+		<button type="button" class="opProfile" id="opBadge${status.index}" name="opBadge${status.index}" value="${inq.giveuserId}">
+			<img src="${inq.giveuserUrl }" alt="">
+		</button>
 		</div>
 		
 		<input class="hidden" value="" name="userId"/>

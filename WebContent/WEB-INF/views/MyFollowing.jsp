@@ -133,7 +133,7 @@ $(document).ready(function(){
                             <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
                             <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
                             <div><a class="navclick" href="myfollowing.action">팔로우</a></div>
-                            <div><a class="navnonclick" href="#">내모임</a></div>
+                            <div><a class="navnonclick" href="createpostlist.action">내모임</a></div>
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
@@ -152,7 +152,7 @@ $(document).ready(function(){
                                     <div class="MyFollow-user flex-row-left-center">
         
                                         <div class="user-badge-box">
-                                        		 <img class="user-bad-badge" src="${followingBad[status.index].urlBad }" alt="">
+                                        		<img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
                      
                                                 <img class="followbadge" src="<%=cp %>/${fList.url } " alt="">
                                         </div>

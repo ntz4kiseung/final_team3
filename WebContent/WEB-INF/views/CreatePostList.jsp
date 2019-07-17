@@ -23,16 +23,6 @@
     <link href="css/sagyo.css" rel="stylesheet">
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 <!-- 추가한거 -->
 <script type="text/javascript">
 $(document).ready(function()
@@ -72,6 +62,8 @@ $(document).ready(function()
 			 }
 	     });
 	 });
+	 
+	
 
 	 
 	 // 후기 조회
@@ -80,6 +72,7 @@ $(document).ready(function()
 		 var inquiry = $(this).val();
 		 console.log(inquiry);
 		 
+		
 		 $.ajax({
 	         url : "<%=cp %>/hostInquiry.action",
 	         type : "post",
@@ -128,7 +121,7 @@ $(document).ready(function()
 	    var content = $(this).attr("data-popover-content");
 	    return $(content).children(".popover-body").html();
 	    }
-	 })
+	    })
 		
 	 });
 	  
@@ -159,7 +152,7 @@ $(document).ready(function()
 		   	}
 	 	   
 	 	   	$(this).parent().children("input").val(num);
-	} )
+	})
 	
 	
 	$(document).on("click",".badgePoint", function(){
@@ -169,7 +162,10 @@ $(document).ready(function()
 		$('#'+selectPoint).attr('src', src);
 		$('#'+selectPoint).next().attr('value', badgePointId);
 		
-	} )	
+	})
+
+	
+	
 });
 
 </script>
@@ -374,11 +370,11 @@ $(document).ready(function()
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
-                            <div><a href="#">프로필</a></div>
-                            <div><a href="#">쪽지함</a></div>
-                            <div><a href="#">뱃지</a></div>
-                            <div><a href="#">팔로우</a></div>
-                            <div><a  class="font-bold font-orange" href="createpostlist.action">내모임</a></div>
+                            <div><a class="navnonclick" href="myprofile.action">프로필</a></div>
+                            <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
+                            <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
+                            <div><a class="navnonclick" href="myfollowing.action">팔로우</a></div>
+                            <div><a class="navclick" href="createpostlist.action">내모임</a></div>
                         </div>
                         
                         
