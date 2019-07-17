@@ -636,7 +636,10 @@ function submitContents(elClickedObj)
     }
     else
     {
-    	debugger;
+    	var hour = $('#hour').val();
+        var min = $('#min').val();
+        var meetDate = $('#filter-minMeetDate').html();
+        $('#meetDate').val(meetDate+hour+":"+min+":00");   
     	$('#PostWriteForm').submit();
     }
 	

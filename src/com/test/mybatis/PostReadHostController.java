@@ -19,16 +19,16 @@ public class PostReadHostController
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value = "/postreadhost.action", method = RequestMethod.GET)
-	public String hostList(Model model, HttpSession session)
+	public String hostList(Model model, HttpSession session, String postId)
 	{
 		String result = null;
-		
+		System.out.println("test");
 		String userId = (String)session.getAttribute("userId");
 		
 		IPostDAO IPostDAO = sqlSession.getMapper(IPostDAO.class);
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
-		String postHostId = "PT00002";
+		String postHostId = postId;
 		int serchNum = (Integer)joinDAO.serchjoin(postHostId);
 		ArrayList<JoinDTO> joinDTO = joinDAO.joinlist(postHostId);
 		for (JoinDTO joinDTOs : joinDTO)
@@ -59,7 +59,6 @@ public class PostReadHostController
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String userId = (String)session.getAttribute("userId");
-		
 		reportDTO.setUserId(userId);
 		reportDAO.reportjoininsert(reportDTO);
 		int serchNum = (Integer)reportDAO.serchreportjoin(reportDTO.getReportId());
@@ -67,7 +66,7 @@ public class PostReadHostController
 		{
 			reportDAO.joindelcheckinsert(reportDTO);
 		}
-		result = "redirect:postreadjoin.action";
+		result = "redirect:postreadhost.action";
 		return result;
 	}
 	

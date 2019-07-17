@@ -28,14 +28,14 @@ public class PostReadJoinController
 	// 이 때, 전송 방식은 submit 액션인 경우만 POST
 	// 나머지 모든 전송 방식은 GET 으로 처리한다.
 	@RequestMapping(value = "/postreadjoin.action", method = RequestMethod.GET)
-	public String readList(Model model, HttpSession session)
+	public String readList(Model model, HttpSession session,String postId)
 	{
 		String result = null;
 		IPostDAO postDAO = sqlSession.getMapper(IPostDAO.class);
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String userId = (String)session.getAttribute("userId");
-		String postHostId = "PT00002";
+		String postHostId = postId;
 		int serchNum = (Integer)joinDAO.serchjoin(postHostId);
 		ArrayList<JoinDTO> joinDTO = joinDAO.joinlist(postHostId);
 		String serchjoinid = joinDAO.serchjoinid(postHostId, userId);
@@ -96,6 +96,8 @@ public class PostReadJoinController
 		IJoinDAO joindao = sqlSession.getMapper(IJoinDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		System.out.println(joinDTO.getContents());
+		System.out.println(postHostId);
+		System.out.println(userId);
 		joinDTO.setUserId(userId);
 		joindao.joininsert(joinDTO, postHostId);
 		
@@ -157,6 +159,9 @@ public class PostReadJoinController
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		joinDTO.setUserId(userId);
+		System.out.println(joinDTO.getContents());
+		System.out.println(joinDTO.getJoinId());
+		System.out.println(joinDTO.getUserTypeId());
 		joinDAO.replyinsert(joinDTO);
 		result = "redirect:postreadjoin.action";
 		return result;

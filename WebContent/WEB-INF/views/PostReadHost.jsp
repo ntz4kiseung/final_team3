@@ -27,6 +27,10 @@
 {
 	display: none;
 }
+.hidden
+{
+	display: none;
+}
 </style>
 <script type="text/javascript">
 	$(document).ready(function()
@@ -62,7 +66,7 @@
 			var reply = $(this).attr('name');
 			$('#reply-insert-Btn').click(function()
 			{
-				location.href="hostreplyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val();
+				location.href="hostreplyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00001";
 			});	
 		});
 		
@@ -88,13 +92,13 @@
 			var userId="";
 			$('.nickName').each(function(index)
 			{
-				if($(this).attr('id') == 'ST00003')
+				alert($(this).attr('id'));
+				if($(this).attr('id') == "ST00003")
 				{
-					userId += $(this).attr('name')+ " ";
+					userId += $(this).val()+ " ";
 				}
 			});	
-			userId = $('#takeUserIds').val(userId);
-			
+			$('#takeUserIds').val(userId);
 			$('#message-close').click(function()
 			{
 				$('#takeUserIds').empty();
@@ -183,7 +187,9 @@
 			{
 				$('#meeting-contents').html('인원이 맞지 않습니다.');
 			}	
-		
+			$('#mainlist').click(function(){
+				location.href="main.action";
+			});
 	});
 </script>
 
@@ -300,11 +306,14 @@
 			                            <div class="PostWrite-row-right">
 			                            	<c:choose>
 			                            	<c:when test="${join.statusId eq 'ST00001' || join.statusId eq 'ST00002'}">
-			                            	<input class="nickName" id="${join.statusId }" name="${join.joinId }" type="checkbox"
+			                            	<input type="checkbox" class="nickName" id="${join.statusId }" name="${join.joinId }" value="${join.userId }"
 			                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
 			                            	참가수락
 			                            	</c:when>
 			                            	</c:choose>
+			                            	<input type="checkbox" class="nickName hidden" id="${join.statusId }" name="${join.joinId }" value="${join.userId }"
+			                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
+			                            	참가수락
 		                            	</div>
 			                        </div>
 	                        	</c:when>
@@ -346,7 +355,7 @@
 
 <!-- 끝 --------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                         <div class="Post-footer flex-row-right-center">
-                            <button class="btn btn-outline-orange btn-120-35">목록으로</button>
+                            <button class="btn btn-outline-orange btn-120-35" id="mainlist">목록으로</button>
                         </div>
                     </div>
                 </div>

@@ -23,7 +23,7 @@
 <!-- ajax -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(window).on('load', function ()
+	$(document).ready(function()
 	{
 		$($('#test99')).each(function(index)
 		{
@@ -90,7 +90,7 @@
 			var reply = $(this).attr('name');
 			$('#reply-insert-Btn').click(function()
 			{
-				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val();
+				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00002";
 			});	
 		});
 		
@@ -109,10 +109,14 @@
 			var join = $(this).attr('name');
 			$('#join-reset-Btn').click(function()
 			{
-				alert(join);
 				location.href="joindelcheckinsert.action?reportId="+join;
 			});
 		});
+		$('#mainlist').click(function(){
+			location.href="main.action";
+		});
+
+			
 	});
 
 </script>
@@ -284,7 +288,7 @@
  						</c:forEach>
 <!-- 끝 ------------------------------------------------------------------------------------------------------------------------------------------------------------------ --> 						
                         <div class="Post-footer flex-row-right-center">
-                            <button class="btn btn-outline-orange btn-120-35">목록으로</button>
+                            <button class="btn btn-outline-orange btn-120-35" id="mainlist">목록으로</button>
                         </div>
                     </div>
                 </div>

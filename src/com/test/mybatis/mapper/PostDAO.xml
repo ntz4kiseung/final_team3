@@ -12,8 +12,14 @@
 	
 	<insert id="postinsert">
 		INSERT INTO POST(POSTID, USERID, TITLE, ADDRGUID, ADDRDETAIL, INTERSUBID, INTERDETAIL, MEETDATE, POSTDATE, CONTENTS, MOODID, LIMITGRADE, MINNUM, MAXNUM, DRINKID, SAMEGENDERID)
-		VALUES(ADD_ID('POST', 'POSTID', 'PT'), 'aberine', #{title}, #{addrGuId}, #{addrDetail}, #{interSubId}, #{interDetail}, TO_DATE(#{meetDate}, 'YYYY-MM-DD HH24:MI:SS'), SYSDATE, #{contents}, #{moodName}, #{grade}, #{minNum}, #{maxNum}, #{drink}, #{samegender})
+		VALUES(ADD_ID('POST', 'POSTID', 'PT'), #{userId}, #{title}, #{addrGuId}, #{addrDetail}, #{interSubId}, #{interDetail}, TO_DATE(#{meetDate}, 'YYYY-MM-DD HH24:MI:SS'), SYSDATE, #{contents}, #{moodName}, #{grade}, #{minNum}, #{maxNum}, #{drink}, #{samegender})
 	</insert>
+	
+	<select id="serchpost" resultType="java.lang.String">
+		SELECT MAX(POSTID) POSTID
+		FROM POST
+		WHERE USERID = #{userId}
+	</select>
 	<select id="searchList" resultType="com.test.mybatis.PostDTO">
 	<![CDATA[
 		SELECT *

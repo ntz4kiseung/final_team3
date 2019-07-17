@@ -18,6 +18,7 @@ public interface IPostDAO
 	public ArrayList<PostDTO> searchListGuest(SearchDTO s);
 	public ArrayList<PostDTO> searchCateList(SearchDTO s);
 	public int postinsert(PostDTO postDTO);
+	public String serchpost(String userId);
 	// 조현우 제작
 	public ArrayList<PostDTO> searchPostIdList(String userId);
 	public int postlistCheck(@Param("userId")String userId, @Param("postId")String postId);
