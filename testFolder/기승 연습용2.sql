@@ -1,3 +1,49 @@
+--guestReview
+
+SELECT P.USERID, UE.NICKNAME, PT.URL, 0 AS NUM
+FROM POST P JOIN USER_ESSENTIAL UE ON P.USERID=UE.USERID
+            JOIN USER_BADGE_LOG BL ON UE.BADGELOGID=BL.BADGELOGID
+            JOIN POINT PT ON BL.BADGEPOINTID=PT.BADGEPOINTID
+WHERE P.POSTID='PT01301'
+UNION
+SELECT J.USERID, UE.NICKNAME, PT.URL, ROW_NUMBER() OVER(ORDER BY J.USERID DESC) AS NUM
+FROM POST P JOIN JOIN J ON J.POSTID=P.POSTID
+            JOIN USER_ESSENTIAL UE ON J.USERID=UE.USERID
+            JOIN USER_BADGE_LOG BL ON UE.BADGELOGID=BL.BADGELOGID
+            JOIN POINT PT ON BL.BADGEPOINTID=PT.BADGEPOINTID
+WHERE P.POSTID='PT01301'
+  AND J.USERID NOT IN ('BAHEELA')
+  ;
+
+SELECT *
+FROM JOIN;
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+
+		SELECT POSTID ,USERID, GIVEUSERID, GIVEUSERNAME, GIVEUSERURL, GRADE, TAKEURL, CONTENTS
+		FROM VIEW_REVIEW_INQURY
+		WHERE UPPER(USERID) = UPPER('BROGAN') AND POSTID = 'PT01081';
+
+SELECT R.REVIEWID, R.TAKEUSERID AS USERID, R.GIVEUSERID, R.NICKNAME AS GIVEUSERNAME, VU.URL AS GIVEUSERURL, R.POSTID, R.GRADE, RS.BADGEPOINTID AS BADGEPOINTID, RS.URL AS TAKEURL, RS.CONTENTS AS CONTENTS
+FROM VIEW_REVIEW_NICK R, VIEW_SUB_URL RS, VIEW_DAEPO_BADGE_URL VU
+WHERE RS.REVIEWID(+) = R.REVIEWID AND VU.USERID = R.GIVEUSERID
+ORDER BY TAKEUSERID, REVIEWID;
+
+SELECT USERID
+FROM POST
+WHERE POSTID='PT00003'
+;
+select *
+from user_essential
+where userid='BROGAN';
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------
+
+
 
 -- REVIEWID 만들어주기
 SELECT ADD_ID('REVIEW','REVIEWID', 'RV')

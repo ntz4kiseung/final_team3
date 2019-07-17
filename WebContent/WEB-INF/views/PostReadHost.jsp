@@ -22,6 +22,12 @@
 <!-- sagyo.css -->
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="css/sagyo.css" rel="stylesheet">
+<style type="text/css">
+.allmessage
+{
+	display: none;
+}
+</style>
 <script type="text/javascript">
 	$(document).ready(function()
 	{
@@ -73,7 +79,7 @@
 		{
 			$('#delete-post-Btn').click(function()
 			{
-				location.href="hostpostDelete.action";
+				location.href="hostpostDelete.action?reportId="+$('#postId').attr('name');
 			});
 		});
 // 쪽지 기능 -------------------------------------------------------------------------------------------
@@ -170,6 +176,7 @@
 						});
 						}
 					});
+					$('.check-meeting').css('display', 'none');
 				});
 			}
 			else
@@ -241,7 +248,6 @@
                     <div class="Post-report flex-row-right-center">
                         <button class="btn post-d" data-toggle="modal" data-target="#delete-post">삭제하기</button>
                     </div>
-
                     <div class="Post-Status">
                         <div class="flex-row-center-center">현재 참가 신청인원 (<div id="serchNum">${serchNum }</div>/<div id="minNum">${postlist.minNum }</div>~<div id="maxNum">${postlist.maxNum })</div></div>
                         <div class="flex-row-right-center">
@@ -254,6 +260,12 @@
 
                     <div class="Post-joinList">
  						<c:forEach var="join" items="${list}">
+                   			<c:if test="${join.statusId eq 'ST00004' }">
+                   				<script type="text/javascript">
+                   					$('.check-meeting').css('display', 'none');
+                   					$('.allmessage').css('display', 'inline');                					
+                   				</script>
+ 							</c:if>
  							<c:choose>
  								<c:when test="${!empty join.delJoin}">
 		                        	<div class="comments flex-row-left-center">
@@ -286,9 +298,13 @@
 			                                </div>
 			                            </div>
 			                            <div class="PostWrite-row-right">
+			                            	<c:choose>
+			                            	<c:when test="${join.statusId eq 'ST00001' || join.statusId eq 'ST00002'}">
 			                            	<input class="nickName" id="${join.statusId }" name="${join.joinId }" type="checkbox"
 			                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
 			                            	참가수락
+			                            	</c:when>
+			                            	</c:choose>
 		                            	</div>
 			                        </div>
 	                        	</c:when>

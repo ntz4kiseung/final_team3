@@ -10,7 +10,7 @@ public interface IPostDAO
 	public ArrayList<PostDTO> myReviewList(String userId);
 	public ArrayList<PostDTO> reviewList(String userId);
 	public ArrayList<PostDTO> hostReview(String postId);
-	public ArrayList<PostDTO> guestReview(String postId);
+	public ArrayList<PostDTO> guestReview(@Param("postId")String postId, @Param("userId")String userId);
 	public ArrayList<PostDTO> mainHotList();
 	public ArrayList<PostDTO> mainRecommendList(String userId);
 	public ArrayList<PostDTO> mainApproachingList();

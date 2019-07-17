@@ -6,7 +6,7 @@
 </c:if>
 <c:forEach var="post" items="${list }">
 	<div class="PostList-post flex-row-left-center">
-        <div class="PostList-post-left flex-col-center-center">
+        <div class="PostList-post-left flex-col-center-center" onclick="location.href='profile.action?userId=${post.userId}'">
             <div class="PostList-post-badge user-badge-box">
                 <img class="user-bad-badge" src="${post.urlBad }" alt="">
 	            <img src="${post.url }" alt="">
@@ -15,7 +15,7 @@
 	            ${post.nickname }
 	        </div>
 	    </div>
-	    <div class="PostList-post-center flex-col-left-center">
+	    <div class="PostList-post-center flex-col-left-center" onclick="location.href='post.action?postId=${post.postId}'">
 	        <div class="PostList-post-title">
 	            ${post.title}, ${post.postId },총점: ${post.gradeTotal }, 개설자: ${post.gradeHost }, 주소: ${post.gradeAddr }, 제목: ${post.gradeTitle }, 본문: ${post.gradeContents }, 관심사: ${post.gradeInterDetail }
 	        </div>

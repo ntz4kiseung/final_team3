@@ -33,4 +33,9 @@
 		STATUSID = CASE WHEN 1<=(SELECT COUNT(STATUSID) FROM JOIN WHERE JOINID = #{hostPostId} AND STATUSID = 'ST00003') THEN 'ST00003' ELSE 'ST00002' END
 		]]>
 	</select>
+	<select id="serchjoinid" resultType="java.lang.String">
+		SELECT JOINID
+		FROM JOIN
+		WHERE POSTID= #{postHostId} AND USERID = #{userId}
+	</select>
 </mapper>

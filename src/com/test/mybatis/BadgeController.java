@@ -30,7 +30,6 @@ public class BadgeController
 		model.addAttribute("BadgeList1",dao.BadgeList1(userId));
 		model.addAttribute("BadgeList1_count",dao.BadgeList1_count(userId));
 		model.addAttribute("BadgeList1_date",dao.BadgeList1_date(userId));
-	
 		
 		model.addAttribute("BadgeList2",dao.BadgeList2(userId));
 		model.addAttribute("BadgeList3",dao.BadgeList3(userId));
@@ -41,10 +40,30 @@ public class BadgeController
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));
 		
-		
 		return "WEB-INF/views/MyBadge.jsp";
 	}
 	
+	@RequestMapping(value="/opbadge.action", method=RequestMethod.GET)
+	public String opBadgeList(Model model, String userId)
+	{
+		IBadgeDAO dao = sqlSession.getMapper(IBadgeDAO.class);
+		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
+		
+		model.addAttribute("BadgeList1",dao.BadgeList1(userId));
+		model.addAttribute("BadgeList1_count",dao.BadgeList1_count(userId));
+		model.addAttribute("BadgeList1_date",dao.BadgeList1_date(userId));
+		
+		model.addAttribute("BadgeList2",dao.BadgeList2(userId));
+		model.addAttribute("BadgeList3",dao.BadgeList3(userId));
+		model.addAttribute("BadgeList4",dao.BadgeList4(userId));
+		
+		model.addAttribute("MyPageBad",dao2.MyPageBad(userId));
+		model.addAttribute("myPageList", dao2.myPageList(userId));
+		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
+		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));
+		
+		return "WEB-INF/views/OpBadge.jsp";
+	}
 	
 	@RequestMapping(value="/mainBadge.action", method=RequestMethod.POST)	
 	public String mainBadge(String badgeLogId, HttpSession session) throws IOException
@@ -73,29 +92,7 @@ public class BadgeController
 		
 	}
 	
-	@RequestMapping(value="/opbadge.action", method=RequestMethod.GET)
-	public String opBadgeList(Model model, String opuserid)
-	{
-		
-		IBadgeDAO dao = sqlSession.getMapper(IBadgeDAO.class);
-		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
-		
-		model.addAttribute("BadgeList1",dao.BadgeList1(opuserid));
-		//model.addAttribute("BadgeList1_count",dao.BadgeList1_count(opuserid));
-		//model.addAttribute("BadgeList1_date",dao.BadgeList1_date(opuserid));
-	
-		
-		model.addAttribute("BadgeList2",dao.BadgeList2(opuserid));
-		model.addAttribute("BadgeList3",dao.BadgeList3(opuserid));
-		model.addAttribute("BadgeList4",dao.BadgeList4(opuserid));
-		
-		model.addAttribute("MyPageBad",dao2.MyPageBad(opuserid));
-		model.addAttribute("myPageList", dao2.myPageList(opuserid));
-		model.addAttribute("myPageAddrList", dao2.myPageAddrList(opuserid));
-		model.addAttribute("myPageInterList", dao2.myPageInterList(opuserid));
-		
-		return "WEB-INF/views/OpBadge.jsp";
-	}
+
 }
 
    

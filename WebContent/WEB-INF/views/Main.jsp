@@ -227,7 +227,6 @@
 		
     });
     
-    
   	$(function(){
 	    $("[data-toggle=popover]").popover({
 	        html : true,
@@ -247,13 +246,9 @@
 <body>
     <div class="browser flex-col-center-center">
         
-        
-        
         <c:import url="/WEB-INF/views/Navbar.jsp">
         	<c:param name="isMain"><%=user %></c:param>
         </c:import>
-
-
 
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
@@ -318,22 +313,20 @@
                             <div class="PostList flex-col-left-center">
                                 <!-- 라벨 -->
                                 <div class="PostList-label">
-                                    <%=( (user==null||user.equals("")) ? "요즘 가장 핫한 모임!" : "Sagyo가"+user+" 님에게 추천하는 모임")%>
+                                    <%=( (user==null||user.equals("")) ? "요즘 가장 핫한 모임!" : "Sagyo가 " + user + " 님에게 추천하는 모임")%>
                                 </div>
                                 <c:forEach var="post" items="${mainPostList1 }">
                                 	<div class="PostList-post flex-row-left-center">
-	                                    <div class="PostList-post-left flex-col-center-center">
-	                                        <div class="PostList-post-badge user-badge-box">
-	                                        
-	                                        	<img class="user-bad-badge" src="${post.urlBad }" alt="">
-	                                        	
-	                                            <img src="${post.url}" alt="">
-	                                        </div>
-	                                        <div>
-	                                            ${post.nickname}
-	                                        </div>
+	                                    <div class="PostList-post-left flex-col-center-center" onclick="location.href='profile.action?userId=${post.userId}'">
+		                                        <div class="PostList-post-badge user-badge-box">
+		                                        	<img class="user-bad-badge" src="${post.urlBad }" alt="">
+		                                            <img src="${post.url}" alt="">
+		                                        </div>
+		                                        <div>
+		                                            ${post.nickname}
+		                                        </div>
 	                                    </div>
-	                                    <div class="PostList-post-center flex-col-left-center">
+	                                    <div class="PostList-post-center flex-col-left-center" onclick="location.href='post.action?postId=${post.postId}'">
 	                                        <div class="PostList-post-title">
 	                                            ${post.title}
 	                                        </div>
@@ -402,7 +395,7 @@
                                 </div>
                                 <c:forEach var="post" items="${mainPostList2 }">
                                 	<div class="PostList-post flex-row-left-center">
-	                                    <div class="PostList-post-left flex-col-center-center">
+	                                    <div class="PostList-post-left flex-col-center-center" onclick="location.href='profile.action?userId=${post.userId}'">
 	                                        <div class="PostList-post-badge user-badge-box">
 	                                        	<img class="user-bad-badge" src="${post.urlBad }" alt="">
 	                                            <img src="${post.url}" alt="">
@@ -411,7 +404,7 @@
 	                                            ${post.nickname}
 	                                        </div>
 	                                    </div>
-	                                    <div class="PostList-post-center flex-col-left-center">
+	                                    <div class="PostList-post-center flex-col-left-center" onclick="location.href='post.action?postId=${post.postId}'">
 	                                        <div class="PostList-post-title">
 	                                            ${post.title}
 	                                        </div>

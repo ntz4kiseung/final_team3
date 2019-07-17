@@ -4,6 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <!-- sagyo.css -->
-<link href="css/sagyo.css" rel="stylesheet">
+<link rel="stylesheet" href="css/sagyo.css" >
 <style>
     .PostWrite{
         width: 100%;
@@ -131,333 +132,201 @@
 	}
 </style>
 <script type="text/javascript">
-	var js = jQuery.noConflict();
-	$(document).ready(function()
-	{
-		$(function() {
-			js( "#slider-range" ).slider({
-		      range: true,
-		      min: 2,
-		      max: 20,
-		      values: [ 2, 20 ],
-		      slide: function( event, ui ) {
-		    	  js( ".price-slider-one" ).val(ui.values[ 0 ]);
-		    	  js( ".price-slider-two" ).val(ui.values[ 1 ] );
-		    	  js( ".post-people-range" ).val(ui.values[ 0 ] + " ~ " + ui.values[ 1 ]+"명");
-		      }
-		    });
-			js( ".price-slider-one" ).val($( "#slider-range" ).slider( "values", 0 ));
-			js( ".price-slider-two" ).val($( "#slider-range" ).slider( "values", 1 ));
-			js( ".post-people-range" ).val($( "#slider-range" ).slider( "values", 0 ) +
-		    	      " ~ " + js( "#slider-range" ).slider( "values", 1 )+"명" );
-		  });
-		
-		js("input[name='minMeetDate']").val(sysdateToString(2));
-		
-		js("#filter-minMeetDate").text(sysdateToString(2));
-		js( "#slider-range-one" ).slider({
-			  range: "max",
-		      min: 2,
-		      max: 10,
-		      values: 2,
-		      slide: function( event, ui ) {
-		    	  js(this).next().val(sysdateToString(ui.value));
-		    	  js("#filter-minMeetDate").text(sysdateToString(ui.value));
-		      }
-		    });
+   var js = jQuery.noConflict();
+   $(document).ready(function()
+   {
+      $(function() {
+         js( "#slider-range" ).slider({
+            range: true,
+            min: 2,
+            max: 20,
+            values: [ 2, 20 ],
+            slide: function( event, ui ) {
+               js( ".price-slider-one" ).val(ui.values[ 0 ]);
+               js( ".price-slider-two" ).val(ui.values[ 1 ] );
+               js( ".post-people-range" ).val(ui.values[ 0 ] + " ~ " + ui.values[ 1 ]+"명");
+            }
+          });
+         js( ".price-slider-one" ).val($( "#slider-range" ).slider( "values", 0 ));
+         js( ".price-slider-two" ).val($( "#slider-range" ).slider( "values", 1 ));
+         js( ".post-people-range" ).val($( "#slider-range" ).slider( "values", 0 ) +
+                   " ~ " + js( "#slider-range" ).slider( "values", 1 )+"명" );
+        });
+      
+      js("input[name='minMeetDate']").val(sysdateToString(2));
+      
+      js("#filter-minMeetDate").text(sysdateToString(2));
+      js( "#slider-range-one" ).slider({
+           range: "max",
+            min: 2,
+            max: 10,
+            values: 2,
+            slide: function( event, ui ) {
+               js(this).next().val(sysdateToString(ui.value));
+               js("#filter-minMeetDate").text(sysdateToString(ui.value));
+            }
+          });
 
-		$(".btn-check-cate1").click(function() {
-			$(".btn-pop-sido").click(function() {
-				
-				$("#addrSiName").text($(this).text());
-				$("#addrSiId").val($(this).val());
-				var siid = $(this).val();
-				var str = "";
-				 $.ajax({
-	                   url: '<%=cp %>/addrguajax.action',
-	                   type: 'GET',
-	                   dataType: 'html',
-	                   data : {'siid': siid}
-	                }).done(function(result){
-	                  
-						console.log('성공');
-						$("#inbodyB").empty();
-						$("#inbodyB").append(result);
-	                }); 
-			})
-			
-		})
-		
-		$(".btn-check-cate2").click(function()
-		{
-			$(".btn-pop-gu").click(function()
-			{
-				$("#btn-check-gugun").text($(this).text());
-				 
-				$("#addrGuId").val($(this).val());
-				$("#addrGuName").val($(this).text());
-				
-				console.log("구 아이디 = " + $("#addrGuId").val());
-				console.log("구 이름 = " + $("#addrGuName").val());
-			})
-		})
-		
-		
-		
-		/* interSubName1 */
-		$(".btn-check-cate3").click(function() {
-			
-			$(".btn-pop-main").click(function() {
-				$("#interMainName").text($(this).text());
-				$("#interMainId").val($(this).val());
-				var mainid = $(this).val();
-				
-				$.ajax({
-						url: '<%=cp %>/intersubajax.action',
-						type: 'GET',
-						dataType: 'html',
-						data: {'mainid': mainid}
-					}).done(function(result) {
-						console.log('성공')
-						
-						$("#inbodyD").empty();
-						$("#inbodyD").append(result);
-					})
-			})
-		})
-		
-		$(".btn-check-cate4").click(function()
-		{
-			$(".btn-pop-sub").click(function()
-			{
-				$("#btn-check-sub").text($(this).text());
-				 
-				$("#interSubId").val($(this).val());
-				$("#interSubName").val($(this).text());
-				
-				console.log("서브 아이디 = " + $("#interSubId").val());
-				console.log("서브 이름 = " + $("#interSubName").val());
-			})
-		})
-						
-							
-		$(".big_place").click(function() {
-			a = $(this).val();
-			document.getElementById("place_pop" + a).style.display = 'block';
-			/* 대분류 클릭했을시 place_pop div 나타내기 */
-			
-		});
+      $(".btn-check-cate1").click(function() {
+         $(".btn-pop-sido").click(function() {
+            
+            $("#addrSiName").text($(this).text());
+            $("#addrSiId").val($(this).val());
+            var siid = $(this).val();
+            var str = "";
+             $.ajax({
+                      url: '<%=cp %>/addrguajax.action',
+                      type: 'GET',
+                      dataType: 'html',
+                      data : {'siid': siid}
+                   }).done(function(result){
+                     
+                  console.log('성공');
+                  $("#inbodyB").empty();
+                  $("#inbodyB").append(result);
+                   }); 
+         })
+         
+      })
+      
+      $(".btn-check-cate2").click(function()
+      {
+         $(".btn-pop-gu").click(function()
+         {
+            $("#btn-check-gugun").text($(this).text());
+             
+            $("#addrGuId").val($(this).val());
+            $("#addrGuName").val($(this).text());
+            
+            console.log("구 아이디 = " + $("#addrGuId").val());
+            console.log("구 이름 = " + $("#addrGuName").val());
+         })
+      })
+      
+      
+      
+      /* interSubName1 */
+      $(".btn-check-cate3").click(function() {
+         
+         $(".btn-pop-main").click(function() {
+            $("#interMainName").text($(this).text());
+            $("#interMainId").val($(this).val());
+            var mainid = $(this).val();
+            
+            $.ajax({
+                  url: '<%=cp %>/intersubajax.action',
+                  type: 'GET',
+                  dataType: 'html',
+                  data: {'mainid': mainid}
+               }).done(function(result) {
+                  console.log('성공')
+                  
+                  $("#inbodyD").empty();
+                  $("#inbodyD").append(result);
+               })
+         })
+      })
+      
+      $(".btn-check-cate4").click(function()
+      {
+         $(".btn-pop-sub").click(function()
+         {
+            $("#btn-check-sub").text($(this).text());
+             
+            $("#interSubId").val($(this).val());
+            $("#interSubName").val($(this).text());
+            
+            console.log("서브 아이디 = " + $("#interSubId").val());
+            console.log("서브 이름 = " + $("#interSubName").val());
+         })
+      })
+                  
+                     
+      $(".big_place").click(function() {
+         a = $(this).val();
+         document.getElementById("place_pop" + a).style.display = 'block';
+         /* 대분류 클릭했을시 place_pop div 나타내기 */
+         
+      });
 
-		$(".big_place_btn").click(function() {
-			$("#big_place" + a).html($(this).val());
-			document.getElementById("place_pop" + a).style.display = 'none';
-			/* place_pop div 의 버튼을 클릭했을시 대분류 버튼이 변경 */
-		});
-		$(function(){
-		    $("[data-toggle=popover]").popover({
-		        html : true,
-		        content: function() {
-		          var content = $(this).attr("data-popover-content");
-		          return $(content).children(".popover-body").html();
-		        },
-		        title: function() {
-		          var title = $(this).attr("data-popover-content");
-		          return $(title).children(".popover-heading").html();
-		        }
-		    });
-		});		
-		/* 글쓰기 용 */
-		var oEditors = [];
-		nhn.husky.EZCreator.createInIFrame(
-		{
-			oAppRef: oEditors
-			, elPlaceHolder: "content"
-			, sSkinURI: "<%=cp%>/resource/se/SmartEditor2Skin.html"
-			, htParams : 
-			  {
-				bUseToolbar : true
-				, fOnBeforeUnload : function()
-				  {
-					//alert("아싸!");
-				  }
-			  }
-			, //boolean
-			  fOnAppLoad : function()
-			  {
-				  // 예제 코드
-				  //oEditors.getById["content"].exec("PASTE_HTML", ["로딩이 완료된 후에 본문에 삽입되는 text."]);
-			  }
-			, fCreator : "createSEditor2"
-		});
-		
-		function pasteHTML()
-		{
-			var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입한다.<\/span>";
-			oEditors.getById["content"].exec("PASTE_HTML", [ sHTML ]);
-		}
-		
-		function showHTML()
-		{
-			var sHTML = oEditors.getById["content"].getIR();
-			alert(sHTML);
-		}
-		
-		function submitContents(elClickedObj)
-		{
-			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용된다.
-			
-			// 에디터의 내용에 대한 값 검증은 
-			// 이곳에서 document.getElementById("content").value를 이용해서 처리하면 된다.
-			
-			try
-			{
-				// elClickedObj.form.submit();
-				return check();
-			} 
-			catch (e)
-			{
-				
-			}
-		}
-		
-		function setDefaultFont()
-		{
-			var sDefaultFont = '돋움';
-			var nFontSize = 24;
-			oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
-		}
-		
-		$('#myModal').on('shown.bs.modal', function () {
-			$('#myInput').trigger('focus')
-		});
-		
-		$(".star-rating>img").click(function(){
-		 	   
-		 	   var num = $(this).attr('id');
-		 	   
-		 	   $(this).parent().children('img').each(function(index, item){
-					$(item).addClass("grayscale");
-		 	   });
-		 	   
-		 	   for (var i = 0; i < num; i++)
-			   {
-				   $(this).parent().children("#"+(i+1)).removeClass("grayscale");
-			   }
-		 	   
-		 	   // 색 칠해진 별의 갯수를 hidden input 태그에 넣어줌
-		 	   $(this).parent().children("input").val(num);
-		    });
-	    $('#postWriteEvent').click(function()
-	    {
-	    	var title = $('#title').val();
-	    	var addrSiId = $('.btn-pop-sido').val();
-	    	var addrGuId = $('#addrGuId').val();
-	    	var addrDetail = $('#addrDetail').val();
-	    	var interMainId = $('.btn-pop-main').val();
-	    	var interSubId = $('#interSubId').val();
-	    	var interDetail = $('#interDetail').val();
-	    	var minNum = $('#minNum').val();
-	    	var maxNum = $('#maxNum').val();
-	    	if($('#drink').is(":checked"))
-	    	{
-	    		$('#drink').val('DR00001');
-	    	}
-	    	else
-	    	{
-	    		$('#drink').val('DR00002');
-	    	}
-	    	
-	    	if($('#samegenders').is(":checked"))
-	    	{
-	    		$('#samegender').val('SG00001');
-	    	}
-	    	else
-	    	{
-	    		$('#samegender').val('SG00002');
-	    	}
-	    	console.log($('#samegender').val());
-	    	var grade = $('#grade').val();
-	    	var hour = $('#hour').val();
-	    	var min = $('#min').val();
-	    	var meetDate = $('#filter-minMeetDate').html();
-	    	$('#meetDate').val(meetDate+hour+":"+min+":00");	
-	    	if(title == "")
-	    	{
-	    		alert("제목이 없습니다.");
-	    		return false;
-	    	}
-	    	else if(addrSiId == "")
-	    	{
-	    		alert("도시를 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(addrGuId == "")
-	    	{
-	    		alert("구를 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(addrDetail == "")
-	    	{
-	    		alert("상세지역를 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(interMainId == "")
-	    	{
-	    		alert("대카테고리를 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(interSubId == "")
-	    	{
-	    		alert("소카테고리를 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(interDetail == "")
-	    	{
-	    		alert("상세관심사 내용을 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(minNum == "")
-	    	{
-	    		alert("최소인원을 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(maxNum == "")
-	    	{
-	    		alert("최대인원을 선택하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(hour == "")
-	    	{
-	    		alert("만나는 시간을 입력하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else if(min == "")
-	    	{
-	    		alert("만나는 분을 입력하지 않았습니다.");
-	    		return false;
-	    	}
-	    	else
-			{
-				alert("글쓰기 완료 접근");
-				var form = document.getElementById("PostWriteForm");
-				form.submit();
-			}
-	    });
-	});
+      $(".big_place_btn").click(function() {
+         $("#big_place" + a).html($(this).val());
+         document.getElementById("place_pop" + a).style.display = 'none';
+         /* place_pop div 의 버튼을 클릭했을시 대분류 버튼이 변경 */
+      });
+      $(function(){
+          $("[data-toggle=popover]").popover({
+              html : true,
+              content: function() {
+                var content = $(this).attr("data-popover-content");
+                return $(content).children(".popover-body").html();
+              },
+              title: function() {
+                var title = $(this).attr("data-popover-content");
+                return $(title).children(".popover-heading").html();
+              }
+          });
+      });      
+      
+      
+      $('#myModal').on('shown.bs.modal', function () {
+         $('#myInput').trigger('focus')
+      });
+      
+      $(".star-rating>img").click(function(){
+             
+             var num = $(this).attr('id');
+             
+             $(this).parent().children('img').each(function(index, item){
+               $(item).addClass("grayscale");
+             });
+             
+             for (var i = 0; i < num; i++)
+            {
+               $(this).parent().children("#"+(i+1)).removeClass("grayscale");
+            }
+             
+             // 색 칠해진 별의 갯수를 hidden input 태그에 넣어줌
+             $(this).parent().children("input").val(num);
+          });
+      $('#postEvent').click()
+      {
+          if($('#drink').is(":checked"))
+          {
+             $('#drink').val('DR00001');
+          }
+          else
+          {
+             $('#drink').val('DR00002');
+          }   
+          if($('#samegenders').is(":checked"))
+          {
+             $('#samegender').val('SG00001');
+          }
+          else
+          {
+             $('#samegender').val('SG00002');
+          }
+          var hour = $('#hour').val();
+          var min = $('#min').val();
+          var meetDate = $('#filter-minMeetDate').html();
+          $('#meetDate').val(meetDate+hour+":"+min+":00");   
+      };
+   });
 </script>
 <script type="text/javascript">
-	function sysdateToString(day){
-		var date = new Date();
-		date.setDate(date.getDate()+day);
-		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-		return result;
-	}
-	function defaultMinMeetDate(){
-		var date = new Date();
-		date.setDate(date.getDate()+2);
-		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
-		return result;
-	}
+   function sysdateToString(day){
+      var date = new Date();
+      date.setDate(date.getDate()+day);
+      var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+      return result;
+   }
+   function defaultMinMeetDate(){
+      var date = new Date();
+      date.setDate(date.getDate()+2);
+      var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+      return result;
+   }
 </script>
 </head>
 <body>
@@ -465,7 +334,7 @@
         <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
         <div class="body-box flex-item-grow flex-col-center-up">
             <div class="body flex-item-grow flex-col-center-center">
-                <form class="PostWrite flex-item-grow" id="PostWriteForm" action="postInsert.action" method="post">
+                <form class="PostWrite flex-item-grow" id="PostWriteForm" action="postInsert.action" method="post" onsubmit="return submitContents(this);">
                     
                     <div class="PostWrite-row1 flex-row-left-center">
                         <div class="PostWrite-row1-label">
@@ -601,48 +470,19 @@
                     </div>
 
                     <div class="PostWrite-row3 flex-item-grow flex-col-center-center">
-						<form name="boardForm" method="post" onsubmit="return submitContents(this);">
 							<div style="width: 830px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 								<div align="left" style="border-bottom: 1px solid #cccccc;">
 									<div style="padding: 5px 0px 5px 10px;">
-										<textarea name="content" id="content" style="width: 95%; height: 400px;">${dto.content}</textarea>
+										<textarea name="contents" id="contents" style="width: 95%; height: 400px;">${dto.content}</textarea>
 									</div>
 								</div>
 							</div>
-						</form>
 					</div>
-						
-
-                    <div class="PostWrite-footer flex-col-center-center">
-                        <button class="btn btn-orange btn-160-45" data-toggle="modal"  data-target="#exampleModal">모임개설</button>
-                    </div>
-
+					<div class="PostWrite-footer flex-col-center-center">
+                    	<button class="btn btn-orange btn-160-45 postEvent">모임개설</button>
+                	</div>
                 </form>
             </div>
-            <!-- Modal -->
-			<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">모임 개설</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-			          <span aria-hidden="true">&times;</span>
-			        </button>
-			      </div>
-			      <div class="modal-body">
-			      	<div class="flex-col-center-center">
-			      		<div>한 번 작성된 글은 수정이 불가능 합니다.</div>
-				        <div>계속하시려면 모임 개설 버튼을 클릭해주세요.</div>
-				        
-				    </div>
-			      </div>
-			      <div class="modal-footer">
-			      	<button type="button" class="btn btn-primary" id="postWriteEvent" >모임 개설</button>
-			        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>
         </div>
     </div>
 
@@ -700,6 +540,114 @@
        <div id="inbodyD">
        </div> 
     </div>
-</div>   
+</div>
+<script type="text/javascript">	
+/* 글쓰기 용 */
+var oEditors = [];
+nhn.husky.EZCreator.createInIFrame(
+{
+	oAppRef: oEditors
+	, elPlaceHolder: "contents"
+	, sSkinURI: "<%=cp%>/resource/se/SmartEditor2Skin.html"
+	, fCreator : "createSEditor2"
+	
+});
+
+function pasteHTML()
+{
+	var sHTML = "<span style='color:#FF0000;'>이미지도 같은 방식으로 삽입한다.<\/span>";
+	oEditors.getById["contents"].exec("PASTE_HTML", [sHTML]);
+}
+
+function showHTML()
+{
+	var sHTML = oEditor.getIR();
+	alert(sHTML);
+}
+
+function submitContents(elClickedObj)
+{
+	oEditors.getById["contents"].exec("UPDATE_CONTENTS_FIELD", []); // 에디터의 내용이 textarea에 적용된다.
+	
+	// 에디터의 내용에 대한 값 검증은 
+	var contents = $.trim(oEditors[0].getContents());
+	if (contents == '<p>&bnsp;</p>' || contents == '' || contents =='<p><br><p>')
+	{
+		alert("test");
+		return;
+	}
+	var title = document.getElementById('title').value;
+    var addrSiId = $('.btn-pop-sido').val();
+    var addrGuId = document.getElementById('addrGuId').value;
+    var addrDetail = document.getElementById('addrDetail').value;
+    var interSubId = document.getElementById('interSubId').value;
+    var interDetail = document.getElementById('interDetail').value;
+    var minNum = document.getElementById('minNum').value;
+    var maxNum = document.getElementById('maxNum').value;
+    var hour = document.getElementById('hour').value;
+    var min = document.getElementById('min').value;
+    var meetDate = document.getElementById('filter-minMeetDate').value;
+    
+    if(title == "")
+    {
+    	debugger;
+       alert("제목이 없습니다.");
+       return false;
+    }
+    else if(addrGuId == "")
+    {
+       alert("구를 선택하지 않았습니다.");
+       return false;
+    }
+    else if(addrDetail == "")
+    {
+       alert("상세지역를 선택하지 않았습니다.");
+       return false;
+    }
+    else if(interSubId == "")
+    {
+       alert("소카테고리를 선택하지 않았습니다.");
+       return false;
+    }
+    else if(interDetail == "")
+    {
+       alert("상세관심사 내용을 선택하지 않았습니다.");
+       return false;
+    }
+    else if(minNum == "")
+    {
+       alert("최소인원을 선택하지 않았습니다.");
+       return false;
+    }
+    else if(maxNum == "")
+    {
+       alert("최대인원을 선택하지 않았습니다.");
+       return false;
+    }
+    else if(hour == "")
+    {
+       alert("만나는 시간을 입력하지 않았습니다.");
+       return false;
+    }
+    else if(min == "")
+    {
+       alert("만나는 분을 입력하지 않았습니다.");
+       return false;
+    }
+    else
+    {
+    	debugger;
+    	$('#PostWriteForm').submit();
+    }
+	
+}
+
+function setDefaultFont()
+{
+	var sDefaultFont = '궁서';
+	var nFontSize = 24;
+	oEditor.setDefaultFont(sDefaultFont, nFontSize);
+}
+</script>  
 </body>
 </html>

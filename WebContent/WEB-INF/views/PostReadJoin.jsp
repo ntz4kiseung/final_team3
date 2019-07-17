@@ -198,7 +198,7 @@
 <!-- 댓글 부분 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -->					
                     <div class="Post-joinList">
  						<c:forEach var="join" items="${list}">
- 							<c:if test="${join.userId eq 'B001' }">
+ 							<c:if test="${join.userId eq userId }">
  							<script type="text/javascript">
  								$('.post-join-secondary').css('display', 'none');
  							</script>
@@ -225,7 +225,7 @@
 			                                    <div>
 			                                        <button class="btn joinreport" data-toggle="modal" data-target="#report-post" name="${join.joinId }">신고하기</button>
 			                                    </div>
-			                                    <c:if test="${join.userId eq 'B001'}">
+			                                    <c:if test="${join.userId eq userId}">
 			                                    <div>
 			                                        <button class="btn btn-border-right reply-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId }">댓글달기</button>
 			                                        <button class="btn request-join" data-toggle="modal" data-target="#join-reset-modal" name="${join.joinId }">신청취소</button>
@@ -260,11 +260,18 @@
 				                                    <div>
 				                                        <button class="btn replyreport" data-toggle="modal" data-target="#report-post" name="${replylist.replyId }">신고하기</button>
 				                                    </div>
-				                                    <c:if test="${replylist.userId eq 'B001' || replylist.userId eq postlist.userId}">
-				                                    <div>
-				                                        <button class="btn reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
-				                                    </div>
-				                                    </c:if>
+				                                    <c:choose>
+				                                    	<c:when test="${replylist.userId eq userId}">
+				                                    		<div>
+				                                        		<button class="btn reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
+				                                    		</div>
+				                                    	</c:when>
+				                                    	<c:when test="${replylist.userId eq postlist.userId && serchjoinid eq replylist.joinId}">
+				                                    		<div>
+				                                        		<button class="btn reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
+				                                    		</div>
+				                                    	</c:when>
+				                                    </c:choose>
 				                                </div>
 				                                <div>
 				                                    ${replylist.contents }

@@ -43,7 +43,7 @@ $(document).ready(function()
 		 $("#postId").val($(this).val())
 
 		 $.ajax({
-	         url : "<%=cp %>/hostReview.action",
+	         url : "<%=cp %>/guestReview.action",
 	         type : "get",
 	         data : {'postId': postId},
 	         success: function(result)
@@ -103,6 +103,11 @@ $(document).ready(function()
 		    sanitize : false,
 		    content: function() {
 		    temp=$(this);
+		    if(temp.attr("hostNum")=='0'){
+		    	$("#hostPointBox").removeClass("hidden");
+		    }else{
+		    	$("#hostPointBox").addClass("hidden");
+		    }
 		    var content = $(this).attr("data-popover-content");
 		    return $(content).children(".popover-body").html();
 		    }		    
@@ -264,7 +269,17 @@ $(document).ready(function()
 		display: block;
 		color: inherit;
 		font-weight: normal;
-	}	
+	}
+	.review-badge{
+		position: relative;
+	}
+	.review-badge>img:FIRST-CHILD {
+		position: absolute;
+	    width: 35px;
+	    height: 35px;
+	    right: -20%;
+	    top: -20%;
+	}
 </style>
 
 </head>
@@ -549,8 +564,8 @@ $(document).ready(function()
 		      			</c:forEach>
 		      			</div>	
 		      		</div>
-		      		
-		      		<div class="badge-cate-box">
+		      		<hr>
+		      		<div class="badge-cate-box" id="hostPointBox">
 		      			<div class="badge-cate-name">
 		      				호스트포인트
 		      			</div>
@@ -559,7 +574,7 @@ $(document).ready(function()
 			      			<div class="flex-badge-item">
 				      			<div class="flex-badge-list flex-item-grow">
 				      				<div class="badgePoint-box">
-					      				<img class="badgePoint" id="${status.count}" alt="${host.badgePointId }" src="${negative.url }" />
+					      				<img class="badgePoint" id="${status.count}" alt="${host.badgePointId }" src="${host.url }" />
 					      				<input class="hidden" id="${host.url }" value="${host.badgePointId }" />
 				      				</div>
 				      				<div>

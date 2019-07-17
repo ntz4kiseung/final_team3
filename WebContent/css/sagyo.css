@@ -1,5 +1,18 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+.bg-orange {
+  background-color: rgb(250,170,10) !important;
+}
+
+a.bg-orange:hover, a.bg-orange:focus,
+button.bg-orange:hover,
+button.bg-orange:focus {
+  background-color: rgb(250,170,10) !important;
+}
+div[onclick]:HOVER{
+	cursor: pointer;
+	color: rgb(255,170,10);
+}
 /* slider */
 .ui-widget-header {
     border: 1px solid #dddddd;
@@ -758,6 +771,10 @@ input:read-only {
 .comments-user{
     width: 60px;
     margin: 0px 30px 0px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .comments-else{
     display: flex;

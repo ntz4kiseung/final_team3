@@ -4,7 +4,8 @@
 
 	<div class="review-post flex-review" id="list'+i+'">
 		<div id="repBadge" class="flex-review-first">
-			<div class="PostList-post-badge">
+			<div class="PostList-post-badge review-badge">
+				<img class="${(post.num eq 0) ? '' : 'hidden' }" src="img/hostCrown.png" alt="">
 				<img src="${post.url }" alt="">
 			</div>
 			${post.nickname }
@@ -24,7 +25,7 @@
 		</div>
 		<div class="flex-review-third" >
 			<div class="PostList-post-badge">
-				<img class="selectPoint" name="select" id="selectPoint${status.index }" name="image" src="img/Logo_NoBorder.png" alt="포인트선택" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-container="body">
+				<img class="selectPoint" hostNum="${post.num }" id="selectPoint${status.index }" name="image" src="img/Logo_NoBorder.png" alt="포인트선택" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-container="body">
 				<input type="hidden" value="nonSelect" class="hidden" id="badgePointId${status.index }" name="badgePointId" />
 			</div>
 	   	</div>

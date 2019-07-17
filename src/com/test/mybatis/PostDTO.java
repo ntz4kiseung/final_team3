@@ -5,11 +5,19 @@ public class PostDTO
 	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId, interMainName, interSubId, interSubName, interDetail, postDate, meetDate, samegender, drink, grade, moodName, contents, urlBad, url, nickname, telCertiId, emailCertiId, followId, postId;
 	
 	// 타입 수정 2019.07.10 15:40
-	private int minNum, maxNum, limitGrade, postStatus;
+	private int minNum, maxNum, limitGrade, postStatus, num;
 	
 	// 점수 확인 테스트용 속성 → 추후 제거함
 	private int gradeHost, gradeAddr, gradeTitle, gradeContents, gradeInterDetail, gradeTotal;
 	
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
 
 	public int getGradeHost()
 	{

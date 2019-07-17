@@ -96,76 +96,59 @@
 
 </style>
 <script type="text/javascript">
-   $(document).ready(function()
-   {
-	   
-       $("[data-toggle=popover]").popover({
-           html : true,
-           content: function() {
-	           var content = $(this).attr("data-popover-content");
-	           return $(content).children(".popover-body").html();
-           },
-           title: function() {
-	           var title = $(this).attr("data-popover-content");
-	           return $(title).children(".popover-heading").html();
-           }
-       });
-       
-       
-       $(".popoverclick").click(function()
-	   {
-    	   
-    	   $(".selectBadge").click(function(){
-    		  
-    		 
-    		   var badgeLogId = $(this).val();
-    		   
-    		   
-    		   var confirm_val = confirm("대표뱃지로 설정하시겠습니까?");
-        	   if(confirm_val) 
-        	   {
-        	     	
-                   $.ajax({
-                   url : 'mainBadge.action',
-                   type : 'post',
-                   data : { badgeLogId : badgeLogId },
-                   }).done(function(result){
-                   		$("#user_main").attr("src",result)
-                   		location.href = "<%=cp%>/mybadge.action";
-       			   })
-       			
-                  }   
-    		   
-    	   });
-    	   
-	   });
-       
-       $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
-		
-
-    	   
-      $(".popoverclick").click(function()
-	  {
-			
-		var badgeId = $(this).val()
-		
-		   $.ajax({
-               url : 'badgeajax.action',
-               type : 'GET',
-               data : { badgeId : badgeId},
-               dataType : 'html',
-               }).done(function(result){
-            	 console.log(result);
-            	 $(".PointLog").empty();
-               	 $(".PointLog").append(result);
-      
-               })    
-	  })
-	  
-
-       
-   });
-
+$(document).ready(function()
+		   {
+		       $("[data-toggle=popover]").popover({
+		           html : true,
+		           sanitize : false,
+		           content: function() {
+		              var content = $(this).attr("data-popover-content");
+		              return $(content).children(".popover-body").html();
+		           },
+		           title: function() {
+		              var title = $(this).attr("data-popover-content");
+		              return $(title).children(".popover-heading").html();
+		           }
+		       });
+		       
+		       
+		       $(".popoverclick").click(function()
+		      {
+		          $(".selectBadge").click(function(){
+		             var badgeLogId = $(this).val();
+		             var confirm_val = confirm("대표뱃지로 설정하시겠습니까?");
+		              if(confirm_val) 
+		              {
+		                   $.ajax({
+		                   url : 'mainBadge.action',
+		                   type : 'post',
+		                   data : { badgeLogId : badgeLogId },
+		                   }).done(function(result){
+		                         $("#user_main").attr("src",result)
+		                         location.href = "<%=cp%>/mybadge.action";
+		                   });
+		              }   
+		          });
+		      });
+		       
+		      $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
+		          
+		      $(".popoverclick").click(function()
+			     {
+			      var badgeId = $(this).val()
+			      
+			         $.ajax({
+			               url : 'badgeajax.action',
+			               type : 'GET',
+			               data : { badgeId : badgeId},
+			               dataType : 'html',
+			               }).done(function(result){
+			                console.log(result);
+			                $(".PointLog").empty();
+			                   $(".PointLog").append(result);
+			               })    
+			     })
+		   });
 </script>
 </head>
 <body>
@@ -245,17 +228,15 @@
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
-                            <div><a class="navnonclick" href="opprofile.action?opuserid=${param.opuserid}">프로필</a></div>
-                            <div><a class="navclick" href="opbadge.action?opuserid=${param.opuserid}">뱃지</a></div>
-                            <div><a class="navnonclick" href="opcreatepostlist.action?opuserid=${param.opuserid}">개설모임</a></div>
+                            <div><a class="navnonclick" href="profile.action?userId=${UserList.userId}">프로필</a></div>
+                            <div><a class="navclick" href="opbadge.action?userId=${UserList.userId}">뱃지</a></div>
+                            <div><a class="navnonclick" href="opcreatepostlist.action?userId=${UserList.userId}">개설모임</a></div>
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
                             <div class="MyPage-body-header flex-row-left-center">
                                 뱃지
                             </div>
-                            
-                        
 
                             <div class="MyPage-body-body">
 

@@ -64,35 +64,22 @@ public class MypageController
 	 }
 	 
 	 @RequestMapping(value="/guestReview.action", method=RequestMethod.GET) 
-	 public void guestReview(String postId, HttpServletResponse response) throws IOException 
+	 public String guestReview(String postId, Model model, HttpSession session) throws IOException 
 	 {
-		 response.setContentType("text/html;charset=UTF-8");
-		 
+		 String userId = (String) session.getAttribute("userId");
 		 IPostDAO dao = sqlSession.getMapper(IPostDAO.class);
 		 
-		 ArrayList<PostDTO> str = dao.guestReview(postId);
-		 
-		 System.out.println("사이즈 : " + dao.guestReview(postId).size());
-		 
-		 String result = "";
-		 
-		 for (int i = 0; i < dao.guestReview(postId).size(); i++)
-		 {
-			 result += str.get(i).getUserId();
-	         result += ",";
-	         result += str.get(i).getUrl();
-	         result += ",";
-	         result += str.get(i).getNickname();
-	         result += ",";
-		 }
-		 
-		 response.getWriter().print(result);
+		 model.addAttribute("list", dao.guestReview(postId,userId));
+		 for (PostDTO dto : dao.guestReview(postId,userId)) {
+			System.out.println("name: " + dto.getNickname());
+		}
+		 return "WEB-INF/views/HostReviewAjax.jsp";
 	 }
 	 
 	 @RequestMapping(value="myreviewinsert.action", method=RequestMethod.POST) 
 	 public String myReviewInsert(String postId, String[] userId, String[] grade, String[] badgePointId, String[] contents, HttpServletRequest request, HttpSession session)
 	 {
-		 String giveUserId = (String) session.getAttribute("userId");
+		String giveUserId = (String) session.getAttribute("userId");
 		if(giveUserId==null||giveUserId.equals(""))
 		{
 		   System.out.println("비로그인 유저 진입");
@@ -130,7 +117,14 @@ public class MypageController
 				dao.reviewInsertSub(reviewId, badgePointId[i], contents[i]);
 			}
 		}
-		 return "redirect:createpostlist.action";
+		
+		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
+		String hostId = dao2.getHost(postId);
+		
+		if(hostId.equals(giveUserId))
+			return "redirect:createpostlist.action";
+		else
+			return "redirect:joinpostlist.action";
 	 }
 	 
 	 @RequestMapping(value="/reviewinsert.action", method=RequestMethod.POST) 

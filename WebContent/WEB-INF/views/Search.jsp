@@ -789,7 +789,7 @@
     	}
    </script>
 </head>
-<body onunload="deleteAllCookies()">
+<body>
     <div class="browser flex-col-center-center">
 		
 		
