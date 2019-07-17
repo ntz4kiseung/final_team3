@@ -79,7 +79,7 @@
 		{
 			$('#delete-post-Btn').click(function()
 			{
-				location.href="hostpostDelete.action";
+				location.href="hostpostDelete.action?reportId="+$('#postId').attr('name');
 			});
 		});
 // 쪽지 기능 -------------------------------------------------------------------------------------------

@@ -2,6 +2,8 @@ package com.test.mybatis;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,14 +19,15 @@ public class PostReadHostController
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value = "/postreadhost.action", method = RequestMethod.GET)
-	public String hostList(Model model)
+	public String hostList(Model model, HttpSession session)
 	{
 		String result = null;
+		
+		String userId = (String)session.getAttribute("userId");
 		
 		IPostDAO IPostDAO = sqlSession.getMapper(IPostDAO.class);
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
-		String followId = "anlant";
 		String postHostId = "PT00002";
 		int serchNum = (Integer)joinDAO.serchjoin(postHostId);
 		ArrayList<JoinDTO> joinDTO = joinDAO.joinlist(postHostId);
@@ -39,10 +42,11 @@ public class PostReadHostController
 			}
 		}
 		model.addAttribute("serchNum",serchNum);
-		model.addAttribute("postlist",IPostDAO.postlist(followId, postHostId)); 
+		model.addAttribute("postlist",IPostDAO.postlist(userId, postHostId)); 
 		model.addAttribute("list",joinDAO.joinlist(postHostId)); 
 		model.addAttribute("replylist",joinDAO.replylist(postHostId));
 		model.addAttribute("reportlist", reportDAO.reportlist());
+		model.addAttribute("userId", userId);
 		 
 		result = "WEB-INF/views/PostReadHost.jsp";
 
@@ -50,11 +54,13 @@ public class PostReadHostController
 	}
 	
 	@RequestMapping(value = "/hostreportjoininsert.action", method = RequestMethod.GET)
-	public String reportJoin(Model model, ReportDTO reportDTO)
+	public String reportJoin(Model model, ReportDTO reportDTO, HttpSession session)
 	{
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
-		reportDTO.setUserId("anlant");
+		String userId = (String)session.getAttribute("userId");
+		
+		reportDTO.setUserId(userId);
 		reportDAO.reportjoininsert(reportDTO);
 		int serchNum = (Integer)reportDAO.serchreportjoin(reportDTO.getReportId());
 		if(serchNum>= 5)
@@ -66,11 +72,12 @@ public class PostReadHostController
 	}
 	
 	@RequestMapping(value = "/hostreportreplyinsert.action", method = RequestMethod.GET)
-	public String reportreply(Model model, ReportDTO reportDTO)
+	public String reportreply(Model model, ReportDTO reportDTO, HttpSession session)
 	{
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
-		reportDTO.setUserId("anlant");
+		String userId = (String)session.getAttribute("userId");
+		reportDTO.setUserId(userId);
 		reportDAO.reportreplyinsert(reportDTO);
 		int serchNum = (Integer)reportDAO.serchreportreply(reportDTO.getReportId());
 		if(serchNum>= 5)
@@ -82,11 +89,12 @@ public class PostReadHostController
 	}
 	
 	@RequestMapping(value = "/hostreplyinsert.action", method = RequestMethod.GET)
-	public String replyInsert(Model model, JoinDTO joinDTO)
+	public String replyInsert(Model model, JoinDTO joinDTO, HttpSession session)
 	{
 		String result = null;
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
-		joinDTO.setUserId("anlant");
+		String userId = (String)session.getAttribute("userId");
+		joinDTO.setUserId(userId);
 		joinDAO.replyinsert(joinDTO);
 		result = "redirect:postreadhost.action";
 		return result;
@@ -107,19 +115,19 @@ public class PostReadHostController
 	{
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
-		reportDTO.setReportId("PT00002");
 		reportDAO.postdelte(reportDTO);
 		result = "redirect:postreadhost.action";
 		return result;
 	}
 	
 	@RequestMapping(value = "/hostmessagesend.action", method = RequestMethod.POST)
-	public String postMessage(Model model, MessageDTO messageDTO, String takeUserIds)
+	public String postMessage(Model model, MessageDTO messageDTO, String takeUserIds, HttpSession session)
 	{
 		String result = null;
 		IMessageDAO messageDAO = sqlSession.getMapper(IMessageDAO.class);
+		String userId = (String)session.getAttribute("userId");
 		String[] takeuserid = takeUserIds.split(" ");
-		messageDTO.setGiveUserId("BLUMBALD");
+		messageDTO.setGiveUserId(userId);
 		for (int i = 0; i < takeuserid.length; i++)
 		{
 			messageDTO.setTakeUserId(takeuserid[i]);
