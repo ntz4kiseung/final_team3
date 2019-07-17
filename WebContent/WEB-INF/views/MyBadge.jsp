@@ -256,6 +256,8 @@
                             <div class="MyPage-body-header flex-row-left-center">
                                 뱃지
                             </div>
+                            
+                        
 
                             <div class="MyPage-body-body">
 

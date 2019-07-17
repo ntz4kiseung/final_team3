@@ -75,6 +75,15 @@ $(document).ready(function(){
             	
             })     
     }) 
+    
+    $(".opbadge").click(function()
+	{
+		var temp = $(this).attr("id");
+		$(this).attr('href', "<%=cp%>/opprofile.action?opuserid="+temp);
+		
+		$("#opId"+temp).val(temp);
+		
+	})
    
     		
 });
@@ -179,9 +188,14 @@ $(document).ready(function(){
                                     <div class="MyFollow-user flex-row-left-center">
         
                                         <div class="user-badge-box">
-                                        		 <img class="user-bad-badge" src="${followingBad[status.index].urlBad }" alt="">
-                     
+                                        	<a href="" class="opbadge" id="${fList.userId }" >
+                                        	  
+                                        	
+                                        		<img class="user-bad-badge" src="${followingBad[status.index].urlBad }" alt="">
                                                 <img class="followbadge" src="<%=cp %>/${fList.url } " alt="">
+                                            </a>
+                     						<input type="hidden" id="opId${fList.userId }" name="opId${fList.userId }" value="">
+                                            
                                         </div>
                                         <div class="MyFollow-user-detail">
                                         
