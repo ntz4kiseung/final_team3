@@ -89,6 +89,7 @@
   
 }
 .modalbutton{
+    margin-top: 10px;
 	color:gray;
 }
 
@@ -98,7 +99,6 @@
    $(document).ready(function()
    {
 	   
-      
        $("[data-toggle=popover]").popover({
            html : true,
            content: function() {
@@ -144,13 +144,25 @@
 		
 
     	   
-    
-	  
+      $(".popoverclick").click(function()
+	  {
+			
+		var badgeId = $(this).val()
+		
+		   $.ajax({
+               url : 'badgeajax.action',
+               type : 'GET',
+               data : { badgeId : badgeId},
+               dataType : 'html',
+               }).done(function(result){
+            	 console.log(result);
+            	 $(".PointLog").empty();
+               	 $(".PointLog").append(result);
       
+               })    
+	  })
+	  
 
-     
-       
-     
        
    });
 
@@ -199,10 +211,29 @@
                                 ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <div>${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 }  ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 } 
-                                ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
-                                <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
-                                <div>${myPageInterList[status.index].interSubName3 }</div> 
+                             <div>
+								<c:if test="${myPageAddrList[status.index].addrSiName1 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName1 } ${myPageAddrList[status.index].addrGuName1 }
+								</c:if>
+								<c:if test="${myPageAddrList[status.index].addrSiName2 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 }
+								</c:if>
+                                <c:if test="${myPageAddrList[status.index].addrSiName3 != null }">
+								   # ${myPageAddrList[status.index].addrSiName3 } ${myPageAddrList[status.index].addrGuName3 }
+								</c:if> 
+							</div>	
+							<div>	
+                                <c:if test="${myPageInterList[status.index].interSubName1 != null}">
+								   # ${myPageInterList[status.index].interSubName1 }
+								</c:if> 
+                                
+                                 <c:if test="${myPageInterList[status.index].interSubName2 != null}">
+								   # ${myPageInterList[status.index].interSubName2 }
+								</c:if> 
+								 <c:if test="${myPageInterList[status.index].interSubName3 != null}">
+								   # ${myPageInterList[status.index].interSubName3 }
+								</c:if> 
+                             </div>    
                                       
                                 <div style="color: orange;">${List.telCheck }</div>
                                 
@@ -354,10 +385,10 @@
                                         <div class="MyBadge-box-label flex-col-left-center">
                                                칭찬 뱃지
                                         </div>
-                                        <div class="MyBadge-box-badges flex-row-left-center">
+                                        <div class="MyBadge-box-badges flex-row-left-center ">
                                         <c:forEach var="List" items="${BadgeList2 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                               <button type="button" class="btn popoverclick" id="btn-popover-open"  data-trigger="focus"  data-toggle="popover" data-popover-content="#badge${List.badgePointId }" data-placement="bottom">
+                                               <button type="button" class="btn popoverclick" id="btn-popover-open${List.badgePointId }"  value="${List.badgePointId }" data-trigger="focus"  data-toggle="popover" data-popover-content="#badge${List.badgePointId }" data-placement="bottom">
                                                     <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
                                                     src="<%=cp %>/${List.url }" >
                                                 </button>
@@ -378,47 +409,36 @@
                                                    </div>
                                                    <div class="flex-col-left-center" style="padding-left: 20px;">
                                                        <div class="MyBadge-header-nickname">${List.badgePointName }</div>
-                                                        <div class="MyBadge-header-detail">뱃지 포인트 </div>
-                                                        <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
-                                                       <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
-                                                   </div>
-                                                   
-                                                   <hr>
+                                                      
+                                                       
+                                                    <c:choose>
+													<c:when test="${List.badgeCk == 1}">
+														 <div class="MyBadge-header-detail">뱃지 포인트 
+														 <progress value="3" max="3" style="width: 140px;"></progress></div>
+                                                         <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일 <div>${List.reviewDate }</div></div>
+                                                         <div class="MyBadge-header-detail flex-row-center-center">뱃지소멸일 <div>${List.expirationDate }</div></div>
+													   
+													</c:when>
+													
+													<c:when test="${List.badgeCk == 0}">
+													        <div class="MyBadge-header-detail">뱃지 포인트 : 
+														   <progress value="${List.pointNum}" max="3" style="width: 140px;"></progress></div>
+														   <div class="MyBadge-header-detail"> <div>뱃지 획득까지 ${3- List.pointNum}포인트 남았습니다! </div></div>
+													   
+													</c:when>
+												</c:choose>
                                                 </div>
-                                                
                                                  </div>  
                                                  <hr>
-                                                 <div class="flex-col-left-center" style="padding-left: 20px;">
-                                                 	최근 뱃지 포인트 내역
-                                                       <c:when test="${List.badgeCk == 1}">
-														<c:set var="badge" value="${List.badgePointId}" />
-														
-													   <c:if test="${badge eq 'BP00001'}">
-													    11
-													   </c:if>
-													
-													   <c:if test="${badge eq 'BP00002'}">
-															22
-													   </c:if>
-													   
-													    <c:if test="${badge eq 'BP00003'}">33
-														 </c:if>
-													   
-													    <c:if test="${badge eq 'BP00004'}">44
-														</c:if>
-													</c:when>
-                                                       
-                                                       
-                                                       <div class="">뱃지 포인트 </div>
-                                                       <div class="">뱃지 포인트 </div>
-                                                       <div class="">뱃지 포인트 </div>
-                                                       <div class="">뱃지 포인트 </div>
-                                                   </div>   
+                                                 <div class="flex-col-left-center PointLog" style="padding-left: 20px;">
+                                                 </div>   
                                           </div>
                                        </div>                     
                                     </div>   
                                         <!-- 모달 -->   
                                                 </c:forEach>
+                                                
+                                                
                                               </div>
                                           </div>  
                                              
@@ -431,7 +451,7 @@
                                         <div class="MyBadge-box-badges flex-row-left-center">
                                          <c:forEach var="List" items="${BadgeList3 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                               <button type="button" class="btn popoverclick"  data-toggle="popover" data-trigger="focus" data-popover-content="#badge${List.badgePointId }" data-placement="bottom">
+                                               <button type="button" class="btn popoverclick"  value="${List.badgePointId }" data-toggle="popover" data-trigger="focus" data-popover-content="#badge${List.badgePointId }" data-placement="bottom">
                                                     <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
                                                     src="<%=cp %>/${List.url }" >
                                                 </button>
@@ -443,7 +463,7 @@
                                                  <div class="MyFollow-user flex-row-left-center">
                                                   <div class="flex-col-left-center">
                                                         <div class="MyFollow-user-badge" >
-                                                            <img id="modal1badge" ${List.badgeCk==0 ? "class='modalimg'" : "" }  src="<%=cp %>/${List.url }" alt="">
+                                                            <img id="modal1badge" ${List.badgeCk==0 ? "class='modalimg'" : "" }  src="<%=cp %>/${List.url }" >
                                                         </div>
                                                         <div>   
                                                         <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
@@ -452,12 +472,29 @@
                                                    </div>
                                                    <div class="flex-col-left-center" style="padding-left: 20px;">
                                                        <div class="MyBadge-header-nickname">${List.badgePointName }</div>
-                                                        <div class="MyBadge-header-detail">뱃지 포인트 </div>
-                                                        <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
-                                                       <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
-                                                   </div>
+                                                          
+                                                    <c:choose>
+													<c:when test="${List.badgeCk == 1}">
+														 <div class="MyBadge-header-detail">뱃지 포인트 
+														 <progress value="3" max="3" style="width: 140px;"></progress></div>
+                                                         <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일 <div>${List.reviewDate }</div></div>
+                                                         <div class="MyBadge-header-detail flex-row-center-center">뱃지소멸일 <div>${List.expirationDate }</div></div>
+													   
+													</c:when>
+													
+													<c:when test="${List.badgeCk == 0}">
+													        <div class="MyBadge-header-detail">뱃지 포인트 : 
+														   <progress  value="${List.pointNum}" max="3" style="width: 140px;"></progress></div>
+														   <div class="MyBadge-header-detail"> <div> 뱃지 획득까지 ${3- List.pointNum}포인트 남았습니다! </div></div>
+													   
+													</c:when>
+												</c:choose>
                                                 </div>
-                                                 </div>     
+                                                
+                                                 </div>  
+                                                 <hr>
+                                                 <div class="flex-col-left-center PointLog" style="padding-left: 20px;">
+                                                 </div>   
                                           </div>
                                        </div>                     
                                     </div>   
@@ -475,36 +512,53 @@
                                         <div class="MyBadge-box-badges flex-row-left-center">
                                             <c:forEach var="List" items="${BadgeList4 }" varStatus="status">
                                             <div class="MyBadge-box-badge">
-                                               <button type="button" class="btn popoverclick" data-toggle="popover" data-trigger="focus" data-popover-content="#badge${List.badgePointId }" data-placement="bottom">
+                                               <button type="button" class="btn popoverclick" value="${List.badgePointId }" data-toggle="popover" data-trigger="focus" data-popover-content="#badge${List.badgePointId }" data-placement="bottom">
                                                      <img  ${List.badgeCk==0 ? "class='img2'" : "class='img'" }
                                                     src="<%=cp %>/${List.url }" >
                                                 </button> 
                                             </div>
                                             <!-- 모달 -->      
-		                                     <div id="badge${List.badgePointId }" class="hidden" >
-		                                       <div class="popover-body">
-		                                          <div id="inbody"  >
-		                                                 <div class="MyFollow-user flex-row-left-center">
-		                                                  <div class="flex-col-left-center">
-		                                                        <div class="MyFollow-user-badge" >
-		                                                            <img id="modal1badge"  ${List.badgeCk==0 ? "class='modalimg'" : "" }  src="<%=cp %>/${List.url }" alt="">
-		                                                        </div>
-		                                                        <div>   
-		                                                       <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
-		                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } value="${List.badgeLogId }">대표뱃지 설정</button>
-		                                                        </div>
-		                                                   </div>
-		                                                   <div class="flex-col-left-center" style="padding-left: 20px;">
-		                                                       <div class="MyBadge-header-nickname">${List.badgePointName }</div>
-		                                                        <div class="MyBadge-header-detail">뱃지 포인트 </div>
-		                                                        <div class="MyBadge-header-detail">${List.badgePointDesc1 }</div>
-		                                                       <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일<div>sadsads </div>
-		                                                   </div>
-		                                                </div>
-		                                                 </div>     
-		                                          </div>
-		                                       </div>                     
-		                                    </div>   
+		                               <div id="badge${List.badgePointId }" class="hidden" >
+                                       <div class="popover-body">
+                                          <div id="inbody" >
+                                                 <div class="MyFollow-user flex-row-left-center">
+                                                  <div class="flex-col-left-center">
+                                                        <div class="MyFollow-user-badge" >
+                                                            <img id="modal1badge" ${List.badgeCk==0 ? "class='modalimg'" : "" }  src="<%=cp %>/${List.url }" >
+                                                        </div>
+                                                        <div>   
+                                                        <button type="button"  ${List.badgeCk==0 ? "class='modalbutton'" : "class='btn btn-orange selectBadge'" }
+                                                       						  ${List.badgeCk==1 ? "" : "disabled='disabled'" } value="${List.badgeLogId }">대표뱃지 설정</button>
+                                                        </div>
+                                                   </div>
+                                                   <div class="flex-col-left-center" style="padding-left: 20px;">
+                                                       <div class="MyBadge-header-nickname">${List.badgePointName }</div>
+                                                          
+                                                    <c:choose>
+													<c:when test="${List.badgeCk == 1}">
+														 <div class="MyBadge-header-detail">뱃지 포인트 
+														 <progress value="3" max="3" style="width: 140px;"></progress></div>
+                                                         <div class="MyBadge-header-detail flex-row-center-center">뱃지획득일 <div>${List.reviewDate }</div></div>
+                                                         <div class="MyBadge-header-detail flex-row-center-center">뱃지소멸일 <div>${List.expirationDate }</div></div>
+													   
+													</c:when>
+													
+													<c:when test="${List.badgeCk == 0}">
+													        <div class="MyBadge-header-detail">뱃지 포인트 : 
+														   <progress  value="${List.pointNum}" max="3" style="width: 140px;"></progress></div>
+														   <div class="MyBadge-header-detail"> <div> 뱃지 획득까지 ${3- List.pointNum}포인트 남았습니다! </div></div>
+													   
+													</c:when>
+												</c:choose>
+                                                </div>
+                                                
+                                                 </div>  
+                                                 <hr>
+                                                 <div class="flex-col-left-center PointLog" style="padding-left: 20px;">
+                                                 </div>   
+                                          </div>
+                                       </div>                     
+                                    </div>   
                                         <!-- 모달 -->   
                                           </c:forEach>
                                         </div>
@@ -523,3 +577,6 @@
 
 </body>
 </html>
+
+
+

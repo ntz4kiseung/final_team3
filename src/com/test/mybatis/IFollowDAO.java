@@ -7,18 +7,17 @@ public interface IFollowDAO
 {
 	public int followinsert(FollowDTO followDTO);
 	public int followdelete(FollowDTO followDTO);
-	public ArrayList<FollowDTO> followingList();
-	public ArrayList<FollowDTO> followingBad();
-	public ArrayList<FollowDTO> followingAddrList();
-	public ArrayList<FollowDTO> followingInterList();
-	public ArrayList<FollowDTO> followerList();
-	public ArrayList<FollowDTO> followerBad();
-	public ArrayList<FollowDTO> followerAddrList();
-	public ArrayList<FollowDTO> followerInterList();
+	public ArrayList<FollowDTO> followingList(String userId);
+	public ArrayList<FollowDTO> followingBad(String userId);
+	public ArrayList<FollowDTO> followingAddrList(String userId);
+	public ArrayList<FollowDTO> followingInterList(String userId);
+	public ArrayList<FollowDTO> followerList(String userId);
+	public ArrayList<FollowDTO> followerBad(String userId);
+	public ArrayList<FollowDTO> followerAddrList(String userId);
+	public ArrayList<FollowDTO> followerInterList(String userId);
 	
-	public int followinsert2(String followId);
-	public int followdelete2(String followId);
+	public int followinsert2(@Param("userId")String userId, @Param("followId")String followId );
+	public int followdelete2(@Param("userId")String userId, @Param("followId")String followId );
 	
-	public int followinsert3(String followId);
-	public int followdelete3(String followId);
+
 }

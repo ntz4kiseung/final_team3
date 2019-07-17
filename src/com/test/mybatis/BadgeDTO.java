@@ -6,11 +6,63 @@ public class BadgeDTO
 	private String badgeCateId, badgeCateName, badgePointId, badgePointName, url, badgePointDesc1, badgePointDesc2;
 	
 	//선아 DTO 추가 
-	private int badgeCk;
+	private int badgeCk,pointNum;
 	private String badgeLogId, badgeDate;
+	
+	private String reviewDate,expirationDate,takeUserId,giveUserId;
+	
+	
+	
 
-	
-	
+	public String getTakeUserId()
+	{
+		return takeUserId;
+	}
+
+	public void setTakeUserId(String takeUserId)
+	{
+		this.takeUserId = takeUserId;
+	}
+
+	public String getGiveUserId()
+	{
+		return giveUserId;
+	}
+
+	public void setGiveUserId(String giveUserId)
+	{
+		this.giveUserId = giveUserId;
+	}
+
+	public int getPointNum()
+	{
+		return pointNum;
+	}
+
+	public void setPointNum(int pointNum)
+	{
+		this.pointNum = pointNum;
+	}
+
+	public String getReviewDate()
+	{
+		return reviewDate;
+	}
+
+	public void setReviewDate(String reviewDate)
+	{
+		this.reviewDate = reviewDate;
+	}
+
+	public String getExpirationDate()
+	{
+		return expirationDate;
+	}
+
+	public void setExpirationDate(String expirationDate)
+	{
+		this.expirationDate = expirationDate;
+	}
 
 	public String getBadgeDate()
 	{

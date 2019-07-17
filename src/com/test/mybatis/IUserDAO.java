@@ -41,13 +41,13 @@ public interface IUserDAO
 	
 	// 로그인 사용
 	
-	public ArrayList<UserDTO> myPageList(String userid);
+	public ArrayList<UserDTO> myPageList(String userId);
 	
-	public ArrayList<UserDTO> MyPageBad(String userid); 
+	public ArrayList<UserDTO> MyPageBad(String userId); 
 	
-	public ArrayList<AddrDTO> myPageAddrList(String userid);
+	public ArrayList<AddrDTO> myPageAddrList(String userId);
 	
-	public ArrayList<InterDTO> myPageInterList(String userid);
+	public ArrayList<InterDTO> myPageInterList(String userId);
 	
 	public UserDTO userList(String userid);
 	

@@ -30,10 +30,10 @@ public class FollowController
 		IFollowDAO dao = sqlSession.getMapper(IFollowDAO.class);
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
-		model.addAttribute("followingBad",dao.followingBad());
-		model.addAttribute("followingList",dao.followingList());
-		model.addAttribute("followingAddrList",dao.followingAddrList());
-		model.addAttribute("followingInterList",dao.followingInterList());
+		model.addAttribute("followingBad",dao.followingBad(userId));
+		model.addAttribute("followingList",dao.followingList(userId));
+		model.addAttribute("followingAddrList",dao.followingAddrList(userId));
+		model.addAttribute("followingInterList",dao.followingInterList(userId));
 		
 		model.addAttribute("MyPageBad",dao2.MyPageBad(userId));
 		model.addAttribute("myPageList", dao2.myPageList(userId));
@@ -51,10 +51,10 @@ public class FollowController
 		IFollowDAO dao = sqlSession.getMapper(IFollowDAO.class);
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
 		
-		model.addAttribute("followerBad",dao.followerBad());
-		model.addAttribute("followerList",dao.followerList());
-		model.addAttribute("followerAddrList",dao.followerAddrList());
-		model.addAttribute("followerInterList",dao.followerInterList());
+		model.addAttribute("followerBad",dao.followerBad(userId));
+		model.addAttribute("followerList",dao.followerList(userId));
+		model.addAttribute("followerAddrList",dao.followerAddrList(userId));
+		model.addAttribute("followerInterList",dao.followerInterList(userId));
 		
 		model.addAttribute("MyPageBad",dao2.MyPageBad(userId));
 		model.addAttribute("myPageList", dao2.myPageList(userId));
@@ -65,9 +65,10 @@ public class FollowController
 	}
 	
 	@RequestMapping(value="/followingajax.action", method = RequestMethod.GET)
-	public void singUpcheckId(ModelMap model,String followId,String fck,HttpServletResponse response,FollowDTO followDTO) throws IOException
+	public void singUpcheckId(ModelMap model,String followId,String fck,HttpServletResponse response,FollowDTO followDTO, HttpSession session) throws IOException
 	{
-
+		String userId = (String) session.getAttribute("userId");
+		
 		int result = 0;
 		IFollowDAO dao = sqlSession.getMapper(IFollowDAO.class);
 		
@@ -81,14 +82,14 @@ public class FollowController
 		
 		if(fck1 == 0)
 		{
-			dao.followinsert2(followId);
+			dao.followinsert2(userId, followId);
 			result = 1;
 			
 		}
 		else if(fck1 == 1)
 		{
 			
-			dao.followdelete2(followId);
+			dao.followdelete2(userId, followId);
 			result = 0;
 			
 		}
