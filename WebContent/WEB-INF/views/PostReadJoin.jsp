@@ -69,7 +69,7 @@
 			var joinId = $(this).attr('name');
 			$('#reportBtn').click(function()
 			{
-				location.href="reportjoininsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId;
+				location.href="reportjoininsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postHostId="+$('#postId').attr('name');
 			});
 			
 		});
@@ -79,7 +79,7 @@
 			var joinId = $(this).attr('name');
 			$('#reportBtn').click(function()
 			{
-				location.href="reportreplyinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId;
+				location.href="reportreplyinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postHostId="+$('#postId').attr('name');
 			});
 		});
 // ------------------------------------------------------------------------------------------------------ 신고 구간

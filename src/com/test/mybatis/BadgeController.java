@@ -62,6 +62,8 @@ public class BadgeController
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));
 		
+		model.addAttribute("userId", userId);
+		
 		return "WEB-INF/views/OpBadge.jsp";
 	}
 	

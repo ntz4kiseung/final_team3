@@ -42,7 +42,7 @@
 			var joinId = $(this).attr('name');
 			$('#reportBtn').click(function()
 			{
-				location.href="hostreportjoininsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId;
+				location.href="hostreportjoininsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postHostId="+$('#postId').attr('name');
 			});
 			
 		});
@@ -52,7 +52,7 @@
 			var joinId = $(this).attr('name');
 			$('#reportBtn').click(function()
 			{
-				location.href="hostreportreplyinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId;
+				location.href="hostreportreplyinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postHostId="+$('#postId').attr('name');
 			});
 		});
 		

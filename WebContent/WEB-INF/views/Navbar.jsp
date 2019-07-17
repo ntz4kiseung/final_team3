@@ -4,7 +4,7 @@
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 
-	String userId = (String)session.getAttribute("userId");
+	String navbarUserId = (String)session.getAttribute("userId");
 %>
 <%@ page contentType="text/html; charset=UTF-8"%>
 <div class="navbar-box">
@@ -31,7 +31,7 @@
             </div>
             
             
-            <div class='navbar-right flex-row-right-center ${userId==null ? "" : "hidden"}'>
+            <div class='navbar-right flex-row-right-center <%=(navbarUserId==null||navbarUserId.equals("") ? "" : "hidden") %>'>
                 <div>
                     <a href="login.action"><button class="btn btn-border-right">로그인</button></a>
                 </div>
@@ -41,13 +41,13 @@
             </div> 
             
             
-            <div class='navbar-right flex-row-right-center ${userId==null ? "hidden" : ""}'>
+            <div class='navbar-right flex-row-right-center <%=(navbarUserId==null||navbarUserId.equals("") ? "hidden" : "") %>'>
                 <div><img src="img/알람on.png" alt="noimage" /></div>
                 <div>
                     <a href="postwrite.action"><button class="btn btn-border-right">모임개설</button></a>
                 </div>
                 <div>
-                    <a href="myprofile.action"><button class="btn btn-border-right">${userId}</button></a>
+                    <a href="myprofile.action"><button class="btn btn-border-right"><%=navbarUserId %></button></a>
                 </div>
                 <div>
                     <a href="notice.action"><button class="btn ">고객센터</button></a>

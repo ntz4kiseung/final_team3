@@ -91,34 +91,30 @@ public class PostReadJoinController
 	@RequestMapping(value = "/joininsert.action", method = RequestMethod.GET)
 	public String JoinInsert(Model model, JoinDTO joinDTO,String postHostId, HttpSession session)
 	{
-		String result = null;
 		IJoinDAO joindao = sqlSession.getMapper(IJoinDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		System.out.println(joinDTO.getContents());
+		System.out.println("postHostId : " + postHostId);
 		joinDTO.setUserId(userId);
 		joindao.joininsert(joinDTO, postHostId);
 		
-		result = "redirect:postreadjoin.action";
-		return result;
+		return "redirect:postreadjoin.action?postId="+postHostId;
 	}
 	
 	@RequestMapping(value = "/reportinsert.action", method = RequestMethod.GET)
 	public String reportPost(Model model, ReportDTO reportDTO,String postHostId, HttpSession session)
 	{
-		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		reportDTO.setUserId(userId);
 		reportDAO.reportpostinsert(reportDTO, postHostId);
 		
-		result = "redirect:postreadjoin.action";
-		return result;
+		return "redirect:postreadjoin.action?postId="+postHostId;
 	}
 	
 	@RequestMapping(value = "/reportjoininsert.action", method = RequestMethod.GET)
-	public String reportJoin(Model model, ReportDTO reportDTO, HttpSession session)
+	public String reportJoin(Model model, ReportDTO reportDTO,String postHostId, HttpSession session)
 	{
-		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		reportDTO.setUserId(userId);
@@ -128,14 +124,12 @@ public class PostReadJoinController
 		{
 			reportDAO.joindelcheckinsert(reportDTO);
 		}
-		result = "redirect:postreadjoin.action";
-		return result;
+		return "redirect:postreadjoin.action?postId="+postHostId;
 	}
 	
 	@RequestMapping(value = "/reportreplyinsert.action", method = RequestMethod.GET)
-	public String reportreply(Model model, ReportDTO reportDTO, HttpSession session)
+	public String reportreply(Model model, ReportDTO reportDTO,String postHostId, HttpSession session)
 	{
-		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		reportDTO.setUserId(userId);
@@ -145,8 +139,7 @@ public class PostReadJoinController
 		{
 			reportDAO.reportreplyinsert(reportDTO);
 		}
-		result = "redirect:postreadjoin.action";
-		return result;
+		return "redirect:postreadjoin.action?postId="+postHostId;
 	}
 	
 	@RequestMapping(value = "/replyinsert.action", method = RequestMethod.GET)

@@ -363,7 +363,7 @@ $(document).ready(function()
                                     
                                     <c:forEach var="list" items="${reviewList }" varStatus="status">
                                     <div class="PostList-post flex-row-left-center">
-                                        <div class="PostList-post-left flex-col-center-center">
+                                        <div class="PostList-post-left flex-col-center-center" onclick="location.href='profile.action?userId=${list.userId}'">
                                             <div class="PostList-post-badge">
                                                <img src="${list.url }" onerror="this.src='img/뉴비.png'">
                                             </div>
@@ -371,7 +371,7 @@ $(document).ready(function()
                                                 ${list.nickname }
                                             </div>
                                         </div>
-                                        <div class="PostList-post-center flex-col-left-center">
+                                        <div class="PostList-post-center flex-col-left-center" onclick="location.href='post.action?postId=${list.postId}'">
                                             <div class="PostList-post-title">
                                                 ${list.title }
                                             </div>
