@@ -66,7 +66,7 @@
 		                  
 							$("#inbodyB"+a).empty();
 							$("#inbodyB"+a).append(result);
-		                }); 
+		                });
 			}
 			
 			if ($("#interMainId"+i).val != "") {

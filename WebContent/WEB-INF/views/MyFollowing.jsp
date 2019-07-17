@@ -36,20 +36,13 @@
 	width: 100px;
 	height: 100px;
 }
-
-
-
-
 </style>
 <script type="text/javascript">
 $(document).ready(function(){
-    
 	
 	$(".star-show>div:nth-child(2)").each(function(index,item){
 	    $(item).css("width", $(item).next().val()*20+"%");
 	});
-    
-   
     
      $('.followBtn').click(function()
     {			
@@ -189,13 +182,10 @@ $(document).ready(function(){
         
                                         <div class="user-badge-box">
                                         	<a href="" class="opbadge" id="${fList.userId }" >
-                                        	  
-                                        	
                                         		<img class="user-bad-badge" src="${followingBad[status.index].urlBad }" alt="">
                                                 <img class="followbadge" src="<%=cp %>/${fList.url } " alt="">
                                             </a>
                      						<input type="hidden" id="opId${fList.userId }" name="opId${fList.userId }" value="">
-                                            
                                         </div>
                                         <div class="MyFollow-user-detail">
                                         

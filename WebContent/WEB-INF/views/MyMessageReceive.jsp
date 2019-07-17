@@ -137,8 +137,7 @@
 	pageNum = '${pageNum}';
 	totalPage = '${totalPage}';
     $(document).ready(function()
-   {
-    	
+    {
 		$(document).on('click', 'a[href="#"]', function(e){
 	        e.preventDefault();
 	    });
@@ -162,7 +161,43 @@
 			};
 			location.href="mymessagerecevie.action?pageNum="+pageNum;
 		});
-		
+    	
+    	$(".submit").click(function name()
+		{
+    		var temp = $(this).val();
+			
+			if (temp == 0)
+			{
+				console.log("보내기");
+			}
+			else
+			{
+				console.log("답장보내기");
+			}
+		})
+    	
+    	function sysdate(){
+            var date = new Date();
+            var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " +date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            
+            return result; 
+        }
+ 		
+ 		$(".MyMessage-title").click(function()
+		{
+ 			var a = $(this).val();
+ 			var b = $("#checkDate"+a).text();
+ 			
+ 			alert("첫번째"+a);
+ 			
+ 			if (b == '')
+			{
+				var time = sysdate();
+				var time2 = "확인날짜:"+time;
+				$('#checkDate'+a).text(time);
+				$("#checkD"+a).text(time2);
+			}
+		})
     	
        function allCheckFunc( obj ) {
           $("[name=checkOne]").prop("checked", $(obj).prop("checked") );
@@ -226,8 +261,6 @@
            }  
            
           });
-      
-       
        
       $("#btn-check-id").click(function()
       {
@@ -247,20 +280,6 @@
             data : {'id': inputid},
             success : function(count)
             {
-               console.log(count);
-               
-               if (count == 0) {
-                  document.getElementById("span-check-id").style.display = 'block';
-                  document.getElementById("span-check-id").style.color = '#DF0101';
-                  $("#btn-check-id").val("1");
-                  $("#span-check-id").text("아이디가 존재하지 않습니다.");
-               }
-               else {
-                  document.getElementById("span-check-id").style.display = 'block';
-                  document.getElementById("span-check-id").style.color = '#31B404';
-                  $("#span-check-id").text("존재하는 아이디 입니다.");
-                  
-               }
             }
          })
       });
@@ -288,13 +307,13 @@
                      if (count == 0) {
                         document.getElementById("span-check-id2").style.display = 'block';
                         document.getElementById("span-check-id2").style.color = '#DF0101';
-                        $("#btn-check-id2").val("1");
                         $("#span-check-id2").text("아이디가 존재하지 않습니다.");
                      }
                      else {
                         document.getElementById("span-check-id2").style.display = 'block';
                         document.getElementById("span-check-id2").style.color = '#31B404';
                         $("#span-check-id2").text("존재하는 아이디 입니다.");
+                        $("#btn-check-id2").val("1");
                      }
                   }
                })
@@ -309,6 +328,10 @@
         {
    	  
 	   	  var msgId = $(this).val();
+	   	  
+	   	alert("두번째"+msgId);
+	   	  
+	   	  alert(msgId);
 
 	   	  var checkDate = $("#checkDate"+msgId).text();
 	   	  
@@ -329,7 +352,7 @@
 
    });
     
-    </script>
+</script>
     
     
     
@@ -451,13 +474,13 @@
                                         <span aria-hidden="true" id="message-close">×</span>
                                       </button>
                                     </div>
-                                     <form role="form" action="messagesend.action" method="post">
+                                     <form role="form" id="sendform" name="sendform" action="messagesend.action" method="post">
+                                     
                                     <div class="modal-body">
                                         <div class="control-group flex-row-center-center">
                                           <div for="destinataire" style="padding-right: 15px;" >받는 사람</div>
                                           <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" ></div>
                                             <button type="button" class="btn" id="btn-check-id2" value="0">아이디 중복확인</button>
-                                              
                                        </div>
                                        <br>   
                                        <div class="control-group">
@@ -477,7 +500,7 @@
                                       
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button type="submit" class="btn btn-orange submit">전송하기</button>
+                                      <button type="button" id="send" name="send" value="0" class="btn btn-orange submit">전송하기</button>
                                     </div>
                                    </form>
                                   </div>
@@ -519,7 +542,7 @@
 
 
                                             <!-- card card card card card card card card card card card card card card card  -->
-                                           <c:forEach var="message" items="${messageRecevieList }">
+                                           <c:forEach var="message" items="${messageRecevieList }" varStatus = "status">
                                            <div class="card">
                                                 <!-- card header -->
                                                 <div class="card-header flex-row-left-center" id="headingOne">
@@ -545,7 +568,8 @@
                                                         <br>
                                                         <div class="flex-row-left-center">
                                                             <div class="MyMessage-date">보낸날짜:  ${message.sendDate }</div>&nbsp;&nbsp;
-                                                            <div class="MyMessage-date " >확인날짜: ${message.checkDate }</div>
+                                                            <div id="checkD${message.messageId }" class="MyMessage-date " >확인날짜: ${message.checkDate }</div>
+                                                            
                                                             <div class="flex-item-grow flex-row-right-center">
                                                                 <button class="btn btn-orange btn-85-25" id="remsg" data-toggle="modal" data-target="#messageModal${message.messageId }">답장하기</button>
                                                             </div>
@@ -562,7 +586,7 @@
                                               <span aria-hidden="true" id="message-close">×</span>
                                             </button>
                                           </div>
-                                           <form role="form" action="messagesend.action" method="post">
+                                           <form role="form" id="resendform" name="resendform" action="messagesend.action" method="post">
                                           <div class="modal-body">
                                               <div class="control-group flex-row-center-center">
                                                 <div for="destinataire" style="padding-right: 15px;" >받는 사람</div>
@@ -581,7 +605,9 @@
                                             
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-orange submit">전송하기</button>
+                                            <button type="button" id="resend-btn" name="resend-btn" value="1" class="btn btn-orange submit">전송하기</button>
+                                            
+                                            
                                           </div>
                                          </form>
                                         </div>

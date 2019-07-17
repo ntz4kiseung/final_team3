@@ -33,8 +33,6 @@
 		ORDER BY M.SENDDATE DESC
 	</select>
 
-
-
 	<select id="messageSendList" resultType="com.test.mybatis.MessageDTO"> 
 		SELECT *
 		FROM
@@ -63,24 +61,20 @@
 		ORDER BY M.SENDDATE
 	</select>
 	
-	
-	
-	
 	<insert id="messageAdd">
 		INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE)
-		VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), 'admin001', #{takeUserId},#{contents },SYSDATE)
+		VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'), #{userId}, #{message.takeUserId},#{message.contents },SYSDATE)
 	</insert>
 	
 	<delete id="messageDelete">
 		INSERT INTO DEL_MESSAGE(ID,MESSAGEID,DELETEDATE,USERID)
 		VALUES (DEL_MESSAGE_SEQ.NEXTVAL ,#{messageId },SYSDATE, 'caroin')
 	</delete>
-	
 
  	<select id="checkId" resultType="java.lang.Integer">
- 		SELECT COUNT(USERID) AS COUNT
+ 		SELECT COUNT(*)
 		FROM LOGIN
-		WHERE UPPER(USERID) = UPPER(#{takeUserId })
+		WHERE USERID = #{takeUserId }
  	</select> 
  	
  	<update id="messageCheckDate">
@@ -89,11 +83,8 @@
 		WHERE MESSAGEID = #{messageId }
  	</update>
  	
-<!-- 승원 추가 밑에 부분 -->
 	<insert id="messageinsert">
 		INSERT INTO MESSAGE(MESSAGEID, GIVEUSERID, TAKEUSERID, CONTENTS, SENDDATE) VALUES(ADD_ID('MESSAGE', 'MESSAGEID', 'MS'),#{giveUserId}, #{takeUserId}, #{contents}, SYSDATE)
 	</insert>
-
 	
-  
 </mapper>

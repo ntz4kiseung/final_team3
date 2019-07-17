@@ -52,11 +52,8 @@
 				  $(location).attr("href","myprofilemodify.action");
 					  
 			});
-			
-			
-			
+
 			$(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
-					
 	});
     
     </script>

@@ -137,7 +137,7 @@
                             <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
                             <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
                             <div><a class="navnonclick" href="myfollowing.action">팔로우</a></div>
-                            <div><a class="navnonclick" href="#">내모임</a></div>
+                            <div><a class="navnonclick" href="createpostlist.action">내모임</a></div>
                         </div>
 
                         <div class="MyPage-body flex-item-grow flex-col-center-center">

@@ -159,6 +159,4 @@ public class MyProfileController
 		
 		return "WEB-INF/views/OpponentProfile.jsp";
 	}
-	
-
 }

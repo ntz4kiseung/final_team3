@@ -20,7 +20,6 @@
     <!-- sagyo.css -->
     <link href="css/sagyo.css" rel="stylesheet">
     
-<!-- 추가한거 -->
 <script type="text/javascript">
 $(document).ready(function()
 {
@@ -61,6 +60,7 @@ $(document).ready(function()
 		 var inquiry = $(this).val();
 		 console.log(inquiry);
 		 
+		
 		 $.ajax({
 	         url : "<%=cp %>/hostInquiry.action",
 	         type : "get",

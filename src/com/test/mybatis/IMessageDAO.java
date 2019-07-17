@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 public interface IMessageDAO
 {
 	public int checkId(String id);
-	public int messageAdd(MessageDTO m);
+	public int messageAdd(@Param("userId")String userId, @Param("message")MessageDTO message);
 	public ArrayList<MessageDTO> messageRecevieList(@Param("userId")String userId, @Param("pageNum")String pageNum);
 	public ArrayList<MessageDTO> messageSendList(@Param("userId")String userId, @Param("pageNum")String pageNum);
 	public int messageinsert(MessageDTO messageDTO);

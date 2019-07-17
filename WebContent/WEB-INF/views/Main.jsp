@@ -324,7 +324,9 @@
                                 	<div class="PostList-post flex-row-left-center">
 	                                    <div class="PostList-post-left flex-col-center-center">
 	                                        <div class="PostList-post-badge user-badge-box">
+	                                        
 	                                        	<img class="user-bad-badge" src="${post.urlBad }" alt="">
+	                                        	
 	                                            <img src="${post.url}" alt="">
 	                                        </div>
 	                                        <div>

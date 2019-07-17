@@ -35,9 +35,7 @@ public class MessageController
 		model.addAttribute("myPageList", dao2.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
-		
 		model.addAttribute("messageRecevieList",dao.messageRecevieList(userId, pageNum));
-		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("largePage", (int)(Math.ceil((double)Integer.parseInt(pageNum)/5)));
 		model.addAttribute("totalPage",dao.messageRecevieTotalPageNum(userId));
@@ -63,9 +61,7 @@ public class MessageController
 		model.addAttribute("myPageList", dao2.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
-		
 		model.addAttribute("messageSendList",dao.messageSendList(userId, pageNum));
-		 
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("largePage", (int)(Math.ceil((double)Integer.parseInt(pageNum)/5)));
 		model.addAttribute("totalPage",dao.messageSendTotalPageNum(userId));
@@ -83,37 +79,32 @@ public class MessageController
 			return "redirect: login.action";
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
-		
-		dao.messageAdd(m); 
+		dao.messageAdd(userId, m); 
 		
 		return "redirect:mymessagerecevie.action";
-		
 	}
 	
 
 	@RequestMapping(value="/messageidcheck.action")
 	public void singUpcheckId(String id, HttpServletResponse response) throws IOException
 	{
-		
 		int result = 0;
 
 		IMessageDAO dao2 = sqlSession.getMapper(IMessageDAO.class);
 		result = dao2.checkId(id);
-
+		System.out.println(result);
 		response.getWriter().print(result);
-		
 	}
 
 	
 	@RequestMapping(value="/messagesend2.action", method=RequestMethod.POST)	
-	public String MessageSend2(MessageDTO m)
+	public String MessageSend2(MessageDTO m, HttpSession session)
 	{
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
-		
-		dao.messageAdd(m); 
+		String userId = (String) session.getAttribute("userId");
+		dao.messageAdd(userId, m); 
 		
 		return "redirect:mymessagesend.action";
-		
 	}
 	
 	@RequestMapping(value="/messagedelete.action", method=RequestMethod.POST)	
@@ -126,7 +117,6 @@ public class MessageController
 		{
 			result  = dao.messageDelete(checkArr[i]);
 		}
-
 		response.getWriter().print(result);
 	}
 	
@@ -138,6 +128,5 @@ public class MessageController
 		dao.messageCheckDate(msgId);
 		
 		return "WEB-INF/views/messageCheckDateAjax.jsp";
-		
 	}
 }

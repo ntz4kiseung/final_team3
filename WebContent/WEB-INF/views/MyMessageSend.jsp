@@ -133,7 +133,6 @@
 	totalPage = '${totalPage}';
  	$(document).ready(function()
 	{
- 		
  		$(document).on('click', 'a[href="#"]', function(e){
 	        e.preventDefault();
 	    });
@@ -258,10 +257,6 @@
 	          });
 		   
 		   $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
-			
-
-	     		
-		
 	 	
 	});
  	
