@@ -1,4 +1,4 @@
-package com.test.smart;
+package com.sp.smart;
 
 import org.springframework.web.multipart.MultipartFile;
 

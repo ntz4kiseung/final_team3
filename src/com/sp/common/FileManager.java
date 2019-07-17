@@ -1,4 +1,4 @@
-package com.test.common;
+package com.sp.common;
 
 import java.io.BufferedInputStream;
 import java.io.File;

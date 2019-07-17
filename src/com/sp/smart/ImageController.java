@@ -1,4 +1,4 @@
-package com.test.smart;
+package com.sp.smart;
 
 import java.io.File;
 import java.io.InputStream;
@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.test.common.FileManager;
-import com.test.common.ImageManager;
+import com.sp.common.FileManager;
+import com.sp.common.ImageManager;
 
 @Controller("smart.imageController")
 public class ImageController 
