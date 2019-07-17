@@ -1,15 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String cp = request.getContextPath();
 %>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>프로필</title>
   	<!-- 부트스트랩 -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -49,6 +53,8 @@
 					  
 			});
 			
+			
+			
 			$(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%");
 					
 	});
@@ -70,11 +76,11 @@
                         <div class="MyPage-header-left flex-col-center-center">
                         <div class="MyPage-header-badge">
                                <div class="user-badge-box">
-                                        <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
-                                         <img id="user_main" src="<%=cp %>/${List.url } ">
+                                          <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
+                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
                                  </div>
                             </div>
-                             <div class="star-show star-25-box">
+                            <div class="star-show star-25-box">
 								<div>
 									<img class="grayscale" id="1" src="img/star.png" alt=""/>
 									<img class="grayscale" id="2"  src="img/star.png" alt="" />
@@ -98,29 +104,10 @@
                                 ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                             <div>
-								<c:if test="${myPageAddrList[status.index].addrSiName1 != null  }">
-								    # ${myPageAddrList[status.index].addrSiName1 } ${myPageAddrList[status.index].addrGuName1 }
-								</c:if>
-								<c:if test="${myPageAddrList[status.index].addrSiName2 != null  }">
-								    # ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 }
-								</c:if>
-                                <c:if test="${myPageAddrList[status.index].addrSiName3 != null }">
-								   # ${myPageAddrList[status.index].addrSiName3 } ${myPageAddrList[status.index].addrGuName3 }
-								</c:if> 
-							</div>	
-							<div>	
-                                <c:if test="${myPageInterList[status.index].interSubName1 != null}">
-								   # ${myPageInterList[status.index].interSubName1 }
-								</c:if> 
-                                
-                                 <c:if test="${myPageInterList[status.index].interSubName2 != null}">
-								   # ${myPageInterList[status.index].interSubName2 }
-								</c:if> 
-								 <c:if test="${myPageInterList[status.index].interSubName3 != null}">
-								   # ${myPageInterList[status.index].interSubName3 }
-								</c:if> 
-                             </div>    
+                                <div>${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 }  ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 } 
+                                ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
+                                <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
+                                <div>${myPageInterList[status.index].interSubName3 }</div> 
                                       
                                 <div style="color: orange;">${List.telCheck }</div>
                                 
@@ -131,13 +118,10 @@
                     </c:forEach>
                     
                     <div class="flex-item-grow flex-row-left-up">
-
                         <div class="MyPage-nav flex-col-center-up">
-                            <div><a class="navclick" href="myprofile.action">프로필</a></div>
-                            <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
-                            <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
-                            <div><a class="navnonclick" href="myfollowing.action">팔로우</a></div>
-                            <div><a class="navnonclick" href="#">내모임</a></div>
+                            <div><a class="navclick" href="opprofile.action?opuserid=${param.opuserid}">프로필</a></div>
+                            <div><a class="navnonclick" href="opbadge.action?opuserid=${param.opuserid}">뱃지</a></div>
+                            <div><a class="navnonclick" href="opcreatepostlist.action?opuserid=${param.opuserid}">개설모임</a></div>
                         </div>
 
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
@@ -150,47 +134,20 @@
                                 <c:forEach var="List" items="${ myPageList }" varStatus="status">
                                     <form action="myprofilemodify.action" class="MyProfile-body flex-col-left-up">
 									
-                                            <div class="MyProfile-input-group">
-                                                <div class="MyProfile-input-group-label">
-                                                    아이디*
-                                                </div>  
-                                                <input type="text" id="userId" name="userId" class="form-control input-245-40" value="${List.userId }" readonly>
-                                            </div>
+                                            
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     닉네임*
                                                 </div>  
                                                 <input type="text" id="nickname" name="nickname"  class="form-control input-245-40" value="${List.nickname }" readonly>
                                             </div>                        
-                                            <div class="MyProfile-input-group">
-                                                <div class="MyProfile-input-group-label">
-                                                    이름*
-                                                </div>  
-                                                <input type="text" id="name" name="name" class="form-control input-245-40" value="${List.name }" readonly>
-                                            </div>
-                                            <div class="MyProfile-input-group">
-                                                <div class="MyProfile-input-group-label">
-                                                    생년월일
-                                                </div>
-                                                
-                                                
-                                                <input type="text" id="birthYear" name="birthYear" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 0,10),'-')[0]}" readonly>년
-                                                <input type="text" id="birthMonth" name="birthMonth" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[1]}" readonly>월
-                                                <input type="text" id="birthDay" name="birthDay" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[2]}" readonly>일
-                                            </div>
+                                           
                 
-                                            <div class="MyProfile-input-group">
-                                                <div class="MyProfile-input-group-label">
-                                                    성별
-                                                </div>
-                                                <input type="text" class="form-control input-245-40" value="${List.genderId }" readonly>
-                                            </div>
                 
                                             <div class="MyProfile-input-group">
                                                 <div class="MyProfile-input-group-label">
                                                     휴대전화
                                                 </div>
-                                                <input type="text" class="form-control input-245-40" value="${List.tel }" readonly>
                                                 <span style="color: orange; padding-left: 10px; padding-top: 10px;">${List.telCheck }</span>
                                             </div>
                 
@@ -199,7 +156,6 @@
                                                 <div class="MyProfile-input-group-label">
                                                     Email
                                                 </div>  
-                                                <input type="text" class="form-control input-245-40" value="${List.email }" readonly>
                                                       <span style="color: orange; padding-left: 10px; padding-top: 10px;">${List.emailCheck }</span>
                                             </div>
                 
@@ -300,11 +256,11 @@
                                                 </div>  
                                                 <textarea class="form-control" name="" id="" cols="30" rows="10"  readonly>${List.introduce }</textarea>
                                             </div>
+                                            <br>
+                                            <br>
                                         </form>
                                         </c:forEach>
-                                          <div class="MyProfileModify-footer flex-row-center-center">
-                                            <button type="submit" class="btn btn-orange btn-160-45 modify" >수정하기</button>
-                                        </div>
+
                             </div>
                         </div>
                     </div>

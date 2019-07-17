@@ -42,7 +42,10 @@
    
    $(document).ready(function()
    {
-	   /* $(".star-show>div:nth-child(2)").css("width", $(".star-show>input").val()*20+"%"); */
+		$(".star-show>div:nth-child(2)").each(function(index,item){
+		    $(item).css("width", $(item).next().val()*20+"%");
+		});
+	    
 		
 	    $('.followBtn').click(function()
 		{			
@@ -79,8 +82,7 @@
             <div class="body flex-item-grow flex-col-center-center">
                 
                 <div class="MyPage flex-item-grow flex-col-center-up">
-
-                    
+                  
                     <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
@@ -134,7 +136,8 @@
                             <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
                             <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
                             <div><a class="navclick" href="myfollowing.action">팔로우</a></div>
-                            <div><a class="navnonclick" href="#">내모임</a></div>
+                            <div><a class="navnonclick" href="createpostlist.action">내모임</a></div>
+                           
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
@@ -167,7 +170,7 @@
 				                           	</c:when>
 				                           	</c:choose>
 				                           	</div>
-	                                           <div class="flex-row-center-center"> 
+	                                           <div class="flex-row-left-center"> 
 					                              <div class="star-show star-20-box">
 														
 														<div>

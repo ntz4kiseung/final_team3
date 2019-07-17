@@ -349,11 +349,11 @@
                         <div class="MyPage-header-left flex-col-center-center">
                         <div class="MyPage-header-badge">
                                <div class="user-badge-box">
-                                          <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
-                                         <img src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                        <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
+                                         <img id="user_main" src="<%=cp %>/${List.url } ">
                                  </div>
                             </div>
-                            <div class="star-show star-25-box">
+                             <div class="star-show star-25-box">
 								<div>
 									<img class="grayscale" id="1" src="img/star.png" alt=""/>
 									<img class="grayscale" id="2"  src="img/star.png" alt="" />
@@ -377,10 +377,29 @@
                                 ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <div>${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 }  ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 } 
-                                ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
-                                <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
-                                <div>${myPageInterList[status.index].interSubName3 }</div> 
+                             <div>
+								<c:if test="${myPageAddrList[status.index].addrSiName1 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName1 } ${myPageAddrList[status.index].addrGuName1 }
+								</c:if>
+								<c:if test="${myPageAddrList[status.index].addrSiName2 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 }
+								</c:if>
+                                <c:if test="${myPageAddrList[status.index].addrSiName3 != null }">
+								   # ${myPageAddrList[status.index].addrSiName3 } ${myPageAddrList[status.index].addrGuName3 }
+								</c:if> 
+							</div>	
+							<div>	
+                                <c:if test="${myPageInterList[status.index].interSubName1 != null}">
+								   # ${myPageInterList[status.index].interSubName1 }
+								</c:if> 
+                                
+                                 <c:if test="${myPageInterList[status.index].interSubName2 != null}">
+								   # ${myPageInterList[status.index].interSubName2 }
+								</c:if> 
+								 <c:if test="${myPageInterList[status.index].interSubName3 != null}">
+								   # ${myPageInterList[status.index].interSubName3 }
+								</c:if> 
+                             </div>    
                                       
                                 <div style="color: orange;">${List.telCheck }</div>
                                 
@@ -396,7 +415,7 @@
                             <div><a class="navclick" href="mymessagerecevie.action">쪽지함</a></div>
                             <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
                             <div><a class="navnonclick" href="myfollowing.action">팔로우</a></div>
-                            <div><a class="navnonclick" href="#">내모임</a></div>
+                            <div><a class="navnonclick" href="createpostlist.action">내모임</a></div>
                         </div>
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 

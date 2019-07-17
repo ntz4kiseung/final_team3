@@ -113,8 +113,7 @@ $(document).ready(function()
 			$(temp).next().val($(this).next().val());
 		}); 
     });
-    
-    
+
 });
 	  
 </script>
@@ -252,6 +251,17 @@ $(document).ready(function()
 			align-items: center;
 			padding-left: 10px;
 		}
+			 .navclick {
+	display: block;
+	color: orange;
+	font-weight: bold;
+	}
+	.navnonclick {
+		display: block;
+		color: inherit;
+		font-weight: normal;
+	}	
+		
 </style>
 
 </head>
@@ -265,68 +275,88 @@ $(document).ready(function()
                 
 			<div class="MyPage flex-item-grow flex-col-center-up">
 
+                 
+                    <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
-                    
-                       <c:forEach items="${myPageList }" var="profile">
                         <div class="MyPage-header-left flex-col-center-center">
-                            <div class="MyPage-header-badge">
-                                <img src="${profile.url }" onerror="this.src='img/뉴비.png'">
+                        <div class="MyPage-header-badge">
+                               <div class="user-badge-box">
+                                        <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
+                                         <img id="user_main" src="<%=cp %>/${List.url } ">
+                                 </div>
                             </div>
-                            <div class="MyPage-header-grade-star">
-                                <c:forEach var="i" begin="1" end="${profile.reviewGrade }">
-                                   <label style="color: #ffd700;">★</label>
-                                </c:forEach>
-                                <c:forEach var="i" begin="${profile.reviewGrade }" end="4">
-                                   <label style="color: #e9e9e9;">★</label>
-                                </c:forEach>
-                            </div>
-                            <div class="MyPage-header-grade">
-                              ${profile.reviewGrade } / 5.0
-                            </div>
-                  		</div>
+                             <div class="star-show star-25-box">
+								<div>
+									<img class="grayscale" id="1" src="img/star.png" alt=""/>
+									<img class="grayscale" id="2"  src="img/star.png" alt="" />
+									<img class="grayscale" id="3"  src="img/star.png" alt="" />
+									<img class="grayscale" id="4"  src="img/star.png" alt="" />
+									<img class="grayscale" id="5"  src="img/star.png" alt="" />                    		
+								</div>
+								<div>
+							  		<img class="" id="1" src="img/star.png" alt=""/>
+									<img class="" id="2"  src="img/star.png" alt="" />
+									<img class="" id="3"  src="img/star.png" alt="" />
+									<img class="" id="4"  src="img/star.png" alt="" />
+									<img class="" id="5"  src="img/star.png" alt="" />
+								</div>
+								<input class="hidden" type="text" id="grade2" name="grade2" value="${List.reviewGrade }"/>
+								<div class="MyPage-header-grade" style="padding-left: 40px;">${List.reviewGrade } / 5.0</div>
+							</div>
+                        </div>
                         <div class="MyPage-header-right flex-item-grow">
                             <div class="MyPage-header-nickname">
-                                ${profile.nickname }
+                                ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <c:forEach items="${myPageAddrList }" var="addr">
-                                   <div>
-                                      ${addr.addrSiName1} ${addr.addrGuName1 } ${addr.addrSiName2} ${addr.addrGuName2 } ${addr.addrSiName3} ${addr.addrGuName3 }
-                                   </div>
-                                </c:forEach>
-                                <c:forEach items="${myPageInterList }" var="inter">
-                                   <div>
-                                      ${inter.interMainName1 } ${inter.interSubName1 } ${inter.interMainName2 } ${inter.interSubName2 } ${inter.interMainName3 } ${inter.interSubName3 }
-                                   </div>
-                                </c:forEach>
+                             <div>
+								<c:if test="${myPageAddrList[status.index].addrSiName1 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName1 } ${myPageAddrList[status.index].addrGuName1 }
+								</c:if>
+								<c:if test="${myPageAddrList[status.index].addrSiName2 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 }
+								</c:if>
+                                <c:if test="${myPageAddrList[status.index].addrSiName3 != null }">
+								   # ${myPageAddrList[status.index].addrSiName3 } ${myPageAddrList[status.index].addrGuName3 }
+								</c:if> 
+							</div>	
+							<div>	
+                                <c:if test="${myPageInterList[status.index].interSubName1 != null}">
+								   # ${myPageInterList[status.index].interSubName1 }
+								</c:if> 
                                 
-                                   <div style="color: orange;">
-                                      ${profile.telCheck }
-                                   </div>
-                                   <div style="color: orange;">
-                                      ${profile.emailCheck }
-                                   </div>
-                               </div>
-                          </div>
-                       </c:forEach>
+                                 <c:if test="${myPageInterList[status.index].interSubName2 != null}">
+								   # ${myPageInterList[status.index].interSubName2 }
+								</c:if> 
+								 <c:if test="${myPageInterList[status.index].interSubName3 != null}">
+								   # ${myPageInterList[status.index].interSubName3 }
+								</c:if> 
+                             </div>    
+                                      
+                                <div style="color: orange;">${List.telCheck }</div>
+                                
+                                <div style="color: orange;">${List.emailCheck }</div>
+                            </div>
+                        </div>
                     </div>
+                    </c:forEach>
 
                     
                     <div class="flex-item-grow flex-row-left-up">
                         <div class="MyPage-nav flex-col-center-up">
-                            <div><a href="#">프로필</a></div>
-                            <div><a href="#">쪽지함</a></div>
-                            <div><a href="#">뱃지</a></div>
-                            <div><a href="#">팔로우</a></div>
-                            <div><a  class="font-bold font-orange" href="createpostlist.action">내모임</a></div>
+                            <div><a class="navnonclick" href="myprofile.action">프로필</a></div>
+                            <div><a class="navnonclick" href="mymessagerecevie.action">쪽지함</a></div>
+                            <div><a class="navnonclick" href="mybadge.action">뱃지</a></div>
+                            <div><a class="navnonclick" href="myfollowing.action">팔로우</a></div>
+                            <div><a class="navclick" href="createpostlist.action">내모임</a></div> 
                         </div>
                         
                         
                         <div class="MyPage-body flex-item-grow flex-col-center-center">
 
                             <div class="MyPage-body-header flex-row-left-center">
-                                <span class="font-bold"><a href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;
-                                <span><a href="joinpostlist.action">참여모임</a></span>
+                                <span ><a  class="navclick" href="createpostlist.action">개설모임</a></span>&nbsp;&nbsp;&nbsp;
+                                <span><a class="navnonclick" href="joinpostlist.action">참여모임</a></span>
                             </div>
 							
                             <div class="MyPage-body-body">
