@@ -205,6 +205,8 @@ public class MypageController
 		
 		ArrayList<PostDTO> reviewList = dao2.reviewList(userId);
 		
+		System.out.println("참여 모임 갯수 : "+reviewList.size());
+		
 		model.addAttribute("myPageList",dao1.myPageList(userId));
 		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao1.myPageInterList(userId));
