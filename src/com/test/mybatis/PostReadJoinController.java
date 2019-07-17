@@ -39,7 +39,8 @@ public class PostReadJoinController
 		for (JoinDTO joinDTOs : joinDTO)
 		{
 			String delJoin = joinDTOs.getDelJoin();
-			if(delJoin != null)
+			String statusId = joinDTOs.getStatusId();
+			if(delJoin != null && statusId !="ST00004")
 			{
 				joinDTOs.setStatusId("ST00001");
 				joinDAO.joinupdate(joinDTOs);
