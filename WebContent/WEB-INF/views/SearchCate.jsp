@@ -291,6 +291,18 @@
     .slider-range-box{
 		width: 275px;
 	}
+   .interMain-item{
+   		font-size: 24px;
+   }
+   .interSub-item{
+   		font-size: 20px;
+   }
+   .Search-cate{
+   		display: flex;
+   		flex-direction: column;
+   		justify-content: space-around;
+   		align-items: flex-start;
+   }	
    </style>
 
    <script>
@@ -298,7 +310,6 @@
    	   var js = jQuery.noConflict();
    	   
        $(document).ready(function(){
-    	   
     	   
     	   js( "#slider-range" ).slider({
  		      range: true,
@@ -350,8 +361,6 @@
     		document.cookie="limitGrade=1";
     	}
     	   
-           /* *************************************** */
-           
 		// 별점 보여줄때 쓰이는 jQuery. hidden input value 안에 입력받은 숫자 만큼 width를 바꿔줌
 		// jsp→html 만들때 hidden input태그의 value에 값이 들어가고
 		// html이 document.ready될때 아래 별점 채우기가 시작됨
@@ -777,7 +786,6 @@
 			$(document).on('click', 'a[href="#"]', function(e){
 				e.preventDefault();
 			});
-
 			
 			// 관심사 소분류 클릭시
 			// 카테고리 내비게이션 굵은 글씨 바꿔주고
@@ -798,7 +806,6 @@
 				pageNum=1;
 				callListCate(pageNum);
 			});
-			
 			
 			// 관심사 대분류 클릭시
 			// 카테고리 내비게이션 굵은 글씨 바꿔주고, 대분류 쿠키 바꾸고
@@ -849,24 +856,21 @@
 	    
 		});
        
+       function deleteAllCookies() {
+   	    var cookies = document.cookie.split(";");
+
+   	    for (var i = 0; i < cookies.length; i++) {
+   	        var cookie = cookies[i];
+   	        var eqPos = cookie.indexOf("=");
+   	        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+   	        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+   	    }
+   	}
    </script>
    
-   <style>
-   .interMain-item{
-   		font-size: 24px;
-   }
-   .interSub-item{
-   		font-size: 20px;
-   }
-   .Search-cate{
-   		display: flex;
-   		flex-direction: column;
-   		justify-content: space-around;
-   		align-items: flex-start;
-   }
-   </style>
+
 </head>
-<body>
+<body onunload="deleteAllCookies()">
     <div class="browser flex-col-center-center">
 		
 		
