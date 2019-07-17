@@ -32,6 +32,13 @@
    	<script src="js/bootstrap-4.3.1.min.js"></script>
     <!-- 폰트 (Noto Snas KR + Handlee) -->
     <link href="css/sagyo-font.css" rel="stylesheet">
+    
+    <!-- Slider -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	
+	
     <!-- sagyo.css, sagyo.js -->
     <link href="css/sagyo.css" rel="stylesheet">
 	
@@ -281,14 +288,49 @@
 	.font-bold{
       	font-weight: bold;
     }
+    .slider-range-box{
+		width: 275px;
+	}
    </style>
 
    <script>
    	   var pageNum = 1;
-   	   
+   	   var js = jQuery.noConflict();
    	   
        $(document).ready(function(){
     	   
+    	   
+    	   js( "#slider-range" ).slider({
+ 		      range: true,
+ 		      min: 2,
+ 		      max: 20,
+ 		      values: [ 2, 20 ],
+ 		      slide: function( event, ui ) {
+ 		    	  js(this).next().val(ui.values[ 0 ]);
+ 		    	  js(this).next().next().val(ui.values[ 1 ]);
+ 		    	  js("#filter-minNum").text(ui.values[ 0 ]);
+ 		    	  js("#filter-maxNum").text(ui.values[ 1 ]);
+ 		      }
+ 		    });
+ 			
+ 			// 필터에 있는 만남일 초기값은 현재일에 따라 바뀌어야 함
+ 			js("input[name='minMeetDate']").val(sysdateToString(2));
+ 			js("input[name='maxMeetDate']").val(sysdateToString(10));
+ 			js("#filter-minMeetDate").text(sysdateToString(2));
+ 	    	js("#filter-maxMeetDate").text(sysdateToString(10));
+ 			js( "#slider-range2" ).slider({
+ 			      range: true,
+ 			      min: 2,
+ 			      max: 10,
+ 			      values: [ 2, 10 ],
+ 			      slide: function( event, ui ) {
+ 			    	  js(this).next().val(sysdateToString(ui.values[ 0 ]));
+ 			    	  js(this).next().next().val(sysdateToString(ui.values[ 1 ]));
+ 			    	  js("#filter-minMeetDate").text(sysdateToString(ui.values[ 0 ]));
+ 			    	  js("#filter-maxMeetDate").text(sysdateToString(ui.values[ 1 ]));
+ 			      }
+ 			    });
+ 			
     	// Search.jsp 진입시 → setSearchCookies : 전에 있던 Search용 쿠키 값 비워주고 기본 값들로 채워줌
     	setSearchCookies();
     	function setSearchCookies(){
@@ -298,8 +340,8 @@
     		document.cookie="interSubId1=";
     		document.cookie="interSubId2=";
     		document.cookie="interSubId3=";
-    		document.cookie="minMeetDate=2019-07-01";
-    		document.cookie="maxMeetDate=2020-07-31";
+    		document.cookie="minMeetDate="+defaultMinMeetDate();
+    		document.cookie="maxMeetDate="+defaultMaxMeetDate();
     		document.cookie="moodId=";
     		document.cookie="drinkId=";
     		document.cookie="sameGenderId=";
@@ -354,8 +396,9 @@
 				return false;
             });
     	    
-            // 페이지 요청시 게시글 불러옴
+            // 페이지 요청시 게시글 불러옴 + 필터창에 관심사 채워줌
             callListCate(pageNum);
+            fillInterest();
             
             // 무한 스크롤
            	$(".Search-result-body").scroll(function(){
@@ -367,21 +410,7 @@
            		}
            	})
            	
-           	// 페이지 최초 요청시 게시글 불러오고, 스크롤 내리면 또 불러오는 함수
-           	function callList(pageNum){
-				console.log('ajax 페이지 요청 : ', pageNum);
-				document.cookie = "pageNum="+pageNum;
-				
-           		$.ajax({
-           			url: 'searchajax.action',
-           			data: cookieToJson(),
-           			type: 'GET',
-           			dataType: 'html'
-           		}).done(function(result){
-               		$('.Search-result-body').append(result);
-           		}); 
-           	};
-         	
+           	// 페이지 최초 요청시 게시글 불러오고, 스크롤 내리면 또 불러오는 함수       	
            	function callListCate(pageNum){
 				console.log('ajax 페이지 요청 : ', pageNum);
 				document.cookie = "pageNum="+pageNum;
@@ -404,50 +433,50 @@
            		var json = cookieToJson();
            		// 필수 필터들 입력 → 기본 값이 아닐시에만 출력
            		if(json.minNum!="2" || json.maxNum!="20"){
-    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minNum">인원수 : '+json.minNum+' ~ '+json.maxNum+' <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
+    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minNum">인원수 : '+json.minNum+' ~ '+json.maxNum+' <a class="filter-cancle1" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
            		}
            		if(json.minMeetDate!=defaultMinMeetDate() || json.maxMeetDate!=defaultMaxMeetDate()){
-    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minMeetDate">만남일 : '+json.minMeetDate+' ~ '+json.maxMeetDate+' <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
+    				$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="minMeetDate">만남일 : '+json.minMeetDate+' ~ '+json.maxMeetDate+' <a class="filter-cancle1" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');           			
            		}
 				if(json.limitGrade!="1"){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="limitGrade">참가제한 : '+json.limitGrade+'점 이상 <a class="filter-cancle1" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');					
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="limitGrade">참가제한 : '+json.limitGrade+'점 이상 <a class="filter-cancle1" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');					
 				}
 				// 부가 필터는 있으면 입력
 				if(json.addrGuId1!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId1">'+$("#addrSiName1").text()+' '+json.addrGuName1+' <a class="filter-cancle2" href="" >&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId1">'+json.addrSiName1+' '+json.addrGuName1+' <a class="filter-cancle2" href="#" >&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.addrGuId2!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId2">'+$("#addrSiName2").text()+' '+json.addrGuName2+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId2">'+json.addrSiName2+' '+json.addrGuName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.addrGuId3!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId3">'+$("#addrSiName3").text()+' '+json.addrGuName3+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="addrGuId3">'+json.addrSiName3+' '+json.addrGuName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId1!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId1">'+$("#interMainName1").text()+' > '+json.interSubName1+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId1">'+json.interMainName1+' > '+json.interSubName1+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId2!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId2">'+$("#interMainName2").text()+' > '+json.interSubName2+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId2">'+json.interMainName2+' > '+json.interSubName2+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.interSubId3!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId3">'+$("#interMainName3").text()+' > '+json.interSubName3+' <a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="interSubId3">'+json.interMainName3+' > '+json.interSubName3+' <a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
 				if(json.moodId!=""){
 					if(json.moodId=="MI00002"){
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">진지한<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">진지한<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}
 					else{
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">가벼운<a class="filter-cancle" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="moodId">가벼운<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}
 				}
 				if(json.drinkId!=""){
 					if(json.drinkId="DR00001"){
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주가능<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주가능<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}else{
-						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주불가<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+						$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="drinkId">음주불가<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 					}
 				}
 				if(json.sameGenderId!=""){
-					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="sameGenderId">동성만<a class="filter-cancle2" href="" disabled>&nbsp;&nbsp;Ｘ</a></div>');
+					$("#Search-filter").append('<div class="Search-filter-item flex-row-center-center Search-filter-cookie" id="sameGenderId">동성만<a class="filter-cancle2" href="#" disabled>&nbsp;&nbsp;Ｘ</a></div>');
 				}
            	}
            	
@@ -474,6 +503,12 @@
            		return false;
            	})
            	
+           	function sysdateToString(day){
+           		var date = new Date();
+           		date.setDate(date.getDate()+day);
+           		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
+           		return result;
+           	}
            	function defaultMinMeetDate(){
            		var date = new Date();
            		date.setDate(date.getDate()+2);
@@ -482,13 +517,15 @@
            	}
            	function defaultMaxMeetDate(){
            		var date = new Date();
-           		date.setDate(date.getDate()+20);
+           		date.setDate(date.getDate()+10);
            		var result = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate();
            		return result;
            	}
-           	// 부가정보 필터는 취소하면 쿠키 비움
+           	// 부가정보 필터는 취소하면 해당 쿠키 비움
            	$(document).on("click", ".filter-cancle2", function(){
            		document.cookie= $(this).parent().attr("id")+"=";
+           		moveAddrInter("addrGu");
+           		moveAddrInter("interSub");
 			  	// 필터창 갈아주고
 			  	fillFilter();
 			  	// 결과창 비워주고
@@ -499,7 +536,54 @@
 			  	callListCate(pageNum);
            		return false;
            	});
-
+           	
+           	// 필터 X 누르는 순서때문에 addr이나 inter중 앞에게 비었을때 메꿔주는거
+			function moveAddrInter(what){
+				var id1 = what+"Id1";
+				var id2 = what+"Id2";
+				var id3 = what+"Id3";
+				var name1 = what + "Name1";
+				var name2 = what + "Name2";
+				var name3 = what + "Name3";
+				if( cookieIsEmpty(id1) && (!cookieIsEmpty(id2)) ){
+					document.cookie=id1+"="+getCookie(id2);
+					document.cookie=id2+"=";
+					document.cookie=name1+"="+getCookie(name2);
+					document.cookie=name2+"=";
+					if( what=="addrGu" ){
+						document.cookie="addrSiName1="+getCookie("addrSiName2");
+						document.cookie="addrSiName2=";
+					}else if( what=="interSub"){
+						document.cookie="interMainName1="+getCookie("interMainName2");
+						document.cookie="interMainName2=";
+					}
+				}else if( cookieIsEmpty(id1) && cookieIsEmpty(id2) && (!cookieIsEmpty(id3)) ){
+					document.cookie=id1+"="+getCookie(id3);
+					document.cookie=id3+"=";
+					document.cookie=name1+"="+getCookie(name3);
+					document.cookie=name3+"=";
+					if( what=="addrGu" ){
+						document.cookie="addrSiName1="+getCookie("addrSiName3");
+						document.cookie="addrSiName3=";
+					}else if( what=="interSub"){
+						document.cookie="interMainName1="+getCookie("interMainName3");
+						document.cookie="interMainName3=";
+					}
+				}
+			}
+			// 쿠키가 비었니?
+			function cookieIsEmpty(cookieName){
+				var cookie = getCookie(cookieName);
+				if(cookie==null || cookie==""){
+					return true;
+				}
+				return false;
+			}
+			// 쿠키 얻기
+			function getCookie(name) {
+				  var value = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+				  return value? value[2] : null;
+			};
            	// 현재 문서의 쿠키를 Json으로 바꿔줌
            	function cookieToJson(){
            		var result='{';
@@ -525,20 +609,82 @@
 				  // 쿠키로 만들고
  	          	  values.forEach(function(item){
 					 document.cookie= item.name+"="+item.value;
-				  });
+				  }); 
 				  
+				  // addrSiName, interSubName도 쿠키로 만듬
+				  for (var i = 1; i < 4; i++)
+				  {
+						document.cookie="addrSiName"+i+"="+$("#addrSiName"+i).text();
+						document.cookie="interMainName"+i+"="+$("#interMainName"+i).text();
+				  }
 				  // 필터창 갈아주고
 				  fillFilter();
 				  // 필터 새로 적용하면 페이지 넘버 초기화
 				  pageNum=1;
 				  // 페이지 넘버랑 같이 해서 ajax호출(검색 키워드 쿠키는 search.action 최초 호출시 컨트롤러에서 채워놓음)
 				  callListCate(pageNum);
+				  
+				  $('#Search-filter-modal').modal("hide");
+				  
+				  // 모달 초기화
+				  cleanModal();
+				  
 				  return false;
  	          	});
            	});
-           	
-           	// 필터에서 x 누르면 일어나는 함수
+           	function cleanModal(){
+           		$(".btn-check-cate1").text("시·도");
+           		$(".btn-check-cate2").text("구·군");
+           		$(".btn-check-cate3").text("대분류");
+           		$(".btn-check-cate4").text("소분류");
+           		
+           		$("input[name='']").val();
+           		
+           		$("input[name='addrGuId1']").val();
+           		$("input[name='addrGuId2']").val();
+           		$("input[name='addrGuId3']").val();
+           		$("input[name='addrGuName1']").val();
+           		$("input[name='addrGuName2']").val();
+           		$("input[name='addrGuName3']").val();
+           		
+           		$("input[name='interSubId1']").val();
+           		$("input[name='interSubId2']").val();
+           		$("input[name='interSubId3']").val();
+           		$("input[name='interSubName1']").val();
+           		$("input[name='interSubName2']").val();
+           		$("input[name='interSubName3']").val();
+           		
+           		$("input[name='minNum']").val("2");
+           		$("input[name='maxNum']").val("20");
+           		$("#filter-minNum").text("2");
+           		$("#filter-maxNum").text("20");
+           		
+           		$($("#slider-range .ui-slider-handle")[0]).css("left", "0%");
+           		$($("#slider-range .ui-slider-handle")[1]).css("left", "100%");
+           		$("#slider-range .ui-slider-range").css("width","100%");
+           		$("#slider-range .ui-slider-range").css("left","0%");
+           		
+           		$("input[name='minMeetDate']").val(defaultMinMeetDate());
+           		$("input[name='maxMeetDate']").val(defaultMaxMeetDate());
+           		$("#filter-minMeetDate").text(defaultMinMeetDate());
+           		$("#filter-maxMeetDate").text(defaultMaxMeetDate());
 
+           		$($("#slider-range2 .ui-slider-handle")[0]).css("left", "0%");
+           		$($("#slider-range2 .ui-slider-handle")[1]).css("left", "100%");
+           		$("#slider-range2 .ui-slider-range").css("width","100%");
+           		$("#slider-range2 .ui-slider-range").css("left","0%");
+           		
+           		$(".filter-attribute img").addClass("grayscale");
+           		$($(".filter-attribute img")[0]).removeClass("grayscale");
+           		$("input[name='limitGrade']").val("1");
+           		
+           		$(".filter-plus").removeClass("hidden");
+           	}
+           	
+           	function fillInterest(){
+           		$("#SearchCateFilterInterMainName").text(getCookie("userInterMainName"));
+           		$("#SearchCateFilterInterSubName").text(getCookie("userInterSubName"));
+           	};
            	
 			var a;
 			$(".btn-check-cate1").click(function() {
@@ -643,7 +789,11 @@
 				console.log("관심사 sub 클릭");
 				$(".interSub-item").removeClass("font-bold");
 				$(this).addClass("font-bold");
+				
 				document.cookie="userInterSubId="+$(this).attr("id");
+				document.cookie="userInterSubName="+$(this).text();
+				
+				fillInterest();
 				$('.Search-result-body').empty();
 				pageNum=1;
 				callListCate(pageNum);
@@ -661,6 +811,9 @@
 				$(".interMain-item").removeClass("font-bold");
 				$(this).addClass("font-bold");
 				document.cookie="userInterMainId="+$(this).attr("id");
+				document.cookie="userInterMainName="+$(this).text();
+				document.cookie="userInterSubName=전체";
+				fillInterest();
 				$.ajax({
 					url: '<%=cp %>/intersubajax2.action',
 					type: 'GET',
@@ -733,22 +886,20 @@
 					<div class="Search-filter Search-cate">
 						<div>
 							<c:forEach var="interMain" items="${intermainlist }">
-								<c:set var="userInterMainId" value="${interMain.interMainId1 }" />
-								<span class="interMain-item  <%=(userInterMainId.equals((String)pageContext.getAttribute("userInterMainId")) ? "font-bold" : "") %>" id="${interMain.interMainId1 }"><a href="#">${interMain.interMainName1 }</a></span>&nbsp;&nbsp;
+								<span class="interMain-item  ${(interMain.interMainId1 eq userInterMainId || (userInterMainId eq null && interMain.interMainId1 eq 'IM00001'))? 'font-bold' : '' }" id="${interMain.interMainId1 }"><a href="#">${interMain.interMainName1 }</a></span>&nbsp;&nbsp;
 							</c:forEach>						
 						</div>
 						<div id="interSubBox">
-							<span class="interSub-item <%=(userInterSubId.equals("") ? "font-bold" : "" ) %>" id=""><a href="#">전체</a></span>&nbsp;&nbsp;&nbsp;
+							<span class="interSub-item ${(userInterSubId eq null || userInterSubId eq '' ) ? 'font-bold' : '' } " id=""><a href="#">전체</a></span>&nbsp;&nbsp;&nbsp;
 							<c:forEach var="interSub" items="${userInterSubList }">
-								<c:set var="userInterSubId" value="${interSub.interSubId1 }" />
-								<span class="interSub-item <%=(userInterSubId.equals((String)pageContext.getAttribute("userInterSubId")) ? "font-bold" : "" ) %>" id="${interSub.interSubId1 }"><a href="#">${interSub.interSubName1 }</a></span>&nbsp;&nbsp;&nbsp;				
+								<span class="interSub-item ${interSub.interSubId1 eq userInterSubId ? 'font-bold' : '' }" id="${interSub.interSubId1 }"><a href="#">${interSub.interSubName1 }</a></span>&nbsp;&nbsp;&nbsp;				
 							</c:forEach>						
 						</div>
 					</div>
                     
                     <!-- 필터창 -->
                     <div class="Search-filter" id="Search-filter">
-                        <div class="Search-filter-item flex-row-center-center"><span id="SearchCateFilterInterMainName"></span>&nbsp;&nbsp;<span id="SearchCateFilterInterSubName"></span></div>
+                        <div class="Search-filter-item flex-row-center-center"><span id="SearchCateFilterInterMainName"></span>&nbsp;&nbsp;>&nbsp;&nbsp;<span id="SearchCateFilterInterSubName"></span></div>
                     </div>
 
                     <!-- 글목록 -->
@@ -810,15 +961,25 @@
                                             <div class="filter-attribute">
                                                 <div>인원수</div>
                                                 <div class="flex-row-left-center">
-                                                    <input type="text" name="minNum" value="2" />임시
-                                                    <input type="text" name="maxNum"  value="19" />인원수
+                                                	<div class="slider-range-box">
+	                                                	<div id="slider-range" class=" input-w-250"></div>
+	                                                		<input type="text" name="minNum" class="price-slider-one hidden" value="2">
+               	                            				<input type="text" name="maxNum" class="price-slider-two hidden" value="20">
+	                                                	</div>
+	                                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														<span id="filter-minNum">2</span>&nbsp;~&nbsp;<span id="filter-maxNum">20</span>&nbsp;명
                                                 </div>
                                             </div>
                                             <div class="filter-attribute">
                                                 <div>만남일</div>
-                                                <div>
-                                                    <input type="text" name="minMeetDate" value="2019-07-12" />임시
-                                                    <input type="text" name="maxMeetDate"  value="2019-07-20" />만남일
+                                                <div class="flex-row-left-center">
+                                                	<div class="slider-range-box">
+	                                                	<div id="slider-range2" class=" input-w-250"></div>
+	                                                	<input type="text" name="minMeetDate" class="price-slider-one hidden" value="">
+               	                            			<input type="text" name="maxMeetDate" class="price-slider-two hidden" value="">
+                                                	</div>
+                                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													<span id="filter-minMeetDate">2</span>&nbsp;~&nbsp;<span id="filter-maxMeetDate">20</span>&nbsp;
 												</div>
                                             </div>
                                             <div class="flex-row-left-center">

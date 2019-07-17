@@ -65,7 +65,7 @@
             overflow:hidden; 
             text-overflow:ellipsis; 
             white-space:nowrap;
-
+			text-align: left;
             /* 출처: https://jos39.tistory.com/211 [JOS39 블로그] */
         }
 
@@ -121,15 +121,49 @@
         text-align: left;
         vertical-align: middle;
       }   
-      
+       .MyMessage-pagination{
+        	font-size: 16px;
+        	display: flex;
+        	jutify-content: center;
+        	align-items: center;
+        }
+        .MyMessage-pagination>div:FIRST-CHILD, .Notice-pagination>div:LAST-CHILD{
+        	width: 60px;
+        }
 
         
     </style>
     <script type="text/javascript">
-    
+	pageNum = '${pageNum}';
+	totalPage = '${totalPage}';
     $(document).ready(function()
    {
-       
+    	
+		$(document).on('click', 'a[href="#"]', function(e){
+	        e.preventDefault();
+	    });
+		 
+		$(".paging").click(function(){
+			location.href="mymessagerecevie.action?pageNum="+$(this).text();
+		});
+		
+		$(".paging-next").click(function(){
+			pageNum = Number(pageNum) + 5;
+			if(pageNum>Number(totalPage)){
+				pageNum=totalPage
+			};
+			location.href="mymessagerecevie.action?pageNum="+pageNum;
+		});
+		
+		$(".paging-prev").click(function(){
+			pageNum = Number(pageNum) - 5;
+			if(pageNum>Number(totalPage)){
+				pageNum=totalPage
+			};
+			location.href="mymessagerecevie.action?pageNum="+pageNum;
+		});
+		
+    	
        function allCheckFunc( obj ) {
           $("[name=checkOne]").prop("checked", $(obj).prop("checked") );
        }
@@ -550,7 +584,63 @@
                                     <!-- MyMessage Footer 쪽지함 페이징 -->
                                     <div class="MyMessage-footer flex-col-center-center">
                                         <div class="MyMessage-pagination">
-                                            이전글 6 7 8 9 10 다음글
+                                        
+                                        	<c:choose>
+												<c:when test="${(largePage eq 1) && (largePage eq totalLargePage)}">
+													<div></div>
+													<div>
+														<c:forEach var="index" begin="1" end="${totalPage }">
+															&nbsp;<a href="#" class="paging ${ (index==pageNum) ? 'font-bold font-orange' : '' } ">${index }</a>&nbsp;
+														</c:forEach>
+													</div>
+													<div></div>
+												</c:when>
+												
+												<c:when test="${(largePage eq 1) && !(largePage eq totalLargePage)}">
+													<div></div>
+													<div>
+													<c:forEach var="index" begin="1" end="5">
+														&nbsp;<a href="#" class="paging ${ (index==pageNum) ? 'font-bold font-orange' : '' } ">${index }</a>&nbsp;
+													</c:forEach>
+													</div>
+													<div>
+														&nbsp;<a href="#" class="paging-next">다음글</a>&nbsp;
+													</div>
+												</c:when>
+												
+												<c:when test="${largePage eq totalLargePage }">
+													<div>
+														&nbsp;<a href="#" class="paging-prev">이전글</a>&nbsp;
+													</div>
+													<div>
+														<c:forEach var="index" begin="${5*(totalLargePage-1)+1 }" end="${totalPage }" >
+															&nbsp;<a href="#" class="paging ${ (index==pageNum) ? 'font-bold font-orange' : '' } ">${index }</a>&nbsp;
+														</c:forEach>
+													</div>
+													<div></div>
+												</c:when>
+			
+												<c:otherwise>
+													<div>
+														&nbsp;<a href="#" class="paging-prev">이전글</a>&nbsp;
+													</div>
+													<div>
+														<c:forEach var="index" begin="${5*(largePage-1)+1 }" end="${5*largePage }" >
+															&nbsp;<a href="#" class="paging ${ (index==pageNum) ? 'font-bold font-orange' : '' } ">${index }</a>&nbsp;
+														</c:forEach>										
+													</div>
+													<div>
+														&nbsp;<a href="#" class="paging-next">다음글</a>&nbsp;
+													</div>
+												</c:otherwise>
+											</c:choose>
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
                                         </div>  
                                     </div>
 

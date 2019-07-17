@@ -96,10 +96,14 @@ public class SearchController
 			System.out.println("비로그인 유저 진입");
 			Cookie userInterMainCookie = new Cookie("userInterMainId", "IM00001"); 
 			Cookie userInterSubCookie = new Cookie("userInterSubId", "");
+			Cookie userInterMainNameCookie = new Cookie("userInterMainName", "스포츠"); 
+			Cookie userInterSubNameCookie = new Cookie("userInterSubName", "전체");
 			Cookie userCookie = new Cookie("userId", "");
 			response.addCookie(userCookie);
 			response.addCookie(userInterSubCookie);
 			response.addCookie(userInterMainCookie);
+			response.addCookie(userInterMainNameCookie);
+			response.addCookie(userInterSubNameCookie);
 			model.addAttribute("userInterSubList", interA.interSubList("IM00001"));
 		}
 		else
@@ -120,6 +124,8 @@ public class SearchController
 			response.addCookie(userInterSubIdCookie);
 			response.addCookie(userInterSubNameCookie);
 			
+			model.addAttribute("userInterMainId", temp.getInterMainId1());
+			model.addAttribute("userInterSubId", temp.getInterSubId1());
 			model.addAttribute("userInterSubList", interA.interSubList(temp.getInterMainId1()));
 		}
 		

@@ -41,26 +41,20 @@ $(document).ready(function()
       $('#myInput').trigger('focus')
    });
    
-   /*          
-   $("[data-toggle=popover]").popover({
-        html : true,
-        content: function() {
-          var content = $(this).attr("data-popover-content");
-          return $(content).children(".popover-body").html();
-        }
-    });
-	 */
+	 
 	$(".on").on("onclick", "a.this()", function (){
 	    alert($(this).text());
 	    alert("경고");
 	});
 	 
 	 jQuery.ajaxSettings.traditional = true;
+	 
 	 // 후기 남기기
 	 $(".btn-review").click(function(){
+			
 		 var postId = $(this).val();
 		 $("#postId").val($(this).val())
-		 debugger;
+
 		 $.ajax({
 	         url : "<%=cp %>/hostReview.action",
 	         type : "get",
@@ -71,6 +65,36 @@ $(document).ready(function()
                 $("#reviewList").append(result);
 			 }
 	     });
+		 
+
+		 $(document).on("click",".selectPoint", function(){
+				
+				$("[data-toggle=popover]").popover({
+				    html : true,
+				    sanitize : false,
+				    content: function() {
+				    var content = $(this).attr("data-popover-content");
+				    return $(content).children(".popover-body").html();
+				    }
+				 });
+				
+				var temp=$(this);
+				
+				debugger;
+				/* $(document).on('click', '.badgePoint', function(){
+					$(temp).attr("src", $(this).attr("src"));
+					$(temp).next().val($(this).next().val());
+					
+					debugger;
+				}); */
+				
+			});	
+		 
+		 
+		 
+		 
+		 
+		 
 	 });
 
 	 
@@ -94,6 +118,7 @@ $(document).ready(function()
 	
 
 	$("#review-submit").click(function() {
+		
 		var postId = $("#postId").val();		// 방 번호
 		
 		grade = new Array();
@@ -119,58 +144,38 @@ $(document).ready(function()
 
 	});
 	
-	 $(document).on("click",".select",function(){
+    // 별점 평가시 쓰이는 jQuery
+    // 평가용 별 누를때 마다 발동됨
+    $(".star-rating>img").click(function(){
+ 	   
+ 	   var num = $(this).attr('id');
+ 	   
+ 	   $(this).parent().children('img').each(function(index, item){
+				$(item).addClass("grayscale");
+ 	   });
+ 	   
+ 	   for (var i = 0; i < num; i++)
+	   {
+		   $(this).parent().children("#"+(i+1)).removeClass("grayscale");
+	   }
+ 	   
+ 	   // 색 칠해진 별의 갯수를 hidden input 태그에 넣어줌
+ 	   $(this).parent().children("input").val(num);
+    });
 		
-		$("[data-toggle=popover]").popover({
-	    html : true,
-	    sanitize : false,
-	    content: function() {
-	    var content = $(this).attr("data-popover-content");
-	    return $(content).children(".popover-body").html();
-	    }
-	 })
-		
-	 });
-	  
-	  
-	 $(document).on("click",".pointSelect",function(){
-			
-		//console.log('1');	
-		
-		selectPoint = 'selectPoint'+$(this).val();	// img 태그 id
-		
-		
-		console.log(selectPoint);
-		
-			
-	 }); 
-	 
-	 
-	$(document).on("click",".star-rating>img", function(){
-			var num = $(this).attr('id');
-	 	   
-	 	   	$(this).parent().children('img').each(function(index, item){
-					$(item).addClass("grayscale");
-	 	   	});
-	 	   
-	 	   	for (var i = 0; i < num; i++)
-		   	{
-				$(this).parent().children("#"+(i+1)).removeClass("grayscale");
-		   	}
-	 	   
-	 	   	$(this).parent().children("input").val(num);
-	} )
 	
-	
-	$(document).on("click",".badgePoint", function(){
-		
-		var src = $(this).attr('src');
-		badgePointId = $(this).parent().val();
-		$('#'+selectPoint).attr('src', src);
-		$('#'+selectPoint).next().attr('value', badgePointId);
-		
-	} )	
+    
+    
+    
+    
 });
+	  
+	
+	 
+
+	
+	
+	
 
 </script>
 <style type="text/css">

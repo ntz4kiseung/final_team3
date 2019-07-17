@@ -24,8 +24,8 @@
 		</div>
 		<div class="flex-review-third" >
 			<div class="PostList-post-badge">
-				<input type="hidden" value="nonSelect" class="hidden" id="badgePointId'+i+'" name="badgeId" />
-				<img class="select" name="select" id="selectPoint'+i+'" name="image" src="img/Logo_NoBorder.png" value="badgeSelect" alt="포인트선택" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-container="body">
+				<img class="selectPoint" name="select" id="selectPoint${status.index }" name="image" src="img/Logo_NoBorder.png" alt="포인트선택" data-trigger="focus" tabindex="0" data-toggle="popover"  data-popover-content="#badgeList" data-placement="bottom" data-container="body">
+				<input type="hidden" value="nonSelect" class="hidden" id="badgePointId${status.index }" name="badgePointId" />
 			</div>
 	   	</div>
 	    <div class="flex-review-fourth">

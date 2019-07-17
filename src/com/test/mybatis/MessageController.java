@@ -1,7 +1,6 @@
 package com.test.mybatis;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,8 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class MessageController
@@ -22,9 +19,14 @@ public class MessageController
 	private SqlSession sqlSession;
 	
 	@RequestMapping(value="/mymessagerecevie.action", method = RequestMethod.GET)
-	public String myMessageRecevie( Model model, HttpSession session)
+	public String myMessageRecevie( Model model, HttpSession session, String pageNum )
 	{
 		String userId = (String) session.getAttribute("userId");
+		if(userId==null||userId.equals(""))
+			return "redirect: login.action";
+			
+		if(pageNum==null||pageNum.equals(""))
+			pageNum="1";
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
@@ -34,15 +36,25 @@ public class MessageController
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
 		
-		model.addAttribute("messageRecevieList",dao.messageRecevieList());
-		 
+		model.addAttribute("messageRecevieList",dao.messageRecevieList(userId, pageNum));
+		
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("largePage", (int)(Math.ceil((double)Integer.parseInt(pageNum)/5)));
+		model.addAttribute("totalPage",dao.messageRecevieTotalPageNum(userId));
+		model.addAttribute("totalLargePage",dao.messageRecevieTotalLargePageNum(userId));
+		
 		return "WEB-INF/views/MyMessageReceive.jsp";
 	}
 	
 	@RequestMapping(value="/mymessagesend.action", method = RequestMethod.GET)
-	public String myMessageSend(Model model, HttpSession session)
+	public String myMessageSend(Model model, HttpSession session, String pageNum)
 	{
 		String userId = (String) session.getAttribute("userId");
+		if(userId==null||userId.equals(""))
+			return "redirect: login.action";
+		
+		if(pageNum==null||pageNum.equals(""))
+			pageNum="1";
 		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		IUserDAO dao2 = sqlSession.getMapper(IUserDAO.class);
@@ -52,15 +64,24 @@ public class MessageController
 		model.addAttribute("myPageAddrList", dao2.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", dao2.myPageInterList(userId));	
 		
-		model.addAttribute("messageSendList",dao.messageSendList());
+		model.addAttribute("messageSendList",dao.messageSendList(userId, pageNum));
 		 
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("largePage", (int)(Math.ceil((double)Integer.parseInt(pageNum)/5)));
+		model.addAttribute("totalPage",dao.messageSendTotalPageNum(userId));
+		model.addAttribute("totalLargePage",dao.messageSendTotalLargePageNum(userId));
+		
 		return "WEB-INF/views/MyMessageSend.jsp";
 	}
 
 
 	@RequestMapping(value="/messagesend.action", method=RequestMethod.POST)	
-	public String MessageSend(MessageDTO m)
+	public String MessageSend(MessageDTO m, HttpSession session)
 	{
+		String userId = (String) session.getAttribute("userId");
+		if(userId==null||userId.equals(""))
+			return "redirect: login.action";
+		
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
 		
 		dao.messageAdd(m); 
