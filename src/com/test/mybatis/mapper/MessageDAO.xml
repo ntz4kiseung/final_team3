@@ -68,7 +68,7 @@
 	
 	<delete id="messageDelete">
 		INSERT INTO DEL_MESSAGE(ID,MESSAGEID,DELETEDATE,USERID)
-		VALUES (DEL_MESSAGE_SEQ.NEXTVAL ,#{messageId },SYSDATE, 'caroin')
+		VALUES (DEL_MESSAGE_SEQ.NEXTVAL ,#{messageId },SYSDATE, #{userId })
 	</delete>
 
  	<select id="checkId" resultType="java.lang.Integer">
