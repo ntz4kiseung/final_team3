@@ -13,4 +13,5 @@ public interface IJoinDAO
 	public int joinupdate(JoinDTO joinDTO);
 	public int serchjoin(String hostPostId);
 	public String serchjoinid(@Param("postHostId")String postHostId , @Param("userId")String userId);
+	public int postmeettype (String postId);
 }

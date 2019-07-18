@@ -28,7 +28,7 @@ public class PostReadHostController
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		
 		int serchNum = (Integer)joinDAO.serchjoin(postId);
-		System.out.println(serchNum);
+		int meetType = (Integer)joinDAO.postmeettype(postId);
 		ArrayList<JoinDTO> joinDTO = joinDAO.joinlist(postId);
 		
 		for (JoinDTO joinDTOs : joinDTO)
@@ -41,7 +41,7 @@ public class PostReadHostController
 				joinDAO.joinupdate(joinDTOs);
 			}
 		}
-		
+		model.addAttribute("meetType",meetType);
 		model.addAttribute("serchNum",serchNum);
 		model.addAttribute("postlist",IPostDAO.postlist(userId, postId)); 
 		model.addAttribute("list",joinDAO.joinlist(postId)); 
@@ -149,7 +149,9 @@ public class PostReadHostController
 			joinDTO.setJoinId(joinId[i]);
 			joinDAO.joinupdate(joinDTO);
 		}
-		result = "redirect:postreadhost.action?postId="+postId;
+		int serchNum = (Integer)joinDAO.serchjoin(postId);
+		model.addAttribute("serchNum",serchNum);
+		result = "WEB-INF/views/serchNumAjax.jsp";
 		return result;
 	}
 	
