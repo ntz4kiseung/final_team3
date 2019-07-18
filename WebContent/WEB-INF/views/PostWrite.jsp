@@ -130,6 +130,27 @@
 	z-index: 1020;
     display : none;
 	}
+	
+	.form-control-hyunwoo {
+  	display: block;
+  	width: 100%;
+  	height: calc(1.5em + 0.75rem + 2px);
+  	padding: 0.375rem 0.75rem;
+  	font-size: 2rem;
+  	font-weight: 400;
+  	line-height: 1.5;
+  	color: #495057;
+  	background-color: #fff;
+  	background-clip: padding-box;
+  	border: 1px solid #ced4da;
+  	border-radius: 0.25rem;
+  	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	}
+	
+	element.style {
+    padding-right: 6px;
+	}
+	
 </style>
 <script type="text/javascript">
    var js = jQuery.noConflict();
@@ -310,7 +331,15 @@
           var hour = $('#hour').val();
           var min = $('#min').val();
           var meetDate = $('#filter-minMeetDate').html();
-          $('#meetDate').val(meetDate+hour+":"+min+":00");   
+          $('#meetDate').val(meetDate+hour+":"+min+":00"); 
+          
+	      /* 시간 제작 */
+	      $(".select-time").change(function()
+		  {
+		  	  var id = $(this).attr("id").substr(7);
+		  	$("#"+id).val($(this).val());
+		  	
+		  })
       };
    });
 </script>
@@ -451,12 +480,32 @@
                                 <span id="filter-minMeetDate">2</span>
                             </div>
                             <div class="flex-row-center-center">
-                            	<div>
-                            		<input type="text" class="input-w-40" id="hour">
+								<div>
+                            		<select id="select-hour" name="select-hour" class="form-control select-time" style="width:60px; padding-right: 6px;">
+									  <option value="01" selected="selected">01</option>
+									  <option value="02">02</option>
+									  <option value="03">03</option>
+									  <option value="04">04</option>
+									  <option value="05">05</option>
+									  <option value="06">06</option>
+									  <option value="07">07</option>
+									  <option value="08">08</option>
+									  <option value="09">09</option>
+									  <option value="10">10</option>
+									  <option value="11">11</option>
+									  <option value="12">12</option>
+									</select>
+                            		<input type="hidden" class="input-w-40" id="hour" name="hour" value="01">
                             	</div>
                             	:
                             	<div>
-                            		<input type="text" class="input-w-40" id="min">
+                            		<select id="select-min" name="select-min" class="form-control select-time" style="width:60px; padding-right: 6px;">
+									  <option value="00" selected="selected">00</option>
+									  <option value="15">15</option>
+									  <option value="30">30</option>
+									  <option value="45">45</option>
+									</select>
+                            		<input type="hidden" class="input-w-40" id="min" name="min" value="00">
                             	</div>
                             	<input type="hidden" id="meetDate" name="meetDate" value="">
                             </div>
@@ -479,7 +528,7 @@
 							</div>
 					</div>
 					<div class="PostWrite-footer flex-col-center-center">
-                    	<button class="btn btn-orange btn-160-45 postEvent">모임개설</button>
+                    	<button class="btn btn-orange btn-160-45 postEvent">모임개설</button><button type="button" id="testdate" name="testdate">날짜확인</button>
                 	</div>
                 </form>
             </div>
@@ -591,6 +640,7 @@ function submitContents(elClickedObj)
     if(title == "")
     {
        alert("제목이 없습니다.");
+       
        return false;
     }
     else if(addrGuId == "")
@@ -638,8 +688,9 @@ function submitContents(elClickedObj)
     	var hour = $('#hour').val();
         var min = $('#min').val();
         var meetDate = $('#filter-minMeetDate').html();
-        $('#meetDate').val(meetDate+hour+":"+min+":00");   
-    	$('#PostWriteForm').submit();
+        $('#meetDate').val(meetDate+hour+":"+min+":00");
+       
+    	/* $('#PostWriteForm').submit(); */
     }
 }
 
