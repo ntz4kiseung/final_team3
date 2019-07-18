@@ -1,5 +1,14 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+.comments-reply{
+	position: relative;
+}
+.comments-reply>img{
+	height: 40%;
+    top: 7px;
+    left: 5px;
+    position: absolute;
+}
 .bg-orange {
   background-color: rgb(250,170,10) !important;
 }
