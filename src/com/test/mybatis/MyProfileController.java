@@ -109,30 +109,71 @@ public class MyProfileController
 		else
 			System.out.println("지역1 실패");
 		
-		if(!addr.getAddrGuId2().equals(addrB.get(0).getAddrGuId2()))
+		System.out.println(addrB.get(0).getAddrGuId2());
+		
+		if (addrB.get(0).getAddrGuId2()==null)
+		{
+			System.out.println("지나감");
+		}
+		else if(!addr.getAddrGuId2().equals(addrB.get(0).getAddrGuId2()))
+		{
 			addrA.updateAddr2(userId, addr, addrB.get(0));
+		}
 		else
+		{
 			System.out.println("지역2 실패");
+		}
 		
-		if(!addr.getAddrGuId3().equals(addrB.get(0).getAddrGuId3()))
+		if (addrB.get(0).getAddrGuId2()==null)
+		{
+			System.out.println("지나감");
+		}
+		else if(!addr.getAddrGuId3().equals(addrB.get(0).getAddrGuId3()))
+		{
 			addrA.updateAddr3(userId, addr, addrB.get(0));
-		else 
+		}
+		else
+		{
 			System.out.println("지역3 실패");
+		}
 		
-		if (inter.getInterSubId1() != interB.get(0).getInterSubId1())
+		
+		
+		if (interB.get(0).getInterSubId1()==null)
+		{
+			System.out.println("지나감");
+		}
+		else if (inter.getInterSubId1() != interB.get(0).getInterSubId1())
 			interA.updateInter1(userId, inter, interB.get(0));
 		else
 			System.out.println("관심사1 실패");
 		
-		if (inter.getInterSubId2() != interB.get(0).getInterSubId2())
+		
+		
+		if (interB.get(0).getInterSubId2()==null)
+		{
+			System.out.println("지나감");
+		}
+		else if (inter.getInterSubId2() != interB.get(0).getInterSubId2())
 			interA.updateInter3(userId, inter, interB.get(0));
 		else
 			System.out.println("관심사2 실패");
 		
-		if (inter.getInterSubId3() != interB.get(0).getInterSubId3())
+		
+		System.out.println(interB.get(0).getInterSubId3());
+		
+		if (interB.get(0).getInterSubId3()==null)
+		{
+			System.out.println("지나감");
+		}
+		else if (inter.getInterSubId3() != interB.get(0).getInterSubId3())
 			interA.updateInter3(userId, inter, interB.get(0));
 		else
 			System.out.println("관심사3 실패");
+		
+		
+		
+		
 		
 		return "redirect:myprofile.action";
 	}

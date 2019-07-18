@@ -108,16 +108,17 @@ public class MessageController
 	}
 	
 	@RequestMapping(value="/messagedelete.action", method=RequestMethod.POST)	
-	public void messageDelete(String[] checkArr, HttpServletResponse response) throws IOException
+	public void messageDelete(String[] checkArr, HttpServletResponse response, HttpSession session) throws IOException
 	{
 		IMessageDAO dao = sqlSession.getMapper(IMessageDAO.class);
+		String userId = (String) session.getAttribute("userId");
+		System.out.println(userId);
 		int result = 0;
 		
 		for (int i = 0; i < checkArr.length; i++)
 		{
-			result  = dao.messageDelete(checkArr[i]);
+			result  = dao.messageDelete(userId,checkArr[i]);
 		}
-		
 		response.getWriter().print(result);
 	}
 	

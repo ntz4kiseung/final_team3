@@ -288,7 +288,6 @@
 			else
 			{	
 				var form = document.getElementById("update-submit-form");
-				alert("회원가입 완료 접근");
 				form.submit();
 			}
 			
