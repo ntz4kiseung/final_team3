@@ -28,7 +28,7 @@
 						<img class="" id="4"  src="img/star.png" alt="" />
 						<img class="" id="5"  src="img/star.png" alt="" />
 					</div>
-					<input class="hidden" type="text" id="grade2" name="grade2" value="${ing.grade }"/>
+					<input class="hidden" type="text" id="grade2" name="grade2"  value="${inq.grade}" >
 				</div>
 			</div>
 		</div>

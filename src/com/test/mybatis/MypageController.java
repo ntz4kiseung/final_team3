@@ -229,8 +229,6 @@ public class MypageController
 		}
 		
 		model.addAttribute("list", review.inquryView(userId, postId));
-
-		System.out.println("123:"+postId + userId);
 		
 		return "/WEB-INF/views/HostInquiryAjax.jsp";
 	}
