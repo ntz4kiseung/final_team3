@@ -94,7 +94,6 @@ public class PostReadJoinController
 		IJoinDAO joindao = sqlSession.getMapper(IJoinDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		System.out.println(joinDTO.getContents());
-		System.out.println("postHostId : " + postHostId);
 		joinDTO.setUserId(userId);
 		joindao.joininsert(joinDTO, postHostId);
 		
@@ -149,6 +148,9 @@ public class PostReadJoinController
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		joinDTO.setUserId(userId);
+		System.out.println(joinDTO.getContents());
+		System.out.println(joinDTO.getJoinId());
+		System.out.println(joinDTO.getUserTypeId());
 		joinDAO.replyinsert(joinDTO);
 		result = "redirect:postreadjoin.action";
 		return result;

@@ -17,10 +17,9 @@ public interface IPostDAO
 	public ArrayList<PostDTO> searchList(SearchDTO s);
 	public ArrayList<PostDTO> searchListGuest(SearchDTO s);
 	public ArrayList<PostDTO> searchCateList(SearchDTO s);
-	public int postinsert(PostDTO postDTO);
+	public String serchpost(String userId);
+    public int postinsert(PostDTO postDTO);
 	public ArrayList<PostDTO> searchPostIdList(String userId);
 	public int postlistCheck(@Param("userId")String userId, @Param("postId")String postId);
 	public String getHost(String postId);
-	
-	
 }

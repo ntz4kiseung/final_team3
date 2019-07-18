@@ -57,7 +57,6 @@ public class PostReadHostController
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		String userId = (String)session.getAttribute("userId");
-		
 		reportDTO.setUserId(userId);
 		reportDAO.reportjoininsert(reportDTO);
 		int serchNum = (Integer)reportDAO.serchreportjoin(reportDTO.getReportId());
@@ -65,7 +64,7 @@ public class PostReadHostController
 		{
 			reportDAO.joindelcheckinsert(reportDTO);
 		}
-		result = "redirect:postreadjoin.action";
+		result = "redirect:postreadhost.action";
 		return result;
 	}
 	
