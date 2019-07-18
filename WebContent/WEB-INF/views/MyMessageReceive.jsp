@@ -162,7 +162,7 @@
 			location.href="mymessagerecevie.action?pageNum="+pageNum;
 		});
     	
-    	$(".submit").click(function name()
+     	$(".submit").click(function name()
 		{
     		var temp = $(this).val();
 			
@@ -303,13 +303,14 @@
                   success : function(count)
                   {
                      console.log(count);
-                     
+                     $("#span-check-id2").text("");
                      if (count == 0) {
                         document.getElementById("span-check-id2").style.display = 'block';
                         document.getElementById("span-check-id2").style.color = '#DF0101';
                         $("#span-check-id2").text("아이디가 존재하지 않습니다.");
                      }
                      else {
+                    	 
                         document.getElementById("span-check-id2").style.display = 'block';
                         document.getElementById("span-check-id2").style.color = '#31B404';
                         $("#span-check-id2").text("존재하는 아이디 입니다.");
@@ -480,7 +481,7 @@
                                         <div class="control-group flex-row-center-center">
                                           <div for="destinataire" style="padding-right: 15px;" >받는 사람</div>
                                           <div><input type="text" class="form-control" name="takeUserId" id="takeUserId" ></div>
-                                            <button type="button" class="btn" id="btn-check-id2" value="0">아이디 중복확인</button>
+                                            <button type="button" class="btn" id="btn-check-id2" value="0">아이디 확인</button>
                                        </div>
                                        <br>   
                                        <div class="control-group">
@@ -500,7 +501,7 @@
                                       
                                     <div class="modal-footer">
                                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      <button type="button" id="send" name="send" value="0" class="btn btn-orange submit">전송하기</button>
+                                      <button type="submit" id="send" name="send" value="0" class="btn btn-orange submit">전송하기</button>
                                     </div>
                                    </form>
                                   </div>
@@ -551,7 +552,8 @@
                                                     </div>
                                                     <div class="flex-item-grow">
                                                         <button class="btn btn-link MyMessage-title" id="msgcontent${message.messageId }" 
-                                                        value="${message.messageId }" type="button" data-toggle="collapse" data-target="#collapse${message.messageId }" aria-expanded="true" aria-controls="collapseOne">
+                                                        value="${message.messageId }" 
+ data-toggle="collapse" data-target="#collapse${message.messageId }" aria-expanded="true" aria-controls="collapseOne">
                                                            ${message.contents }
                                                          </button>
                                                     </div>
@@ -605,7 +607,7 @@
                                             
                                           <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                            <button type="button" id="resend-btn" name="resend-btn" value="1" class="btn btn-orange submit">전송하기</button>
+                                            <button type="submit" id="resend-btn" name="resend-btn" value="1" class="btn btn-orange submit">전송하기</button>
                                             
                                             
                                           </div>

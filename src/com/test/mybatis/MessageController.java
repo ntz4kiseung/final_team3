@@ -117,6 +117,7 @@ public class MessageController
 		{
 			result  = dao.messageDelete(checkArr[i]);
 		}
+		
 		response.getWriter().print(result);
 	}
 	

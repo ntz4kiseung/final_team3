@@ -3,6 +3,7 @@
 <script>
 $(document).ready(function(){
 	console.log('aaa');
+	
 	if(${pleaseReview}>0){
 		$("#A").removeClass("please-review");
 		$("#pleaseReview").addClass("hidden");
@@ -10,6 +11,7 @@ $(document).ready(function(){
 		$("#A").addClass("please-review");
 		$("#pleaseReview").removeClass("hidden");
 	};
+	
 });
 </script>
 <c:forEach var="inq" items="${list }" varStatus = "status">
