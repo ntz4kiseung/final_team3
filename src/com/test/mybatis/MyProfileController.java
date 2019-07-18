@@ -212,4 +212,26 @@ public class MyProfileController
 		
 	}
 	
+	@RequestMapping(value="/opcreatepostlist.action")
+	public String opCreatePostList(Model model, String userId)
+	{
+		IUserDAO dao1 = sqlSession.getMapper(IUserDAO.class);
+		IPostDAO dao2 = sqlSession.getMapper(IPostDAO.class);
+		IBadgeDAO dao3 = sqlSession.getMapper(IBadgeDAO.class);
+		IUserDAO user = sqlSession.getMapper(IUserDAO.class);
+		
+		ArrayList<PostDTO> myReviewList = dao2.myReviewList(userId);
+		
+		model.addAttribute("myPageList",dao1.myPageList(userId));
+		model.addAttribute("MyPageBad",user.MyPageBad(userId));
+		model.addAttribute("myPageAddrList", dao1.myPageAddrList(userId));
+		model.addAttribute("myPageInterList", dao1.myPageInterList(userId));
+		model.addAttribute("myReviewList", myReviewList);
+		model.addAttribute("positiveBadge", dao3.positiveBadge());
+		model.addAttribute("negativeBadge", dao3.negativeBadge());
+		model.addAttribute("opUser", userId);
+		
+		return "WEB-INF/views/OpponentCreatePostList.jsp";
+	}
+	
 }

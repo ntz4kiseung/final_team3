@@ -7,6 +7,19 @@
 	String navbarUserId = (String)session.getAttribute("userId");
 %>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<script>
+$(document).ready(function(){
+	$("#navbar-search-btn").click(function(){
+		if($("#navbar-search-input").val()==null || $("#navbar-search-input").val()==""){
+			alert("검색어를 입력해주세요");
+			return false;
+		}
+		else{
+			return true;
+		}
+	})
+})
+</script>
 <div class="navbar-box">
 
             <div class="navbar-left flex-row-left-center">
@@ -24,7 +37,7 @@
             
             
             <div class="navbar-center flex-item-grow flex-row-center-center  ${param.isMain==null ? "" : "hidden"}">
-                <form action="search.action" class="flex-row-center-center">
+                <form action="search.action" class="flex-row-center-center" id="navbar-search-form">
                     <input type="text" placeholder="관심사의 키워드를 입력해주세요" name="keyword" class="form-control flex-item-grow" id="navbar-search-input">
                     <button type="submit" class="btn" id="navbar-search-btn">검색</button>
                 </form>
@@ -42,7 +55,7 @@
             
             
             <div class='navbar-right flex-row-right-center <%=(navbarUserId==null||navbarUserId.equals("") ? "hidden" : "") %>'>
-                <div><img src="img/알람on.png" alt="noimage" /></div>
+                <div class="hidden"><img src="img/알람on.png" alt="noimage" /></div>
                 <div>
                     <a href="postwrite.action"><button class="btn btn-border-right">모임개설</button></a>
                 </div>

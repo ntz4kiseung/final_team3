@@ -711,11 +711,11 @@
                                     만남장소1
                                 </div>
                                 <div class="box-245-40 div-addr">
-									<button type="button" class="btn btn-check-cate1" id="addrSiName1" name="addrSiName1" value="1"
+									<button type="button" class="btn btn-120-35 btn-check-cate1" id="addrSiName1" name="addrSiName1" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#a1" data-placement="bottom">시·도</button>
 									 
-                                	<button type="button" class="btn btn-check-cate2" id="btn-check-gugun1" value="1"
+                                	<button type="button" class="btn btn-120-35 btn-check-cate2" id="btn-check-gugun1" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#b1" data-placement="bottom">구·군</button>
 									 <input type= "hidden" id="addrGuId1" name="addrGuId1" value="">
@@ -728,11 +728,11 @@
                                     만남장소2
                                 </div>
                                 <div class="box-245-40">
-                                    <button type="button" class="btn btn-check-cate1" id="addrSiName2" name="addrSiName2" value="2"
+                                    <button type="button" class="btn btn-120-35 btn-check-cate1" id="addrSiName2" name="addrSiName2" value="2"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#a2" data-placement="bottom">시·도</button>
                                     
-									<button type="button" class="btn btn-check-cate2" id="btn-check-gugun2" value="2"
+									<button type="button" class="btn btn-120-35 btn-check-cate2" id="btn-check-gugun2" value="2"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#b2" data-placement="bottom">구·군</button>
 									 <input type= "hidden" id="addrGuId2" name="addrGuId2" value="">
@@ -745,11 +745,11 @@
                                     만남장소3
                                 </div>
                                 <div class="box-245-40">
-                                   <button type="button" class="btn btn-check-cate1" id="addrSiName3" name="addrSiName3" value="3"
+                                   <button type="button" class="btn btn-120-35 btn-check-cate1" id="addrSiName3" name="addrSiName3" value="3"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#a3" data-placement="bottom">시·도</button>
                                     
-                                    <button type="button" class="btn btn-check-cate2" id="btn-check-gugun3" value="3"
+                                    <button type="button" class="btn btn-120-35 btn-check-cate2" id="btn-check-gugun3" value="3"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#b3" data-placement="bottom">구·군</button>
 									 <input type= "hidden" id="addrGuId3" name="addrGuId3" value="">
@@ -763,11 +763,11 @@
                                     관심사1
                                 </div>
                                 <div class="box-245-40 div-inter">
-                                    <button type="button" class="btn btn-check-cate3" id="interMainName1" name="interMainName1" value="1"
+                                    <button type="button" class="btn btn-120-35 btn-check-cate3" id="interMainName1" name="interMainName1" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#c1" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub1" name="btn-check-sub1" value="1"
+                                	<button type="button" class="btn btn-120-35 btn-check-cate4" id="btn-check-sub1" name="btn-check-sub1" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#d1" data-placement="bottom">소분류</button>
 									 <input type= "hidden" id="interSubId1" name="interSubId1" value="">
@@ -781,11 +781,11 @@
                                 </div>
                                 <div class="box-245-40">
                                     <div class="box-245-40">
-                                    <button type="button" class="btn btn-check-cate3" id="interMainName2" name="interMainName2" value="2"
+                                    <button type="button" class="btn btn-120-35 btn-check-cate3" id="interMainName2" name="interMainName2" value="2"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#c2" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub2" name="btn-check-sub2" value="2"
+                                	<button type="button" class="btn btn-120-35 btn-check-cate4" id="btn-check-sub2" name="btn-check-sub2" value="2"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#d2" data-placement="bottom">소분류</button>
 									 <input type= "hidden" id="interSubId2" name="interSubId2" value="">
@@ -800,11 +800,11 @@
                                 </div>
                                 <div class="box-245-40">
                                     <div class="box-245-40">
-                                    <button type="button" class="btn btn-check-cate3" id="interMainName3" name="interMainName3" value="3"
+                                    <button type="button" class="btn btn-120-35 btn-check-cate3" id="interMainName3" name="interMainName3" value="3"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#c3" data-placement="bottom">대분류</button>
 									 
-                                	<button type="button" class="btn btn-check-cate4" id="btn-check-sub3" name="btn-check-sub3" value="3"
+                                	<button type="button" class="btn btn-120-35 btn-check-cate4" id="btn-check-sub3" name="btn-check-sub3" value="3"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#d3" data-placement="bottom">소분류</button>
 									 <input type= "hidden" id="interSubId3" name="interSubId3" value="">

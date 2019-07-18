@@ -137,7 +137,10 @@
     $(document).ready(function(){
 
     	$("#mainSearchBtn").click(function(){
-    		
+    		if($("#mainSearchInput").val()==null || $("#mainSearchInput").val()==""){
+    			alert("검색어를 입력해주세요");
+    			return false;
+    		}
     		/* 비로그인시 쿠키 하나 추가해줌 */
     		if(sessionStorage.getItem("userId")==null || sessionStorage.getItem("userId")==""){
         		document.cookie="guestAddrGuId="+$("#addrGuId1").val();   			
@@ -292,7 +295,7 @@
 
                                 <!-- 키워드 검색 -->
                                 <div class="input-group">  
-                                    <input type="text" name="keyword" class="form-control" placeholder="관심사의 키워드를 입력하세요" aria-describedby="mainSearchBtn">
+                                    <input type="text" id="mainSearchInput" name="keyword" class="form-control" placeholder="관심사의 키워드를 입력하세요" aria-describedby="mainSearchBtn">
                                     <div class="input-group-append">
                                         <button class="btn btn-orange" type="button" id="mainSearchBtn">검색</button>
                                     </div>

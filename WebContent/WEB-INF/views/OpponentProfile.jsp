@@ -167,8 +167,8 @@
                                                     만남장소1
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName1 } " readonly>
-                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName1 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrSiName1 } " readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrGuName1 }" readonly>
                                                 </div>
                                             </div>
                                             
@@ -183,8 +183,8 @@
                                                     만남장소2
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName2 }" readonly>
-                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName2 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrSiName2 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrGuName2 }" readonly>
                                                 </div>
                                             </div>
                 							</c:if>
@@ -196,8 +196,8 @@
                                                     만남장소3
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName3 }" readonly>
-                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName3 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrSiName3 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrGuName3 }" readonly>
                                                 </div>
                                             </div>
                 							</c:if>

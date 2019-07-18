@@ -106,7 +106,6 @@
 .progress-140{
 	width: 140px;
 }
-progress{background: orange;}
 </style>
 <script type="text/javascript">
 $(document).ready(function()

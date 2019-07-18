@@ -1,3 +1,28 @@
+
+
+SELECT *
+FROM POST_VIEW
+WHERE USERID='BROGAN'
+ORDER BY MEETDATE;
+
+
+		SELECT *
+		FROM
+		(
+		SELECT BADGEPOINTNAME, BADGEPOINTDESC1, URL, BADGEPOINTID
+		FROM POINT
+        WHERE BADGEPOINTCATEID IN ('BC00001', 'BC00003')
+          AND BADGEPOINTID NOT IN ('BP00010')
+		ORDER BY DBMS_RANDOM.VALUE
+		)
+		WHERE ROWNUM<=2	;
+
+SELECT *
+FROM POINT;
+SELECT *
+FROM POINT_CATE;
+BC00001	칭찬
+BC00003	개설자
 -- 입력받은 userId가 postId에 후기를 남겼나(참여실패 등등 전부 그냥 0처리 후기 있으면 1이상)
 -- 이게 되려면 3일 지나서 자동으로 후기 남겨지는 액션에선 giveUserId가 null이 되어야 함 → quartz
 select count(*)

@@ -63,7 +63,7 @@
         justify-content: space-between;
     }
     .PostWrite-row2-left{
-        width: 500px;
+        width: 550px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -109,7 +109,7 @@
 	}
 	.input-w-250	/* range 길이 크기 */
 	{
-		width: 200px;
+		width: 250px;
 	}
 	.div-check{
 	display: flex;
@@ -150,7 +150,25 @@
 	element.style {
     padding-right: 6px;
 	}
+	input[type='radio'],
+	input[type='radio']:checked {
+		-webkit-appearance:none;
+	  width: 13px;
+	  height: 13px;
+	  border-radius: 100%;
+	  margin-right: 0.1rem;
+	}
 	
+	input[type='radio'] {
+	  background-color: white;
+	  border: 1.5px solid rgba(255,170,10);
+	}
+	input[type='radio']:checked {
+	  background-clip: content-box;
+	  background-color: orange;
+	  border: 1.5px solid rgba(255,170,10);
+	  padding: 2px 2px 2px 2px;
+	}
 </style>
 <script type="text/javascript">
    var js = jQuery.noConflict();
@@ -165,7 +183,7 @@
             slide: function( event, ui ) {
                js( ".price-slider-one" ).val(ui.values[ 0 ]);
                js( ".price-slider-two" ).val(ui.values[ 1 ] );
-               js( ".post-people-range" ).val(ui.values[ 0 ] + " ~ " + ui.values[ 1 ]+"명");
+               js( ".post-people-range" ).val(ui.values[ 0 ] + "  ~  " + ui.values[ 1 ]+" 명");
             }
           });
          js( ".price-slider-one" ).val($( "#slider-range" ).slider( "values", 0 ));
@@ -178,10 +196,10 @@
       
       js("#filter-minMeetDate").text(sysdateToString(2));
       js( "#slider-range-one" ).slider({
-           range: "max",
+           range: "min",
             min: 2,
             max: 10,
-            values: 2,
+            values: 10,
             slide: function( event, ui ) {
                js(this).next().val(sysdateToString(ui.value));
                js("#filter-minMeetDate").text(sysdateToString(ui.value));
@@ -310,7 +328,8 @@
              // 색 칠해진 별의 갯수를 hidden input 태그에 넣어줌
              $(this).parent().children("input").val(num);
           });
-      $('#postEvent').click()
+      
+      $('.postEvent').click(function()
       {
           if($('#drinks').is(":checked"))
           {
@@ -331,16 +350,17 @@
           var hour = $('#hour').val();
           var min = $('#min').val();
           var meetDate = $('#filter-minMeetDate').html();
-          $('#meetDate').val(meetDate+hour+":"+min+":00"); 
-          
+          $('#meetDate').val(meetDate+" "+hour+":"+min+":00"); 
+      });
+      
 	      /* 시간 제작 */
 	      $(".select-time").change(function()
 		  {
 		  	  var id = $(this).attr("id").substr(7);
-		  	$("#"+id).val($(this).val());
-		  	
-		  })
-      };
+		  	  
+		  	  $("#"+id).val($(this).val());
+		  });
+      
    });
 </script>
 <script type="text/javascript">
@@ -380,11 +400,11 @@
                         </div>
                         <div class="PostWrite-row1-input-box flex-row-left-center">
 								<div class="box-245-40 div-addr">
-									<button type="button" class="btn btn-check-cate1" id="addrSiName" name="addrSiName" value="1"
+									<button type="button" class="btn btn-120-35 btn-check-cate1" id="addrSiName" name="addrSiName" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#a" data-placement="bottom">시·도</button>
 									 
-                                	<button type="button" class="btn btn-check-cate2" id="btn-check-gugun" value="1"
+                                	<button type="button" class="btn btn-120-35 btn-check-cate2" id="btn-check-gugun" value="1"
 									 tabindex="0" data-toggle="popover"
 									 data-trigger="focus" data-popover-content="#b" data-placement="bottom">구·군</button>
 									 <input type="hidden" id="addrSiId" name="addrSiId" value="">
@@ -401,12 +421,12 @@
                         </div>
                         <div class="PostWrite-row1-input-box flex-row-left-center">
 							<div class="box-245-40 div-inter">
-								<button type="button" class="btn btn-check-cate3"
+								<button type="button" class="btn btn-120-35 btn-check-cate3"
 									id="interMainName" name="interMainName" value="1"
 									tabindex="0" data-toggle="popover" data-trigger="focus"
 									data-popover-content="#c" data-placement="bottom">대분류</button>
 
-								<button type="button" class="btn btn-check-cate4"
+								<button type="button" class="btn btn-120-35 btn-check-cate4"
 									id="btn-check-sub" name="btn-check-sub" value="1"
 									tabindex="0" data-toggle="popover" data-trigger="focus"
 									data-popover-content="#d" data-placement="bottom">소분류
@@ -425,7 +445,7 @@
                                 	인원수
                             </div>
                             <div>
-                            	<div class="PostWrite-row2-right">
+                            	<div class="PostWrite-row2-right hidden">
                             		<div>
                             			<input type="text" class="price-slider-one input-w-20" id="minNum" name="minNum" readonly="readonly" value="2">명
                             		</div>
@@ -474,41 +494,51 @@
                             <div class="PostWrite-row1-label">
                                	 만남일
                             </div>
-                            <div>
+                            <div style="position: relative;">
+                            	<span style="position: absolute; top: -430%; left: -10%;" >2일 후</span><span style="position: absolute; left: 90%; width: 50px; top: -430%;">10일 후</span>
                             	<div id="slider-range-one" class="input-w-250"></div>
                             </div>
-                            <div>
-                                <span id="filter-minMeetDate">2</span>
-                            </div>
-                            <div class="flex-row-center-center">
-								<div>
-                            		<select id="select-hour" name="select-hour" class="form-control select-time" style="width:60px; padding-right: 6px;">
-									  <option value="01" selected="selected">01</option>
-									  <option value="02">02</option>
-									  <option value="03">03</option>
-									  <option value="04">04</option>
-									  <option value="05">05</option>
-									  <option value="06">06</option>
-									  <option value="07">07</option>
-									  <option value="08">08</option>
-									  <option value="09">09</option>
-									  <option value="10">10</option>
-									  <option value="11">11</option>
-									  <option value="12">12</option>
-									</select>
-                            		<input type="hidden" class="input-w-40" id="hour" name="hour" value="01">
-                            	</div>
-                            	:
-                            	<div>
-                            		<select id="select-min" name="select-min" class="form-control select-time" style="width:60px; padding-right: 6px;">
-									  <option value="00" selected="selected">00</option>
-									  <option value="15">15</option>
-									  <option value="30">30</option>
-									  <option value="45">45</option>
-									</select>
-                            		<input type="hidden" class="input-w-40" id="min" name="min" value="00">
-                            	</div>
-                            	<input type="hidden" id="meetDate" name="meetDate" value="">
+                            <div class="flex-col-center-center">
+	                            <div>
+	                                <span id="filter-minMeetDate">2</span>
+	                            </div>
+	                            <div class="flex-row-center-center">
+									<div>
+	                            		<select id="select-hour" name="select-hour" class="select-time" style="padding: 0px 0px 0px 5px;">
+										  <option value="01" selected="selected">01</option>
+										  <option value="02">02</option>
+										  <option value="03">03</option>
+										  <option value="04">04</option>
+										  <option value="05">05</option>
+										  <option value="06">06</option>
+										  <option value="07">07</option>
+										  <option value="08">08</option>
+										  <option value="09">09</option>
+										  <option value="10">10</option>
+										  <option value="11">11</option>
+										  <option value="12">12</option>
+										</select>
+	                            		<input type="hidden" class="input-w-40" id="hour" name="hour" value="01">
+	                            	</div>
+	                            	
+	                            	<div>
+	                            		<select id="select-min" name="select-min" class="select-time" style="padding: 0px 0px 0px 5px;">
+										  <option value="00" selected="selected">00</option>
+										  <option value="15">15</option>
+										  <option value="30">30</option>
+										  <option value="45">45</option>
+										</select>
+	                            		<input type="hidden" class="input-w-40" id="min" name="min" value="00">
+	                            	</div>
+	                            	<div>
+	                            		<select id="select-amPm" name="select-amPm" class="" style="padding: 0px 0px 0px 5px;">
+										  <option value="AM">AM</option>
+										  <option value="PM" selected="selected">PM</option>
+										</select>
+	                            	</div>
+	                            	<input type="hidden" id="meetDate" name="meetDate" value="">
+	                            </div>
+                            
                             </div>
                         </div>
                         <div class="PostWrite-row2-right flex-row-right-center">
@@ -529,7 +559,7 @@
 							</div>
 					</div>
 					<div class="PostWrite-footer flex-col-center-center">
-                    	<button class="btn btn-orange btn-160-45 postEvent">모임개설</button><button type="button" id="testdate" name="testdate">날짜확인</button>
+                    	<button class="btn btn-orange btn-160-45 postEvent">모임개설</button>
                 	</div>
                 </form>
             </div>
@@ -687,10 +717,12 @@ function submitContents(elClickedObj)
     else
     {
     	var hour = $('#hour').val();
+    	if($("#select-amPm").val()=="PM"){
+      	  hour = Number(hour)+12;
+        }
         var min = $('#min').val();
         var meetDate = $('#filter-minMeetDate').html();
         $('#meetDate').val(meetDate+hour+":"+min+":00");
-       
     	/* $('#PostWriteForm').submit(); */
     }
 }

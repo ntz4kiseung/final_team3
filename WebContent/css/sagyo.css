@@ -1,5 +1,9 @@
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
 /* ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL ALL  */
+
+.btn-check-cate4{
+	overflow: hidden;
+}
 .modal-body{
 	position: relative;
 }
@@ -81,6 +85,9 @@ div[onclick]:HOVER{
     touch-action: none;
 }
 /* *************************************** */
+.star-rating img{
+	transition: filter 0.35s;
+}
 .grayscale{
 	filter: grayscale(100%);
 }
@@ -179,7 +186,6 @@ textarea{
     height: 100%;
 }
 input:read-only { 
-    background-color: yellow;
   }
 .flex-row-left-up{
     display: flex;
@@ -312,10 +318,13 @@ input:read-only {
     height: 40px;
     font-size: 16px;    
 }
+.MyProfile-input-group .input-120-40{
+	text-align: center;
+}
 .input-120-40{
     width: 120px;
     height: 40px;
-    font-size: 16px;    
+    font-size: 16px;
 }
 .input-150-40{
     width: 150px;
@@ -735,7 +744,9 @@ input:read-only {
     flex-grow: 1;
     padding-left: 20px;
 }
-
+.Post-host>div:last-child>div{
+	margin-bottom: 3px;
+}
 .Post-contents{
     flex-basis:auto;
 
@@ -783,7 +794,7 @@ input:read-only {
 
 .comments{
     width: 1040px;
-    height: 90px;
+    height: 105px;
     border-bottom: 2px solid rgb(240, 240, 240);
 }
 .comments-reply{
@@ -793,6 +804,7 @@ input:read-only {
 .comments-user{
     width: 60px;
     margin: 0px 30px 0px 10px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -849,7 +861,7 @@ input:read-only {
 }
 .MyPage-nav{
     min-height: 600px;
-    flex-basis: 260px;
+    flex-basis: 220px;
 }
 .MyPage-nav>div{
     font-size: 20px;
@@ -876,10 +888,13 @@ input:read-only {
 .MyPage-header-nickname{
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 .MyPage-header-detail{
     font-size: 16px;
+}
+.MyPage-header-detail>div{
+	margin-bottom: 2px;
 }
 .MyPage-body-header{
     width: 100%;
@@ -913,6 +928,10 @@ input:read-only {
     flex-direction: row;
     padding: 10px 0px 10px 0px;
 }
+.MyProfile-input-group input{
+	border-color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0) !important;
+}
 .MyProfile-input-group-label{
     width: 120px;
     display: flex;
@@ -925,6 +944,11 @@ input:read-only {
 
 /* MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp MyFollowing.jsp  */
 /* MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp MyFollower.jsp  */
+.followBtn{
+	color: orange;
+    font-size: 20px;
+    padding: 0px 0px 5px 0px;
+}
 .MyFollow{
     width: 800px;
     flex-wrap: wrap;

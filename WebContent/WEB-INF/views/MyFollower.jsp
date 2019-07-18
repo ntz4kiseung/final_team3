@@ -151,7 +151,7 @@
 
                                    	<c:forEach var="fList" items="${followerList }" varStatus="status">
                                     <div class="MyFollow-user flex-row-left-center">
-                                       <div class="user-badge-box">
+                                       <div class="user-badge-box"  onclick="location.href='profile.action?userId=${fList.userId}'">
                                                 <img class="user-bad-badge" src="${followerBad[status.index].urlBad }" alt="">
                     							 <img class="followbadge" src="<%=cp %>/${fList.url } " alt="">
                                         </div>

@@ -174,9 +174,9 @@
                                                 </div>
                                                 
                                                 
-                                                <input type="text" id="birthYear" name="birthYear" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 0,10),'-')[0]}" readonly>년
-                                                <input type="text" id="birthMonth" name="birthMonth" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[1]}" readonly>월
-                                                <input type="text" id="birthDay" name="birthDay" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[2]}" readonly>일
+                                                <input type="text" id="birthYear" name="birthYear" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 0,10),'-')[0]}년" readonly style="width: 80px;">
+                                                <input type="text" id="birthMonth" name="birthMonth" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[1]}월" readonly>
+                                                <input type="text" id="birthDay" name="birthDay" class="form-control input-65-40" value="${fn:split(fn:substring(List.birth, 2,10),'-')[2]}일" readonly>
                                             </div>
                 
                                             <div class="MyProfile-input-group">
@@ -216,8 +216,8 @@
                                                     만남장소1
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName1 } " readonly>
-                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName1 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrSiName1 } " readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrGuName1 }" readonly>
                                                 </div>
                                             </div>
                                             
@@ -232,8 +232,8 @@
                                                     만남장소2
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName2 }" readonly>
-                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName2 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrSiName2 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrGuName2 }" readonly>
                                                 </div>
                                             </div>
                 							</c:if>
@@ -245,8 +245,8 @@
                                                     만남장소3
                                                 </div>
                                                 <div class="box-245-40">
-                                                    <input type="text" class="form-control input-150-40" value="${myPageAddrList[status.index].addrSiName3 }" readonly>
-                                                    <input type="text" class="form-control input-90-40" value="${myPageAddrList[status.index].addrGuName3 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrSiName3 }" readonly>
+                                                    <input type="text" class="form-control input-120-40" value="${myPageAddrList[status.index].addrGuName3 }" readonly>
                                                 </div>
                                             </div>
                 							</c:if>

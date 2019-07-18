@@ -212,8 +212,8 @@
                             <img src="${postlist.url }" alt="이미지 없음" id="postId" name="${postlist.postId }">
                         </div>
                         <div>
-                            <div>${postlist.nickname }</div> 
-                            <div>
+                            <div style="font-size:16px; margin-bottom:5px;">${postlist.nickname }</div> 
+                            <div style='margin-bottom: 5px;'>
                             	<div class="star-show star-25-box">
 									<div>
 										<img class="grayscale" id="1" src="img/star.png" alt=""/>
@@ -233,10 +233,10 @@
 								</div>
                             </div>
                             <c:if test="${not empty postlist.telCertiId}">
-                            	<div>휴대폰 인증 완료 ✔</div>
+                            	<div style="font-size:16px; color: orange;">휴대폰 인증 완료 ✔</div>
                             </c:if>
                             <c:if test="${not empty postlist.emailCertiId != '없음'}">
-                            <div>이메일 인증 완료 ✔</div>
+                            <div style="font-size:16px; color: orange;">이메일 인증 완료 ✔</div>
                             </c:if>
                         </div>
                         <div>
@@ -367,7 +367,7 @@
 
 <!-- 끝 --------------------------------------------------------------------------------------------------------------------------------------------------------- -->
                         <div class="Post-footer flex-row-right-center">
-                            <button class="btn btn-outline-orange btn-120-35" id="mainlist">목록으로</button>
+                            <button class="btn btn-outline-orange btn-120-35 hidden" id="mainlist">목록으로</button>
                         </div>
                     </div>
                 </div>

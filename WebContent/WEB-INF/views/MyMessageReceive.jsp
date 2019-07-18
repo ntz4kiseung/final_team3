@@ -188,7 +188,6 @@
  			var a = $(this).val();
  			var b = $("#checkDate"+a).text();
  			
- 			alert("첫번째"+a);
  			
  			if (b == '')
 			{
@@ -328,12 +327,7 @@
       
         $(document).on("click",".MyMessage-title",function()
         {
-   	  
 	   	  var msgId = $(this).val();
-	   	  
-	   	alert("두번째"+msgId);
-	   	  
-	   	  alert(msgId);
 
 	   	  var checkDate = $("#checkDate"+msgId).text();
 	   	  
