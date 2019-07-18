@@ -106,8 +106,8 @@ public class SingupController
 		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
 		
 		
-		model.addAttribute("list", interA.interSubList(mainid));
 		
+		model.addAttribute("list", interA.interSubList(mainid));
 		
 		return "/WEB-INF/views/InterSubAjax.jsp";
 	}

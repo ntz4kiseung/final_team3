@@ -418,9 +418,10 @@
 							type: 'GET',
 							dataType: 'html',
 							data: {'mainid': mainid}
-						}).done(function(data) {
+						}).done(function(result) {
 							
-							console.log('성공')
+							console.log('성공');
+							console.log(result);
 							
 							$("#inbodyD"+d).empty();
 							$("#inbodyD"+d).append(result);
