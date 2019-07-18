@@ -13,7 +13,12 @@
 		FROM REPLY_VIEW
 		WHERE POSTID = #{postHostId}
 	</select>
-	
+	<select id="postmeettype" resultType="int">
+		SELECT COUNT(STATUSID)
+		FROM JOIN
+		WHERE POSTID = #{postId} AND 
+		STATUSID = 'ST00003'
+	</select>
 	<insert id="joininsert">
 		INSERT INTO JOIN(JOINID, POSTID, USERID, STATUSID, CONTENTS, JOINDATE) VALUES(ADD_ID('JOIN','JOINID','JN'),#{postHostId},#{joinDTO.userId}, 'ST00001',#{joinDTO.contents},SYSDATE)
 	</insert>

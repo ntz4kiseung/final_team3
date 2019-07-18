@@ -138,8 +138,7 @@
 			}
 		});
 // 만남확정 ------------------------------------------------------------------------------------------------
-		
-		if($('#serchNum').html >= $('#minNum').html && $('#serchNum').html <= $('#maxNum').html)
+		if(parseInt($('#serchNum').val()) >= parseInt($('#minNum').val()) && parseInt($('#serchNum').val()) <= parseInt($('#maxNum').val()))
 			{
 				$('.check-meeting').on('click', function()
 				{
@@ -160,6 +159,7 @@
 							dataType: 'html'
 						}).done(function(result)
 						{
+							$('#totalSerchNum').text(result);
 						});
 						}
 						joinId = "";
@@ -170,12 +170,13 @@
 						});
 						$.ajax({
 							url : 'hostalljoinupdate.action',
-							data: {joinIds : joinId, statusId : "ST00004"},
+							data: {joinIds : joinId, statusId : "ST00004", postId : $('#postId').attr('name')},
 							type: 'POST',
 							dataType: 'html'
 						}).done(function(result)
 						{
 							console.log($(this).attr('name'));
+							$('#totalSerchNum').text(result);
 						});
 						}
 					});
@@ -186,6 +187,7 @@
 			else
 			{
 				$('#meeting-contents').html('인원이 맞지 않습니다.');
+				return false;
 			}	
 			$('#mainlist').click(function(){
 				location.href="main.action";
@@ -255,10 +257,27 @@
                         <button class="btn post-d" data-toggle="modal" data-target="#delete-post">삭제하기</button>
                     </div>
                     <div class="Post-Status">
-                        <div class="flex-row-center-center">현재 참가 신청인원 (<div id="serchNum">${serchNum }</div>/<div id="minNum">${postlist.minNum }</div>~<div id="maxNum">${postlist.maxNum })</div></div>
+                        <div class="flex-row-center-center">현재 참가 신청인원 (<div><span type="text" id="totalSerchNum">${serchNum }</span></div>/<div>${postlist.minNum }</div>~<div>${postlist.maxNum })</div></div>
+                        <input type="hidden" id="serchNum" value="${serchNum }">
+                        <input type="hidden" id="minNum" value="${postlist.minNum }">
+                        <input type="hidden" id="maxNum" value="${postlist.maxNum }">
                         <div class="flex-row-right-center">
-                            <button class="btn btn-outline-secondary btn-120-35 allmessage" data-toggle="modal" data-target="#messageModal">참가자 전체 쪽지</button>
-                            <button class="btn btn-outline-orange btn-120-35 check-meeting" data-toggle="modal" data-target="#meetcheck">만남확정</button>
+                        	<button class="btn btn-outline-orange btn-120-35 check-meeting" data-toggle="modal" data-target="#meetcheck">만남확정</button>
+                        	<button class="btn btn-outline-secondary btn-120-35 allmessage" data-toggle="modal" data-target="#messageModal">참가자 전체 쪽지</button>
+                        	<c:choose>
+                        	<c:when test="${meetType != 0 }">
+	                        	<script type="text/javascript">
+	                        		$('.check-meeting').css('display', 'none');
+	                        		$('.allmessage').css('display', 'inline');
+	                        	</script>
+                        	</c:when>
+                        	<c:when test="${meetType eq 0 }">
+	                        	<script type="text/javascript">
+	                        		$('.check-meeting').css('display', 'inline');
+	                        		$('.allmessage').css('display', 'none');
+	                        	</script>
+                        	</c:when>
+                        	</c:choose>
                         </div>
                     </div>
 
@@ -266,12 +285,6 @@
 
                     <div class="Post-joinList">
  						<c:forEach var="join" items="${list}">
-                   			<c:if test="${join.statusId eq 'ST00004' }">
-                   				<script type="text/javascript">
-                   					$('.check-meeting').css('display', 'none');
-                   					$('.allmessage').css('display', 'inline');                					
-                   				</script>
- 							</c:if>
  							<c:choose>
  								<c:when test="${!empty join.delJoin}">
 		                        	<div class="comments flex-row-left-center">
