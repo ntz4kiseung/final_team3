@@ -90,7 +90,7 @@
 			var reply = $(this).attr('name');
 			$('#reply-insert-Btn').click(function()
 			{
-				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00002";
+				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00002"+"&postId="+$('#postId').attr('name');
 			});	
 		});
 		
@@ -99,7 +99,7 @@
 			var reply = $(this).attr('name');
 			$('#reply-insert-Btn').click(function()
 			{
-				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00002";
+				location.href="replyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00002"+"&postId="+$('#postId').attr('name');
 			});	
 		});
 // ------------------------------------------------------------------------------------------------- 댓글 추가 구간
@@ -109,7 +109,7 @@
 			var join = $(this).attr('name');
 			$('#join-reset-Btn').click(function()
 			{
-				location.href="joindelcheckinsert.action?reportId="+join;
+				location.href="joindelcheckinsert.action?reportId="+join+"&postId="+$('#postId').attr('name');
 			});
 		});
 		$('#mainlist').click(function(){
