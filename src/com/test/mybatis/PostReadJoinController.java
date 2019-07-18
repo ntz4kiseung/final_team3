@@ -142,7 +142,7 @@ public class PostReadJoinController
 	}
 	
 	@RequestMapping(value = "/replyinsert.action", method = RequestMethod.GET)
-	public String replyInsert(Model model, JoinDTO joinDTO, HttpSession session)
+	public String replyInsert(Model model, JoinDTO joinDTO, HttpSession session, String postId)
 	{
 		String result = null;
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
@@ -152,17 +152,18 @@ public class PostReadJoinController
 		System.out.println(joinDTO.getJoinId());
 		System.out.println(joinDTO.getUserTypeId());
 		joinDAO.replyinsert(joinDTO);
-		result = "redirect:postreadjoin.action";
+		System.out.println(postId);
+		result = "redirect:postreadjoin.action?postId="+postId;
 		return result;
 	}
 	
 	@RequestMapping(value = "/joindelcheckinsert.action", method = RequestMethod.GET)
-	public String joinDelcheckInsert(Model model, ReportDTO reportDTO)
+	public String joinDelcheckInsert(Model model, ReportDTO reportDTO, String postId)
 	{
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		reportDAO.joindelcheckinsert(reportDTO);
-		result = "redirect:postreadjoin.action";
+		result = "redirect:postreadjoin.action?postId="+postId;
 		return result;
 	}
 }

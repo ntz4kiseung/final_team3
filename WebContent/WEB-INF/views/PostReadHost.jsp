@@ -46,7 +46,7 @@
 			var joinId = $(this).attr('name');
 			$('#reportBtn').click(function()
 			{
-				location.href="hostreportjoininsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postHostId="+$('#postId').attr('name');
+				location.href="hostreportjoininsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postId="+$('#postId').attr('name');
 			});
 			
 		});
@@ -56,7 +56,7 @@
 			var joinId = $(this).attr('name');
 			$('#reportBtn').click(function()
 			{
-				location.href="hostreportreplyinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postHostId="+$('#postId').attr('name');
+				location.href="hostreportreplyinsert.action?reportCateName="+$('#reportType').val()+"&reportDetail="+$('#reportArea').val()+"&reportId="+joinId+"&postId="+$('#postId').attr('name');
 			});
 		});
 		
@@ -66,7 +66,7 @@
 			var reply = $(this).attr('name');
 			$('#reply-insert-Btn').click(function()
 			{
-				location.href="hostreplyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00001";
+				location.href="hostreplyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00001"+"&postId="+$('#postId').attr('name');
 			});	
 		});
 		
@@ -75,7 +75,7 @@
 			var reply = $(this).attr('name');
 			$('#reply-insert-Btn').click(function()
 			{
-				location.href="hostreplyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00001";
+				location.href="hostreplyinsert.action?joinId="+reply+"&contents="+$('#replyArea').val()+"&userTypeId="+"RU00001"+"&postId="+$('#postId').attr('name');
 			});	
 		});
 // 삭제 기능 -----------------------------------------------------------------------------------------
@@ -92,7 +92,6 @@
 			var userId="";
 			$('.nickName').each(function(index)
 			{
-				alert($(this).attr('id'));
 				if($(this).attr('id') == "ST00003")
 				{
 					userId += $(this).val()+ " ";
@@ -113,7 +112,7 @@
 			{
 				jQuery.ajaxSettings.traditional = true;
 				var joinId = $(this).attr('name');
-				arr = [joinId, "ST00002"];
+				arr = [joinId, "ST00002", $('#postId').attr('name')];
 				$.ajax({
 					url : 'hostjoinupdate.action',
 					data: {joinArr : arr},
@@ -127,7 +126,7 @@
 			{
 				jQuery.ajaxSettings.traditional = true;
 				var joinId = $(this).attr('name');
-				arr = [joinId, "ST00001"];
+				arr = [joinId, "ST00001", $('#postId').attr('name')];
 				$.ajax({
 					url : 'hostjoinupdate.action',
 					data: {joinArr : arr},
@@ -156,7 +155,7 @@
 						});
 						$.ajax({
 							url : 'hostalljoinupdate.action',
-							data: {joinIds : joinId, statusId : "ST00003"},
+							data: {joinIds : joinId, statusId : "ST00003", postId : $('#postId').attr('name')},
 							type: 'POST',
 							dataType: 'html'
 						}).done(function(result)
@@ -181,6 +180,7 @@
 						}
 					});
 					$('.check-meeting').css('display', 'none');
+					$('.allmessage').css('display', 'inline');
 				});
 			}
 			else
@@ -313,7 +313,6 @@
 			                            	</c:choose>
 			                            	<input type="checkbox" class="nickName hidden" id="${join.statusId }" name="${join.joinId }" value="${join.userId }"
 			                            	${join.statusId == 'ST00001' || join.statusId == 'ST00004'? "" : "Checked = 'checked'" }>
-			                            	참가수락
 		                            	</div>
 			                        </div>
 	                        	</c:when>
@@ -484,9 +483,7 @@
 	      <div class="modal-body">
 	       	<div class="control-group flex-row-center-center">
 	            <div for="destinataire" style="padding-right: 15px;">받는 사람</div>
-	            <div><input type="text" class="form-control" name="takeUserIds" id="takeUserIds" ></div>
-	              <button type="button" class="btn" id="btn-check-id" value="0">아이디 중복확인</button>
-						 
+	            <div><input type="text" class="form-control" name="takeUserIds" id="takeUserIds" readonly="readonly"></div>
 	         </div>
 	         <br>   
 	         <div class="control-group">
@@ -500,6 +497,7 @@
 	          <div class="control-group">
 	            <label for="destinataire" >내용</label>
 	            <textarea id="contents" name="contents" class="form-control" rows="5"></textarea>
+	            <input type="hidden" postId" id="postId" name="postId" value="${postlist.postId }">
 	          </div>
 	          <br />
 	        </div>

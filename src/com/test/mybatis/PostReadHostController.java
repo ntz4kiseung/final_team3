@@ -28,6 +28,7 @@ public class PostReadHostController
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		
 		int serchNum = (Integer)joinDAO.serchjoin(postId);
+		System.out.println(serchNum);
 		ArrayList<JoinDTO> joinDTO = joinDAO.joinlist(postId);
 		
 		for (JoinDTO joinDTOs : joinDTO)
@@ -52,7 +53,7 @@ public class PostReadHostController
 	}
 	
 	@RequestMapping(value = "/hostreportjoininsert.action", method = RequestMethod.GET)
-	public String reportJoin(Model model, ReportDTO reportDTO, HttpSession session)
+	public String reportJoin(Model model, ReportDTO reportDTO, HttpSession session, String postId)
 	{
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
@@ -64,12 +65,12 @@ public class PostReadHostController
 		{
 			reportDAO.joindelcheckinsert(reportDTO);
 		}
-		result = "redirect:postreadhost.action";
+		result = "redirect:postreadhost.action?postId="+postId;
 		return result;
 	}
 	
 	@RequestMapping(value = "/hostreportreplyinsert.action", method = RequestMethod.GET)
-	public String reportreply(Model model, ReportDTO reportDTO, HttpSession session)
+	public String reportreply(Model model, ReportDTO reportDTO, HttpSession session, String postId)
 	{
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
@@ -81,29 +82,19 @@ public class PostReadHostController
 		{
 			reportDAO.reportreplyinsert(reportDTO);
 		}
-		result = "redirect:postreadhost.action";
+		result = "redirect:postreadhost.action?postId="+postId;
 		return result;
 	}
 	
 	@RequestMapping(value = "/hostreplyinsert.action", method = RequestMethod.GET)
-	public String replyInsert(Model model, JoinDTO joinDTO, HttpSession session)
+	public String replyInsert(Model model, JoinDTO joinDTO, HttpSession session, String postId)
 	{
 		String result = null;
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		joinDTO.setUserId(userId);
 		joinDAO.replyinsert(joinDTO);
-		result = "redirect:postreadhost.action";
-		return result;
-	}
-	
-	@RequestMapping(value = "/hostjoindelcheckinsert.action", method = RequestMethod.GET)
-	public String joinDelcheckInsert(Model model, ReportDTO reportDTO)
-	{
-		String result = null;
-		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
-		reportDAO.joindelcheckinsert(reportDTO);
-		result = "redirect:postreadhost.action";
+		result = "redirect:postreadhost.action?postId="+postId;
 		return result;
 	}
 	
@@ -113,12 +104,12 @@ public class PostReadHostController
 		String result = null;
 		IReportDAO reportDAO = sqlSession.getMapper(IReportDAO.class);
 		reportDAO.postdelte(reportDTO);
-		result = "redirect:postreadhost.action";
+		result = "redirect:main.action";
 		return result;
 	}
 	
 	@RequestMapping(value = "/hostmessagesend.action", method = RequestMethod.POST)
-	public String postMessage(Model model, MessageDTO messageDTO, String takeUserIds, HttpSession session)
+	public String postMessage(Model model, MessageDTO messageDTO, String takeUserIds, HttpSession session, String postId)
 	{
 		String result = null;
 		IMessageDAO messageDAO = sqlSession.getMapper(IMessageDAO.class);
@@ -130,7 +121,7 @@ public class PostReadHostController
 			messageDTO.setTakeUserId(takeuserid[i]);
 			messageDAO.messageinsert(messageDTO);
 		}
-		result = "redirect:postreadhost.action";
+		result = "redirect:postreadhost.action?postId="+postId;
 		return result;
 	}
 	
@@ -142,12 +133,12 @@ public class PostReadHostController
 		joinDTO.setJoinId(joinArr[0]);
 		joinDTO.setStatusId(joinArr[1]);
 		joinDAO.joinupdate(joinDTO);
-		result = "redirect:postreadhost.action";
+		result = "redirect:postreadhost.action?postId="+joinArr[2];
 		return result;
 	}
 	
 	@RequestMapping(value = "/hostalljoinupdate.action", method = RequestMethod.POST)
-	public String postJoinallUpdate(Model model, JoinDTO joinDTO, String joinIds, String statusId)
+	public String postJoinallUpdate(Model model, JoinDTO joinDTO, String joinIds, String statusId, String postId)
 	{
 		String result = null;
 		IJoinDAO joinDAO = sqlSession.getMapper(IJoinDAO.class);
@@ -158,7 +149,7 @@ public class PostReadHostController
 			joinDTO.setJoinId(joinId[i]);
 			joinDAO.joinupdate(joinDTO);
 		}
-		result = "redirect:postreadhost.action";
+		result = "redirect:postreadhost.action?postId="+postId;
 		return result;
 	}
 	
