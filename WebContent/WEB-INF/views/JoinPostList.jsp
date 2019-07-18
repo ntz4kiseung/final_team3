@@ -69,6 +69,9 @@ $(document).ready(function()
 		 {
 	    	 $("#A").empty();
              $("#A").append(result);
+             $(".star-show>div:nth-child(2)").each(function(index,item){
+         		$(item).css("width", $(item).next().val()*20+"%")
+         	});
 		 });
 		 
 	 });
@@ -92,9 +95,7 @@ $(document).ready(function()
     });
     
     
-    $(".star-show>div:nth-child(2)").each(function(index,item){
-		$(item).css("width", $(item).next().val()*20+"%")
-	});
+
     
     $(document).on('click','.selectPoint', function(){
     	

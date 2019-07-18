@@ -116,15 +116,15 @@ $(document).ready(function()
                             
                             <div class="flex-row-center-center">
                                 <button type="button" id="btn-login" class="btn btn-orange flex-item-grow">로그인</button>&nbsp;&nbsp;
-                                <button type="button" id="btn-signUp" class="btn btn-outline-orange flex-item-grow">회원가입</button>
+                                <button type="button" id="btn-signUp" class="btn btn-outline-orange flex-item-grow" onclick="location.href='signup.action'">회원가입</button>
                             </div>
                             </form>
                         </div>
                         <!-- 아디, 비번 찾기 -->
                         <div class="flex-row-center-center">
-                            <a href="#">아이디찾기</a>
+                            <a href="findid.action">아이디찾기</a>
                             &nbsp;&nbsp;|&nbsp;&nbsp;
-                            <a href="#">비밀번호찾기</a>
+                            <a href="findpw.action">비밀번호찾기</a>
                         </div>
                     </div>
 

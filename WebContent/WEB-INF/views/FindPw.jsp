@@ -321,6 +321,7 @@
     </script>
 </head>
 <body>
+<div class="browser flex-col-center-center">
    <c:import url="/WEB-INF/views/Navbar.jsp"></c:import>
 
         <div class="body-box flex-item-grow flex-col-center-up">
@@ -432,7 +433,7 @@
                 </div>
             </div>
 
-
+</div>
       
 
 
@@ -499,5 +500,6 @@
 			</div>
         </div>
     </div>
+
 </body>
 </html>

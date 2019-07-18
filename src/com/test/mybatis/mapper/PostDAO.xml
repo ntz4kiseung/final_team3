@@ -211,6 +211,7 @@
 	        JOIN POINT PT
 	        ON UBL.BADGEPOINTID = PT.BADGEPOINTID
 			WHERE J.USERID = #{userId} AND E.USERID NOT IN(#{userId})
+			ORDER BY P.MEETDATE DESC
 		)
 		<!-- <![CDATA[ WHERE NUM>=1 AND NUM <=6 ]]> -->
 	</select>

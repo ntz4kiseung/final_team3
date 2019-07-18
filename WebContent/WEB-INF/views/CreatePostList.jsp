@@ -69,6 +69,9 @@ $(document).ready(function()
 		 {
 	    	 $("#A").empty();
              $("#A").append(result);
+             $(".star-show>div:nth-child(2)").each(function(index,item){
+ 	    		$(item).css("width", $(item).next().val()*20+"%")
+ 	    	});
 		 });
 		 
 	 });
@@ -92,9 +95,7 @@ $(document).ready(function()
     });
     
     
-    $(".star-show>div:nth-child(2)").each(function(index,item){
-		$(item).css("width", $(item).next().val()*20+"%")
-	});
+
     
     $(document).on('click','.selectPoint', function(){
     	
@@ -486,18 +487,21 @@ $(document).ready(function()
 		      </div>
 		      
 		      <div class="modal-body">
-		        <div>
-					<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 15px;">
-						<div class="flex-review-first" >유저</div>
-						<div class="flex-review-second">평점</div>
-						<div class="flex-review-third">뱃지 포인트</div>
-						<div class="flex-review-fourth">코멘트</div>
-					</div>
-				</div>
-						
-						<div id="A" style="overflow:auto; height: 495px;">
-							
+			        <div>
+						<div class="flex-review" style="text-align: center; font-weight: bold; font-size: 15px; margin-bottom: 15px;">
+							<div class="flex-review-first" >유저</div>
+							<div class="flex-review-second">평점</div>
+							<div class="flex-review-third">뱃지 포인트</div>
+							<div class="flex-review-fourth">코멘트</div>
 						</div>
+					</div>
+					<div id="pleaseReview" class="hidden">
+						<p>해당 모임에 후기를 남기지 않아 결과를 조회할 수 없습니다.</p>
+						<p>다음 모임에선 꼭 후기를 남겨주세요.</p>
+					</div>
+					<div id="A" style="overflow:auto; height: 495px;" class="please-review">
+						
+					</div>
 						
 		      </div>
 		      

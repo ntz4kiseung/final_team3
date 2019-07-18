@@ -1,3 +1,14 @@
+-- 입력받은 userId가 postId에 후기를 남겼나(참여실패 등등 전부 그냥 0처리 후기 있으면 1이상)
+-- 이게 되려면 3일 지나서 자동으로 후기 남겨지는 액션에선 giveUserId가 null이 되어야 함 → quartz
+select count(*)
+from review
+where postid='PT00008'
+  and giveuserid='advice'
+;
+
+
+-------
+
 SELECT POSTID ,USERID, GIVEUSERID, GIVEUSERNAME, GIVEUSERURL, GRADE, TAKEURL, CONTENTS
 FROM VIEW_REVIEW_INQURY
 WHERE POSTID = 'PT00778'
