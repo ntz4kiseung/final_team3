@@ -1,5 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+$(document).ready(function(){
+	console.log('aaa');
+	if(${pleaseReview}>0){
+		$("#A").removeClass("please-review");
+		$("#pleaseReview").addClass("hidden");
+	}else{
+		$("#A").addClass("please-review");
+		$("#pleaseReview").removeClass("hidden");
+	};
+});
+</script>
 <c:forEach var="inq" items="${list }" varStatus = "status">
 
 	<div class="review-post flex-review" id="list${status.index}">

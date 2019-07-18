@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.test.mybatis.IReviewDAO">
+	<select id="pleaseReview" resultType="java.lang.String">
+		SELECT COUNT(*)
+		FROM REVIEW
+		WHERE POSTID=#{postId, jdbcType=VARCHAR}
+		  AND GIVEUSERID=#{userId, jdbcType=VARCHAR}
+	</select>
+
 	<insert id="reviewInsertMain">
 		INSERT INTO REVIEW(REVIEWID, POSTID, GIVEUSERID, TAKEUSERID, GRADE, REVIEWDATE)
 		VALUES(ADD_ID('REVIEW','REVIEWID', 'RV'), #{postId}, #{giveUserId}, #{takeUserId}, #{grade}, SYSDATE)

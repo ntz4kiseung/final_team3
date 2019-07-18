@@ -13,5 +13,6 @@ public interface IReviewDAO
 	public String getNextReviewId();
 	
 	public ArrayList<ReviewDTO> inquryView(@Param("userId")String userId, @Param("postId")String postId);
-
+	
+	public String pleaseReview(@Param("userId")String userId, @Param("postId")String postId);
 }

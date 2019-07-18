@@ -213,7 +213,6 @@ public class MypageController
 	@RequestMapping(value="/hostInquiry.action", method = RequestMethod.GET)
 	public String reviewHostInquiry(String postId, ModelMap model, HttpSession session)
 	{
-		
 		IReviewDAO review = sqlSession.getMapper(IReviewDAO.class);
 		String userId = (String) session.getAttribute("userId");	
 		if(userId==null||userId.equals(""))
@@ -227,6 +226,7 @@ public class MypageController
 		}
 		
 		model.addAttribute("list", review.inquryView(userId, postId));
+		model.addAttribute("pleaseReview", review.pleaseReview(userId, postId));
 		
 		return "/WEB-INF/views/HostInquiryAjax.jsp";
 	}

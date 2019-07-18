@@ -495,7 +495,7 @@ $(document).ready(function()
 							<div class="flex-review-fourth">코멘트</div>
 						</div>
 					</div>
-					<div id="pleaseReview" class="hidden">
+					<div id="pleaseReview" class="hidden flex-col-center-center">
 						<p>해당 모임에 후기를 남기지 않아 결과를 조회할 수 없습니다.</p>
 						<p>다음 모임에선 꼭 후기를 남겨주세요.</p>
 					</div>
