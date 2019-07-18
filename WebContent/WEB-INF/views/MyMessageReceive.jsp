@@ -255,6 +255,7 @@
             type : 'post',
             data : { checkArr : checkArr },
             }).done(function(result){
+            	console.log(result);
             	location.href = "<%=cp%>/mymessagerecevie.action";
 			})
 			
