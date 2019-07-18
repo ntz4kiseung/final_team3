@@ -264,6 +264,7 @@
 				                                    <div>
 				                                        <button class="btn replyreport" data-toggle="modal" data-target="#report-post" name="${replylist.replyId }">신고하기</button>
 				                                    </div>
+<<<<<<< HEAD
 				                                    <c:choose>
 				                                    	<c:when test="${replylist.userId eq userId}">
 				                                    		<div>
@@ -276,6 +277,13 @@
 				                                    		</div>
 				                                    	</c:when>
 				                                    </c:choose>
+=======
+				                                    <c:if test="${replylist.userId eq 'B001' || replylist.userId eq postlist.userId}">
+				                                    <div>
+				                                        <button class="btn reply-r-insert" data-toggle="modal" data-target="#reply-insert-modal" name="${join.joinId}">댓글달기</button>
+				                                    </div>
+				                                    </c:if>
+>>>>>>> e956e78992ba9865c2bce4a8e75c7178c3753020
 				                                </div>
 				                                <div>
 				                                    ${replylist.contents }

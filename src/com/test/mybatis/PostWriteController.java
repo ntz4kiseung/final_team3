@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -38,6 +37,7 @@ public class PostWriteController
 		String result = null;
 		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
 		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
+<<<<<<< HEAD
 		IPostDAO postDAO = sqlSession.getMapper(IPostDAO.class);
 		String userId = (String)session.getAttribute("userId");
 		postDTO.setUserId(userId);
@@ -47,6 +47,16 @@ public class PostWriteController
 		postDAO.postinsert(postDTO);
 		String userid = postDAO.serchpost(userId);
 		result = "redirect:postreadhost.action?postId="+userid;
+=======
+        IPostDAO postDAO = sqlSession.getMapper(IPostDAO.class);
+        postDTO.setContents("없음");
+        System.out.println(postDTO.getContents());
+		model.addAttribute("addrsilist", addrA.addrSiList());
+		model.addAttribute("intermainlist", interA.interMainList());
+        //postDAO.postinsert(postDTO);
+        result = "redirect:postwrite.action";
+        
+>>>>>>> e956e78992ba9865c2bce4a8e75c7178c3753020
 		return result;
 	}
 	

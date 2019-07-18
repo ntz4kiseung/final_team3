@@ -473,7 +473,11 @@
 							<div style="width: 830px; margin: 20px auto 0px; border-spacing: 0px; border-collapse: collapse;">
 								<div align="left" style="border-bottom: 1px solid #cccccc;">
 									<div style="padding: 5px 0px 5px 10px;">
+<<<<<<< HEAD
 										<textarea name="contents" id="contents" style="width: 95%; height: 400px;">${dto.content}</textarea>
+=======
+										<textarea name="content" id="content" style="width: 95%; height: 400px;"></textarea>
+>>>>>>> e956e78992ba9865c2bce4a8e75c7178c3753020
 									</div>
 								</div>
 							</div>
