@@ -178,7 +178,7 @@ public class PostReadHostController
 		if(logInUserId==null || logInUserId.equals(""))
 			return "redirect: login.action";
 		
-		if(logInUserId==hostId)
+		if(logInUserId.equals(hostId))
 			return ("redirect: postreadhost.action?postId="+postId);
 		else
 			return ("redirect: postreadjoin.action?postId="+postId);

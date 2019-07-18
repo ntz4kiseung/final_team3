@@ -163,7 +163,7 @@ public class MyProfileController
 			return ("redirect: opprofile.action?userId="+userId);
 		else
 		{
-			if(logInUserId==userId)
+			if(logInUserId.equals(userId))
 				return "redirect: myprofile.action";
 			else
 				return ("redirect: opprofile.action?userId="+userId);
