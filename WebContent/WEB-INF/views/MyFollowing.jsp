@@ -72,7 +72,7 @@ $(document).ready(function(){
     $(".opbadge").click(function()
 	{
 		var temp = $(this).attr("id");
-		$(this).attr('href', "<%=cp%>/opprofile.action?opuserid="+temp);
+		$(this).attr('href', "<%=cp%>/profile.action?userId="+temp);
 		
 		$("#opId"+temp).val(temp);
 		
