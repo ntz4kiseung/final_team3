@@ -83,7 +83,7 @@ public class SingupController
 		else 
 		{
 		}
-		return "redirect:signup.action";
+		return "redirect:login.action";
 	}
 	
 	@RequestMapping(value="/addrguajax.action", method=RequestMethod.GET)
