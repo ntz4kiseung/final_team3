@@ -41,7 +41,10 @@ public class SingupController
 		userA.userLoginInsert(user);
 		
 		userA.userNewBadgeInsert(user);
+		
 		String badgelogid = userA.userNewBadgeSelect(user);
+		
+		System.out.println(badgelogid);
 		  
 		userA.userEssentialInsert(user, badgelogid);
 		 
