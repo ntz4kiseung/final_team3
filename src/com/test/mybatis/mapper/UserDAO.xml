@@ -17,7 +17,7 @@
  	
  	<insert id = "userNewBadgeInsert">
  		INSERT INTO USER_BADGE_LOG(BADGELOGID, USERID, BADGEPOINTID) 
- 		VALUES(ADD_ID('USER_BADGE_LOG', 'BADGELOGID', 'BL'), #{userId}, 'BP00011')
+		VALUES(ADD_ID('USER_BADGE_LOG', 'BADGELOGID', 'BL'), #{userId}, 'BP00011')
  	</insert>
  	
  	<select id = "userNewBadgeSelect" resultType = "java.lang.String">
