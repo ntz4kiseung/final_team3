@@ -312,7 +312,7 @@
           });
       $('#postEvent').click()
       {
-          if($('#drink').is(":checked"))
+          if($('#drinks').is(":checked"))
           {
              $('#drink').val('DR00001');
           }
@@ -445,7 +445,8 @@
                         <div class="PostWrite-row2-right">
                             <div>
                                	 음주가능
-                                <input type="checkbox" id="drink" name="drink" value="">
+                                <input type="checkbox" id="drinks" name="drinks" value="">
+                                <input type="hidden" id="drink" name="drink" value="">
                             </div>
 
                             <div>
