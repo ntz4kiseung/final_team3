@@ -29,6 +29,7 @@ public class LogInController
 	{
 		IUserDAO userA = sqlSession.getMapper(IUserDAO.class);
 		int count = 0;
+		System.out.println(count);
 		count =  userA.checkIdPw(logindata[0], logindata[1]);
 		
 		System.out.println(count);
@@ -38,8 +39,9 @@ public class LogInController
 	@RequestMapping(value="/loginsuccess.action", method=RequestMethod.POST)
 	public String successLogin(HttpSession session, UserDTO user)
 	{
+		System.out.println("1:"+user.getUserId());
 		session.setAttribute("userId", user.getUserId());
-		System.out.println(user.getUserId());
+		System.out.println("2:"+user.getUserId());
 		
 		return "redirect: main.action";
 	}

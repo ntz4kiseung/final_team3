@@ -34,6 +34,7 @@ public interface IUserDAO
 	public String findPwdString(String userId);
 	public int findPwTelInsert(UserDTO user);
 	public int findPwEmailInsert(UserDTO user);
+	public int insertNewGrade(String userId);
 	
 	// 아이디, 비밀번호 찾기 사용
 	
@@ -50,6 +51,7 @@ public interface IUserDAO
 	public ArrayList<InterDTO> myPageInterList(String userId);
 	
 	public UserDTO userList(String userid);
+	
 	
 	// 프로필 변경 사용
 	public int checkGuPwd(@Param("userId")String userId, @Param("pwd")String pwd);

@@ -39,22 +39,39 @@ public class SingupController
 		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
 		
 		userA.userLoginInsert(user);
+		System.out.println("유저 아이디 비밀번호");
+		
+		System.out.println(user.getUserId());
 		
 		userA.userNewBadgeInsert(user);
+		System.out.println("유저 기본 뱃지");
+		
 		
 		String badgelogid = userA.userNewBadgeSelect(user);
+		System.out.println("뱃지값 넣기" + badgelogid);
 		
-		System.out.println(badgelogid);
 		  
 		userA.userEssentialInsert(user, badgelogid);
+		System.out.println("유저 에센셜 넣기");
+		
+		
 		 
 		userA.userSubInsert(user);
+		System.out.println("유저 서브 넣기");
+		
+		
 		
 		userA.userTelInsert(user);
+		System.out.println("유저 서브 넣기");
 		
 		userA.userEmailInsert(user);
+		System.out.println("유저 이메일 넣기");
 		  
 		addrA.userAddrInsert1(addr);
+		System.out.println("유저 지역1 넣기");
+		userA.insertNewGrade(user.getUserId());
+		
+		
 		
 		if(addr.getAddrGuId2() != "")
 		{
@@ -62,6 +79,7 @@ public class SingupController
 		}
 		else 
 		{
+			System.out.println("2번 지역 실패");
 		}
 		if(addr.getAddrGuId3() != "")
 		{
@@ -69,22 +87,36 @@ public class SingupController
 		}
 		else 
 		{
+			System.out.println("3번 지역 실패");
 		}
 		
+		
+		
+		
+		
 		interA.userInterInsert1(inter); 
+		System.out.println("유저 관심1 넣기");
+		
+		
+		
 		if (inter.getInterSubId2() != "")
 		{
 			interA.userInterInsert2(inter);
 		}
 		else 
 		{
+			System.out.println("2번 지역 실패");
 		}
+		
+		
+		
 		if (inter.getInterSubId3() != "")
 		{
 			interA.userInterInsert3(inter);
 		}
 		else 
 		{
+			System.out.println("3번 관심 실패");
 		}
 		return "redirect:login.action";
 	}
