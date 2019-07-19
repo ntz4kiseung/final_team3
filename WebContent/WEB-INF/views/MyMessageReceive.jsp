@@ -638,7 +638,7 @@
 													<div></div>
 												</c:when>
 												
-												<c:when test="${(largePage eq 1) && !(largePage eq totalLargePage)}">
+												<c:when test="${(totalLargePage eq 0) || ((largePage eq 1) && (totalLargePage eq 1))}">
 													<div></div>
 													<div>
 													<c:forEach var="index" begin="1" end="5">

@@ -555,7 +555,7 @@ input:read-only {
 .navbar-box{
     flex-basis: 70px;
     width: 100%;
-    background: linear-gradient(to right, rgb(255,159,16), rgb(255,175,13));
+    background: linear-gradient(to right, rgb(255,159,16), rgb(255,185,13));
     color: #fff;
     display: flex;
     justify-content: space-between;

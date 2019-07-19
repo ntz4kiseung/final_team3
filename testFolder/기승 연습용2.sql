@@ -1,4 +1,6 @@
-
+select userid, cryptpack.decrypt(pwd, 'JAVA006$')
+from login
+where userid='aaa';
 
 SELECT *
 FROM POST_VIEW

@@ -443,10 +443,10 @@
                                     <!-- MyMessage Footer 쪽지함 페이징 -->
                                     <div class="MyMessage-footer flex-col-center-center">
                                         <div class="MyMessage-pagination">
-                                            
+                                            largePage: ${largePage }, totalLargePage: ${totalLargePage }
 
 											<c:choose>
-												<c:when test="${(largePage eq 1) && (largePage eq totalLargePage)}">
+												<c:when test="${(totalLargePage eq 0) || ((largePage eq 1) && (totalLargePage eq 1))}">
 													<div></div>
 													<div>
 														<c:forEach var="index" begin="1" end="${totalPage }">
