@@ -29,6 +29,9 @@
  	<insert id = "userEssentialInsert">
  		INSERT INTO USER_ESSENTIAL(USERID, NICKNAME, NAME, BIRTH, GENDERID, TEL, EMAIL, REGISTERDATE, BADGELOGID)
 		VALUES(#{user.userId }, #{user.nickname }, #{user.name } , TO_DATE(#{user.birth },'YYMMDD'), #{user.genderId }, #{user.tel }, #{user.email }, SYSDATE, #{badgelogid})
+		
+		
+		
  	</insert>
  	
 	<select id="checkId" resultType="java.lang.Integer">
@@ -48,7 +51,7 @@
 		VALUES(#{userId }, CRYPTPACK.ENCRYPT(#{pwd }, 'JAVA006$'), 'RL00002')
  	</insert>
  	
- 	 	<insert id = "userSubInsert">
+ 	 <insert id = "userSubInsert">
  		INSERT INTO USER_SUB(ID, USERID, SNS, INTRODUCE)
 		VALUES(USER_SUB_SEQ.NEXTVAL, #{userId }, #{sns }, #{introduce })
  	</insert>
@@ -129,13 +132,8 @@
  	<select id ="checkIdPw" resultType="java.lang.Integer">
 	 	SELECT COUNT(*) AS COUNT
 		FROM LOGIN
-		WHERE USERID = #{userId} AND CRYPTPACK.DECRYPT(PWD, 'JAVA006$') = UPPER(#{pwd})
+		WHERE USERID = #{userId} AND CRYPTPACK.DECRYPT(PWD, 'JAVA006$') = #{pwd}
 	 </select>
-
-
-
-
-
 
 <!-- 내 프로필 -->
 
@@ -237,4 +235,16 @@
 		SET SNS = '${user.sns}', INTRODUCE = #{user.introduce}
 		WHERE UPPER(USERID) = UPPER(#{userId})
 	</update>
+	
+	
+	<insert id= "insertNewGrade">
+	INSERT INTO REVIEW(REVIEWID, TAKEUSERID, GRADE ,REVIEWDATE) VALUES(ADD_ID('REVIEW', 'REVIEWID', 'RV'), #{userId } ,3, SYSDATE)
+	
+	</insert>
+	
+	
+
+	
+	
+	
 </mapper>

@@ -24,9 +24,13 @@ public class MyProfileController
 	{
 		String userId = (String) session.getAttribute("userId");
 		IUserDAO user = sqlSession.getMapper(IUserDAO.class);
+		System.out.println(userId);
 		
 		model.addAttribute("UserList",user.userList(userId));
 		model.addAttribute("MyPageBad",user.MyPageBad(userId));
+		
+		System.out.println(user.myPageList(userId).get(0).getName());
+		
 		model.addAttribute("myPageList", user.myPageList(userId));
 		model.addAttribute("myPageAddrList", user.myPageAddrList(userId));
 		model.addAttribute("myPageInterList", user.myPageInterList(userId));

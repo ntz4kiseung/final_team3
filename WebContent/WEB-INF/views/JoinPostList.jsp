@@ -294,13 +294,13 @@ $(document).ready(function()
                 
 			<div class="MyPage flex-item-grow flex-col-center-up">
 
-                     <c:forEach var="List" items="${ myPageList }" varStatus="status">
+                   <c:forEach var="List" items="${ myPageList }" varStatus="status">
                     <div class="MyPage-header flex-row-left-center">
                         <div class="MyPage-header-left flex-col-center-center">
                         <div class="MyPage-header-badge">
                                <div class="user-badge-box">
                                         <img class="user-bad-badge" src="${MyPageBad[status.index].urlBad }" alt="">
-                                         <img class="" src="<%=cp %>/${List.url } " onerror="this.src='img/뉴비.png'">
+                                         <img id="user_main" src="<%=cp %>/${List.url } ">
                                  </div>
                             </div>
                              <div class="star-show star-25-box">
@@ -327,10 +327,29 @@ $(document).ready(function()
                                 ${List.nickname }
                             </div>
                             <div class="MyPage-header-detail">
-                                <div>${myPageAddrList[status.index].addrSiName1 }   ${myPageAddrList[status.index].addrGuName1 }  ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 } 
-                                ${myPageAddrList[status.index].addrSiName3 }   ${myPageAddrList[status.index].addrGuName3 }</div> 
-                                <div>${myPageInterList[status.index].interSubName1 }  ${myPageInterList[status.index].interSubName2 }</div> 
-                                <div>${myPageInterList[status.index].interSubName3 }</div> 
+                             <div>
+								<c:if test="${myPageAddrList[status.index].addrSiName1 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName1 } ${myPageAddrList[status.index].addrGuName1 }
+								</c:if>
+								<c:if test="${myPageAddrList[status.index].addrSiName2 != null  }">
+								    # ${myPageAddrList[status.index].addrSiName2 } ${myPageAddrList[status.index].addrGuName2 }
+								</c:if>
+                                <c:if test="${myPageAddrList[status.index].addrSiName3 != null }">
+								   # ${myPageAddrList[status.index].addrSiName3 } ${myPageAddrList[status.index].addrGuName3 }
+								</c:if> 
+							</div>	
+							<div>	
+                                <c:if test="${myPageInterList[status.index].interSubName1 != null}">
+								   # ${myPageInterList[status.index].interSubName1 }
+								</c:if> 
+                                
+                                 <c:if test="${myPageInterList[status.index].interSubName2 != null}">
+								   # ${myPageInterList[status.index].interSubName2 }
+								</c:if> 
+								 <c:if test="${myPageInterList[status.index].interSubName3 != null}">
+								   # ${myPageInterList[status.index].interSubName3 }
+								</c:if> 
+                             </div>    
                                       
                                 <div style="color: orange;">${List.telCheck }</div>
                                 
