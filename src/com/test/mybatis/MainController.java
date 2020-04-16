@@ -24,8 +24,14 @@ public class MainController
 		// 랜덤 뱃지 2개 생성
 		ArrayList<BadgeDTO> randomBadgeList = badge.randomMainBadge();
 		// 생성된 랜덤 뱃지의 최근 획득 유저 리스트 생성
-		ArrayList<String> userList1 = badge.getUserList(randomBadgeList.get(0).getBadgePointId());
-		ArrayList<String> userList2 = badge.getUserList(randomBadgeList.get(1).getBadgePointId());
+		ArrayList<String> userList1 = null;
+		ArrayList<String> userList2 = null;		
+		if(randomBadgeList.size() >= 2) {
+			userList1 = badge.getUserList(randomBadgeList.get(0).getBadgePointId());
+			userList2 = badge.getUserList(randomBadgeList.get(1).getBadgePointId());			
+		}
+//		ArrayList<String> userList1 = badge.getUserList(randomBadgeList.get(0).getBadgePointId());
+//		ArrayList<String> userList2 = badge.getUserList(randomBadgeList.get(1).getBadgePointId());
 		// for문 돌리기 위해 두 리스트를 하나에 담아줌
 		ArrayList<ArrayList<String>> userList = new ArrayList<ArrayList<String>>();
 		userList.add(userList1);
