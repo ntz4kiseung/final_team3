@@ -31,7 +31,7 @@ public class LogInController
 		int count = 0;
 		System.out.println(count);
 		count =  userA.checkIdPw(logindata[0], logindata[1]);
-		
+
 		System.out.println(count);
 		response.getWriter().print(count);
 	}

@@ -29,7 +29,7 @@ public class MyProfileController
 		model.addAttribute("UserList",user.userList(userId));
 		model.addAttribute("MyPageBad",user.MyPageBad(userId));
 		
-		System.out.println(user.myPageList(userId).get(0).getName());
+		// System.out.println(user.myPageList(userId).get(0).getName());
 		
 		model.addAttribute("myPageList", user.myPageList(userId));
 		model.addAttribute("myPageAddrList", user.myPageAddrList(userId));
