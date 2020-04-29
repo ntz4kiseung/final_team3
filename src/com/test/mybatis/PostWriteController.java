@@ -35,9 +35,11 @@ public class PostWriteController
 	public String postWrite(Model model, PostDTO postDTO, HttpSession session)
 	{
 		String result = null;
+		
 		IInterDAO interA = sqlSession.getMapper(IInterDAO.class);
 		IAddrDAO addrA = sqlSession.getMapper(IAddrDAO.class);
 		IPostDAO postDAO = sqlSession.getMapper(IPostDAO.class);
+		
 		String userId = (String)session.getAttribute("userId");
 		postDTO.setUserId(userId);
 		model.addAttribute("addrsilist", addrA.addrSiList());

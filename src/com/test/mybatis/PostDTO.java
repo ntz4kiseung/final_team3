@@ -2,14 +2,45 @@ package com.test.mybatis;
 
 public class PostDTO
 {
-	private String userId, title, addrSiId, addrSiName, addrGuId, addrGuName, addrDetail, interMainId, interMainName, interSubId, interSubName, interDetail, postDate, meetDate, samegender, drink, grade, moodName, contents, urlBad, url, nickname, telCertiId, emailCertiId, followId, postId;
-	
+	private String userId;
+	private String title;
+	private String addrSiId;
+	private String addrSiName;
+	private String addrGuId;
+	private String addrGuName;
+	private String addrDetail;
+	private String interMainId;
+	private String interMainName;
+	private String interSubId;
+	private String interSubName;
+	private String interDetail;
+	private String postDate;
+	private String meetDate;
+	private String samegender;
+	private String drink;
+	private String grade;
+	private String moodName;
+	private String contents;
+	private String urlBad;
+	private String url;
+	private String nickname;
+	private String telCertiId;
+	private String emailCertiId;
+	private String followId;
+	private String postId;
 	// 타입 수정 2019.07.10 15:40
-	private int minNum, maxNum, limitGrade, postStatus, num;
-	
+	private int minNum;
+	private int maxNum;
+	private int limitGrade;
+	private int postStatus;
+	private int num;
 	// 점수 확인 테스트용 속성 → 추후 제거함
-	private int gradeHost, gradeAddr, gradeTitle, gradeContents, gradeInterDetail, gradeTotal;
-	
+	private int gradeHost;
+	private int gradeAddr;
+	private int gradeTitle;
+	private int gradeContents;
+	private int gradeInterDetail;
+	private int gradeTotal;
 
 	public int getNum() {
 		return num;
