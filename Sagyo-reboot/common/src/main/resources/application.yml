@@ -1,0 +1,17 @@
+---
+spring: 
+  jpa: 
+    show-sql: true # jpa에서 호출하는 sql을 노출. 개발시에만 on
+  datasource:
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    username: SAGYO
+    password: java006$
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    hikary:
+      connection-timeout: 6000
+      maximum-pool-size: 5
+    
+server:
+  port: 8090    
+  servlet:
+    context-path: /common
